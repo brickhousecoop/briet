@@ -1,0 +1,42 @@
+const opds = require('opds')
+
+const xml = opds.create({
+  title: "BRIET Marketplace",
+  author: {
+    name: "BRIET",
+    uri: "https://thebrick.house"
+  },
+  books: [
+    {
+      title: "The Brick House Quarterly, Vol. 1",
+      summary: "This is a test book",
+      updated: new Date(),
+      author: {
+        name: "Aaron O'Mullan",
+        uri: "https://www.gitbook.com/@aaron"
+      },
+      links: [
+        {
+          rel: "image",
+          href: "/book/test.jpg",
+          type: "image/jpeg"
+        },
+        {
+          rel: "acquisition/borrow",
+          href: "https://openlibrary.org/books/OL32926810M/The_Brick_House_Apparent_Quarterly_Vol._1",
+          type: "application/pdf"
+        },
+        {
+          rel: "acquisition/buy",
+          href: "https://www.kickstarter.com/projects/thebrickhouse/the-brick-house-apparent-quarterly-buy-this-book",
+          type: "application/epub+zip"
+        }
+      ],
+      categories: [
+        "LCO010000"
+      ]
+    }
+  ]
+});
+
+console.log(xml)
