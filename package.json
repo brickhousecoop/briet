@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "opds": "^2.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^27.0.0"
+  },
+  "scripts": {
+    "dev": "vercel dev"
   }
 }
