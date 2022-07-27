@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "opds": "^2.0.0"
+  },
+  "overrides": {
+    "lodash": "^4.0.0"
   }
 }
