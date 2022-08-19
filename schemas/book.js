@@ -1,8 +1,8 @@
 import {MdLocalMovies as icon} from 'react-icons/md'
 
 export default {
-  name: 'movie',
-  title: 'Movie',
+  name: 'book',
+  title: 'Book',
   type: 'document',
   icon,
   fields: [
@@ -21,11 +21,6 @@ export default {
       },
     },
     {
-      name: 'overview',
-      title: 'Overview',
-      type: 'blockContent',
-    },
-    {
       name: 'releaseDate',
       title: 'Release date',
       type: 'datetime',
@@ -36,47 +31,43 @@ export default {
       type: 'number',
     },
     {
-      name: 'popularity',
-      title: 'Popularity',
-      type: 'number',
-    },
-    {
-      name: 'poster',
-      title: 'Poster Image',
+      name: 'cover',
+      title: 'Cover Image',
       type: 'image',
       options: {
         hotspot: true,
       },
     },
     {
-      name: 'castMembers',
-      title: 'Cast Members',
-      type: 'array',
-      of: [{type: 'castMember'}],
-    },
+      name: 'file',
+      title: 'Book File',
+      type: 'file',
+      description: 'The actual file to be downloaded by buying institutions'
+    }
     {
-      name: 'crewMembers',
-      title: 'Crew Members',
+      name: 'authors',
+      title: 'Authors',
+      description: 'Primary author first'
       type: 'array',
-      of: [{type: 'crewMember'}],
+      of: [{type: 'author'}],
     },
   ],
   preview: {
     select: {
       title: 'title',
+      authorName0: 'authors.0.name',
+      authorName1: 'authors.1.name',
       date: 'releaseDate',
       media: 'poster',
-      castName0: 'castMembers.0.person.name',
-      castName1: 'castMembers.1.person.name',
     },
     prepare(selection) {
       const year = selection.date && selection.date.split('-')[0]
-      const cast = [selection.castName0, selection.castName1].filter(Boolean).join(', ')
+      const authorsPreview = [selection.authorName0, selection.authorName1].filter(Boolean).join(', ')
 
       return {
         title: `${selection.title} ${year ? `(${year})` : ''}`,
         date: selection.date,
-        subtitle: cast,
+        subtitle: authorsPreview,
         media: selection.media,
       }
     },
