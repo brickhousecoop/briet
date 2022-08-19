@@ -43,11 +43,11 @@ export default {
       title: 'Book File',
       type: 'file',
       description: 'The actual file to be downloaded by buying institutions'
-    }
+    },
     {
       name: 'authors',
       title: 'Authors',
-      description: 'Primary author first'
+      description: 'Primary author first',
       type: 'array',
       of: [{type: 'author'}],
     },
