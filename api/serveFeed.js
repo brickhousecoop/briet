@@ -1,7 +1,7 @@
-const generateFeed = require('../lib/generateFeed')
+import generateFeed from '../lib/generateFeed'
 
 export default async (req, res) => {
-  const feed = await generateFeed
+  const feed = await generateFeed()
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'text/xml')
