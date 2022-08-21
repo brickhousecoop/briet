@@ -16,10 +16,10 @@ const feed = {
   }
 }
 
-feed.updated = new Date()
-feed.books = client.fetch('*[_type == "book"] {title, isbn}')
-
 // exports XML as string
 export default async () => {
-  opds.create(feed)
+  feed.updated = new Date()
+  feed.books = await client.fetch('*[_type == "book"] {title, isbn}')
+
+  return opds.create(feed)
 }
