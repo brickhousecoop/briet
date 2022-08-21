@@ -1,10 +1,10 @@
-import {MdLocalMovies as icon} from 'react-icons/md'
+import {BookIcon} from '@sanity/icons'
 
 export default {
   name: 'book',
   title: 'Book',
   type: 'document',
-  icon,
+  icon: BookIcon,
   fields: [
     {
       name: 'title',
