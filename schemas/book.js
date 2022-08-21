@@ -26,9 +26,10 @@ export default {
       type: 'datetime',
     },
     {
-      name: 'externalId',
-      title: 'External ID',
+      name: 'isbn',
+      title: 'ISBN',
       type: 'number',
+      description: 'Optional; only add if your book has a unique one'
     },
     {
       name: 'cover',
