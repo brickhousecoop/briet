@@ -9,5 +9,5 @@ export default async (req, res) => {
   // Instructing the Vercel edge to cache the file
   res.setHeader('Cache-control', 'stale-while-revalidate, s-maxage=3600')
 
-  res.end(feed.default)
+  res.end(feed)
 }
