@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "BRIET Marketplace"
-  },
   "api": {
     "projectId": "3lm68n5v",
     "dataset": "production"
+  },
+  "project": {
+    "name": "BRIET Marketplace"
   },
   "plugins": [
     "@sanity/base",
