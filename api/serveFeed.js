@@ -1,4 +1,4 @@
-const feed = require('../lib/generateFeed')
+const feed = await require('../lib/generateFeed')
 
 export default (req, res) => {
   res.statusCode = 200
