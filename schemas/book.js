@@ -50,7 +50,14 @@ export default {
       title: 'Authors',
       description: 'Primary author first',
       type: 'array',
-      of: [{type: 'author'}],
+      of: [
+        {
+          type: 'reference',
+          to: [
+            {type: 'author'},
+          ]
+        }
+      ],
     },
   ],
   preview: {
