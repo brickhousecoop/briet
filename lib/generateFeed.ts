@@ -20,4 +20,6 @@ feed.updated = new Date()
 feed.books = client.fetch('*[_type == "book"] {title, isbn}')
 
 // exports XML as string
-export default opds.create(feed)
+export default async () => {
+  opds.create(feed)
+}

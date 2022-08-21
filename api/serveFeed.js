@@ -1,4 +1,4 @@
-import generateFeed from '../lib/generateFeed'
+const generateFeed = require('../lib/generateFeed')
 
 export default async (req, res) => {
   const feed = await generateFeed()
