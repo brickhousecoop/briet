@@ -1,4 +1,4 @@
-const generateFeed = require('../lib/generateFeed')
+import generateFeed from '../lib/generateFeed'
 
 export default async (req, res) => {
   const feed = await generateFeed
@@ -9,5 +9,5 @@ export default async (req, res) => {
   // Instructing the Vercel edge to cache the file
   res.setHeader('Cache-control', 'stale-while-revalidate, s-maxage=3600')
 
-  res.end(feed)
+  res.end(feed.default)
 }
