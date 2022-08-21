@@ -16,7 +16,6 @@
     "@sanity/default-login": "^2.30.5",
     "@sanity/desk-tool": "^2.30.5",
     "@sanity/eslint-config-studio": "^2.0.0",
-    "@sanity/google-maps-input": "^2.30.5",
     "@sanity/vision": "^2.30.5",
     "eslint": "^8.6.0",
     "opds": "^2.0.0",
