@@ -2,7 +2,7 @@ import generateFeed from '../lib/generateFeed'
 
 export default async (req, res) => {
   const feed = await generateFeed
-  .then(feed => console.log)
+  console.log('serveFeed feed', feed)
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'text/xml')
