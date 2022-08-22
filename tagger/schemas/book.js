@@ -59,6 +59,12 @@ export default {
         }
       ],
     },
+    {
+      name: 'price_usd',
+      title: 'Price (USD)',
+      type: 'number',
+      validation: Rule => Rule.positive().precision(2)
+    }
   ],
   preview: {
     select: {
