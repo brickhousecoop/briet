@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@sanity/client": "^3.3.3",
     "opds": "^2.0.0"
   }
 }
