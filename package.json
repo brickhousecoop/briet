@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes && cd ./tagger",
+    "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes && cd ./server"
+  },
+  "devDependencies": {
+    "vercel": "^28.1.0"
+  }
+}
