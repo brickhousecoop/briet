@@ -1,0 +1,30 @@
+{
+  "name": "bh-briet-marketplace",
+  "private": true,
+  "description": "Prototype of an adventure in Controlled Digital Lending",
+  "main": "package.json",
+  "author": "Jacob Ford <j@cobford.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "dependencies": {
+    "@sanity/base": "^2.30.5",
+    "@sanity/core": "^2.30.5",
+    "@sanity/default-layout": "^2.30.5",
+    "@sanity/default-login": "^2.30.5",
+    "@sanity/desk-tool": "^2.30.5",
+    "@sanity/eslint-config-studio": "^2.0.0",
+    "@sanity/vision": "^2.30.5",
+    "eslint": "^8.22.0",
+    "opds": "^2.0.0",
+    "prop-types": "^15.8",
+    "react": "^17.0",
+    "react-dom": "^17.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@sanity/cli": "^2.30.6"
+  }
+}
