@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from '../../lib/sanityImage'
+import Footer from '../../components/footer'
 
 import sanity from "../../lib/sanity"
 
@@ -61,15 +62,7 @@ const BookBuyPage = ({ book }) => {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://controlleddigitallending.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by Controlled Digital Lending
-        </a>
-      </footer>
+      <Footer/>
     </div>
   )
 }
