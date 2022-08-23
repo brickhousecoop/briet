@@ -14,4 +14,4 @@ const SanityImage = ({ sanityAsset }) => {
 
 SanityImage.displayName = 'SanityImage'
 
-export default sanityImage
+export default SanityImage
