@@ -17,6 +17,7 @@ const singleBookQuery = `
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
+    isbn,
     "downloadUrl": file.asset -> url
   }[0]
 `
@@ -53,6 +54,7 @@ const BookBuyPage = ({ book }) => {
           </div>
 
           <div className={styles.float}>
+            <p>ISBN: <code>{book.isbn}</code></p>
             <h2>{book.title}</h2>
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
