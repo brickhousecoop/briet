@@ -2,7 +2,7 @@ import Image from 'next/image'
 import sanity from "./sanity"
 import { useNextSanityImage } from 'next-sanity-image'
 
-export default ({ sanityAsset }) => {
+const SanityImage = ({ sanityAsset }) => {
   const imageProps = useNextSanityImage(sanity, sanityAsset)
   return (
     <Image
@@ -11,3 +11,7 @@ export default ({ sanityAsset }) => {
     />
   )
 }
+
+SanityImage.displayName = 'SanityImage'
+
+export default sanityImage
