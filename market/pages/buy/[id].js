@@ -37,6 +37,12 @@ const BookBuyPage = ({ book }) => {
           Purchase digital content for libraries, for patrons, forever.
         </p>
 
+        <p className={styles.description}>
+          Powered by <a href="https://controlleddigitallending.org">
+            <strong>Controlled Digital Lending</strong>
+          </a>
+        </p>
+
         <div className={styles.grid}>
           <div className={styles.float}>
             <Image
