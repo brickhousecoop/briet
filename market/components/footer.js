@@ -1,6 +1,9 @@
 import styles from '../styles/Home.module.css'
 
-export default () =>
-  <footer className={styles.footer}>
-    <a href="//server.briet.app">An early BRIET prototype</a>
-  </footer>
+const BrietFooter = <footer className={styles.footer}>
+  <a href="//server.briet.app">An early BRIET prototype</a>
+</footer>
+
+BrietFooter.displayName = 'BrietFooter'
+
+export default BrietFooter

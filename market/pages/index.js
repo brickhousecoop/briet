@@ -4,7 +4,16 @@ import Footer from '../components/footer'
 import styles from '../styles/Home.module.css'
 import sanity from '../lib/sanity'
 
-export default ({ books }) => {
+const catalogQuery = `
+  *[_type == "book"] {
+    _id,
+    title,
+    cover,
+    authors[]->{ name },
+  }
+`
+
+const BrietHomepage = ({ books }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -38,14 +47,10 @@ export default ({ books }) => {
   )
 }
 
-const catalogQuery = `
-  *[_type == "book"] {
-    _id,
-    title,
-    cover,
-    authors[]->{ name },
-  }
-`
+BrietHomepage.displayName = 'BrietHomepage'
+
+export default BrietHomepage
+
 export const getStaticProps = async ({ params }) => {
   const books = await sanity.fetch(catalogQuery);
   return { props: { books } };
