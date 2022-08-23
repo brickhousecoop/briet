@@ -48,8 +48,10 @@ const feed = {
 
 const catalogQuery = `
   *[_type == "book"]{
+    _id,
     title,
     isbn,
+    price_usd,
     authors[]->{ name },
     "coverImg": cover.asset -> url
   }
