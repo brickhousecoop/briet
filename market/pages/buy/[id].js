@@ -17,6 +17,7 @@ const singleBookQuery = `
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
+    "downloadUrl": file.asset -> url
   }[0]
 `
 
@@ -56,13 +57,13 @@ const BookBuyPage = ({ book }) => {
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Purchase: ${book.price_usd}</h2>
+          <a href={book.downloadUrl+'?dl'} className={styles.card}>
+            <h2>Purchase: ${book.price_usd} &rarr;</h2>
             <p>Your instition may freely loan to patrons: you <b>own</b> the file.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>MARC record</h2>
+          <a href="#" className={styles.card}>
+            <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
         </div>
