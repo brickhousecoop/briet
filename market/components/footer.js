@@ -1,8 +1,9 @@
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 const BrietFooter = () =>
   <footer className={styles.footer}>
-    <a href="/">An early BRIET prototype</a>
+    <Link href="/">An early BRIET prototype</Link>
   </footer>
 
 BrietFooter.displayName = 'BrietFooter'
