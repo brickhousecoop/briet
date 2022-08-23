@@ -21,6 +21,15 @@ function brietTaggerToOpds(taggerCatalog) {
         {
           rel: "image",
           href: book.coverImg
+        },
+        {
+          rel: "acquisition/buy",
+          href: `https://market.briet.app/buy/${book._id}`,
+          type: "application/pdf",
+          price: {
+            currencyCode: 'USD',
+            value: book.price_usd
+          }
         }
       ],
       isbn: book.isbn
@@ -41,8 +50,8 @@ const catalogQuery = `
   *[_type == "book"]{
     title,
     isbn,
-    authors[]->{name},
-    "coverImg": cover.asset->url
+    authors[]->{ name },
+    "coverImg": cover.asset -> url
   }
 `
 
