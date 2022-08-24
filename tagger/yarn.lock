@@ -1830,9 +1830,9 @@
     rxjs "^6.5.3"
 
 "@sanity/ui@^0.37.9":
-  version "0.37.19"
-  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.37.19.tgz#0ea890653af5ee475b4f1f6c3d1aaa4e66a83645"
-  integrity sha512-DeL7sQSQ5+gr3QXeMmSudeqvhOQXxjqht5eCgM10pP28MViFIaNDvEepzDKakA5zTEzDZB0Y88ZGzwz0zPeDgA==
+  version "0.37.20"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.37.20.tgz#3e62534687352673599fafd7a1532a7336319e02"
+  integrity sha512-h0JS0YTAhYLkSutRfWIEZZqD2Ut9S0oho9eTp7q2iRKLqbzx0YEbbIkeH188mcWs8cfCqIfa4Q4HMsXGUhREGw==
   dependencies:
     "@juggle/resize-observer" "^3.4.0"
     "@popperjs/core" "^2.11.6"
