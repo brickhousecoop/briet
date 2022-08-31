@@ -1,10 +1,16 @@
 {
+  "workspaces": [
+    "tagger",
+    "server",
+    "market"
+  ],
   "scripts": {
     "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes",
     "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes",
     "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes"
   },
   "devDependencies": {
+    "turbo": "^1.4.3",
     "vercel": "^28.1.0"
   }
 }

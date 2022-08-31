@@ -1,12 +1,24 @@
 {
-  "name": "market",
-  "version": "0.1.0",
+  "name": "bh-briet-market",
+  "version": "1.0.0",
   "private": true,
+  "description": "BRIET component 3 of 3",
+  "homepage": "https://market.briet.app",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Jacob Ford",
+    "email": "jacob@nocomment.llc",
+    "url": "https://nocomment.llc"
+  },
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
     "@sanity/client": "^3.3.3",

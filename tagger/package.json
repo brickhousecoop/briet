@@ -1,13 +1,19 @@
 {
-  "name": "bh-briet-marketplace",
+  "name": "bh-briet-tagger",
+  "version": "1.0.0",
   "private": true,
   "description": "Prototype of an adventure in Controlled Digital Lending",
-  "main": "package.json",
-  "author": "Jacob Ford <j@cobford.com>",
+  "homepage": "https://tagger.briet.app",
   "license": "UNLICENSED",
+  "author": {
+    "name": "Jacob Ford",
+    "email": "jacob@nocomment.llc",
+    "url": "https://nocomment.llc"
+  },
+  "main": "package.json",
   "scripts": {
-    "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "start": "sanity start"
   },
   "dependencies": {
     "@sanity/base": "^2.31.0",
@@ -24,6 +30,7 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.31.0"
+    "@sanity/cli": "^2.31.0",
+    "@sanity/server": "^2.31.1"
   }
 }
