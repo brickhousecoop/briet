@@ -1,0 +1,24 @@
+{
+  "name": "bh-briet-server",
+  "version": "1.0.0",
+  "description": "BRIET component 2 of 3",
+  "homepage": "https://server.briet.app",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Jacob Ford",
+    "email": "jacob@nocomment.llc",
+    "url": "https://nocomment.llc"
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@sanity/client": "^3.3.3",
+    "opds": "^2.0.0"
+  },
+  "devDependencies": {}
+}
