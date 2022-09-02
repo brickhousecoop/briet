@@ -21,7 +21,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@sanity/client": "^3.3.3",
     "next": "12.2.5",
     "next-sanity-image": "^4.1.0",
     "react": "18.2.0",

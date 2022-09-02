@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Footer from '../components/footer'
 import styles from '../styles/Home.module.css'
-import { readOnlyClient as sanity } from '../lib/sanity'
+import { readOnlyClient as sanity } from 'sanity-client'
 
 const catalogQuery = `
   *[_type == "book"] {

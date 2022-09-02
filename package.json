@@ -2,7 +2,8 @@
   "workspaces": [
     "apps/tagger",
     "apps/server",
-    "apps/market"
+    "apps/market",
+    "packages/*"
   ],
   "scripts": {
     "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes",
