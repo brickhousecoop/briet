@@ -1,4 +1,4 @@
-import sanity from '../lib/sanity'
+import { readOnlyClient as sanity } from 'sanity-client'
 import imageUrlBuilder from '@sanity/image-url'
 
 const imageBuilder = imageUrlBuilder(sanity)
