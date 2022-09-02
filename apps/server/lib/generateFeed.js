@@ -1,12 +1,5 @@
 const opds = require('opds')
-const sanityClient = require('@sanity/client')
-const client = sanityClient({
-  projectId: process.env.SANITY_PROJECTID,
-  dataset: process.env.SANITY_DATASET,
-  apiVersion: '2022-08-21', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
-  token: process.env.SANITY_TOKEN, // or leave blank for unauthenticated usage
-  useCdn: false, // `false` if you want to ensure fresh data
-})
+import { readOnlyClient as sanity } from '../../market/lib/sanity'
 
 const catalog = require('../catalog.json')
 console.log('catalogJSon', catalog)
@@ -59,7 +52,7 @@ const catalogQuery = `
 
 // exports XML as string
 export default async () => {
-  const taggerCatalog = await client.fetch(catalogQuery)
+  const taggerCatalog = await sanity.fetch(catalogQuery)
 
   feed.updated = new Date()
   feed.books = brietTaggerToOpds(taggerCatalog)

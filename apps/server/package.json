@@ -17,8 +17,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@sanity/client": "^3.3.3",
     "opds": "^2.0.0"
-  },
-  "devDependencies": {}
+  }
 }
