@@ -11,9 +11,6 @@
     "url": "https://nocomment.llc"
   },
   "main": "next.config.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
