@@ -9,6 +9,7 @@
     "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes",
     "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes",
     "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes",
+    "dev": "npm run dev-server & turbo run dev",
     "build": "turbo run build"
   },
   "devDependencies": {

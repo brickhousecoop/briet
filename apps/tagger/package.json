@@ -13,7 +13,7 @@
   "main": "package.json",
   "scripts": {
     "build": "sanity build",
-    "start": "sanity start"
+    "dev": "sanity start"
   },
   "dependencies": {
     "@sanity/base": "^2.31.1",
