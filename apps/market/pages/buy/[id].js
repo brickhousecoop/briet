@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from '../../lib/sanityImage'
 import Footer from '../../components/footer'
 
-import sanity from "../../lib/sanity"
+import { readOnlyClient as sanity } from 'sanity-client'
 
 import styles from '../../styles/Home.module.css'
 
