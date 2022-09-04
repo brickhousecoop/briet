@@ -1,8 +1,3 @@
-import * as dotenv from 'dotenv'
-dotenv.config({
-  path: '../../.vercel/.env.development.local'
-})
-
 import sanityClient from '@sanity/client'
 
 // two options, optimized according to permissions

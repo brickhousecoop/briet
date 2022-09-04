@@ -16,6 +16,7 @@
     "build:market": "turbo run build --filter=bh-briet-market"
   },
   "devDependencies": {
+    "eslint-config-turbo": "^0.0.3",
     "turbo": "^1.4.5",
     "vercel": "^28.2.2"
   }
