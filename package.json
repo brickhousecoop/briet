@@ -10,7 +10,10 @@
     "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes",
     "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes",
     "dev": "npm run dev-server & turbo run dev",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "build:tagger": "turbo run build --filter=bh-briet-tagger",
+    "build:server": "turbo run build --filter=bh-briet-server",
+    "build:market": "turbo run build --filter=bh-briet-market"
   },
   "devDependencies": {
     "turbo": "^1.4.3",
