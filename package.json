@@ -16,7 +16,7 @@
     "build:market": "turbo run build --filter=bh-briet-market"
   },
   "devDependencies": {
-    "turbo": "^1.4.3",
-    "vercel": "^28.1.0"
+    "turbo": "^1.4.5",
+    "vercel": "^28.2.2"
   }
 }
