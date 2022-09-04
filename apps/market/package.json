@@ -24,6 +24,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.22.0",
     "eslint-config-next": "^12.2.5"
   }
