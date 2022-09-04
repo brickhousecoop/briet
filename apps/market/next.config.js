@@ -4,7 +4,7 @@ const DotEnv = require('dotenv-webpack')
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false,
   images: {
     domains: [
       'cdn.sanity.io'
