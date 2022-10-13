@@ -62,7 +62,7 @@ const BookBuyPage = ({ book }) => {
             <p>Your instition may freely loan to patrons: you <b>own</b> the file.</p>
           </a>
 
-          <a href="#" className={styles.card}>
+          <a href={`/buy/${book._id}/marc`} className={styles.card}>
             <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
