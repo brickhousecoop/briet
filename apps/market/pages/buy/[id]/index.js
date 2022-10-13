@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import Image from '../../lib/sanityImage'
-import Footer from '../../components/footer'
+import Image from '../../../lib/sanityImage'
+import Footer from '../../../components/footer'
 
 import { readOnlyClient as sanity } from 'sanity-client'
 
-import styles from '../../styles/Home.module.css'
+import styles from '../../../styles/Home.module.css'
 
 const allBookIdsQuery = `
   *[_type == "book"] { _id }
