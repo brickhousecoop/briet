@@ -53,7 +53,7 @@ export const getStaticProps = async ({ params }) => {
       },
       {
         code: 'c',
-        value: book.authors.join(', ')
+        value: book.authors.map(author => author.name).join(', ')
       }
     ]
   }]
