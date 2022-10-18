@@ -7,7 +7,7 @@ console.log('catalogJSon', catalog)
 function brietTaggerToOpds(taggerCatalog) {
   console.log(taggerCatalog)
   const processedFeed = taggerCatalog.map(book => {
-    return {
+    const feedItem = {
       title: book.title,
       authors: book.authors,
       links: [
@@ -27,16 +27,18 @@ function brietTaggerToOpds(taggerCatalog) {
       ],
       isbn: book.isbn
     }
-  })
 
-  if (book.identifer_ia) {
-    processedFeed.id = book.identifer_ia
-    processedFeed.links.push({
-      rel: "acquisition/borrow",
-      href: `https://archive.org/details/${book.identifer_ia}`,
-      type: "text/html"
-    })
-  }
+    if (book.identifer_ia) {
+      feedItem.id = book.identifer_ia
+      feedItem.links.push({
+        rel: "acquisition/borrow",
+        href: `https://archive.org/details/${book.identifer_ia}`,
+        type: "text/html"
+      })
+    }
+
+    return feedItem
+  })
 
   return processedFeed
 }
