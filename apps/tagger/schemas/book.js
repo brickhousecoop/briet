@@ -32,6 +32,12 @@ export default {
       description: 'Optional; only add if your book has a unique one'
     },
     {
+      name: 'identifer_ia',
+      title: 'Internet Archive Identifier',
+      type: 'string',
+      description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
+    },
+    {
       name: 'cover',
       title: 'Cover Image',
       type: 'image',
