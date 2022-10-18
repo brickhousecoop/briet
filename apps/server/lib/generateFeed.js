@@ -30,6 +30,7 @@ function brietTaggerToOpds(taggerCatalog) {
   })
 
   if (book.identifer_ia) {
+    processedFeed.id = book.identifer_ia
     processedFeed.links.push({
       rel: "acquisition/borrow",
       href: `https://archive.org/details/${book.identifer_ia}`,
