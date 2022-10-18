@@ -28,6 +28,15 @@ function brietTaggerToOpds(taggerCatalog) {
       isbn: book.isbn
     }
   })
+
+  if (book.identifer_ia) {
+    processedFeed.links.push({
+      rel: "acquisition/borrow",
+      href: `https://archive.org/details/${book.identifer_ia}`,
+      type: "text/html"
+    })
+  }
+
   return processedFeed
 }
 
@@ -44,6 +53,7 @@ const catalogQuery = `
     _id,
     title,
     isbn,
+    identifer_ia,
     price_usd,
     authors[]->{ name },
     "coverImg": cover.asset -> url
