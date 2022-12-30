@@ -53,5 +53,8 @@ export default BrietHomepage
 
 export const getStaticProps = async ({ params }) => {
   const books = await sanity.fetch(catalogQuery);
-  return { props: { books } };
+  return {
+    props: { books },
+    revalidate: 10
+  };
 };
