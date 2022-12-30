@@ -57,7 +57,7 @@ const BookBuyPage = ({ book }) => {
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
-          <a href={book.downloadUrl+'?dl'} className={styles.card}>
+          <a href="#" onClick={() => alert("You must be invited to purchase books. Reach out if you're a librarian: suzanne@briet.dev.")} className={styles.card}>
             <h2>Purchase: ${book.price_usd} &rarr;</h2>
             <p>Your instition may freely loan to patrons: you <b>own</b> the file.</p>
           </a>
