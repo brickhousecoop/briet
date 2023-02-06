@@ -3,6 +3,7 @@ import Image from '../../../lib/sanityImage'
 import Footer from '../../../components/footer'
 
 import { readOnlyClient as sanity } from 'sanity-client'
+import { loadStripe } from '@stripe/stripe-js'
 
 import styles from '../../../styles/Home.module.css'
 
@@ -57,10 +58,12 @@ const BookBuyPage = ({ book }) => {
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
-          <a href="#" onClick={() => alert("You must be invited to purchase books. Reach out if you're a librarian: suzanne@briet.dev.")} className={styles.card}>
+          <form action="/api/checkout_sessions" method="POST">
+          <button type="submit" role="link" className={styles.card}>
             <h2>Purchase: ${book.price_usd} &rarr;</h2>
             <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
-          </a>
+          </button>
+          </form>
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
             <h2>MARC record &darr;</h2>
