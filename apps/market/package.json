@@ -25,6 +25,7 @@
     "stripe": "^11.9.1"
   },
   "devDependencies": {
+    "@types/react": "^18.0.27",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.22.0",
     "eslint-config-next": "^12.2.5"
