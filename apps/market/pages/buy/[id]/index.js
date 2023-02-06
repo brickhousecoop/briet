@@ -59,10 +59,10 @@ const BookBuyPage = ({ book }) => {
           </div>
 
           <form action="/api/checkout_sessions" method="POST">
-          <button type="submit" role="link" className={styles.card}>
-            <h2>Purchase: ${book.price_usd} &rarr;</h2>
-            <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
-          </button>
+            <button type="submit" role="link" className={styles.card}>
+              <h2>Purchase: ${book.price_usd} &rarr;</h2>
+              <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
+            </button>
           </form>
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
