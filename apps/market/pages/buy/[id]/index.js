@@ -59,6 +59,8 @@ const BookBuyPage = ({ book }) => {
           </div>
 
           <form action="/api/checkout_sessions" method="POST">
+            <input type="hidden" id="bookTitle" name="bookTitle" value={book.title}/>
+            <input type="hidden" id="bookPrice" name="bookPrice" value={book.price_usd}/>
             <button type="submit" role="link" className={styles.card}>
               <h2>Purchase: ${book.price_usd} &rarr;</h2>
               <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
