@@ -93,6 +93,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const book = await sanity.fetch(singleBookQuery, { id: params.id });
+  if (!book) {
+    return {
+      notFound: true,
+      revalidate: 5
+    }
+  }
   return {
     props: { book },
     revalidate: 5
