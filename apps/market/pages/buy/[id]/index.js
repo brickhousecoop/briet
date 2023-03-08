@@ -85,14 +85,24 @@ export const getStaticPaths = async () => {
     params: { id: book._id }
   }));
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
+  return {
+    paths,
+    fallback: 'blocking'
+  };
 };
 
 export const getStaticProps = async ({ params }) => {
   const book = await sanity.fetch(singleBookQuery, { id: params.id });
-  return { props: { book } };
+  if (!book) {
+    return {
+      notFound: true,
+      revalidate: 5
+    }
+  }
+  return {
+    props: { book },
+    revalidate: 5
+  };
 };
 
 export default BookBuyPage
