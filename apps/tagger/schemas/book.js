@@ -3,7 +3,7 @@ import { BookIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'book',
-  title: 'Book',
+  title: 'Books',
   type: 'document',
   icon: BookIcon,
   fields: [
