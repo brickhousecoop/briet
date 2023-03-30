@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import { readOnlyClient as sanity} from "sanity-client"
 import { useNextSanityImage } from 'next-sanity-image'
 
