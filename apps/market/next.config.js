@@ -11,7 +11,7 @@ const nextConfig = {
     ]
   },
   webpack: config => {
-    // import Vercel env variables when not being build on Vercel
+    // import Vercel env variables when not being built on Vercel
     config.plugins.push(
       new DotEnv({
         path: '../../.vercel/.env.development.local'
