@@ -23,7 +23,7 @@ const OrderPage = ({ order }) => {
           BRIET Order Pending
         </h1>
 
-        <p>We are reviewing your order and will reach out to {order.customer.email} with your download if you're approved.</p>
+        <p>We are reviewing your order and will reach out to {order.customer.email} with your download if you’re approved to implement <a href="https://controlleddigitallending.org">CDL</a>.</p>
 
         <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
 
