@@ -20,7 +20,7 @@ const OrderPage = ({ order }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          BRIET Order {order.id}
+          BRIET Order
         </h1>
 
         <p>Status: {order.status}</p>
