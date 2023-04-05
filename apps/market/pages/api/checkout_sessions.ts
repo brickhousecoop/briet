@@ -44,9 +44,10 @@ export default async function handler(
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`, // TODO: download
+        customer_creation: 'always',
+        success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         // TODO: is there a pending_url?
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        cancel_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         custom_text: {
           submit: {
             message: 'We will email you within 24 hours with your file. Contact help@briet.app with any questions.',
