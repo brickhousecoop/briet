@@ -26,13 +26,6 @@ const OrderPage = ({ order }) => {
         <p>Status: {order.status}</p>
         <p>Payment Status: {order.payment_status}</p>
 
-        <h2>Books ordered:</h2>
-        <ul>
-        {order.line_items.map(lineItem => {
-          <li>Book id {lineItem.id}</li>
-        })}
-        </ul>
-
         <p className={styles.description}>
           Powered by <a href="https://controlleddigitallending.org">
             <strong>Controlled Digital Lending</strong>
@@ -47,9 +40,7 @@ const OrderPage = ({ order }) => {
 
 export const getServerSideProps = async ({ params }) => {
   const sessionId = params.id
-  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: 'line_items'
-  })
+  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
 
   if (!checkoutSession) {
     return {
@@ -66,7 +57,6 @@ export const getServerSideProps = async ({ params }) => {
         customer: {
           email: checkoutSession.customer_email,
         },
-        // line_items: checkoutSession.line_items.data, // TODO: only page 1
       }
     }
   };
