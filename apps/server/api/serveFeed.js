@@ -7,7 +7,7 @@ export default async (req, res) => {
   res.setHeader('Content-Type', 'text/xml')
 
   // Instructing the Vercel edge to cache the file
-  res.setHeader('Cache-control', 'stale-while-revalidate, s-maxage=3600')
+  res.setHeader('Cache-control', 'stale-while-revalidate, s-maxage=1')
 
   res.end(feed)
 }

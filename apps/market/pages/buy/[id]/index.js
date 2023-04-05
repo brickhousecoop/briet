@@ -36,13 +36,11 @@ const BookBuyPage = ({ book }) => {
         </h1>
 
         <p className={styles.description}>
-          Purchase digital content for libraries, for patrons, forever.
+          Purchase digital books for libraries, for patrons, forever.
         </p>
 
         <p className={styles.description}>
-          Powered by <a href="https://controlleddigitallending.org">
-            <strong>Controlled Digital Lending</strong>
-          </a>
+          <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
         </p>
 
         <div className={styles.grid}>
@@ -70,6 +68,12 @@ const BookBuyPage = ({ book }) => {
             <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
+
+          <p className={styles.description}>
+            Powered by <a href="https://controlleddigitallending.org">
+              <strong>Controlled Digital Lending</strong>
+            </a>
+          </p>
         </div>
       </main>
 

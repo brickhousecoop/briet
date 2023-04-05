@@ -1,17 +1,18 @@
-import {BookIcon} from '@sanity/icons'
+import { defineType, defineField } from "sanity";
+import { BookIcon } from '@sanity/icons'
 
-export default {
+export default defineType({
   name: 'book',
-  title: 'Book',
+  title: 'Books',
   type: 'document',
   icon: BookIcon,
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -19,39 +20,39 @@ export default {
         source: 'title',
         maxLength: 100,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'releaseDate',
       title: 'Release date',
       type: 'datetime',
-    },
-    {
+    }),
+    defineField({
       name: 'isbn',
       title: 'ISBN',
       type: 'number',
       description: 'Optional; only add if your book has a unique one'
-    },
-    {
+    }),
+    defineField({
       name: 'identifer_ia',
       title: 'Internet Archive Identifier',
       type: 'string',
       description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
-    },
-    {
+    }),
+    defineField({
       name: 'cover',
       title: 'Cover Image',
       type: 'image',
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'file',
       title: 'Book File',
       type: 'file',
       description: 'The actual file to be downloaded by buying institutions'
-    },
-    {
+    }),
+    defineField({
       name: 'authors',
       title: 'Authors',
       description: 'Primary author first',
@@ -64,13 +65,13 @@ export default {
           ]
         }
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'price_usd',
       title: 'Price (USD)',
       type: 'number',
       validation: Rule => Rule.positive().precision(2)
-    }
+    })
   ],
   preview: {
     select: {
@@ -92,4 +93,4 @@ export default {
       }
     },
   },
-}
+})
