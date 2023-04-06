@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from "next/image"
 import Footer from '../components/footer'
+import CatalogListing from '../components/CatalogListing'
 import styles from '../styles/Home.module.css'
 import { readOnlyClient as sanity } from 'sanity-client'
 
@@ -34,12 +35,7 @@ const BrietHomepage = ({ books }) => {
         <a href="//server.briet.app">Powered by BookServer</a>
 
         <div className={styles.grid}>
-          {books.map(book =>
-            <a key={book._id} href={`/buy/${book._id}`} className={styles.card}>
-              <h2>{book.title}</h2>
-              <p>{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
-            </a>
-          )}
+          {books.map(book => <CatalogListing book={book} key={book._id}/>)}
         </div>
       </main>
       <Footer/>
