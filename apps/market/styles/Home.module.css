@@ -73,13 +73,15 @@
   max-width: 800px;
 }
 
-.card {
+.cataloglisting {
+  display: block;
+  width: 100%;
+
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
-  max-width: 300px;
 
   border: 1px solid #eaeaea;
   border-radius: 10px;
