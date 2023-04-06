@@ -17,7 +17,7 @@ const BrietAboutPage = () => {
           BRIET is <a href="https://controlleddigitallending.org">for keeps</a>.
         </h1>
 
-        <p>BRIET is a project of <Link href="https://thebrick.house">The Brick House Cooperative</Link>, a journalist- and creator-owned cooperative of independent publications around the world. The BRIET project’s mission is to defend the historical right of libraries to own, preserve and lend digital works to the public. It is named after the pioneering librarian and information scientist Suzanne Briet.</p>
+        <p>BRIET is a project of <Link href="https://thebrick.house">The Brick House Cooperative</Link>, a journalist- and creator-owned cooperative of independent publications around the world. The BRIET project’s mission is to defend the historical right of libraries to own, preserve and lend digital works to the public. It is named after the pioneering librarian and information scientist <Link href="https://en.wikipedia.org/wiki/Suzanne_Briet">Suzanne “Madame Documentation” Briet</Link>.</p>
 
         <p><strong>Librarians and teachers: buy these ebooks!</strong> If your institution is a signatory to the <Link href="https://controlleddigitallending.org/statement">Position Statement</Link> on Controlled Digital Lending (CDL), you can acquire and own BRIET works to lend to patrons. See the <Link href="https://controlleddigitallending.org/ill-signatories/">list of CDL signatories</Link>.</p>
 
