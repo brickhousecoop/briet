@@ -13,7 +13,7 @@ const BrietAboutPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          BRIET is <a href="https://controlleddigitallending.org">for keeps</a>.
+          <span className="logo">BRIET</span> is <a href="https://controlleddigitallending.org">for keeps</a>.
         </h1>
 
         <p>BRIET is a project of <Link href="https://thebrick.house">The Brick House Cooperative</Link>, a journalist- and creator-owned cooperative of independent publications around the world. The BRIET project’s mission is to defend the historical right of libraries to own, preserve and lend digital works to the public. It is named after the pioneering librarian and information scientist <Link href="https://en.wikipedia.org/wiki/Suzanne_Briet">Suzanne “Madame Documentation” Briet</Link>.</p>
@@ -38,7 +38,7 @@ const BrietAboutPage = () => {
 
         <p>We seek charitable funding support to maintain the new BRIET platform, expand its catalog of works for libraries and schools to acquire, and develop its open technologies. The Brick House Cooperative’s allied organization, the Participatory Politics Foundation (PPF), is a 501(c)(3) nonprofit organization founded in 2009 to increase civic engagement. Please get in touch to support our efforts to defend press freedom, libraries, and the digital future. Contact: David Moore and Maria Bustillos, Project Managers</p>
 
-        <p>Read more about BRIET: our pioneering <Link href="https://www.thenation.com/article/culture/libraries-digital-publishing-ebooks/">sale</Link> of one ebook to the Internet Archive’s Open Library in 2021, and our cooperative’s work <Link href="https://popula.com/2022/01/12/buy-this-book-from-the-brick-house-cooperative/">defending library rights</Link>.</p>
+        <p>Read more about <span className="logo">BRIET</span>: our pioneering <Link href="https://www.thenation.com/article/culture/libraries-digital-publishing-ebooks/">sale</Link> of one ebook to the Internet Archive’s Open Library in 2021, and our cooperative’s work <Link href="https://popula.com/2022/01/12/buy-this-book-from-the-brick-house-cooperative/">defending library rights</Link>.</p>
       </main>
       <Footer/>
     </div>

@@ -33,7 +33,7 @@ const BookBuyPage = ({ book }) => {
 
       <main className={styles.main}>
         <Link href="/">
-          <h1 className={styles.title}>BRIET Marketplace</h1>
+          <h1 className={styles.title}><span className="logo">BRIET</span>Marketplace</h1>
         </Link>
 
         <p className={styles.description}>
