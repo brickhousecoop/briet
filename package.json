@@ -21,5 +21,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "turbo": "^1.8.8",
     "vercel": "^28.16.15"
-  }
+  },
+  "license": "UNLICENSED",
+  "private": true
 }
