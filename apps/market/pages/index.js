@@ -1,5 +1,4 @@
 import Head from '@components/head.jsx'
-import Image from "next/image"
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
