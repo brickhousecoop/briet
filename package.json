@@ -1,8 +1,6 @@
 {
   "workspaces": [
-    "apps/tagger",
-    "apps/server",
-    "apps/market",
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
