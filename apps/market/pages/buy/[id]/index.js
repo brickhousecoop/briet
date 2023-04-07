@@ -1,9 +1,10 @@
-import Head from 'next/head'
-import Image from '../../../lib/sanityImage'
-import Footer from '../../../components/footer'
+import Head from '@components/head.jsx'
+import Image from '@lib/sanityImage'
+import Footer from '@components/footer'
 
 import { readOnlyClient as sanity } from 'sanity-client'
 import { loadStripe } from '@stripe/stripe-js'
+import Link from 'next/link'
 
 import styles from '../../../styles/Home.module.css'
 
@@ -31,9 +32,9 @@ const BookBuyPage = ({ book }) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          BRIET Marketplace
-        </h1>
+        <Link href="/">
+          <h1 className={styles.title}><span className="logo">BRIET</span>Marketplace</h1>
+        </Link>
 
         <p className={styles.description}>
           Purchase digital books for libraries, for patrons, forever.

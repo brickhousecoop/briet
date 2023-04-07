@@ -1,8 +1,8 @@
 import Stripe from 'stripe'
 
-import Head from 'next/head'
-import Image from '../../lib/sanityImage'
-import Footer from '../../components/footer'
+import Head from '@components/head.jsx'
+import Image from '@lib/sanityImage'
+import Footer from '@components/footer'
 
 import styles from '../../styles/Home.module.css'
 
@@ -20,7 +20,7 @@ const OrderPage = ({ order }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          BRIET Order Pending
+          <span className="logo">BRIET</span> Order Pending
         </h1>
 
         <p>We are reviewing your order and will reach out to {order.customer.email} with your download if you’re approved to implement <a href="https://controlleddigitallending.org">CDL</a>.</p>

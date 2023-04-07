@@ -26,10 +26,12 @@
     "stripe": "^11.9.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.27",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.33",
     "dotenv-cli": "^7.1.0",
     "eslint": "^8.33.0",
     "eslint-config-next": "^13.3.0",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^5.0.3"
   }
 }

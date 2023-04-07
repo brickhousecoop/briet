@@ -34,3 +34,13 @@ a:hover {
     background: black;
   }
 }
+
+span.logo {
+  display: inline-block;
+  overflow-wrap: break-word;
+  background-color: #ff002b;
+  color: white;
+  padding: 0 0.5em;
+  margin: 0 min(0.25em, 5px);
+  text-decoration-color: currentColor;
+}
