@@ -1,7 +1,17 @@
-import '../styles/globals.css'
+import '@styles/globals.css'
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Script
+        src="https://cdn.usefathom.com/script.js"
+        data-site={process.env.NEXT_PUBLIC_FATHOM_SITEID}
+        strategy="afterInteractive"
+      />
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
