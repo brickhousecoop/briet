@@ -1,8 +1,8 @@
-import Head from 'next/head'
+import Head from '@components/head.jsx'
 import Image from "next/image"
-import Footer from '../components/footer'
-import CatalogListing from '../components/CatalogListing'
-import styles from '../styles/Home.module.css'
+import Footer from '@components/footer'
+import CatalogListing from '@components/CatalogListing'
+import styles from '@styles/Home.module.css'
 import { readOnlyClient as sanity } from 'sanity-client'
 
 const catalogQuery = `
@@ -19,7 +19,6 @@ const BrietHomepage = ({ books }) => {
     <div className={styles.container}>
       <Head>
         <title>BRIET Marketplace</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>

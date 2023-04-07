@@ -1,8 +1,8 @@
 import Stripe from 'stripe'
 
-import Head from 'next/head'
-import Image from '../../lib/sanityImage'
-import Footer from '../../components/footer'
+import Head from '@components/head.jsx'
+import Image from '@lib/sanityImage'
+import Footer from '@components/footer'
 
 import styles from '../../styles/Home.module.css'
 

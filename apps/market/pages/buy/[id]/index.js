@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import Image from '../../../lib/sanityImage'
-import Footer from '../../../components/footer'
+import Head from '@components/head.jsx'
+import Image from '@lib/sanityImage'
+import Footer from '@components/footer'
 
 import { readOnlyClient as sanity } from 'sanity-client'
 import { loadStripe } from '@stripe/stripe-js'
