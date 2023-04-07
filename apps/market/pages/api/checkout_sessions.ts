@@ -54,6 +54,9 @@ export default async function handler(
           }
         }
       });
+      if (session.url === null) {
+        throw Error('Null checkout session URL')
+      }
       res.redirect(303, session.url);
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
