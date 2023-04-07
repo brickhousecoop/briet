@@ -32,9 +32,7 @@ const BrietHomepage = ({ books }) => {
         <h2>The Catalog</h2>
         <a href="//server.briet.app">Powered by BookServer</a>
 
-        <div className={styles.grid}>
-          {books.map(book => <CatalogListing book={book} key={book._id}/>)}
-        </div>
+        {books.map(book => <CatalogListing book={book} key={book._id}/>)}
       </main>
       <Footer/>
     </div>
