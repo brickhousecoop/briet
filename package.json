@@ -7,8 +7,9 @@
     "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes",
     "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes",
     "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes",
-    "dev": "npm run dev-server & turbo run dev",
+    "dev": "turbo run dev --no-cache --parallel --continue",
     "build": "turbo run build",
+    "lint": "turbo run lint",
     "build:tagger": "turbo run build --filter=bh-briet-tagger",
     "build:server": "turbo run build --filter=bh-briet-server",
     "build:market": "turbo run build --filter=bh-briet-market"
