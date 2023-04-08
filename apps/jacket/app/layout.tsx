@@ -1,5 +1,5 @@
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
-import FathomAnalytics from 'components/fathom'
+import Fathom from '@/components/fathom'
 
 import './globals.css'
 
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <FathomAnalytics />
+        <Fathom />
         {children}
         <VercelAnalytics />
       </body>

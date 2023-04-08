@@ -4,11 +4,13 @@ import { load, trackPageview } from 'fathom-client'
 import { useEffect, Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-function TrackPageView(fathomSiteId) {
+function TrackPageView() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const fathomSiteId:string = process.env.NEXT_PUBLIC_FATHOM_SITEID
+
   useEffect(() => {
-    load(process.env.NEXT_PUBLIC_FATHOM_SITEID)
+    load(fathomSiteId)
   }, [])
 
   // Record a pageview when route changes
@@ -20,8 +22,7 @@ function TrackPageView(fathomSiteId) {
 }
 
 export default function Fathom() {
-  return
-  <Suspense fallback={null}>
+  return <Suspense fallback={null}>
     <TrackPageView />
   </Suspense>
 }
