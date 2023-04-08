@@ -9,21 +9,19 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
+          Digital books, for libraries, <strong>for keeps</strong>.
         </p>
         <div>
           <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://thebrick.house"
             target="_blank"
-            rel="noopener noreferrer"
           >
-            By{' '}
+            From{' '}
             <Image
-              src="/vercel.svg"
+              src="/brickhouse_logo.svg"
               alt="Vercel Logo"
               className={styles.vercelLogo}
-              width={100}
+              width={150}
               height={24}
               priority
             />
@@ -34,66 +32,50 @@ export default function Home() {
       <div className={styles.center}>
         <Image
           className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
+          src="/briet_logo.svg"
+          alt="BRIET Logo"
+          width={300}
+          height={100}
           priority
         />
       </div>
 
+      <h2 className={inter.className}>BRIET is three interwoven applications:</h2>
+
       <div className={styles.grid}>
         <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://tagger.briet.app"
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
+            Tagger <span>-&gt;</span>
           </h2>
           <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
+            Authors upload and tag their e-books with library-friendly metadata
           </p>
         </a>
 
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://server.briet.app"
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <h2 className={inter.className}>
-            Learn <span>-&gt;</span>
+            Server <span>-&gt;</span>
           </h2>
           <p className={inter.className}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
+            We serve an open searchable feed of books, powered by BookServer
           </p>
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://market.briet.app"
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
+            Market <span>-&gt;</span>
           </h2>
           <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            Librarians browse for e-books and easily add them to their catalog
           </p>
         </a>
       </div>
