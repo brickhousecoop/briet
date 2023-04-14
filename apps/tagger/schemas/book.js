@@ -72,16 +72,16 @@ export default defineType({
       description: 'Enter 0 for freely downloadable books',
       type: 'number',
       validation: Rule => [
-        Rule.required().positive().precision(2)
-        Rule.max(0).warning('Free book! But just double checking—$0 books will be available for immediate download by the public.')
-      ]
+        Rule.required().positive().precision(2),
+        Rule.max(0).warning('Free book! But just double checking—$0 books will be available for immediate download by the public.'),
+      ],
     }),
     defineField({
       name: 'isPunctumBook',
       title: 'This is a Punctum book',
       type: 'boolean',
       layout: 'checkbox',
-      description: 'Punctum books receive special treatment after download, directing buyers to donate to Punctum'
+      description: 'Punctum books receive special treatment after download, directing buyers to donate to Punctum',
     }),
   ],
   preview: {
