@@ -69,9 +69,20 @@ export default defineType({
     defineField({
       name: 'price_usd',
       title: 'Price (USD)',
+      description: 'Enter 0 for freely downloadable books',
       type: 'number',
-      validation: Rule => Rule.positive().precision(2)
-    })
+      validation: Rule => [
+        Rule.required().positive().precision(2)
+        Rule.max(0).warning('Free book! But just double checking—$0 books will be available for immediate download by the public.')
+      ]
+    }),
+    defineField({
+      name: 'isPunctumBook',
+      title: 'This is a Punctum book',
+      type: 'boolean',
+      layout: 'checkbox',
+      description: 'Punctum books receive special treatment after download, directing buyers to donate to Punctum'
+    }),
   ],
   preview: {
     select: {
