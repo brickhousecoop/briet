@@ -1,10 +1,22 @@
+import { readOnlyClient as sanity } from 'sanity-client'
+import { formium } from '@lib/formium'
+import { loadStripe } from '@stripe/stripe-js'
+import { useRouter } from 'next/router'
+
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
-
-import { readOnlyClient as sanity } from 'sanity-client'
-import { loadStripe } from '@stripe/stripe-js'
+import { FormiumForm, defaultComponents } from '@formium/react'
 import Link from 'next/link'
+
+function Header(props) {
+  return <h2>Download free &rarr;</h2>
+}
+
+const myComponents = {
+  ...defaultComponents,
+  Header,
+}
 
 import styles from '../../../styles/Home.module.css'
 
@@ -19,11 +31,11 @@ const singleBookQuery = `
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
-    "downloadUrl": file.asset -> url
   }[0]
 `
 
-const BookBuyPage = ({ book }) => {
+const BookBuyPage = ({ book, form }) => {
+  const router = useRouter()
   return (
     <div className={styles.container}>
       <Head>
@@ -57,13 +69,26 @@ const BookBuyPage = ({ book }) => {
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
-          <form action="/api/checkout_sessions" method="POST">
-            <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
-            <button type="submit" role="link" className={styles.card}>
-              <h2>Purchase: ${book.price_usd} &rarr;</h2>
-              <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
-            </button>
-          </form>
+            {book.price_usd > 0 ?
+              <form action="/api/checkout_sessions" method="POST">
+                <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
+                <button type="submit" role="link" className={styles.card}>
+                  <h2>Purchase: ${book.price_usd} &rarr;</h2>
+                  <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
+                </button>
+              </form>
+            :
+              <div className={styles.card}>
+                <FormiumForm
+                  data={form}
+                  components={myComponents}
+                  onSubmit={async (values) => {
+                    await formium.submitForm('briet-users', values)
+                    router.push(`/order/free/${book._id}`)
+                  }}
+                />
+              </div>
+            }
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
             <h2>MARC record &darr;</h2>
@@ -97,7 +122,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const book = await sanity.fetch(singleBookQuery, { id: params.id });
+  const book = await sanity.fetch(singleBookQuery, { id: params.id })
+  const form = await formium.getFormBySlug('briet-users')
+
   if (!book) {
     return {
       notFound: true,
@@ -105,9 +132,12 @@ export const getStaticProps = async ({ params }) => {
     }
   }
   return {
-    props: { book },
+    props: {
+      book,
+      form
+    },
     revalidate: 5
-  };
-};
+  }
+}
 
 export default BookBuyPage
