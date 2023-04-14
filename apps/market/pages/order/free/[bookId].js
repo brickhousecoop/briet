@@ -11,6 +11,7 @@ const singleBookQuery = `
   *[_type == "book" && _id == $id] {
     _id,
     title,
+    isPunctumBook,
     "downloadUrl": file.asset -> url,
   }[0]
 `
