@@ -5,8 +5,8 @@ import author from './schemas/author'
 
 export default defineConfig({
   'title': 'BRIET Marketplace',
-  'projectId': '3lm68n5v',
-  'dataset': 'production',
+  'projectId': process.env.SANITY_STUDIO_PROJECTID,
+  'dataset': process.env.SANITY_STUDIO_DATASET,
   'plugins': [
     deskTool(),
   ],
