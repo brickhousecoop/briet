@@ -32,7 +32,7 @@ const OrderPage = ({ book }) => {
           Download your book
         </Link>
 
-        {book.isPunctum
+        {book.isPunctumBook
         ? <p>This is a <Link href="https://punctumbooks.com">Punctum Book</Link>. All Punctum books are free, and BRIET aims to make them even more accessible to public libaries. Still: please consider <Link href="https://punctumbooks.com/support/">donating to Punctum</Link>.</p>
         : <p>Note that this book is free, but is still subject to the terms of <a href="https://controlleddigitallending.org">Controlled Digital Lending</a> when acquired via BRIET.</p>
         }
