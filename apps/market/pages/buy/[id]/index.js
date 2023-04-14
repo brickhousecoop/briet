@@ -1,9 +1,10 @@
+import { readOnlyClient as sanity } from 'sanity-client'
+import { formium } from '@lib/formium'
+import { loadStripe } from '@stripe/stripe-js'
+
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
-
-import { readOnlyClient as sanity } from 'sanity-client'
-import { loadStripe } from '@stripe/stripe-js'
 import Link from 'next/link'
 
 import styles from '../../../styles/Home.module.css'
@@ -23,7 +24,8 @@ const singleBookQuery = `
   }[0]
 `
 
-const BookBuyPage = ({ book }) => {
+const BookBuyPage = ({ book, form }) => {
+  console.log(form) //debug
   return (
     <div className={styles.container}>
       <Head>
@@ -97,7 +99,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const book = await sanity.fetch(singleBookQuery, { id: params.id });
+  const book = await sanity.fetch(singleBookQuery, { id: params.id })
+  const form = await formium.getFormBySlug('briet-users')
+
   if (!book) {
     return {
       notFound: true,
@@ -105,9 +109,12 @@ export const getStaticProps = async ({ params }) => {
     }
   }
   return {
-    props: { book },
+    props: {
+      book,
+      form
+    },
     revalidate: 5
-  };
-};
+  }
+}
 
 export default BookBuyPage
