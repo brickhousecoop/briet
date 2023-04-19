@@ -10,7 +10,7 @@ export default {
       name: 'name',
       title: 'Name',
       type: 'string',
-      description: 'Please use "Firstname Lastname" format',
+      description: 'Please use "Firstname Lastname" format, if applicable',
     },
     {
       name: 'slug',
