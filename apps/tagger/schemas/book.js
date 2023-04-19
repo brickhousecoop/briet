@@ -50,7 +50,9 @@ export default defineType({
       name: 'file',
       title: 'Book File',
       type: 'file',
-      description: 'The actual file to be downloaded by buying institutions'
+      description: 'The actual file to be downloaded by buying institutions',
+      storeOriginalFilename: false,
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'authors',
