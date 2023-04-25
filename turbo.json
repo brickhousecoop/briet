@@ -8,6 +8,9 @@
     "bh-briet-market#build": {
       "outputs": [".next/**"]
     },
+    "bh-briet-jacket#build": {
+      "outputs": [".next/**"]
+    },
     "lint": {
       "outputs": []
     },
