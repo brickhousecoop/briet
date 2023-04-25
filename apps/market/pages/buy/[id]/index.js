@@ -86,7 +86,9 @@ const BookBuyPage = ({ book, form }) => {
                     await formium.submitForm('briet-users', values)
                     router.push(`/order/free/${book._id}`)
                   }}
-                />
+                >
+                  <input type="hidden" name="bookID" value={book._id} />
+                </FormiumForm>
               </div>
             }
 
