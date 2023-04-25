@@ -42,12 +42,12 @@ const BrietAboutPage = () => {
 
         <link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css" />
         <div id="mc_embed_signup">
-            <form action="https://house.us17.list-manage.com/subscribe/post?u=32a22cc8bacf327fb3bb5066e&amp;id=7757e9bd40&amp;f_id=006b5ae0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
+            <form action="https://house.us17.list-manage.com/subscribe/post?u=32a22cc8bacf327fb3bb5066e&amp;id=7757e9bd40&amp;f_id=006b5ae0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>
                 <div id="mc_embed_signup_scroll">
                 <h2>The Brick House Newsletter is Good</h2>
                 <div className="indicates-required"><span className="asterisk">*</span> indicates required</div>
         <div className="mc-field-group">
-          <label for="mce-EMAIL">Email Address  <span className="asterisk">*</span>
+          <label htmlFor="mce-EMAIL">Email Address  <span className="asterisk">*</span>
         </label>
           <input type="email" name="EMAIL" className="required email" id="mce-EMAIL" required />
           <span id="mce-EMAIL-HELPERTEXT" className="helper_text"></span>
@@ -57,7 +57,7 @@ const BrietAboutPage = () => {
             <div className="response" id="mce-error-response" style={{display: 'none'}}></div>
             <div className="response" id="mce-success-response" style={{display: 'none'}}></div>
           </div>
-            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_32a22cc8bacf327fb3bb5066e_7757e9bd40" tabindex="-1" value="" /></div>
+            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_32a22cc8bacf327fb3bb5066e_7757e9bd40" tabIndex="-1" value="" /></div>
             <div className="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
             </div>
         </form>
