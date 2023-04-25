@@ -16,6 +16,11 @@ footer {
   margin: 1rem auto;
 }
 
+form input {
+  display: block;
+  padding: 1em;
+}
+
 a {
   color: inherit;
   text-decoration: none;
