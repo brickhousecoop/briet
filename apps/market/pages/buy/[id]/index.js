@@ -8,6 +8,7 @@ import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
 import { FormiumForm, defaultComponents } from '@formium/react'
 import Link from 'next/link'
+import va from '@vercel/analytics'
 
 function Header(props) {
   return <h2>Download free &rarr;</h2>
@@ -35,7 +36,11 @@ const singleBookQuery = `
 `
 
 const BookBuyPage = ({ book, form }) => {
+  const trackCheckout = ({ bookTitle, price }) => {
+    va.track('Checkout', { title: bookTitle, price: price })
+  }
   const router = useRouter()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -72,7 +77,7 @@ const BookBuyPage = ({ book, form }) => {
             {book.price_usd > 0 ?
               <form action="/api/checkout_sessions" method="POST">
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
-                <button type="submit" role="link" className={styles.card}>
+                <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
                   <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
                 </button>
@@ -82,6 +87,7 @@ const BookBuyPage = ({ book, form }) => {
                 <FormiumForm
                   data={form}
                   components={myComponents}
+                  onClick={trackCheckout}
                   onSubmit={async (values) => {
                     await formium.submitForm('briet-users', values)
                     router.push(`/order/free/${book._id}`)
