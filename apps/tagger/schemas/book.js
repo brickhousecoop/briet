@@ -22,6 +22,12 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'description',
+      title: 'Sescription',
+      type: 'text',
+      validation: Rule => Rule.max(1000),
+    }),
+    defineField({
       name: 'releaseDate',
       title: 'Release date',
       type: 'datetime',
