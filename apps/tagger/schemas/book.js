@@ -22,6 +22,13 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      rows: 5,
+      type: 'text',
+      validation: Rule => Rule.max(1000),
+    }),
+    defineField({
       name: 'releaseDate',
       title: 'Release date',
       type: 'datetime',

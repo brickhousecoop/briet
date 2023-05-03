@@ -29,6 +29,7 @@ const singleBookQuery = `
   *[_type == "book" && _id == $id] {
     _id,
     title,
+    description,
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
@@ -73,6 +74,8 @@ const BookBuyPage = ({ book, form }) => {
             <h2>{book.title}</h2>
             {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
+
+          <p className={styles.description}>{book.description}</p>
 
             {book.price_usd > 0 ?
               <form action="/api/checkout_sessions" method="POST">
