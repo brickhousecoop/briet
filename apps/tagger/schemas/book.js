@@ -23,7 +23,8 @@ export default defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Sescription',
+      title: 'Description',
+      rows: 5,
       type: 'text',
       validation: Rule => Rule.max(1000),
     }),
