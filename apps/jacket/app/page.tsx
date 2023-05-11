@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { BsRssFill } from 'react-icons/bs'
 import styles from './page.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -61,7 +62,7 @@ export default function Home() {
           className={styles.card}
         >
           <h2 className={inter.className}>
-            Server <span>-&gt;</span>
+            <BsRssFill /> Server <span>-&gt;</span>
           </h2>
           <p className={styles.tag}>FOR MACHINES ONLY</p>
           <p className={inter.className}>
