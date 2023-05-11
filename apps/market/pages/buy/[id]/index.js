@@ -1,22 +1,15 @@
 import { readOnlyClient as sanity } from 'sanity-client'
-import { formium } from '@lib/formium'
 import { loadStripe } from '@stripe/stripe-js'
 import { useRouter } from 'next/router'
 
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
-import { FormiumForm, defaultComponents } from '@formium/react'
 import Link from 'next/link'
 import va from '@vercel/analytics'
 
 function Header(props) {
   return <h2>Download free &rarr;</h2>
-}
-
-const myComponents = {
-  ...defaultComponents,
-  Header,
 }
 
 import styles from '../../../styles/Home.module.css'
@@ -132,7 +125,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const book = await sanity.fetch(singleBookQuery, { id: params.id })
-  const form = await formium.getFormBySlug('briet-users')
 
   if (!book) {
     return {
@@ -143,7 +135,6 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       book,
-      form
     },
     revalidate: 5
   }
