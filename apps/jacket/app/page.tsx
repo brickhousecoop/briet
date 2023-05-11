@@ -9,7 +9,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Digital books, for libraries, <strong>for keeps</strong>.
+          Digital content, for libraries, <strong>for keeps</strong>.
         </p>
         <div>
           <a

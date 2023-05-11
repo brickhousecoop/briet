@@ -5,7 +5,7 @@ import './globals.css'
 
 export const metadata = {
   title: 'BRIET',
-  description: 'Digital content for sale, by creators, to libraries, for ever.',
+  description: 'Digital content, for libraries, for keeps.',
 }
 
 export default function RootLayout({
