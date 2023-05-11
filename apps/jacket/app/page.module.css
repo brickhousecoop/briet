@@ -7,6 +7,17 @@
   min-height: 100vh;
 }
 
+.tag {
+  font-family: system-ui, Inter;
+  display: inline-block;
+  overflow-wrap: break-word;
+  background-color: #ff002b;
+  color: white;
+  padding: 0 0.5em;
+  margin: 0 min(0.25em, 5px);
+  text-decoration-color: currentColor;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -66,7 +77,6 @@
 
 .card p {
   margin: 0;
-  opacity: 0.6;
   font-size: 0.9rem;
   line-height: 1.5;
   max-width: 30ch;

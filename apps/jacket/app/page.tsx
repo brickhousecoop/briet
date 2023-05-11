@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { BsRssFill } from 'react-icons/bs'
 import styles from './page.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -50,6 +51,7 @@ export default function Home() {
           <h2 className={inter.className}>
             Tagger <span>-&gt;</span>
           </h2>
+          <p className={styles.tag}>BY INVITATION ONLY</p>
           <p className={inter.className}>
             Authors upload and tag their e-books with library-friendly metadata
           </p>
@@ -60,10 +62,11 @@ export default function Home() {
           className={styles.card}
         >
           <h2 className={inter.className}>
-            Server <span>-&gt;</span>
+            <BsRssFill /> Server <span>-&gt;</span>
           </h2>
+          <p className={styles.tag}>FOR MACHINES ONLY</p>
           <p className={inter.className}>
-            We serve an open searchable feed of books, powered by BookServer
+            Run a catalog? Ingest our open feed of books, powered by BookServer
           </p>
         </a>
 
@@ -74,6 +77,7 @@ export default function Home() {
           <h2 className={inter.className}>
             Market <span>-&gt;</span>
           </h2>
+          <p className={styles.tag}>OPEN TO ALL LIBRARIANS</p>
           <p className={inter.className}>
             Librarians browse for e-books and easily add them to their catalog
           </p>
