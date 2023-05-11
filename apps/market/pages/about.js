@@ -18,7 +18,7 @@ const BrietAboutPage = () => {
 
         <p>BRIET is a project of <Link href="https://thebrick.house">The Brick House Cooperative</Link>, a journalist- and creator-owned cooperative of independent publications around the world. The BRIET project’s mission is to defend the historical right of libraries to own, preserve and lend digital works to the public. It is named after the pioneering librarian and information scientist <Link href="https://en.wikipedia.org/wiki/Suzanne_Briet">Suzanne “Madame Documentation” Briet</Link>.</p>
 
-        <p><strong>Librarians and teachers: buy these ebooks!</strong> If your institution is a signatory to the <Link href="https://controlleddigitallending.org/statement">Position Statement</Link> on Controlled Digital Lending (CDL), you can acquire and own BRIET works to lend to patrons. See the <Link href="https://controlleddigitallending.org/ill-signatories/">list of CDL signatories</Link>.</p>
+        <p><strong>Librarians and teachers: buy these ebooks!</strong> If your institution is a signatory to the <Link href="https://controlleddigitallending.org/statement">Position Statement</Link> on Controlled Digital Lending (CDL), you can acquire and own BRIET works to lend to patrons. <Link href="https://controlleddigitallending.org/faq/">Learn more about CDL</Link> and see the <Link href="https://controlleddigitallending.org/ill-signatories/">list of CDL signatories</Link>.</p>
 
         <p>To begin the process of purchasing digital works on BRIET, or find out how to become a CDL signatory, <Link href="mailto:help@briet.app">contact us</Link>.</p>
 
@@ -32,7 +32,7 @@ const BrietAboutPage = () => {
           <li>List hundreds of digital works such as ebooks for acquisition by libraries and institutions, encouraging use and awareness of CDL programs among readers</li>
         </ul>
 
-        <p>The BRIET project was supported in prototype by a generous gift from the Kahle-Austin Foundation. The foundation’s founders are Brewster Kahle, founder of the Internet Archive, and Mary Austin, who established the San Francisco Center for the book.</p>
+        <p>The BRIET project was supported in prototype by a generous gift from the Kahle-Austin Foundation. The foundation’s founders are Brewster Kahle, founder of the Internet Archive, and Mary Austin, who established the San Francisco Center for the Book.</p>
 
         <p>Freedom of information is under threat. To preserve it, the flow of information must remain clear and strong. Writers, academics and artists, publishers, librarians, educators, and individual readers—all must preserve the right to share our views freely and without interference.</p>
 
