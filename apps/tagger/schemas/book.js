@@ -87,10 +87,10 @@ export default defineType({
     }),
     defineField({
       name: 'isPunctumBook',
-      title: 'This is a Punctum book',
+      title: 'This is a punctum book',
       type: 'boolean',
       layout: 'checkbox',
-      description: 'Punctum books receive special treatment after download, directing buyers to donate to Punctum',
+      description: 'punctum books receive special treatment after download, directing buyers to donate to punctum',
     }),
   ],
   preview: {

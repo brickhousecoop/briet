@@ -33,6 +33,7 @@ const singleBookQuery = `
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
+    isPunctumBook,
   }[0]
 `
 
@@ -58,9 +59,15 @@ const BookBuyPage = ({ book, form }) => {
           Purchase digital books for libraries, for patrons, forever.
         </p>
 
-        <p className={styles.description}>
-          <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
-        </p>
+        {book.isPunctumBook ?
+          <p className={styles.instructions}>
+            This is a <Link href="https://punctumbooks.com">punctum</Link> ebook. Please consider their <Link href="https://punctumbooks.com/supporting-library-membership-program/">Supporting Library Membership Program</Link>.
+          </p>
+        :
+          <p className={styles.instructions}>
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
+          </p>
+        }
 
         <div className={styles.grid}>
           <div className={styles.float}>
@@ -82,23 +89,14 @@ const BookBuyPage = ({ book, form }) => {
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
                 <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
-                  <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
+                  <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
                 </button>
               </form>
             :
-              <div className={styles.card}>
-                <FormiumForm
-                  data={form}
-                  components={myComponents}
-                  onClick={trackCheckout}
-                  onSubmit={async (values) => {
-                    await formium.submitForm('briet-users', values)
-                    router.push(`/order/free/${book._id}`)
-                  }}
-                >
-                  <input type="hidden" name="bookID" value={book._id} />
-                </FormiumForm>
-              </div>
+              <Link href={`/order/free/${book._id}`} className={styles.downloadutton} onClick={trackCheckout}>
+                <h2>Order: $0 &rarr;</h2>
+                <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
+              </Link>
             }
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
