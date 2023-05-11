@@ -29,7 +29,7 @@ const OrderPage = ({ book }) => {
           <span className="logo">BRIET</span> Order Complete
         </h1>
 
-        <Link className={styles.card} href={book.downloadUrl}>
+        <Link className={styles.downloadutton} href={book.downloadUrl}>
           Download your book
         </Link>
 

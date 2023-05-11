@@ -89,23 +89,14 @@ const BookBuyPage = ({ book, form }) => {
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
                 <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
-                  <p>Your institution may freely loan to patrons: you <b>own</b> the file.</p>
+                  <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
                 </button>
               </form>
             :
-              <div className={styles.card}>
-                <FormiumForm
-                  data={form}
-                  components={myComponents}
-                  onClick={trackCheckout}
-                  onSubmit={async (values) => {
-                    await formium.submitForm('briet-users', values)
-                    router.push(`/order/free/${book._id}`)
-                  }}
-                >
-                  <input type="hidden" name="bookID" value={book._id} />
-                </FormiumForm>
-              </div>
+              <Link href={`/order/free/${book._id}`} className={styles.downloadutton} onClick={trackCheckout}>
+                <h2>Order: $0 &rarr;</h2>
+                <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
+              </Link>
             }
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
