@@ -6,7 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-p {
+p, ul, li, ul {
   font-size: 20px;
 }
 
