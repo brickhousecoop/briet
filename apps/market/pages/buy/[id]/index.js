@@ -33,6 +33,7 @@ const singleBookQuery = `
     cover,
     authors[] -> { _id, name, uri },
     price_usd,
+    isPunctumBook,
   }[0]
 `
 
@@ -58,9 +59,15 @@ const BookBuyPage = ({ book, form }) => {
           Purchase digital books for libraries, for patrons, forever.
         </p>
 
-        <p className={styles.description}>
-          <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
-        </p>
+        {book.isPunctumBook ?
+          <p className={styles.instructions}>
+            This is a <Link href="https://punctumbooks.com">punctum</Link> ebook. Please consider their <Link href="https://punctumbooks.com/supporting-library-membership-program/">Supporting Library Membership Program</Link>.
+          </p>
+        :
+          <p className={styles.instructions}>
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
+          </p>
+        }
 
         <div className={styles.grid}>
           <div className={styles.float}>

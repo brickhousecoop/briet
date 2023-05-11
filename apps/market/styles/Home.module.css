@@ -56,6 +56,15 @@
   font-size: 1.5rem;
 }
 
+.instructions {
+  border: 0.25em solid currentColor;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 4rem 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
 .code {
   background: #fafafa;
   border-radius: 5px;
