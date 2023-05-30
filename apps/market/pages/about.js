@@ -26,7 +26,7 @@ const BrietAboutPage = () => {
 
         <p>We’re the <Link href="https://thebrick.house">Brick House</Link>, a small journalist-owned cooperative of independent publishers, writers, editors, artists and information activists around the world. We’ve published a few books by our members, and an anthology of our own work. When we realized we could easily demonstrate how easy it is for publishers to do the right thing, and sell our ebooks to libraries for keeps, we decided to go for it.</p>
 
-        <p><strong>That’s why we’re building BRIET, a platform where publishers can sell their ebooks to libraries, for keeps.</strong> It’s named after the pioneering librarian and information scientist <Link href="https://en.wikipedia.org/wiki/Suzanne_Briet">Suzanne Briet</Link>.</p>
+        <p><strong>That’s why we’re building <span className="logo">BRIET</span>, a platform where publishers can sell their ebooks to libraries, for keeps.</strong> It’s named after the pioneering librarian and information scientist <Link href="https://en.wikipedia.org/wiki/Suzanne_Briet">Suzanne Briet</Link>.</p>
 
         <p><strong>Librarians: please buy, preserve and lend these ebooks!</strong> If your institution is a signatory to the <Link href="https://controlleddigitallending.org/statement">Position Statement</Link> on Controlled Digital Lending (CDL), you can buy permanent digital media at BRIET. <Link href="https://controlleddigitallending.org/faq/">Learn more about CDL</Link> and see the <Link href="https://controlleddigitallending.org/ill-signatories/">list of CDL signatories</Link>.</p>
 
@@ -37,6 +37,8 @@ const BrietAboutPage = () => {
         <p>BRIET was made possible by generous gifts from the <Link href="https://archive.org/details/kahleaustinfoundation">Kahle-Austin Foundation</Link>, and <Link href="https://www.grantfortheweb.org">Grant for the Web</Link>.</p>
 
         <p>The Brick House Cooperative’s allied organization, the Participatory Politics Foundation (PPF), is a 501(c)(3) nonprofit organization founded in 2009 to increase civic engagement. Please get in touch to support our efforts to defend press freedom, libraries, and the digital future. Read more about BRIET: our pioneering <Link href="https://www.thenation.com/article/culture/libraries-digital-publishing-ebooks/">sale</Link> to the Internet Archive’s Open Library in 2021, and our cooperative’s work <Link href="https://popula.com/2022/01/12/buy-this-book-from-the-brick-house-cooperative/">defending library rights</Link>.</p>
+
+        <p>Freedom of information is under threat in the United States, and libraries are in the line of fire. Donate to Brick House here so that we can keep the <span className="logo">BRIET</span> project going.</p>
 
         <link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css" />
         <div id="mc_embed_signup">
