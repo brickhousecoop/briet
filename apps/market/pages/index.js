@@ -9,6 +9,7 @@ const catalogQuery = `
     _id,
     title,
     cover,
+    description,
     authors[]->{ name },
   }
 `
