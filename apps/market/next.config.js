@@ -7,7 +7,16 @@ const nextConfig = {
     domains: [
       'cdn.sanity.io'
     ]
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: 'https://briet.app/about',
+        permanent: true,
+      }
+    ]
+  },
 }
 
 module.exports = nextConfig
