@@ -13,6 +13,7 @@ function sanityImgUrl(source) {
 const CatalogListing = ({ book }) =>
   <a
     href={`/buy/${book._id}`}
+    title={book.description}
     className={styles.cataloglisting}
     style={{ backgroundImage: `url(${sanityImgUrl(book.cover).height(400).url()})` }}
   >
