@@ -19,7 +19,7 @@
   "devDependencies": {
     "eslint": "^8.37.0",
     "eslint-config-turbo": "^0.0.4",
-    "turbo": "^1.9.3",
+    "turbo": "^1.10.3",
     "vercel": "^30.0.0"
   },
   "license": "UNLICENSED",
