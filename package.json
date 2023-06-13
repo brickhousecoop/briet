@@ -4,10 +4,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev-jacket": "vercel link --project=bh-briet-jacket --scope=nocomment --yes",
-    "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes",
-    "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes",
-    "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes",
+    "dev-jacket": "vercel link --project=bh-briet-jacket --scope=nocomment --yes && vercel pull && vercel dev",
+    "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes && vercel pull && vercel dev",
+    "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes && vercel pull && vercel dev",
+    "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes && vercel pull && vercel dev",
     "dev": "turbo run dev --no-cache --parallel --continue",
     "build": "turbo run build",
     "lint": "turbo run lint",
