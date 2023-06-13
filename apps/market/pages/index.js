@@ -4,6 +4,20 @@ import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
 import { readOnlyClient as sanity } from 'sanity-client'
 
+const collectionsQuery = `
+  *[_type == "collection"] {
+    name,
+    slug,
+    members[]->{
+      _id,
+      title,
+      cover,
+      description,
+      authors[]->{ name },
+    },
+  }
+`
+
 const catalogQuery = `
   *[_type == "book"] {
     _id,
@@ -14,7 +28,7 @@ const catalogQuery = `
   }
 `
 
-const BrietHomepage = ({ books }) => {
+const BrietHomepage = ({ books, collections }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -29,10 +43,20 @@ const BrietHomepage = ({ books }) => {
         <p className={styles.description}>
           Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
-
-        <h2>The Catalog</h2>
         <a href="//server.briet.app">Powered by BookServer</a>
 
+        <h2>Curated Collections</h2>
+
+        {collections.map(collection =>
+          <fieldset id={collection.slug.current}>
+            <legend>{collection.name}</legend>
+            {collection.members.map(book =>
+              <CatalogListing book={book} key={book._id}/>
+              )}
+          </fieldset>
+        )}
+
+        <h2>The Whole <span className="logo">BRIET</span> Catalog</h2>
         {books.map(book => <CatalogListing book={book} key={book._id}/>)}
       </main>
       <Footer/>
@@ -45,9 +69,13 @@ BrietHomepage.displayName = 'BrietHomepage'
 export default BrietHomepage
 
 export const getStaticProps = async ({ params }) => {
-  const books = await sanity.fetch(catalogQuery);
+  const books = await sanity.fetch(catalogQuery)
+  const collections = await sanity.fetch(collectionsQuery)
+
+  console.log(await collections)
+
   return {
-    props: { books },
-    revalidate: 5
+    props: { books, collections },
+    revalidate: 5,
   };
 };

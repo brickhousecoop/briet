@@ -21,6 +21,20 @@ form input {
   padding: 1em;
 }
 
+fieldset {
+  border: 2px solid black;
+  border-radius: 2em;
+  box-sizing: border-box;
+}
+
+fieldset legend {
+  margin-left: 1rem;
+}
+
+fieldset .cataloglisting {
+  width: auto;
+}
+
 a {
   color: inherit;
   text-decoration: none;

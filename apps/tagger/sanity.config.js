@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import book from './schemas/book'
 import author from './schemas/author'
+import collection from './schemas/collection'
 
 export default defineConfig({
   'title': 'BRIET Marketplace',
@@ -14,6 +15,7 @@ export default defineConfig({
     'types': [
       book,
       author,
+      collection,
     ],
   },
   'env': {
