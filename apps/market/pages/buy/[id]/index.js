@@ -58,7 +58,7 @@ const BookBuyPage = ({ book, form }) => {
           </p>
         :
           <p className={styles.instructions}>
-            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you. In fact, we <em>only</em> sell to libraries, so that they can use <a href="https://controlleddigitallending.org">controlled digital lending</a> to legally lend digital books to library patrons.
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you.
           </p>
         }
 
