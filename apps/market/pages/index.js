@@ -27,7 +27,7 @@ const BrietHomepage = ({ books }) => {
         </h1>
 
         <p className={styles.description}>
-          Digital content, for libraries, <strong>for keeps</strong>.
+          Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
 
         <h2>The Catalog</h2>
