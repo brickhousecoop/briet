@@ -13,7 +13,7 @@
   "main": "next.config.js",
   "scripts": {
     "build": "next build",
-    "dev": "dotenv -e ../../.vercel/.env.development.local -- next dev",
+    "dev": "npm run --prefix ../../ dev-market",
     "lint": "next lint",
     "start": "next start"
   },

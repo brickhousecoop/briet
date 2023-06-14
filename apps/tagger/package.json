@@ -13,7 +13,7 @@
   "main": "package.json",
   "scripts": {
     "build": "sanity build",
-    "dev": "sanity dev",
+    "dev": "npm run --prefix ../../ dev-tagger",
     "start": "sanity start"
   },
   "dependencies": {
