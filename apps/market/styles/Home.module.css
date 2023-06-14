@@ -4,9 +4,7 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
+  padding: 2rem 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -125,7 +123,6 @@ button.card {
   display: block;
   width: 100%;
 
-  margin: 1rem;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -140,6 +137,14 @@ button.card {
   background-repeat: no-repeat;
 
   padding-right: 150px; /* space for covers; clunky! */
+}
+
+.cataloglisting p {
+  background-color: #ffffffcc;
+}
+
+.cataloglisting + .cataloglisting {
+   margin-top: 1rem;
 }
 
 .float {

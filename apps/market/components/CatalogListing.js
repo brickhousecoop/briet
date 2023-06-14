@@ -17,8 +17,8 @@ const CatalogListing = ({ book }) =>
     className={styles.cataloglisting}
     style={{ backgroundImage: `url(${sanityImgUrl(book.cover).height(400).url()})` }}
   >
-    <h2>{book.title}</h2>
-    <p>{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
+    <p className="title">{book.title}</p>
+    <p className="meta authors">{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
   </a>
 
 CatalogListing.displayName = 'CatalogListing'

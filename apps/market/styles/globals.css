@@ -10,6 +10,14 @@ p, ul, li, ul {
   font-size: 20px;
 }
 
+h1, h2 {
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
 main,
 footer {
   max-width: 800px;
@@ -24,15 +32,11 @@ form input {
 fieldset {
   border: 2px solid black;
   border-radius: 2em;
-  box-sizing: border-box;
+  padding: 2rem;
 }
 
 fieldset legend {
   margin-left: 1rem;
-}
-
-fieldset .cataloglisting {
-  width: auto;
 }
 
 a {
