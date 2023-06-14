@@ -6,6 +6,7 @@ import { readOnlyClient as sanity } from 'sanity-client'
 
 const collectionsQuery = `
   *[_type == "collection"] {
+    _id,
     name,
     slug,
     members[]->{
@@ -48,7 +49,7 @@ const BrietHomepage = ({ books, collections }) => {
         <h2>Curated Collections</h2>
 
         {collections.map(collection =>
-          <fieldset id={collection.slug.current}>
+          <fieldset id={collection.slug.current} key={collection._id}>
             <legend>{collection.name}</legend>
             {collection.members.map(book =>
               <CatalogListing book={book} key={book._id}/>
@@ -71,8 +72,6 @@ export default BrietHomepage
 export const getStaticProps = async ({ params }) => {
   const books = await sanity.fetch(catalogQuery)
   const collections = await sanity.fetch(collectionsQuery)
-
-  console.log(await collections)
 
   return {
     props: { books, collections },
