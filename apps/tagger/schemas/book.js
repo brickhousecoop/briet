@@ -82,7 +82,7 @@ export default defineType({
       type: 'number',
       validation: Rule => [
         Rule.required().positive().precision(2),
-        Rule.custom(price => price == 0).warning('Free book! But just double checking—$0 books will be available for immediate download by the public.'),
+        Rule.custom(price => price == 0 ? true : 'Free book! But just double checking--$0 books will be available for immediate download by the public.').warning(),
       ],
     }),
     defineField({
