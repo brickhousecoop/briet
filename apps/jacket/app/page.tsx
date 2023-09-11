@@ -53,7 +53,7 @@ export default function Home() {
           </h2>
           <p className={styles.tag}>BY INVITATION ONLY</p>
           <p className={inter.className}>
-            Authors upload and tag their e-books with library-friendly metadata
+            Authors and publishers upload and tag their e-books with library-friendly metadata
           </p>
         </a>
 

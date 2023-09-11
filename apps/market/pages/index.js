@@ -46,7 +46,7 @@ const BrietHomepage = ({ books, collections }) => {
         </p>
         <a href="//server.briet.app">Powered by BookServer</a>
 
-        <h2>Curated Collections</h2>
+        <h2>Featured Collections</h2>
 
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
