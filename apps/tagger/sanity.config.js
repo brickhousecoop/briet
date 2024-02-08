@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
+import { visionTool } from '@sanity/vision'
 import book from './schemas/book'
 import author from './schemas/author'
 import collection from './schemas/collection'
@@ -10,7 +11,7 @@ export default defineConfig({
   'dataset': process.env.SANITY_STUDIO_DATASET,
   'plugins': [
     deskTool(),
-    '@sanity/vision',
+    visionTool(),
   ],
   'schema': {
     'types': [
