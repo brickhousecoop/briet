@@ -10,6 +10,7 @@ export default defineConfig({
   'dataset': process.env.SANITY_STUDIO_DATASET,
   'plugins': [
     deskTool(),
+    '@sanity/vision',
   ],
   'schema': {
     'types': [
@@ -18,11 +19,4 @@ export default defineConfig({
       collection,
     ],
   },
-  'env': {
-    'development': {
-      'plugins': [
-        '@sanity/vision',
-      ]
-    }
-  }
 })

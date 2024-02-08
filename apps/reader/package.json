@@ -1,0 +1,11 @@
+{
+  "name": "bh-briet-reader",
+  "version": "1.0.0",
+  "description": "A servable reader for BRIET books",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "Jacob Ford <j@cobford.com> (https://nocomment.llc/)",
+  "license": "UNLICENSED"
+}
