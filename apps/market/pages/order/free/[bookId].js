@@ -1,7 +1,6 @@
 import { readOnlyClient as sanity } from 'sanity-client'
 
 import Head from '@components/head.jsx'
-import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
 import Link from 'next/link'
 
