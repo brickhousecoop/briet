@@ -18,21 +18,23 @@
     "start": "next start"
   },
   "dependencies": {
-    "@natlibfi/marc-record": "^7.2.2",
+    "@natlibfi/marc-record": "^8.1.0",
     "@sanity/image-url": "^1.0.2",
-    "@stripe/stripe-js": "^1.46.0",
-    "@vercel/analytics": "^1.0.0",
-    "next": "^13.3.0",
-    "next-sanity-image": "^5.0.0",
-    "stripe": "^11.9.1"
+    "@stripe/stripe-js": "^3.0.5",
+    "@vercel/analytics": "^1.2.2",
+    "next": "^14.1.0",
+    "next-sanity-image": "^6.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "stripe": "^14.17.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
-    "@types/react": "^18.0.33",
-    "dotenv-cli": "^7.1.0",
-    "eslint": "^8.33.0",
-    "eslint-config-next": "^13.3.0",
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.57",
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.3.3"
   }
 }

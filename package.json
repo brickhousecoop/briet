@@ -17,9 +17,9 @@
     "build:market": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market"
   },
   "devDependencies": {
-    "eslint": "^8.37.0",
-    "eslint-config-turbo": "^0.0.4",
-    "turbo": "^1.10.3"
+    "eslint": "^8.56.0",
+    "eslint-config-turbo": "^1.12.4",
+    "turbo": "^1.12.4"
   },
   "license": "UNLICENSED",
   "private": true
