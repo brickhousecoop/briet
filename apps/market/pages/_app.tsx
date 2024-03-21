@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import '@styles/globals.css'
 import Script from 'next/script'
@@ -14,6 +15,7 @@ function App({ Component, pageProps }: AppProps) {
       />
       <Component {...pageProps} />
       <VercelAnalytics />
+      <SpeedInsights />
     </>
   )
 }
