@@ -16,6 +16,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             By{" "}
+            <div id="BookReader"></div>
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
