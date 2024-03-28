@@ -1,5 +1,5 @@
 {
-  "name": "bh-briet-reader-html",
+  "name": "bh-briet-reader",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,5 +7,8 @@
   },
   "devDependencies": {
     "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "pdf-img-convert": "^1.2.1"
   }
 }
