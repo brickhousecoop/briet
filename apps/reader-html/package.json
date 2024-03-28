@@ -1,5 +1,11 @@
 {
   "name": "bh-briet-reader-html",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "http-server ."
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
 }
