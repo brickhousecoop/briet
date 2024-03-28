@@ -12,8 +12,6 @@ export async function GET(request) {
     pageNumber: index,
   })
 
-  console.log(typeof image)
-
   const headers = new Headers();
   headers.set('Content-Type', 'image/jpg')
 
