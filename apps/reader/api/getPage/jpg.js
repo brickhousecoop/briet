@@ -1,19 +1,17 @@
 var pdf2img = require('pdf-img-convert');
 
-export async function GET(request) {
+export default async (request, response) => {
   const { sanityFileId, index } = request.query
 
-  const pdfUrl = `https://cdn.sanity.io/files/3lm68n5v/production/${fileId}.pdf`
+  const pdfUrl = `https://cdn.sanity.io/files/3lm68n5v/production/${sanityFileId}.pdf`
 
   const image = await pdfPageToJpg2000({
     pdfUrl: pdfUrl,
     pageNumber: index,
   })
 
-  const headers = new Headers();
-  headers.set('Content-Type', 'image/jpg')
-
-  return new Response(image, { headers })
+  response.setHeader('Content-Type', 'image/jpeg');
+  response.send(image)
 }
 
 async function pdfPageToJpg2000({pdfUrl, pageNumber}={}) {
