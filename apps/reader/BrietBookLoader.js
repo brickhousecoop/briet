@@ -1,7 +1,5 @@
-//
-// This file shows the minimum you need to provide to BookReader to display a book
-//
-// Copyright(c)2008-2009 Internet Archive. Software license AGPL version 3.
+const urlParams = new URLSearchParams(window.location.search)
+const sanityFileId = urlParams.get('book')
 
 // Create the BookReader object
 var options = {
@@ -26,10 +24,7 @@ var options = {
       // reduce and rotate are ignored in this simple implementation, but we
       // could e.g. look at reduce and load images from a different directory
       // or pass the information to an image server
-      var leafStr = '000';
-      var imgStr = (index+1).toString();
-      var re = new RegExp("0{"+imgStr.length+"}$");
-      var url = 'http://archive.org/download/BookReader/img/page'+leafStr.replace(re, imgStr) + '.jpg';
+      var url = `/api/getPage/jpg?sanityFileId=${sanityFileId}&index=${index}`;
       return url;
   },
 
