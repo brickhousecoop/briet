@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import BookReader from '@internetarchive/bookreader'
 
 export default function Home() {
   return (
@@ -74,6 +75,7 @@ export default function Home() {
           <h2>
             Templates <span>-&gt;</span>
           </h2>
+          <BookReader/>
           <p>Explore starter templates for Next.js.</p>
         </a>
 
