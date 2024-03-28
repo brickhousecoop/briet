@@ -24,7 +24,7 @@ var options = {
       // reduce and rotate are ignored in this simple implementation, but we
       // could e.g. look at reduce and load images from a different directory
       // or pass the information to an image server
-      var url = `/api/getPage/jpg?sanityFileId=${sanityFileId}&index=${index}`;
+      var url = `/api/getPage/jpg?sanityFileId=${sanityFileId}&index=${index + 1}`;
       return url;
   },
 
