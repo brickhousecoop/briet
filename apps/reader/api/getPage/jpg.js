@@ -1,9 +1,7 @@
 var pdf2img = require('pdf-img-convert');
 
 export async function GET(request) {
-  // const { fileId, index } = request.nextUrl.searchParams
-  const fileId = '0e7fab901df482ab46a641a54b487f9c6fea41e2';
-  const index = 1;
+  const { sanityFileId, index } = request.query
 
   const pdfUrl = `https://cdn.sanity.io/files/3lm68n5v/production/${fileId}.pdf`
 
