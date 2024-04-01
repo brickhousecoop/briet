@@ -9,6 +9,9 @@
     "http-server": "^14.1.1"
   },
   "dependencies": {
-    "pdf-img-convert": "github:brickhousecoop/pdf-img-convert.js#fix-fakeworker"
+    "canvas": "^2.11.2",
+    "is-url": "^1.2.4",
+    "node-fetch": "^3.3.2",
+    "pdfjs-dist": "^4.0.379"
   }
 }

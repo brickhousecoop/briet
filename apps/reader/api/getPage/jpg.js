@@ -1,4 +1,4 @@
-var pdf2img = require('pdf-img-convert');
+const pdf2img = require('../../lib/pdf-to-img');
 
 export async function GET(request) {
   const url = new URL(request.url)
