@@ -4,10 +4,6 @@ const pdfjs = require('pdfjs-dist/legacy/build/pdf.js');
 const pdfjsWorker = require('pdfjs-dist/legacy/build/pdf.worker.min.mjs');
 const Canvas = require("canvas");
 const assert = require("assert").strict;
-const fs = require("fs");
-const util = require('util');
-
-const readFile = util.promisify(fs.readFile);
 
 function NodeCanvasFactory() {}
 NodeCanvasFactory.prototype = {
@@ -59,7 +55,7 @@ module.exports.convert = async function (pdf, conversion_config = {}) {
     }
     // Support for filepath input
     else {
-      pdfData = new Uint8Array(await readFile(pdf));
+      throw Error('filepath input support removed for BRIET')
     }
   }
   // Support for buffer input
