@@ -1,6 +1,3 @@
-const urlParams = new URLSearchParams(window.location.search)
-const sanityFileId = urlParams.get('book')
-
 // Create the BookReader object
 var options = {
   // Total number of leafs
@@ -24,7 +21,7 @@ var options = {
       // reduce and rotate are ignored in this simple implementation, but we
       // could e.g. look at reduce and load images from a different directory
       // or pass the information to an image server
-      var url = `/api/getPage/jpg?sanityFileId=${sanityFileId}&index=${index + 1}`;
+      var url = `./pages/page-${index}.jpg`;
       return url;
   },
 
