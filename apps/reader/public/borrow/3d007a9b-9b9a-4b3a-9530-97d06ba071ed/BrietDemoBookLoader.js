@@ -21,7 +21,7 @@ var options = {
       // reduce and rotate are ignored in this simple implementation, but we
       // could e.g. look at reduce and load images from a different directory
       // or pass the information to an image server
-      var url = `./pages/page-${index}.jpg`;
+      var url = `./pages/page-${index}.jpeg`;
       return url;
   },
 
