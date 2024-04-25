@@ -2,17 +2,17 @@
 var options = {
   // Total number of leafs
   getNumLeafs: function() {
-      return 15;
+      return 189;
   },
 
   // Return the width of a given page.  Here we assume all images are 800 pixels wide
   getPageWidth: function(index) {
-      return 800;
+      return 2550;
   },
 
   // Return the height of a given page.  Here we assume all images are 1200 pixels high
   getPageHeight: function(index) {
-      return 1200;
+      return 3300;
   },
 
   // We load the images from archive.org -- you can modify this function to retrieve images
