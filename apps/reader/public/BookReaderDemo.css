@@ -26,14 +26,14 @@ ia-bookreader[fullscreen] {
 }
 
 ia-bookreader{
-    --br-height: calc(100vh - 100px);
+    --br-height: 100vh;
     display: block;
     height: var(--br-height);
 }
 
 .BookReader {
-    --br-height: calc(100vh - 100px);
-    --new-height: calc(var(--br-height) - 20px); 
+    --br-height: 100vh;
+    --new-height: calc(var(--br-height) - 20px);
     height: var(--br-height);
     overflow: hidden;
     margin: 0 auto;
