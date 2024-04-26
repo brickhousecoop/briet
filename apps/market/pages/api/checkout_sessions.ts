@@ -54,7 +54,10 @@ export default async function handler(
         custom_text: {
           submit: {
             message: 'We will email you within 24 hours with your file. Contact help@briet.app with any questions.',
-          }
+          },
+          terms_of_service_acceptance: {
+            message: `Briet hereby sells authorized digital copies (“ADC”) of the eBooks [Listed in Schedule 1] to [Name of Library] (“Library”). The sale transfers title in the ADC to Library. Briet intends this sale to provide Library with rights to use the ADC that are substantially equivalent to the rights Library would have in a physical print copy (e.g., a paperback or hard cover book) of the applicable literary work purchased by Library under the first sale doctrine, codified at 17 U.S.C. § 109.\n\nBriet understands that certain incidental copies may be made in the process of effectuating these rights, including without limitation, lending to one reader at a time per ADC, transferring the ADC from one hosting provider or device to another, updating the format of the ADC to interoperate with the storage or reading device of Library’s choice, or performing any other activity that would fall within Sections 107-121 of the US Copyright Act. For the avoidance of doubt, Briet intends the sale to include the right to resell the ADC.\n\nMore at market.briet.app/terms-of-sale`
+          },
         }
       });
       if (session.url === null) {
