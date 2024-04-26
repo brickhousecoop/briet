@@ -1,0 +1,268 @@
+html {
+  font-size: 24px;
+  --briet-red: #ff002b;
+}
+
+body {
+  font-family: 'Fern Web', system-ui, serif;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow-x: hidden;
+}
+
+/* the 𝒸𝓁𝒶𝓈𝓈𝒾𝒸 BRIET logo highlight */
+.bh {
+  font-family: system-ui;
+  display: inline-block;
+  overflow-wrap: break-word;
+  background-color: var(--briet-red);
+  color: white;
+  padding: 0 0.5em;
+  margin: 0 min(0.25em, 5px);
+  text-decoration-color: currentColor;
+}
+
+img {
+  max-width: 100%;
+}
+
+section,
+header,
+footer {
+  margin: auto;
+  padding: 1em;
+  max-width: 800px;
+}
+
+header,
+footer {
+  display: flex;
+  justify-content: space-around;
+  font-family: system-ui, -apple-system, "San Francisco", "Helvetica Neue", BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+header aside,
+footer aside {
+  font-size: min(1em, 5vw);
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: auto;
+  padding: 0.3em 0;
+  border: 3px var(--briet-red);
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+
+header a,
+footer a {
+  flex-basis: 150px;
+  flex-grow: 0;
+}
+
+header .logo,
+footer .logo {
+  align-self: center;
+  max-height: 8rem;
+  object-fit: contain;
+  margin: 1em;
+}
+
+#letter p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+h1 {
+  font-size: min(4rem, 20vw);
+  font-family: system-ui, sans-serif;
+  font-weight: normal;
+  margin: 28px 0;
+  text-align: center;
+}
+
+.showtitle,
+.announcement {
+  max-width: 1200px;
+  text-align: center;
+}
+
+h2, h3 {
+  font-weight: 800;
+  margin: 28px 0;
+  font-family: 'Warbler Text Web', 'Crayonette DJR', serif;
+  font-style: italic;
+}
+
+h2 em,
+h3 em {
+  font-style: normal;
+  font-variant-caps: small-caps;
+  font-weight: normal;
+}
+
+li em {
+  font-variant-caps: all-small-caps;
+  opacity: 0.5;
+}
+
+li em::before {
+  content: '[ ';
+}
+
+li em::after {
+  content: ' ]';
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+small {
+  /* all-small-caps don't work right */
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: .9em;
+}
+
+.number {
+  margin-bottom: 0;
+}
+
+.number + p {
+  margin-top: 0;
+}
+
+section#gallery {
+  max-width: unset;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+section#gallery > *:not(.carousell) {
+  max-width: 800px;
+  margin: auto;
+
+  overflow-y: scroll;
+}
+
+.carousell {
+  /* en.wikipedia.org/wiki/B%26B_Carousell */
+  overflow-y: scroll;
+  margin: 1em 0;
+}
+
+.carousell .wolfinger {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  width: calc((800px + 1em) * 17); /* must be # of children */
+  margin: 0 calc(50vw - 400px); /* omg it works */
+  /* TODO: margin-right is actually ignored https://stackoverflow.com/q/38993170/1489243 */
+}
+
+figure {
+  margin: 0;
+}
+
+figure + figure {
+  margin-left: 1em;
+}
+
+figure img {
+  width: 100%;
+  border-radius: 1em;
+}
+
+figure figcaption {
+  padding: 0 1em;
+  font-size: 0.7em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+figcaption.date {
+  font-style: italic;
+}
+
+@media screen and (max-width: 800px) {
+  /* see also above for .carousell (keeping with its calc()-heavy styles) */
+  html {
+    font-size: 20px;
+  }
+
+  header aside,
+  footer aside {
+    font-weight: 500;
+    border-width: 2px;
+  }
+
+  section,
+  header,
+  footer {
+    padding: 0 1em;
+  }
+
+  h1 {
+    margin: 18px 0;
+  }
+
+  h2 {
+    margin: 56px 0 18px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 1.7rem;
+  }
+
+  .links {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  header,
+  footer {
+    flex-direction: column;
+  }
+
+  header aside,
+  footer aside {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em 3em;
+  }
+
+  h1, h2, h3, p {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
+
+a {
+  color: var(--briet-red);
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+  transition: 0.1s ease text-decoration-thickness;
+}
+
+a:hover {
+  text-decoration-thickness: 4px;
+}
+
+#events {
+  text-align: center;
+}
+
+/* 𝓙𝓪𝓬𝓸𝓫 𝓕𝓸𝓻𝓭, 2021 */
