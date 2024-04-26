@@ -75,7 +75,7 @@ var options = {
   bookTitle: 'Edible Schoolyard BookReader Demo',
   bookUrl: 'https://market.briet.app/buy/3d007a9b-9b9a-4b3a-9530-97d06ba071ed',
   // thumbnail is optional, but it is used in the info dialog
-  thumbnail: './pages/page0.jpeg',
+  thumbnail: './pages/page-0.jpeg',
   // Metadata is optional, but it is used in the info dialog
   metadata: [
     {label: 'Title', value: 'The Edible Schoolyard Project: Cooking With Curiosity'},
