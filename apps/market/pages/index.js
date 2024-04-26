@@ -44,7 +44,6 @@ const BrietHomepage = ({ books, collections }) => {
         <p className={styles.description}>
           Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
-        <a href="//server.briet.app">Powered by BookServer</a>
 
         <h2>Featured Collections</h2>
 
@@ -59,6 +58,10 @@ const BrietHomepage = ({ books, collections }) => {
 
         <h2>The Whole <span className="logo">BRIET</span> Catalog</h2>
         {books.map(book => <CatalogListing book={book} key={book._id}/>)}
+
+        <p className={styles.description}>
+          <a href="//server.briet.app">Powered by BookServer</a>
+        </p>
       </main>
       <Footer/>
     </div>
