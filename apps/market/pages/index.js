@@ -42,6 +42,16 @@ const BrietHomepage = ({ books, collections }) => {
         </h1>
 
         <p className={styles.description}>
+          Lorem ipsum TKTKTKTKTKTKTKTKTKTKT domer set amit etc., etc.
+        </p>
+
+        <fieldset>
+          <legend><h3>Hey look a new <span className='logo'>BRIET</span> Reader Demo!</h3></legend>
+          <iframe src='https://reader.briet.app/borrow/3d007a9b-9b9a-4b3a-9530-97d06ba071ed/'/>
+          <a href="https://reader.briet.app/borrow/3d007a9b-9b9a-4b3a-9530-97d06ba071ed/">&#x26F6; Pop out in full window →</a>
+        </fieldset>
+
+        <p className={styles.description}>
           Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
 
@@ -52,7 +62,7 @@ const BrietHomepage = ({ books, collections }) => {
             <legend><h3>{collection.name}</h3></legend>
             {collection.members.map(book =>
               <CatalogListing book={book} key={book._id}/>
-              )}
+            )}
           </fieldset>
         )}
 

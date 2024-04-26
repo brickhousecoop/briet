@@ -72,3 +72,9 @@ span.logo {
   margin: 0 min(0.25em, 5px);
   text-decoration-color: currentColor;
 }
+
+iframe {
+  border: none;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
