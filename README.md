@@ -25,3 +25,9 @@ Ingests a `tagger` book collection with bibligraphic information and returns an 
 Ingests an ODL/OPDS BookServer feed and returns a librarian-friendly marketplace website for local libraries to purchase and lend digital books the [exact same way](https://controlleddigitallending.org) they have with old fashioned wooden books for centuries
 
 _(not yet scoped)_
+
+# BRIET Styleguide
+
+## How to spell “ebook”
+
+It is spelled `ebook` or `ebooks`. Not `e-book`, `eBook`, or `e-Book`. Ebook should be capititalized only when you would normally capitalize a word.
