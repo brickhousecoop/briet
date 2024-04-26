@@ -14,6 +14,10 @@ h1, h2 {
   text-align: center;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: 4rem;
+}
+
 .title {
   font-size: 1.5em;
 }
@@ -33,6 +37,7 @@ fieldset {
   border: 2px solid black;
   border-radius: 2em;
   padding: 2rem;
+  margin-block: 2rem;
 }
 
 fieldset legend {
