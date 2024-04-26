@@ -39,12 +39,15 @@ export default async function handler(
             quantity: 1,
             adjustable_quantity: {
               enabled: true,
-              minimum: 1
-            }
+              minimum: 1,
+            },
           },
         ],
         mode: 'payment',
         customer_creation: 'always',
+        consent_collection: {
+          terms_of_service: 'required',
+        },
         success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         // TODO: is there a pending_url?
         cancel_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
