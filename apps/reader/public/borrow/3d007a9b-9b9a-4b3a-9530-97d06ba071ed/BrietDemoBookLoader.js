@@ -21,7 +21,7 @@ var options = {
       // reduce and rotate are ignored in this simple implementation, but we
       // could e.g. look at reduce and load images from a different directory
       // or pass the information to an image server
-      var url = `./pages/page-${index}.jpeg`;
+      var url = `./pages/page-${index}.jpeg`; // 0 = cover
       return url;
   },
 
@@ -72,17 +72,15 @@ var options = {
   },
 
   // Book title and the URL used for the book title link
-  bookTitle: 'BookReader Advanced Demo',
-  bookUrl: '../index.html',
-  bookUrlText: 'Back to Demos',
-  bookUrlTitle: 'This is the book URL title',
+  bookTitle: 'Edible Schoolyard BookReader Demo',
+  bookUrl: 'https://market.briet.app/buy/3d007a9b-9b9a-4b3a-9530-97d06ba071ed',
   // thumbnail is optional, but it is used in the info dialog
-  thumbnail: '//archive.org/download/BookReader/img/page014.jpg',
+  thumbnail: './pages/page0.jpeg',
   // Metadata is optional, but it is used in the info dialog
   metadata: [
-    {label: 'Title', value: 'Open Library BookReader Presentation'},
-    {label: 'Author', value: 'Internet Archive'},
-    {label: 'Demo Info', value: 'This demo shows how one could use BookReader with their own content.'},
+    {label: 'Title', value: 'The Edible Schoolyard Project: Cooking With Curiosity'},
+    {label: 'Author', value: 'The Edible Schoolyard Project & BRIET Press'},
+    {label: 'Demo Info', value: 'This demo shows how a library could serve an ebook it owns to one patron at a time.'},
   ],
 
   // Override the path used to find UI images
@@ -91,9 +89,6 @@ var options = {
   getEmbedCode: function(frameWidth, frameHeight, viewParams) {
       return "Embed code not supported in bookreader demo.";
   },
-
-  // Note previously the UI param was used for mobile, but it's going to be responsive
-  // embed === iframe
 
   ui: 'full', // embed, full (responsive)
 
