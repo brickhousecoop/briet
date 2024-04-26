@@ -54,21 +54,18 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
         </h1>
 
         <p className={styles.description}>
-          Lorem ipsum TKTKTKTKTKTKTKTKTKTKT domer set amit etc., etc.
+          Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
 
         {demoBookId && <fieldset>
-          <legend><h3>Hey look a new <span className='logo'>BRIET</span> Reader Demo!</h3></legend>
+          <legend><h3>A demo of how ebooks from <span className='logo'>BRIET</span> can be loaned to patrons</h3></legend>
           <iframe src={`https://reader.briet.app/borrow/${demoBookId}/`}/>
           <a href={`https://reader.briet.app/borrow/${demoBookId}/`}>&#x26F6; Pop out in full window →</a>
 
           <p>Book featured:</p>
           <CatalogListing book={demoBook} key={demoBook._id}/>
+          <p>Bring this experience to more readers!</p>
         </fieldset>}
-
-        <p className={styles.description}>
-          Ebooks, for libraries, <strong>for keeps</strong>.
-        </p>
 
         <h2>Featured Collections</h2>
 

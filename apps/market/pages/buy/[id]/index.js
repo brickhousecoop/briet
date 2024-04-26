@@ -58,7 +58,7 @@ const BookBuyPage = ({ book, form }) => {
           </p>
         :
           <p className={styles.instructions}>
-            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you.
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be loaned freely to you.
           </p>
         }
 
