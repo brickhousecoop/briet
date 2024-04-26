@@ -41,6 +41,7 @@ fieldset {
 }
 
 fieldset legend {
+  font-weight: bold;
   margin-left: 1rem;
 }
 
