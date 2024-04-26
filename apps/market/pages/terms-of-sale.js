@@ -13,7 +13,7 @@ const BrietAboutPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> is <Link href="https://controlleddigitallending.org">for keeps</Link>.
+          <span className="logo">BRIET</span> Terms of Sale
         </h1>
 
         <h2>TL;DR</h2>
