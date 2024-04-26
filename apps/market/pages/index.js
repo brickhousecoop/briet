@@ -29,7 +29,19 @@ const catalogQuery = `
   }
 `
 
-const BrietHomepage = ({ books, collections }) => {
+const singleBookQuery = `
+  *[_type == "book" && _id == $id] {
+    _id,
+    title,
+    cover,
+    description,
+    authors[]->{ name },
+  }[0]
+`
+
+const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
+
+const BrietHomepage = ({ books, collections, demoBook }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -45,11 +57,14 @@ const BrietHomepage = ({ books, collections }) => {
           Lorem ipsum TKTKTKTKTKTKTKTKTKTKT domer set amit etc., etc.
         </p>
 
-        <fieldset>
+        {demoBookId && <fieldset>
           <legend><h3>Hey look a new <span className='logo'>BRIET</span> Reader Demo!</h3></legend>
-          <iframe src='https://reader.briet.app/borrow/3d007a9b-9b9a-4b3a-9530-97d06ba071ed/'/>
-          <a href="https://reader.briet.app/borrow/3d007a9b-9b9a-4b3a-9530-97d06ba071ed/">&#x26F6; Pop out in full window →</a>
-        </fieldset>
+          <iframe src={`https://reader.briet.app/borrow/${demoBookId}/`}/>
+          <a href={`https://reader.briet.app/borrow/${demoBookId}/`}>&#x26F6; Pop out in full window →</a>
+
+          <p>Book featured:</p>
+          <CatalogListing book={demoBook} key={demoBook._id}/>
+        </fieldset>}
 
         <p className={styles.description}>
           Ebooks, for libraries, <strong>for keeps</strong>.
@@ -85,9 +100,14 @@ export default BrietHomepage
 export const getStaticProps = async ({ params }) => {
   const books = await sanity.fetch(catalogQuery)
   const collections = await sanity.fetch(collectionsQuery)
+  const demoBook = await sanity.fetch(singleBookQuery, { id: demoBookId })
 
   return {
-    props: { books, collections },
+    props: {
+      books,
+      collections,
+      demoBook,
+    },
     revalidate: 5,
   };
 };
