@@ -17,10 +17,10 @@
     "start": "sanity start"
   },
   "dependencies": {
-    "@sanity/eslint-config-studio": "^2.0.1",
+    "@sanity/eslint-config-studio": "^4.0.0",
     "@sanity/icons": "^2.11.8",
     "@sanity/vision": "^3.40.0",
-    "eslint": "^8.38.0",
+    "eslint": "^9.1.1",
     "prop-types": "^15.8.1",
     "sanity": "^3.40.0",
     "styled-components": "^6.1.9"
