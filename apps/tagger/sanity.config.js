@@ -3,6 +3,7 @@ import { deskTool } from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
 import book from './schemas/book'
 import author from './schemas/author'
+import publisher from './schemas/publisher'
 import collection from './schemas/collection'
 
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
     'types': [
       book,
       author,
+      publisher,
       collection,
     ],
   },
