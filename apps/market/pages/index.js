@@ -71,7 +71,7 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
 
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
-            <legend><h3>{collection.name}</h3></legend>
+            <legend>{collection.name}</legend>
             {collection.members.map(book =>
               <CatalogListing book={book} key={book._id}/>
             )}
