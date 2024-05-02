@@ -5,6 +5,7 @@ import book from './schemas/book'
 import author from './schemas/author'
 import publisher from './schemas/publisher'
 import collection from './schemas/collection'
+import marketSettings from './schemas/settings'
 
 export default defineConfig({
   'title': 'BRIET Marketplace',
@@ -20,6 +21,7 @@ export default defineConfig({
       author,
       publisher,
       collection,
+      marketSettings,
     ],
   },
 })

@@ -5,18 +5,19 @@ import styles from '@styles/Home.module.css'
 import { readOnlyClient as sanity } from 'sanity-client'
 
 const collectionsQuery = `
-  *[_type == "collection"] {
-    _id,
-    name,
-    slug,
-    members[]->{
-      _id,
-      title,
-      cover,
-      description,
-      authors[]->{ name },
-    },
-  }
+  *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
+    featuredCollections[]->{
+      name,
+      slug,
+      members[]->{
+        _id,
+        title,
+        cover,
+        description,
+        authors[]->{ name },
+      },
+    }
+  }[0]
 `
 
 const catalogQuery = `
@@ -99,10 +100,12 @@ export const getStaticProps = async ({ params }) => {
   const collections = await sanity.fetch(collectionsQuery)
   const demoBook = await sanity.fetch(singleBookQuery, { id: demoBookId })
 
+  console.log(collections)
+
   return {
     props: {
       books,
-      collections,
+      collections: collections.featuredCollections,
       demoBook,
     },
     revalidate: 5,
