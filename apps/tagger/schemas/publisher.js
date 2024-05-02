@@ -24,18 +24,4 @@ export default {
       },
     },
   ],
-  preview: {
-    select: {
-      name: 'name',
-      catalog: 'catalog',
-    },
-    prepare(publisher) {
-      const { name, catalog } = publisher
-      const bookCount = catalog ? catalog.length : 0
-      return {
-        title: name,
-        subtitle: `${bookCount} ${bookCount === 1 ? 'book' : 'books'}`
-      }
-    },
-  },
 }
