@@ -23,20 +23,6 @@ export default {
         maxLength: 32,
       },
     },
-    {
-      name: 'catalog',
-      title: 'Catalog',
-      type: 'array',
-      of: [{
-        type: 'reference',
-        to: [{type: 'book'}],
-        title: 'Book'
-      }],
-      description: 'Books may belong to multiple Publishers',
-      options: {
-        disableNew: false,
-      },
-    },
   ],
   preview: {
     select: {

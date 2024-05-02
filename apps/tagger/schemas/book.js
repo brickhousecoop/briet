@@ -76,6 +76,14 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'publisher',
+      title: 'Publisher',
+      type: 'reference',
+      to: [
+        {type: 'publisher'},
+      ]
+    }),
+    defineField({
       name: 'price_usd',
       title: 'Price (USD)',
       description: 'Enter 0 for freely downloadable books',
