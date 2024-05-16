@@ -100,7 +100,7 @@ export const getStaticProps = async ({ params }) => {
   const collections = await sanity.fetch(collectionsQuery)
   const demoBook = await sanity.fetch(singleBookQuery, { id: demoBookId })
 
-  console.log(collections)
+  // console.log(collections) //debug
 
   return {
     props: {
