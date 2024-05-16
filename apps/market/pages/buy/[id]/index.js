@@ -96,12 +96,6 @@ const BookBuyPage = ({ book, form }) => {
             <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
-
-          <p className={styles.description}>
-            Powered by <a href="https://controlleddigitallending.org">
-              <strong>Controlled Digital Lending</strong>
-            </a>
-          </p>
         </div>
       </main>
 

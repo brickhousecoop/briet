@@ -29,12 +29,6 @@ const OrderPage = ({ order }) => {
 
         <p>Status: {order.status}</p>
         <p>Payment Status: {order.payment_status}</p>
-
-        <p className={styles.description}>
-          Powered by <a href="https://controlleddigitallending.org">
-            <strong>Controlled Digital Lending</strong>
-          </a>
-        </p>
       </main>
 
       <Footer/>
