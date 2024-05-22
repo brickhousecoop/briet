@@ -39,12 +39,6 @@ const OrderPage = ({ book }) => {
         }
 
         <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
-
-        <p className={styles.description}>
-          Powered by <a href="https://controlleddigitallending.org">
-            <strong>Controlled Digital Lending</strong>
-          </a>
-        </p>
       </main>
 
       <Footer/>

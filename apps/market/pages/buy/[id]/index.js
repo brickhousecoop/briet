@@ -58,7 +58,7 @@ const BookBuyPage = ({ book, form }) => {
           </p>
         :
           <p className={styles.instructions}>
-            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you.
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be loaned freely to you.
           </p>
         }
 
@@ -96,12 +96,6 @@ const BookBuyPage = ({ book, form }) => {
             <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
-
-          <p className={styles.description}>
-            Powered by <a href="https://controlleddigitallending.org">
-              <strong>Controlled Digital Lending</strong>
-            </a>
-          </p>
         </div>
       </main>
 

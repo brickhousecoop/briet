@@ -7,6 +7,8 @@ const BrietFooter = () =>
     ¶
     <Link href="/about">About</Link>
     ¶
+    <Link href="/terms-of-sale">Terms of Sale</Link>
+    ¶
     <Link href="mailto:help@briet.app">Contact</Link>
   </footer>
 

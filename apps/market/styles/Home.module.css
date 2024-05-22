@@ -3,7 +3,6 @@
 }
 
 .main {
-  min-height: 100vh;
   padding: 2rem 0;
   flex-direction: column;
   justify-content: center;
@@ -26,15 +25,10 @@
   flex-grow: 1;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
 .title a:hover,
 .title a:focus,
 .title a:active {
-  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 
 .title {
