@@ -11,7 +11,7 @@ const singleBookQuery = `
   *[_type == "book" && _id == $id] {
     _id,
     title,
-    "publisher_name": publisher->{ name },
+    "publisher_name": publisher->name,
     "coverImageUrl": cover.asset->url,
     price_usd,
   }[0]
