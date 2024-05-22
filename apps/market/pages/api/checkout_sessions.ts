@@ -25,6 +25,9 @@ export default async function handler(
     const book = await sanity.fetch(singleBookQuery, { id: bookId });
     try {
       const session = await stripe.checkout.sessions.create({
+        mode: 'payment',
+        success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         line_items: [
           {
             price_data: {
@@ -43,14 +46,10 @@ export default async function handler(
             },
           },
         ],
-        mode: 'payment',
         customer_creation: 'always',
         consent_collection: {
           terms_of_service: 'required',
         },
-        success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
-        // TODO: is there a pending_url?
-        cancel_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         custom_text: {
           submit: {
             message: 'We will email you within 24 hours with your file. Contact help@briet.app with any questions.',
