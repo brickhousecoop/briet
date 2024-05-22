@@ -49,7 +49,7 @@ export default async function handler(
         ],
         metadata: {
           briet_payout_to: book.publisher_name
-        }
+        },
         customer_creation: 'always',
         consent_collection: {
           terms_of_service: 'required',
