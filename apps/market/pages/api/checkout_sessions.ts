@@ -47,7 +47,7 @@ export default async function handler(
             },
           },
         ],
-        metadata: {
+        payment_intent_data.metadata: {
           briet_payout_to: book.publisher_name
         },
         customer_creation: 'always',
