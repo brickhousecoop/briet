@@ -11,6 +11,7 @@ const singleBookQuery = `
   *[_type == "book" && _id == $id] {
     _id,
     title,
+    "publisher_name": publisher->name,
     "coverImageUrl": cover.asset->url,
     price_usd,
   }[0]
@@ -27,7 +28,7 @@ export default async function handler(
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/buy/${bookId}`,
         line_items: [
           {
             price_data: {
@@ -46,6 +47,11 @@ export default async function handler(
             },
           },
         ],
+        payment_intent_data: {
+          metadata: {
+            briet_payout_to: book.publisher_name,
+          },
+        },
         customer_creation: 'always',
         consent_collection: {
           terms_of_service: 'required',
