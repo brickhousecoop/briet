@@ -6,6 +6,18 @@ export default defineType({
   title: 'Books',
   type: 'document',
   icon: BookIcon,
+  groups: [
+    {
+      name: 'identfiers',
+      title: 'Identifiers',
+    },
+  ],
+  fieldsets: [
+    {
+      name: 'isbns',
+      title: 'ISBNs',
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -34,14 +46,25 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
-      name: 'isbn',
-      title: 'ISBN',
+      name: 'isbn', // TODO: migrate to isbnEbook
+      title: 'Ebook ISBN',
+      group: 'identfiers',
+      fieldset: 'isbns',
       type: 'number',
-      description: 'Optional; only add if your book has a unique one'
+      description: 'Optional; leave blank if unsure'
+    }),
+    defineField({
+      name: 'isbnPrint',
+      title: 'Print ISBN',
+      group: 'identfiers',
+      fieldset: 'isbns',
+      type: 'number',
+      description: 'Optional; leave blank if unsure'
     }),
     defineField({
       name: 'identifer_ia',
       title: 'Internet Archive Identifier',
+      group: 'identfiers',
       type: 'string',
       description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
     }),
