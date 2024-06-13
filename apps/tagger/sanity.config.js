@@ -5,6 +5,7 @@ import book from './schemas/book'
 import author from './schemas/author'
 import publisher from './schemas/publisher'
 import collection from './schemas/collection'
+import page from './schemas/page'
 import marketSettings from './schemas/settings'
 
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
       author,
       publisher,
       collection,
+      page,
       marketSettings,
     ],
   },
