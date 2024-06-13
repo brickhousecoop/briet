@@ -1,16 +1,16 @@
 import type { Metadata, ResolvingMetadata } from 'next'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 // import { toPlainText } from 'next-sanity'
 import { readOnlyClient as sanity } from 'sanity-client'
 
-import Head from '@components/head.jsx'
-import PortablePageContent from '@components/PortablePageContent'
-import Footer from '@components/footer'
+import '@styles/globals.css'
 import styles from '@styles/Home.module.css'
 
-import '@styles/globals.css'
+import Head from '@components/head.jsx'
+import Footer from '@components/footer'
+import PortablePageContent from '@components/PortablePageContent'
 
 // const PagePreview = dynamic(() => import('@components/pages/page/PagePreview'))
 
