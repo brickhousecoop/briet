@@ -8,7 +8,6 @@ import { readOnlyClient as sanity } from 'sanity-client'
 import '@styles/globals.css'
 import styles from '@styles/Home.module.css'
 
-import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import PortablePageContent from '@components/PortablePageContent'
 
@@ -34,16 +33,12 @@ export async function generateMetadata(
   const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
 
   return {
-    title: page?.title,
-    // description: page?.overview
+    title: page?.title ? `BRIET: ${page.title}` : 'BRIET Marketplace'
+    // description: page?.overview TODO: add to Sanity
     //   ? toPlainText(page.overview)
     //   : (await parent).description,
   }
 }
-
-// export function generateStaticParams() {
-//   return generateStaticSlugs('page')
-// }
 
 export default async function PageSlugRoute({ params }: Props) {
   const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
@@ -58,11 +53,6 @@ export default async function PageSlugRoute({ params }: Props) {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>BRIET Marketplace: {page.title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="logo">BRIET</span> {page.title}
