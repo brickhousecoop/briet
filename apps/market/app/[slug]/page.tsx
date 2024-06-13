@@ -10,6 +10,8 @@ import PortablePageContent from '@components/PortablePageContent'
 import Footer from '@components/footer'
 import styles from '@styles/Home.module.css'
 
+import '@styles/globals.css'
+
 // const PagePreview = dynamic(() => import('@components/pages/page/PagePreview'))
 
 type Props = {
