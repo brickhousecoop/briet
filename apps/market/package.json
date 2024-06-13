@@ -21,6 +21,7 @@
     "@natlibfi/marc-record": "^8.1.0",
     "@sanity/image-url": "^1.0.2",
     "@stripe/stripe-js": "^3.0.5",
+    "@types/react-dom": "^18.3.0",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "next": "^14.2.3",
