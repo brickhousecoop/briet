@@ -31,7 +31,7 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { data: page } = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
+  const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
 
   return {
     title: page?.title,
