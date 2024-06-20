@@ -1,0 +1,86 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+p, ul, li, ul {
+  font-size: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: 4rem;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+main,
+footer {
+  max-width: 800px;
+  margin: 1rem auto;
+}
+
+form input {
+  display: block;
+  padding: 1em;
+}
+
+fieldset {
+  border: 2px solid black;
+  border-radius: 2em;
+  padding: 2rem;
+  margin-block: 2rem;
+}
+
+fieldset legend {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+span.logo {
+  display: inline-block;
+  overflow-wrap: break-word;
+  background-color: #ff002b;
+  color: white;
+  padding: 0 0.5em;
+  margin: 0 min(0.25em, 5px);
+  text-decoration-color: currentColor;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
