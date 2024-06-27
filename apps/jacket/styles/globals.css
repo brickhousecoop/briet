@@ -8,6 +8,7 @@ body {
 
 p, ul, li, ul {
   font-size: 20px;
+  margin: 1em 0;
 }
 
 h1, h2 {
