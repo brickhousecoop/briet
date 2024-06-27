@@ -1,8 +1,27 @@
+import React from 'react';
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 
 import { readOnlyClient as sanity } from 'sanity-client'
+
 import imageUrlBuilder from '@sanity/image-url'
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+interface Book {
+  _id: string;
+  title: string;
+  description: string;
+  cover: SanityImageSource;
+  authors: Author[];
+}
+
+interface Author {
+  name: string;
+}
+
+interface CatalogListingProps {
+  book: Book;
+}
 
 const builder = imageUrlBuilder(sanity)
 
@@ -10,7 +29,7 @@ function sanityImgUrl(source) {
   return imageUrlBuilder(sanity).image(source)
 }
 
-const CatalogListing = ({ book }) =>
+const CatalogListing = ({ book }: CatalogListingProps) =>
   <a
     href={`/buy/${book._id}`}
     title={book.description}
@@ -20,7 +39,5 @@ const CatalogListing = ({ book }) =>
     <p className="title">{book.title}</p>
     <p className="meta authors">{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
   </a>
-
-CatalogListing.displayName = 'CatalogListing'
 
 export default CatalogListing
