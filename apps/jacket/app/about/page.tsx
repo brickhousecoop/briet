@@ -1,16 +1,11 @@
-import Head from '@components/head.jsx'
 import Link from 'next/link'
-import Footer from '@components/footer'
-import styles from '@styles/Home.module.css'
+import Footer from '@/components/footer'
+import styles from '@/styles/Home.module.css'
+import '@/styles/globals.css'
 
 const BrietAboutPage = () => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>BRIET Marketplace</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="logo">BRIET</span> is <Link href="https://controlleddigitallending.org">for keeps</Link>.
