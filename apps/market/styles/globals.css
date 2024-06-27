@@ -1,3 +1,7 @@
+:root {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -38,6 +42,12 @@ fieldset {
   border-radius: 2em;
   padding: 2rem;
   margin-block: 2rem;
+  transition: 0.5s border, padding;
+}
+
+fieldset:target {
+  padding: calc(2rem - 3px);
+  border: 5px solid black;
 }
 
 fieldset legend {

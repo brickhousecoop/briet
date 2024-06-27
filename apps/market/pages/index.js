@@ -7,6 +7,7 @@ import { readOnlyClient as sanity } from 'sanity-client'
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
     featuredCollections[]->{
+      _id,
       name,
       slug,
       members[]->{
@@ -15,6 +16,8 @@ const collectionsQuery = `
         cover,
         description,
         authors[]->{ name },
+        publisher->{ name },
+        price_usd,
       },
     }
   }[0]
@@ -27,6 +30,8 @@ const catalogQuery = `
     cover,
     description,
     authors[]->{ name },
+    publisher->{ name },
+    price_usd,
   }
 `
 
@@ -37,6 +42,8 @@ const singleBookQuery = `
     cover,
     description,
     authors[]->{ name },
+    publisher->{ name },
+    price_usd,
   }[0]
 `
 
@@ -69,6 +76,12 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
         </fieldset>}
 
         <h2>Featured Collections</h2>
+
+        {collections.map(collection =>
+          <nav key={collection._id}>
+            <a href={`#${collection.slug.current}`}>{collection.name}</a>
+          </nav>
+        )}
 
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
