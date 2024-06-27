@@ -47,12 +47,12 @@ const BrietAboutPage = () => {
           <input type="email" name="EMAIL" className="required email" id="mce-EMAIL" required />
           <span id="mce-EMAIL-HELPERTEXT" className="helper_text"></span>
         </div>
-        <div hidden="true"><input type="hidden" name="tags" value="6561264" /></div>
+        <div hidden><input type="hidden" name="tags" value="6561264" /></div>
           <div id="mce-responses" className="clear">
             <div className="response" id="mce-error-response" style={{display: 'none'}}></div>
             <div className="response" id="mce-success-response" style={{display: 'none'}}></div>
           </div>
-            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_32a22cc8bacf327fb3bb5066e_7757e9bd40" tabIndex="-1" value="" /></div>
+            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden><input type="text" name="b_32a22cc8bacf327fb3bb5066e_7757e9bd40" tabIndex={-1} value="" /></div>
             <div className="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
             </div>
         </form>
