@@ -19,6 +19,12 @@
         ".next/**"
       ]
     },
+    "bh-briet-tagger#build": {
+      "env": [
+        "SANITY_STUDIO_PROJECTID",
+        "SANITY_STUDIO_DATASET"
+      ]
+    },
     "lint": {
       "outputs": []
     },
