@@ -13,9 +13,15 @@ interface Book {
   description: string;
   cover: SanityImageSource;
   authors: Author[];
+  publisher: Publisher;
+  price_usd: number;
 }
 
 interface Author {
+  name: string;
+}
+
+interface Publisher {
   name: string;
 }
 
@@ -38,6 +44,8 @@ const CatalogListing = ({ book }: CatalogListingProps) =>
   >
     <p className="title">{book.title}</p>
     <p className="meta authors">{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
+    <p className="meta publisher">{book.publisher?.name}</p>
+    <p className="meta price">{book.price_usd == 0 ? 'FREE' : Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(book.price_usd)}</p>
   </a>
 
 export default CatalogListing

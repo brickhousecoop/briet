@@ -16,6 +16,8 @@ const collectionsQuery = `
         cover,
         description,
         authors[]->{ name },
+        publisher->{ name },
+        price_usd,
       },
     }
   }[0]
@@ -28,6 +30,8 @@ const catalogQuery = `
     cover,
     description,
     authors[]->{ name },
+    publisher->{ name },
+    price_usd,
   }
 `
 
@@ -38,6 +42,8 @@ const singleBookQuery = `
     cover,
     description,
     authors[]->{ name },
+    publisher->{ name },
+    price_usd,
   }[0]
 `
 
