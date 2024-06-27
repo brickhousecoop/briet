@@ -7,7 +7,7 @@ import type { Image } from 'sanity'
 
 // import ImageBox from '@/components/shared/ImageBox'
 
-export default function({
+export default function PortablePageContent({
   paragraphClasses,
   value,
 }: {

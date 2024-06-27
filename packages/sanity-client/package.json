@@ -2,7 +2,7 @@
   "name": "sanity-client",
   "version": "1.0.0",
   "description": "sanityClient for Vercel apps",
-  "main": "main.js",
+  "main": "main.ts",
   "author": {
     "name": "Jacob Ford",
     "email": "jacob@nocomment.llc",

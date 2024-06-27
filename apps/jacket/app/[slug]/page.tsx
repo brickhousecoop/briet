@@ -5,13 +5,13 @@ import { notFound } from 'next/navigation'
 // import { toPlainText } from 'next-sanity'
 import { readOnlyClient as sanity } from 'sanity-client'
 
-import '@styles/globals.css'
-import styles from '@styles/Home.module.css'
+import '@/styles/globals.css'
+import styles from '@/styles/Home.module.css'
 
-import Footer from '@components/footer'
-import PortablePageContent from '@components/PortablePageContent'
+import Footer from '@/components/footer'
+import PortablePageContent from '@/components/PortablePageContent'
 
-// const PagePreview = dynamic(() => import('@components/pages/page/PagePreview'))
+// const PagePreview = dynamic(() => import('@/components/pages/page/PagePreview'))
 
 type Props = {
   params: { slug: string }
@@ -43,13 +43,15 @@ export async function generateMetadata(
 export default async function PageSlugRoute({ params }: Props) {
   const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
 
+  console.log('page', page)
+
   // if (draftMode().isEnabled) {
   //   return <PagePreview params={params} initial={page} />
   // }
 
-  // if (!page.data) {
-  //   notFound()
-  // }
+  if (!page?.content) {
+    notFound()
+  }
 
   return (
     <div className={styles.container}>

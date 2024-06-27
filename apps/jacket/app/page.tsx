@@ -41,7 +41,7 @@ export default function Home() {
         />
       </div>
 
-      <h2 className={inter.className}>BRIET is three interwoven applications:</h2>
+      <h2 className={inter.className}>BRIET is four interwoven applications:</h2>
 
       <div className={styles.grid}>
         <a
@@ -80,6 +80,19 @@ export default function Home() {
           <p className={styles.tag}>OPEN TO ALL LIBRARIANS</p>
           <p className={inter.className}>
             Librarians browse for e-books and easily add them to their catalog
+          </p>
+        </a>
+
+        <a
+          href="https://reader.briet.app"
+          className={styles.card}
+        >
+          <h2 className={inter.className}>
+            Reader <span>-&gt;</span>
+          </h2>
+          <p className={styles.tag}>FOR ALL PATRONS</p>
+          <p className={inter.className}>
+            Whitelabel hosted reader software for patrons to access their borrowed ebooks
           </p>
         </a>
       </div>
