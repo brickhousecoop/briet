@@ -78,7 +78,7 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
         <h2>Featured Collections</h2>
 
         {collections.map(collection =>
-          <nav id={collection.slug.current} key={collection._id}>
+          <nav key={collection._id}>
             <a href={`#${collection.slug.current}`}>{collection.name}</a>
           </nav>
         )}
