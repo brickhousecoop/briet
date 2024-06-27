@@ -21,9 +21,10 @@
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-turbo": "^1.12.4",
-    "turbo": "^1.12.4"
+    "turbo": "^2.0.5"
   },
   "license": "UNLICENSED",
   "private": true,
-  "packageManager": "npm@10.8.1"
+  "packageManager": "npm@10.8.1",
+  "name": "bh-briet"
 }
