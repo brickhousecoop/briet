@@ -7,6 +7,7 @@ import { readOnlyClient as sanity } from 'sanity-client'
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
     featuredCollections[]->{
+      _id,
       name,
       slug,
       members[]->{
