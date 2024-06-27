@@ -31,7 +31,7 @@ interface CatalogListingProps {
 
 const builder = imageUrlBuilder(sanity)
 
-function sanityImgUrl(source) {
+function sanityImgUrl(source: SanityImageSource) {
   return imageUrlBuilder(sanity).image(source)
 }
 
