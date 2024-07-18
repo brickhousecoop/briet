@@ -1,4 +1,4 @@
-import Head from '@components/head.jsx'
+import { Metadata } from 'next'
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
@@ -49,13 +49,14 @@ const singleBookQuery = `
 
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
 
+export const metadata: Metadata = {
+  title: 'BRIET Marketplace',
+  description: 'Ebooks, for libraries, for keeps.',
+}
+
 const BrietHomepage = ({ books, collections, demoBook }) => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>BRIET Marketplace</title>
-      </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="logo">BRIET</span> Marketplace
