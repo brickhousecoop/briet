@@ -10,7 +10,7 @@ import_data = []
 for i in data:
     author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"],i["Contributor 3 Full Name"],i["Contributor 4 Full Name"],i["Contributor 5 Full Name"],i["Contributor 6 Full Name"],i["Contributor 7 Full Name"]] if a != ""]
     authors = [{"_type": "author",
-                    "_id": re.sub("\s", "0",a.lower()),
+                    "_id": re.sub(r"\s", "0",a.lower()),
                     "name":a} for a in author_list]
     for a in authors:
         import_data.append(a)
