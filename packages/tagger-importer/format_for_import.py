@@ -6,16 +6,16 @@ data_path = "./Metadata.csv"
 data = csv.DictReader(open(data_path))
 
 import_data = []
-all_authors = set()
+all_authors = []
 all_books = []
 
 for i in data:
     author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"],i["Contributor 3 Full Name"],i["Contributor 4 Full Name"],i["Contributor 5 Full Name"],i["Contributor 6 Full Name"],i["Contributor 7 Full Name"]] if a != ""]
     authors = [{"_type": "author",
-                    "_id": re.sub(r"\s", "0",a.lower()),
+                    "_id": re.sub("\s", "0",a.lower()),
                     "name":a} for a in author_list]
     for a in authors:
-        all_authors.add(a)
+        all_authors.append(a)
 
     doc = {"_type": "book",
             "authors":authors,
@@ -36,7 +36,7 @@ for i in data:
            "title": i["Title"] + ": " + i["Subtitle"]}
     all_books.append(doc)
 
-all_authors = list(all_authors)
+all_authors = [i for n, i in enumerate(all_authors) if i not in all_authors[:n]]
 
 import_data.extend(all_authors)
 import_data.extend(all_books)
