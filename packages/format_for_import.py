@@ -1,0 +1,50 @@
+import csv
+import json
+import re
+
+data_path = "./Metadata.csv"
+data = csv.DictReader(open(data_path))
+
+import_data = []
+all_authors = set()
+all_books = []
+
+for i in data:
+    author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"],i["Contributor 3 Full Name"],i["Contributor 4 Full Name"],i["Contributor 5 Full Name"],i["Contributor 6 Full Name"],i["Contributor 7 Full Name"]] if a != ""]
+    authors = [{"_type": "author",
+                    "_id": re.sub("\s", "0",a.lower()),
+                    "name":a} for a in author_list]
+    for a in authors:
+        all_authors.add(a)
+
+    doc = {"_type": "book",
+            "authors":authors,
+            "cover": {"_type": "image",
+                     "asset": {"_ref": i["File Name"][:-17] + i['Print ISBN'] + ".jpg",
+                               "_type": "reference"
+                              }
+                     },
+           "description": i ['Main Description'],
+           "file": {"_type": "file",
+                    "asset": {"_ref": i["File Name"],
+                              "_type": "reference"
+                             }
+                   },
+           "isbnEbook": i["eBook ISBN"],
+           "isbnPrint": i["Print ISBN"],
+           "price_usd": i["Price"],
+           "title": i["Title"] + ": " + i["Subtitle"]}
+    all_books.append(doc)
+
+all_authors = list(all_authors)
+
+import_data.extend(all_authors)
+import_data.extend(all_books)
+
+with open("import_data.ndjson", "w") as out_file:
+    for i in import_data:
+        json.dump(i, out_file)
+        out_file.write("/n")
+
+
+
