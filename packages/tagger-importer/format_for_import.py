@@ -46,7 +46,7 @@ import_data.extend(all_books)
 with open("import_data.ndjson", "w") as out_file:
     for i in import_data:
         json.dump(i, out_file)
-        out_file.write("/n")
+        out_file.write("\n")
 
 
 
