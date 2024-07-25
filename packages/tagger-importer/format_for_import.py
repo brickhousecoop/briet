@@ -22,7 +22,7 @@ for i in data:
     doc = {"_type": "book",
             "authors":authors,
             "cover": {"_type": "image",
-                      "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/" + i["File Name"][:-17] + i['Print ISBN'] + ".jpg",
+                      "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/" + i["File Name"][:-3] + ".jpg",
                      },
            "description": i ['Main Description'],
            "file": {"_type": "file",
