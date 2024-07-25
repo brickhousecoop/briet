@@ -16,12 +16,8 @@ export default function PortableImage({
 
   if (!imageProps) return null;
 
-  if (!imageProps.alt) {
-    asset.alt = ''
-  }
-
   return (
-    <Img {...imageProps} layout='responsive' sizes='(max-width: 800px) 100vw, 800px' />
+    <Img {...imageProps} alt='' layout='responsive' sizes='(max-width: 800px) 100vw, 800px' />
   )
 }
 
