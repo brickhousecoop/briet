@@ -26,7 +26,7 @@ for i in data:
                      },
            "description": i ['Main Description'],
            "file": {"_type": "file",
-                    "_sanityAsset": "image@file:///Users/jacob/pmassets/books/" + i["File Name"],
+                    "_sanityAsset": "file@file:///Users/jacob/pmassets/books/" + i["File Name"],
                    },
            "isbn": i["eBook ISBN"],
            "isbnPrint": i["Print ISBN"],
