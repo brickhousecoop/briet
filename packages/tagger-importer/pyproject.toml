@@ -1,0 +1,15 @@
+[project]
+name = "bh-briet-csvtosanity"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Jordan Fairbanks & Jacob Ford", email = "jfwork27182@gmail.com & j@cobford.com"},
+]
+dependencies = []
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "UNLICENSED"}
+
+
+[tool.pdm]
+distribution = false
