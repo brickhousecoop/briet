@@ -20,7 +20,7 @@ export default function Home() {
             From{' '}
             <Image
               src="/brickhouse_logo.svg"
-              alt="Vercel Logo"
+              alt="Brich House Logo"
               className={styles.vercelLogo}
               width={150}
               height={24}
