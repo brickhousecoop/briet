@@ -3,9 +3,8 @@ import {
   type PortableTextBlock,
   type PortableTextComponents,
 } from 'next-sanity'
-import type { Image } from 'sanity'
 
-// import ImageBox from '@/components/shared/ImageBox'
+import PortableImage from './PortableImage'
 
 export default function PortablePageContent({
   paragraphClasses,
@@ -34,26 +33,7 @@ export default function PortablePageContent({
       },
     },
     types: {
-      // image: ({
-      //   value,
-      // }: {
-      //   value: Image & { alt?: string; caption?: string }
-      // }) => {
-      //   return (
-      //     <div className="my-6 space-y-2">
-      //       <ImageBox
-      //         image={value}
-      //         alt={value.alt}
-      //         classesWrapper="relative aspect-[16/9]"
-      //       />
-      //       {value?.caption && (
-      //         <div className="font-sans text-sm text-gray-600">
-      //           {value.caption}
-      //         </div>
-      //       )}
-      //     </div>
-      //   )
-      // },
+      image: ({ value }) => <PortableImage asset={value.asset}/>,
     },
   }
 
