@@ -1,5 +1,6 @@
 import { defineType, defineField } from "sanity";
 import { DocumentIcon } from '@sanity/icons'
+import pageContent from './pageContent'
 
 export default defineType({
   name: 'page',
@@ -21,11 +22,6 @@ export default defineType({
         maxLength: 100,
       },
     }),
-    defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'array',
-      of: [{type: 'block'}],
-    }),
+    defineField(pageContent),
   ],
 })
