@@ -22,15 +22,11 @@ for i in data:
     doc = {"_type": "book",
             "authors":authors,
             "cover": {"_type": "image",
-                     "asset": {"_ref": i["File Name"][:-17] + i['Print ISBN'] + ".jpg",
-                               "_type": "reference"
-                              }
+                      "_sanityAsset": "image@file:///~/pmassets/covers/" + i["File Name"][:-17] + i['Print ISBN'] + ".jpg",
                      },
            "description": i ['Main Description'],
            "file": {"_type": "file",
-                    "asset": {"_ref": i["File Name"],
-                              "_type": "reference"
-                             }
+                    "_sanityAsset": "image@file:///~/pmassets/books/" + i["File Name"],
                    },
            "isbnEbook": i["eBook ISBN"],
            "isbnPrint": i["Print ISBN"],
