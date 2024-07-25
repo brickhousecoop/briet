@@ -11,13 +11,14 @@ export default function PortableImage({
   asset: Image & { alt?: string; caption?: string }
 }) {
 	console.log('asset', asset)
-  if (!asset.alt) {
-    asset.alt = ''
-  }
 
   const imageProps = useNextSanityImage(sanityClient, asset)
 
   if (!imageProps) return null;
+
+  if (!imageProps.alt) {
+    asset.alt = ''
+  }
 
   return (
     <Img {...imageProps} layout='responsive' sizes='(max-width: 800px) 100vw, 800px' />
