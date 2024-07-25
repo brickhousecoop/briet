@@ -27,6 +27,8 @@ const BrietAboutPage = () => {
 
         <p><strong>Readers, students, and friends: BRIET is for libraries.</strong> Ask your librarian to get in touch with us!</p>
 
+        <p><strong>Prohibition on Generative AI Training Uses:</strong> BRIET will not make any of the books in our care available for purposes of training artificial intelligence technologies.</p>
+
         <p><strong>Some technical details:</strong> BRIET is a free and open platform for the acquisition of ebooks and other digital works by libraries that practice CDL. BRIET is built on the <Link href="https://specs.opds.io/opds-1.2">Open Publication Distribution System</Link> (OPDS) data standard, following the model of BookServer, an open architecture led by the Internet Archive. BRIET ebooks include full metadata in the OPDS catalog format.</p>
 
         <p>BRIET was made possible by generous gifts from the <Link href="https://archive.org/details/kahleaustinfoundation">Kahle-Austin Foundation</Link>, and <Link href="https://www.grantfortheweb.org">Grant for the Web</Link>.</p>

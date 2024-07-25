@@ -40,7 +40,7 @@ const CatalogListing = ({ book }: CatalogListingProps) =>
     href={`/buy/${book._id}`}
     title={book.description}
     className={styles.cataloglisting}
-    style={{ backgroundImage: `url(${sanityImgUrl(book.cover).height(400).url()})` }}
+    style={{ backgroundImage: book.cover && `url(${sanityImgUrl(book.cover).height(400).url()})` }}
   >
     <p className="title">{book.title}</p>
     <p className="meta authors">{book.authors[0].name}{book.authors[1] ? <em>, et al.</em> : null}</p>
