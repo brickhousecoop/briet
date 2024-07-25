@@ -3,7 +3,8 @@ name = "bh-briet-csvtosanity"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
-    {name = "Jordan Fairbanks & Jacob Ford", email = "jfwork27182@gmail.com & j@cobford.com"},
+    {name = "Jordan Fairbanks", email = "jfwork27182@gmail.com"},
+    {name = "Jacob Ford", email = "j@cobford.com"},
 ]
 dependencies = []
 requires-python = "==3.12.*"
