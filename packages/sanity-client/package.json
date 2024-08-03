@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@sanity/client": "^3.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0"
   }
 }
