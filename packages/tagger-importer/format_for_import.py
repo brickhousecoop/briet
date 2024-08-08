@@ -24,6 +24,11 @@ for i in data:
 
     description_plaintext = soup_descriptionhtml.get_text()
 
+    if (i["Subtitle"]):
+        fulltitle = i["Title"] + ": " + i["Subtitle"]
+    else:
+        fulltitle = i["Title"]
+
     doc = {"_type": "book",
             "authors":authors,
             "cover": {"_type": "image",
@@ -36,7 +41,7 @@ for i in data:
            "isbn": int(i["eBook ISBN"]),
            "isbnPrint": int(i["Print ISBN"]),
            "price_usd": float(i["Price"]),
-           "title": i["Title"] + ": " + i["Subtitle"]}
+           "title": fulltitle}
     all_books.append(doc)
 
 all_authors = [i for n, i in enumerate(all_authors) if i not in all_authors[:n]]
