@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description: 'Ebooks, for libraries, for keeps.',
 }
 
-const BrietFullCatalog = ({ books, collections, demoBook }) => {
+const BrietFullCatalog = ({ books }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -55,7 +55,7 @@ BrietFullCatalog.displayName = 'BrietFullCatalog'
 
 export default BrietFullCatalog
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async () => {
   const books = await sanity.fetch(catalogQuery)
 
   // console.log(collections) //debug

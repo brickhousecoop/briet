@@ -1,16 +1,10 @@
 import { readOnlyClient as sanity } from 'sanity-client'
-import { loadStripe } from '@stripe/stripe-js'
-import { useRouter } from 'next/router'
 
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
 import Link from 'next/link'
 import va from '@vercel/analytics'
-
-function Header(props) {
-  return <h2>Download free &rarr;</h2>
-}
 
 import styles from '../../../styles/Home.module.css'
 
@@ -30,11 +24,10 @@ const singleBookQuery = `
   }[0]
 `
 
-const BookBuyPage = ({ book, form }) => {
+const BookBuyPage = ({ book }) => {
   const trackCheckout = ({ bookTitle, price }) => {
     va.track('Checkout', { title: bookTitle, price: price })
   }
-  const router = useRouter()
 
   return (
     <div className={styles.container}>
