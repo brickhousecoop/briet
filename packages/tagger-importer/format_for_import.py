@@ -16,6 +16,7 @@ for i in data:
     author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"],i["Contributor 3 Full Name"],i["Contributor 4 Full Name"],i["Contributor 5 Full Name"],i["Contributor 6 Full Name"],i["Contributor 7 Full Name"]] if a != ""]
     authors = [{"_type": "author",
                 "_id": slugify(a) + "-pmpressimport",
+                "slug": {"current": slugify(a)},
                 "name":a} for a in author_list]
     authors_refs = [{"_type": "reference",
                      "_ref": slugify(a)} for a in author_list]
@@ -32,6 +33,7 @@ for i in data:
         fulltitle = i["Title"]
 
     doc = {"_type": "book",
+            "slug": {"current": slugify(fulltitle)},
             "authors": authors_refs,
             "cover": {"_type": "image",
                       "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/" + i["File Name"][:-18] + ".jpg",
