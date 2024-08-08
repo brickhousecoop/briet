@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
@@ -23,18 +24,6 @@ const collectionsQuery = `
   }[0]
 `
 
-const catalogQuery = `
-  *[_type == "book"] {
-    _id,
-    title,
-    cover,
-    description,
-    authors[]->{ name },
-    publisher->{ name },
-    price_usd,
-  }
-`
-
 const singleBookQuery = `
   *[_type == "book" && _id == $id] {
     _id,
@@ -54,7 +43,7 @@ export const metadata: Metadata = {
   description: 'Ebooks, for libraries, for keeps.',
 }
 
-const BrietHomepage = ({ books, collections, demoBook }) => {
+const BrietHomepage = ({ collections, demoBook }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -78,11 +67,13 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
 
         <h2>Featured Collections</h2>
 
+        <div className={styles.grid}>
         {collections.map(collection =>
           <nav key={collection._id}>
-            <a href={`#${collection.slug.current}`}>{collection.name}</a>
+            <a href={`#${collection.slug.current}`}><p className={styles.card}>{collection.name}</p></a>
           </nav>
         )}
+        </div>
 
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
@@ -93,8 +84,7 @@ const BrietHomepage = ({ books, collections, demoBook }) => {
           </fieldset>
         )}
 
-        <h2>The Whole <span className="logo">BRIET</span> Catalog</h2>
-        {books.map(book => <CatalogListing book={book} key={book._id}/>)}
+        <h2><Link href="/catalog">View The Whole <span className="logo">BRIET</span> Catalog →</Link></h2>
 
         <p className={styles.description}>
           <a href="//server.briet.app">Powered by BookServer</a>
@@ -109,8 +99,7 @@ BrietHomepage.displayName = 'BrietHomepage'
 
 export default BrietHomepage
 
-export const getStaticProps = async ({ params }) => {
-  const books = await sanity.fetch(catalogQuery)
+export const getStaticProps = async () => {
   const collections = await sanity.fetch(collectionsQuery)
   const demoBook = await sanity.fetch(singleBookQuery, { id: demoBookId })
 
@@ -118,7 +107,6 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: {
-      books,
       collections: collections.featuredCollections,
       demoBook,
     },

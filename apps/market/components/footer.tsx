@@ -1,5 +1,5 @@
 import styles from '@styles/Home.module.css'
-import Link, { LinkProps } from 'next/link'
+import Link from 'next/link'
 
 const BrietFooter = () =>
   <footer className={styles.footer}>

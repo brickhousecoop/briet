@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
 
 import { readOnlyClient as sanity } from 'sanity-client'
 
@@ -32,7 +31,7 @@ interface CatalogListingProps {
 const builder = imageUrlBuilder(sanity)
 
 function sanityImgUrl(source: SanityImageSource) {
-  return imageUrlBuilder(sanity).image(source)
+  return builder.image(source)
 }
 
 const CatalogListing = ({ book }: CatalogListingProps) =>
