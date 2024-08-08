@@ -1,6 +1,7 @@
 import csv
 import json
 import re
+from bs4 import BeautifulSoup
 
 from slugify import slugify
 
@@ -19,12 +20,16 @@ for i in data:
     for a in authors:
         all_authors.append(a)
 
+    soup_descriptionhtml = BeautifulSoup(i['Main Description'], "html.parser")
+
+    description_plaintext = soup_descriptionhtml.get_text()
+
     doc = {"_type": "book",
             "authors":authors,
             "cover": {"_type": "image",
                       "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/" + i["File Name"][:-18] + ".jpg",
                      },
-           "description": i ['Main Description'],
+           "description": description_plaintext,
            "file": {"_type": "file",
                     "_sanityAsset": "file@file:///Users/jacob/pmassets/books/" + i["File Name"],
                    },

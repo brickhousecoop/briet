@@ -8,6 +8,7 @@ authors = [
 ]
 dependencies = [
     "python-slugify>=8.0.4",
+    "beautifulsoup4>=4.12.3",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
