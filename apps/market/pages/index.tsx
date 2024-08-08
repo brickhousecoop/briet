@@ -67,11 +67,13 @@ const BrietHomepage = ({ collections, demoBook }) => {
 
         <h2>Featured Collections</h2>
 
+        <div className={styles.grid}>
         {collections.map(collection =>
           <nav key={collection._id}>
-            <a href={`#${collection.slug.current}`}>{collection.name}</a>
+            <a href={`#${collection.slug.current}`}><p className={styles.card}>{collection.name}</p></a>
           </nav>
         )}
+        </div>
 
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
