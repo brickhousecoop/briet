@@ -33,9 +33,9 @@ for i in data:
            "file": {"_type": "file",
                     "_sanityAsset": "file@file:///Users/jacob/pmassets/books/" + i["File Name"],
                    },
-           "isbn": i["eBook ISBN"],
-           "isbnPrint": i["Print ISBN"],
-           "price_usd": i["Price"],
+           "isbn": int(i["eBook ISBN"]),
+           "isbnPrint": int(i["Print ISBN"]),
+           "price_usd": float(i["Price"]),
            "title": i["Title"] + ": " + i["Subtitle"]}
     all_books.append(doc)
 
