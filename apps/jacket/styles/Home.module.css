@@ -134,6 +134,7 @@ button.card {
 }
 
 .cataloglisting p {
+  width: fit-content;
   background-color: #ffffffcc;
 }
 
