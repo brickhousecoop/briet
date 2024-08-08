@@ -13,18 +13,28 @@ all_authors = []
 all_books = []
 
 for i in data:
-    author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"],i["Contributor 3 Full Name"],i["Contributor 4 Full Name"],i["Contributor 5 Full Name"],i["Contributor 6 Full Name"],i["Contributor 7 Full Name"]] if a != ""]
-    authors = [{"_type": "author",
-                "_id": slugify(a) + "-pmpressimport",
-                "slug": {"current": slugify(a)},
-                "name":a} for a in author_list]
-    authors_refs = [{"_type": "reference",
-                     "_ref": slugify(a)} for a in author_list]
+    author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"], i["Contributor 3 Full Name"], i["Contributor 4 Full Name"], i["Contributor 5 Full Name"], i["Contributor 6 Full Name"], i["Contributor 7 Full Name"]] if a != ""]
+    authors = []
+    authors_refs = []
+
+    for a in author_list:
+        author_slug = slugify(a)
+        author_id = author_slug + "-viapmpressimport"
+        authors.append({
+            "_type": "author",
+            "_id": author_id,
+            "slug": {"current": author_slug},
+            "name": a
+        })
+        authors_refs.append({
+            "_type": "reference",
+            "_ref": author_id
+        })
+
     for a in authors:
         all_authors.append(a)
 
     soup_descriptionhtml = BeautifulSoup(i['Main Description'], "html.parser")
-
     description_plaintext = soup_descriptionhtml.get_text()
 
     if (i["Subtitle"]):
