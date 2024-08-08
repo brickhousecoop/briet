@@ -9,7 +9,7 @@ import page from './schemas/page'
 import marketSettings from './schemas/settings'
 
 export default defineConfig({
-  'title': 'BRIET Marketplace',
+  'title': 'BRIET Bookmarket',
   'projectId': process.env.SANITY_STUDIO_PROJECTID,
   'dataset': process.env.SANITY_STUDIO_DATASET,
   'plugins': [

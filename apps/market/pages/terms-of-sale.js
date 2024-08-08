@@ -6,7 +6,7 @@ const BrietAboutPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>BRIET Marketplace</title>
+        <title>BRIET Bookmarket</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

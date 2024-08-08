@@ -13,7 +13,7 @@ const OrderPage = ({ order }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: Order Placed`}</title>
+        <title>{`BRIET Bookmarket: Order Placed`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

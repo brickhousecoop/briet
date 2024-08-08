@@ -39,7 +39,7 @@ const singleBookQuery = `
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
 
 export const metadata: Metadata = {
-  title: 'BRIET Marketplace',
+  title: 'BRIET Bookmarket',
   description: 'Ebooks, for libraries, for keeps.',
 }
 
@@ -48,7 +48,7 @@ const BrietHomepage = ({ collections, demoBook }) => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> Marketplace
+          <span className="logo">BRIET</span> Bookmarket
         </h1>
 
         <p className={styles.description}>

@@ -20,7 +20,7 @@ Ingests a `tagger` book collection with bibligraphic information and returns an 
 
 # `market`
 
-**BookServer Feed ⮕ Librarian Marketplace**
+**BookServer Feed ⮕ Librarian Bookmarket**
 
 Ingests an ODL/OPDS BookServer feed and returns a librarian-friendly marketplace website for local libraries to purchase and lend digital books the [exact same way](https://controlleddigitallending.org) they have with old fashioned wooden books for centuries
 

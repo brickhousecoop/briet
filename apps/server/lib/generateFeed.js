@@ -44,7 +44,7 @@ function brietTaggerToOpds(taggerCatalog) {
 }
 
 const feed = {
-  title: "BRIET Marketplace",
+  title: "BRIET Bookmarket",
   author: {
     name: "The Brick House Cooperative",
     uri: "https://thebrick.house"

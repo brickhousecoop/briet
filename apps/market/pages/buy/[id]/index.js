@@ -32,7 +32,7 @@ const BookBuyPage = ({ book }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: ${book.title}`}</title>
+        <title>{`BRIET Bookmarket: ${book.title}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

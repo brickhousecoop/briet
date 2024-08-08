@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'BRIET Marketplace',
+  title: 'BRIET Bookmarket',
   description: 'Ebooks for libraries, for keeps.',
 }
 
