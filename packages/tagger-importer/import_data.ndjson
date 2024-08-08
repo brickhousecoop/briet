@@ -1,3 +1,650 @@
+{"_type": "author", "_id": "kenneth-wishnia", "name": "Kenneth Wishnia"}
+{"_type": "author", "_id": "barbara-damato", "name": "Barbara D\u2019Amato"}
+{"_type": "author", "_id": "gord-hill", "name": "Gord Hill"}
+{"_type": "author", "_id": "e-ethelbert-miller", "name": "E. Ethelbert Miller"}
+{"_type": "author", "_id": "pegi-deitz-shea", "name": "Pegi Deitz Shea"}
+{"_type": "author", "_id": "prole-info", "name": "Prole.info"}
+{"_type": "author", "_id": "nicolas-walter", "name": "Nicolas Walter"}
+{"_type": "author", "_id": "natasha-walter", "name": "Natasha Walter"}
+{"_type": "author", "_id": "buff-whitman-bradley", "name": "Buff Whitman-Bradley"}
+{"_type": "author", "_id": "sarah-lazare", "name": "Sarah Lazare"}
+{"_type": "author", "_id": "cynthia-whitman-bradley", "name": "Cynthia Whitman-Bradley"}
+{"_type": "author", "_id": "michael-fine", "name": "Michael Fine"}
+{"_type": "author", "_id": "staughton-lynd", "name": "Staughton Lynd"}
+{"_type": "author", "_id": "raymond-craib", "name": "Raymond Craib"}
+{"_type": "author", "_id": "vyvian-raoul", "name": "Vyvian Raoul"}
+{"_type": "author", "_id": "matt-bonner", "name": "Matt Bonner"}
+{"_type": "author", "_id": "josh-macphee", "name": "Josh MacPhee"}
+{"_type": "author", "_id": "franco-la-cecla", "name": "Franco La Cecla"}
+{"_type": "author", "_id": "mairin-omahony", "name": "Mairin O\u2019Mahony"}
+{"_type": "author", "_id": "jeremy-brecher", "name": "Jeremy Brecher"}
+{"_type": "author", "_id": "beau-beausoleil", "name": "Beau Beausoleil"}
+{"_type": "author", "_id": "deema-shehabi", "name": "Deema Shehabi"}
+{"_type": "author", "_id": "dani-burlison", "name": "Dani Burlison"}
+{"_type": "author", "_id": "gabriel-kuhn", "name": "Gabriel Kuhn"}
+{"_type": "author", "_id": "dino-sarma-weierman", "name": "Dino Sarma Weierman"}
+{"_type": "author", "_id": "ruth-kinna", "name": "Ruth Kinna"}
+{"_type": "author", "_id": "alex-prichard", "name": "Alex Prichard"}
+{"_type": "author", "_id": "thomas-swann", "name": "Thomas Swann"}
+{"_type": "author", "_id": "seeds-for-change", "name": "Seeds for Change"}
+{"_type": "author", "_id": "judith-suisa", "name": "Judith Suisa"}
+{"_type": "author", "_id": "peter-kropotkin", "name": "Peter Kropotkin"}
+{"_type": "author", "_id": "brian-morris", "name": "Brian Morris"}
+{"_type": "author", "_id": "iain-mckay", "name": "Iain McKay"}
+{"_type": "author", "_id": "markus-lundstrom", "name": "Markus Lundstr\u00f6m"}
+{"_type": "author", "_id": "kirwin-shaffer", "name": "Kirwin Shaffer"}
+{"_type": "author", "_id": "francisco-ferrer", "name": "Francisco Ferrer"}
+{"_type": "author", "_id": "robert-h-haworth", "name": "Robert H. Haworth"}
+{"_type": "author", "_id": "mark-bray", "name": "Mark Bray"}
+{"_type": "author", "_id": "allan-antliff", "name": "Allan Antliff"}
+{"_type": "author", "_id": "david-goodway", "name": "David  Goodway"}
+{"_type": "author", "_id": "victor-serge", "name": "Victor Serge"}
+{"_type": "author", "_id": "mitchell-abidor", "name": "Mitchell Abidor"}
+{"_type": "author", "_id": "richard-greeman", "name": "Richard Greeman"}
+{"_type": "author", "_id": "emma-goldman", "name": "Emma Goldman"}
+{"_type": "author", "_id": "shawn-p-wilbur", "name": "Shawn P. Wilbur"}
+{"_type": "author", "_id": "jay-kinney", "name": "Jay Kinney"}
+{"_type": "author", "_id": "colin-ward", "name": "Colin Ward"}
+{"_type": "author", "_id": "john-p-clark", "name": "John P. Clark"}
+{"_type": "author", "_id": "camille-martin", "name": "Camille Martin"}
+{"_type": "author", "_id": "elisee-reclus", "name": "Elis\u00e9e Reclus"}
+{"_type": "author", "_id": "gordon-carr", "name": "Gordon Carr"}
+{"_type": "author", "_id": "jason-w-moore", "name": "Jason W. Moore"}
+{"_type": "author", "_id": "peter-marshall", "name": "Peter Marshall"}
+{"_type": "author", "_id": "julius-deutsch", "name": "Julius Deutsch"}
+{"_type": "author", "_id": "phil-cohen", "name": "Phil Cohen"}
+{"_type": "author", "_id": "richard-porton", "name": "Richard Porton"}
+{"_type": "author", "_id": "stuart-christie", "name": "Stuart Christie"}
+{"_type": "author", "_id": "havin-guneser", "name": "Havin Guneser"}
+{"_type": "author", "_id": "andrej-grubacic", "name": "Andrej Gruba\u010di\u0107"}
+{"_type": "author", "_id": "sasha-lilley", "name": "Sasha Lilley"}
+{"_type": "author", "_id": "george-katsiaficas", "name": "George Katsiaficas"}
+{"_type": "author", "_id": "siobhan-mcguirk", "name": "Siobh\u00e1n McGuirk"}
+{"_type": "author", "_id": "adrienne-pine", "name": "Adrienne Pine"}
+{"_type": "author", "_id": "seth-holmes", "name": "Seth Holmes"}
+{"_type": "author", "_id": "samuel-r-delany", "name": "Samuel R. Delany"}
+{"_type": "author", "_id": "dylan-eldredge-fitzwater", "name": "Dylan Eldredge Fitzwater"}
+{"_type": "author", "_id": "banksy", "name": "Banksy"}
+{"_type": "author", "_id": "martin-bull", "name": "Martin Bull"}
+{"_type": "author", "_id": "stewart-dean-ebersole", "name": "Stewart Dean Ebersole"}
+{"_type": "author", "_id": "jared-castaldi", "name": "Jared Castaldi"}
+{"_type": "author", "_id": "beverly-hope-slapin", "name": "Beverly Hope Slapin"}
+{"_type": "author", "_id": "thomas-schmidinger", "name": "Thomas Schmidinger"}
+{"_type": "author", "_id": "michael-schiffmann", "name": "Michael Schiffmann"}
+{"_type": "author", "_id": "rachel-pollack", "name": "Rachel Pollack"}
+{"_type": "author", "_id": "jen-angel", "name": "Jen Angel"}
+{"_type": "author", "_id": "peter-cole", "name": "Peter Cole"}
+{"_type": "author", "_id": "robin-d-g-kelley", "name": "Robin D.G. Kelley"}
+{"_type": "author", "_id": "n-o-bonzo", "name": "N.O. Bonzo"}
+{"_type": "author", "_id": "james-kelman", "name": "James Kelman"}
+{"_type": "author", "_id": "noam-chomsky", "name": "Noam Chomsky"}
+{"_type": "author", "_id": "john-holloway", "name": "John Holloway"}
+{"_type": "author", "_id": "katerina-nasioka", "name": "Katerina Nasioka"}
+{"_type": "author", "_id": "panagiotis-doulos", "name": "Panagiotis Doulos"}
+{"_type": "author", "_id": "abdullah-ocalan", "name": "Abdullah \u00d6calan"}
+{"_type": "author", "_id": "international-initiative", "name": "International Initiative"}
+{"_type": "author", "_id": "silvia-federici", "name": "Silvia Federici"}
+{"_type": "author", "_id": "sam-tracy", "name": "Sam Tracy"}
+{"_type": "author", "_id": "jacinta-bunnell", "name": "Jacinta Bunnell"}
+{"_type": "author", "_id": "leela-corman", "name": "Leela Corman"}
+{"_type": "author", "_id": "meg-elison", "name": "Meg Elison"}
+{"_type": "author", "_id": "archie-green", "name": "Archie Green"}
+{"_type": "author", "_id": "david-roediger", "name": "David Roediger"}
+{"_type": "author", "_id": "franklin-rosemont", "name": "Franklin Rosemont"}
+{"_type": "author", "_id": "salvatore-salerno", "name": "Salvatore Salerno"}
+{"_type": "author", "_id": "tom-morello", "name": "Tom Morello"}
+{"_type": "author", "_id": "utah-phillips", "name": "Utah Phillips"}
+{"_type": "author", "_id": "jenny-brown", "name": "Jenny Brown"}
+{"_type": "author", "_id": "alana-apfel", "name": "Alana Apfel"}
+{"_type": "author", "_id": "loretta-j-ross", "name": "Loretta J. Ross"}
+{"_type": "author", "_id": "victoria-law", "name": "Victoria Law"}
+{"_type": "author", "_id": "epstein-howard", "name": "Epstein, Howard"}
+{"_type": "author", "_id": "ken-light", "name": "Ken Light"}
+{"_type": "author", "_id": "grendl-lofkvist", "name": "Grendl L\u00f6fkvist"}
+{"_type": "author", "_id": "the-black-box-collective", "name": "The Black Box Collective"}
+{"_type": "author", "_id": "scott-crow", "name": "scott crow"}
+{"_type": "author", "_id": "kathleen-cleaver", "name": "Kathleen Cleaver"}
+{"_type": "author", "_id": "ben-morea", "name": "Ben Morea"}
+{"_type": "author", "_id": "ron-hahne", "name": "Ron Hahne"}
+{"_type": "author", "_id": "daniel-lukes", "name": "Daniel Lukes"}
+{"_type": "author", "_id": "stanimir-panayotov", "name": "Stanimir Panayotov"}
+{"_type": "author", "_id": "jaci-raia", "name": "Jaci Raia"}
+{"_type": "author", "_id": "joseph-matthews", "name": "Joseph Matthews"}
+{"_type": "author", "_id": "james-brook", "name": "James Brook"}
+{"_type": "author", "_id": "liz-martinez", "name": "Liz Mart\u00ednez"}
+{"_type": "author", "_id": "willson-s-brian", "name": "Willson, S. Brian"}
+{"_type": "author", "_id": "daniel-ellsberg", "name": "Daniel Ellsberg"}
+{"_type": "author", "_id": "shanker-adrian", "name": "Shanker, Adrian"}
+{"_type": "author", "_id": "rachel-l-levine", "name": "Rachel L. Levine"}
+{"_type": "author", "_id": "kate-kendell", "name": "Kate Kendell"}
+{"_type": "author", "_id": "richard-parry", "name": "Richard Parry"}
+{"_type": "author", "_id": "mitch-troutman", "name": "Mitch Troutman"}
+{"_type": "author", "_id": "piercy-marge", "name": "Piercy, Marge"}
+{"_type": "author", "_id": "robe-chris", "name": "Rob\u00e9, Chris"}
+{"_type": "author", "_id": "lee-camp", "name": "Lee Camp"}
+{"_type": "author", "_id": "chris-hedges", "name": "Chris Hedges"}
+{"_type": "author", "_id": "jimmy-dore", "name": "Jimmy Dore"}
+{"_type": "author", "_id": "ted-glick", "name": "Ted Glick"}
+{"_type": "author", "_id": "frida-berrigan", "name": "Frida Berrigan"}
+{"_type": "author", "_id": "al-burian", "name": "Al Burian"}
+{"_type": "author", "_id": "ian-glasper", "name": "Ian Glasper"}
+{"_type": "author", "_id": "michael-moorcock", "name": "Michael Moorcock"}
+{"_type": "author", "_id": "alan-wall", "name": "Alan Wall"}
+{"_type": "author", "_id": "paco-ignacio-taibo-ii", "name": "Paco Ignacio Taibo II"}
+{"_type": "author", "_id": "jason-chang", "name": "Jason Chang"}
+{"_type": "author", "_id": "ben-barson", "name": "Ben Barson"}
+{"_type": "author", "_id": "alexis-dudden", "name": "Alexis Dudden"}
+{"_type": "author", "_id": "kim-inthavong", "name": "Kim Inthavong"}
+{"_type": "author", "_id": "david-mcnally", "name": "David McNally"}
+{"_type": "author", "_id": "eddie-yuen", "name": "Eddie Yuen"}
+{"_type": "author", "_id": "james-davis", "name": "James Davis"}
+{"_type": "author", "_id": "doug-henwood", "name": "Doug Henwood"}
+{"_type": "author", "_id": "norman-nawrocki", "name": "Norman Nawrocki"}
+{"_type": "author", "_id": "michael-harris", "name": "Michael Harris"}
+{"_type": "author", "_id": "bart-van-der-steen", "name": "Bart van der Steen"}
+{"_type": "author", "_id": "ask-katzeff", "name": "Ask Katzeff"}
+{"_type": "author", "_id": "leendert-van-hoogenhuijze", "name": "Leendert van Hoogenhuijze"}
+{"_type": "author", "_id": "geronimo", "name": "Geronimo"}
+{"_type": "author", "_id": "paul-park", "name": "Paul Park"}
+{"_type": "author", "_id": "diana-block", "name": "Diana Block"}
+{"_type": "author", "_id": "martin-popoff", "name": "Martin Popoff"}
+{"_type": "author", "_id": "jose-peirats", "name": "Jos\u00e9 Peirats"}
+{"_type": "author", "_id": "chris-ealham", "name": "Chris Ealham"}
+{"_type": "author", "_id": "l-m-bogad", "name": "L.M. Bogad"}
+{"_type": "author", "_id": "guillermo-gomez-pena", "name": "Guillermo G\u00f3mez-Pe\u00f1a"}
+{"_type": "author", "_id": "gaston-leval", "name": "Gaston Leval"}
+{"_type": "author", "_id": "vernon-richards", "name": "Vernon Richards"}
+{"_type": "author", "_id": "pedro-garcia-guirao", "name": "Pedro Garc\u00eda-Guirao"}
+{"_type": "author", "_id": "todd-vachon", "name": "Todd Vachon"}
+{"_type": "author", "_id": "ralf-ruckus", "name": "Ralf  Ruckus"}
+{"_type": "author", "_id": "richard-roman", "name": "Richard Roman"}
+{"_type": "author", "_id": "edur-velasco-arregui", "name": "Edur Velasco Arregui"}
+{"_type": "author", "_id": "steve-early", "name": "Steve Early"}
+{"_type": "author", "_id": "mel-watkins", "name": "Mel Watkins"}
+{"_type": "author", "_id": "lisa-jervis", "name": "Lisa Jervis"}
+{"_type": "author", "_id": "joy-tienzo", "name": "Joy Tienzo"}
+{"_type": "author", "_id": "marge-piercy", "name": "Marge Piercy"}
+{"_type": "author", "_id": "anti-eviction-mapping-project", "name": "Anti-Eviction Mapping Project"}
+{"_type": "author", "_id": "ananya-roy", "name": "Ananya Roy"}
+{"_type": "author", "_id": "chris-carlsson", "name": "Chris Carlsson"}
+{"_type": "author", "_id": "kris-hermes", "name": "Kris Hermes"}
+{"_type": "author", "_id": "marina-sitrin", "name": "Marina Sitrin"}
+{"_type": "author", "_id": "heidi-boghosian", "name": "Heidi Boghosian"}
+{"_type": "author", "_id": "daniel-burton-rose", "name": "Daniel Burton-Rose"}
+{"_type": "author", "_id": "ward-churchill", "name": "Ward Churchill"}
+{"_type": "author", "_id": "adrian-shanker", "name": "Adrian Shanker"}
+{"_type": "author", "_id": "rea-carey", "name": "Rea Carey"}
+{"_type": "author", "_id": "karl-marx", "name": "Karl Marx"}
+{"_type": "author", "_id": "kevin-b-anderson", "name": "Kevin B. Anderson"}
+{"_type": "author", "_id": "karel-ludenhoff", "name": "Karel Ludenhoff"}
+{"_type": "author", "_id": "peter-hudis", "name": "Peter Hudis"}
+{"_type": "author", "_id": "peter-linebaugh", "name": "Peter Linebaugh"}
+{"_type": "author", "_id": "koni-benson", "name": "Koni Benson"}
+{"_type": "author", "_id": "andre-trantraal", "name": "Andr\u00e9 Trantraal"}
+{"_type": "author", "_id": "nathan-trantraal", "name": "Nathan Trantraal"}
+{"_type": "author", "_id": "ashley-e-marais", "name": "Ashley E. Marais"}
+{"_type": "author", "_id": "ecosocialist-horizons", "name": "Ecosocialist Horizons"}
+{"_type": "author", "_id": "david-goodway", "name": "David Goodway"}
+{"_type": "author", "_id": "jj-amaworo-wilson", "name": "JJ Amaworo Wilson"}
+{"_type": "author", "_id": "andrew-nette", "name": "Andrew Nette"}
+{"_type": "author", "_id": "iain-mcintyre", "name": "Iain McIntyre"}
+{"_type": "author", "_id": "j-smith", "name": "J.  Smith"}
+{"_type": "author", "_id": "andre-moncourt", "name": "Andr\u00e9 Moncourt"}
+{"_type": "author", "_id": "bill-campbell", "name": "Bill Campbell"}
+{"_type": "author", "_id": "bizhan-khodabandeh", "name": "Bizhan Khodabandeh"}
+{"_type": "author", "_id": "p-djeli-clark", "name": "P. Djeli Clark"}
+{"_type": "author", "_id": "alex-ogg", "name": "Alex Ogg"}
+{"_type": "author", "_id": "winston-smith", "name": "Winston Smith"}
+{"_type": "author", "_id": "ruby-ray", "name": "Ruby Ray"}
+{"_type": "author", "_id": "strike-debt", "name": "Strike Debt"}
+{"_type": "author", "_id": "raoul-vaneigem", "name": "Raoul Vaneigem"}
+{"_type": "author", "_id": "liz-heron", "name": "Liz Heron"}
+{"_type": "author", "_id": "peter-kuper", "name": "Peter Kuper"}
+{"_type": "author", "_id": "martin-solares", "name": "Mart\u00edn Solares"}
+{"_type": "author", "_id": "elizabeth-gurley-flynn", "name": "Elizabeth Gurley Flynn"}
+{"_type": "author", "_id": "walker-c-smith", "name": "Walker C. Smith"}
+{"_type": "author", "_id": "william-e-trautmann", "name": "William E. Trautmann"}
+{"_type": "author", "_id": "mark-leier", "name": "Mark Leier"}
+{"_type": "author", "_id": "china-martens", "name": "China Martens"}
+{"_type": "author", "_id": "roxanne-dunbar-ortiz", "name": "Roxanne Dunbar-Ortiz"}
+{"_type": "author", "_id": "paul-goodman", "name": "Paul Goodman"}
+{"_type": "author", "_id": "taylor-stoehr", "name": "Taylor Stoehr"}
+{"_type": "author", "_id": "eric-drooker", "name": "Eric Drooker"}
+{"_type": "author", "_id": "derrick-jensen", "name": "Derrick Jensen"}
+{"_type": "author", "_id": "lierre-keith", "name": "Lierre Keith"}
+{"_type": "author", "_id": "gilles-dauve", "name": "Gilles Dauv\u00e9"}
+{"_type": "author", "_id": "francois-martin", "name": "Fran\u00e7ois Martin"}
+{"_type": "author", "_id": "sin-soracco", "name": "Sin Soracco"}
+{"_type": "author", "_id": "diana-denham", "name": "Diana Denham"}
+{"_type": "author", "_id": "c-a-s-a-collective", "name": "C.A.S.A Collective"}
+{"_type": "author", "_id": "bartolomeo-vanzetti", "name": "Bartolomeo  Vanzetti"}
+{"_type": "author", "_id": "jon-curley", "name": "Jon Curley"}
+{"_type": "author", "_id": "mat-callahan", "name": "Mat Callahan"}
+{"_type": "author", "_id": "bob-ostertag", "name": "Bob Ostertag"}
+{"_type": "author", "_id": "george-lakey", "name": "George Lakey"}
+{"_type": "author", "_id": "hugh-hodges", "name": "Hugh Hodges"}
+{"_type": "author", "_id": "dick-lucas", "name": "Dick Lucas"}
+{"_type": "author", "_id": "boff-whalley", "name": "Boff Whalley"}
+{"_type": "author", "_id": "jon-melrod", "name": "Jon Melrod"}
+{"_type": "author", "_id": "terry-bisson", "name": "Terry Bisson"}
+{"_type": "author", "_id": "mumia-abu-jamal", "name": "Mumia Abu-Jamal"}
+{"_type": "author", "_id": "elizabeth-hand", "name": "Elizabeth Hand"}
+{"_type": "author", "_id": "james-patrick-kelly", "name": "James Patrick Kelly"}
+{"_type": "author", "_id": "wolfgang-eckhardt", "name": "Wolfgang Eckhardt"}
+{"_type": "author", "_id": "albert-meltzer", "name": "Albert Meltzer"}
+{"_type": "author", "_id": "john-king", "name": "John King"}
+{"_type": "author", "_id": "daniel-guerin", "name": "Daniel Gu\u00e9rin"}
+{"_type": "author", "_id": "david-berry", "name": "David Berry"}
+{"_type": "author", "_id": "john-curl", "name": "John Curl"}
+{"_type": "author", "_id": "ishmael-reed", "name": "Ishmael Reed"}
+{"_type": "author", "_id": "marcy-rein", "name": "Marcy Rein"}
+{"_type": "author", "_id": "mickey-ellinger", "name": "Mickey Ellinger"}
+{"_type": "author", "_id": "vicki-legion", "name": "Vicki Legion"}
+{"_type": "author", "_id": "pauline-lipman", "name": "Pauline Lipman"}
+{"_type": "author", "_id": "robert-hillary-king", "name": "Robert Hillary King"}
+{"_type": "author", "_id": "terry-kupers", "name": "Terry Kupers"}
+{"_type": "author", "_id": "simon-springer", "name": "Simon Springer"}
+{"_type": "author", "_id": "paul-buhle", "name": "Paul Buhle"}
+{"_type": "author", "_id": "tom-keough", "name": "Tom Keough"}
+{"_type": "author", "_id": "david-camfield", "name": "David Camfield"}
+{"_type": "author", "_id": "dharna-noor", "name": "Dharna Noor"}
+{"_type": "author", "_id": "john-barker", "name": "John Barker"}
+{"_type": "author", "_id": "rick-dakan", "name": "Rick Dakan"}
+{"_type": "author", "_id": "claire-askew", "name": "Claire Askew"}
+{"_type": "author", "_id": "vortex-group", "name": "Vortex Group"}
+{"_type": "author", "_id": "asaro", "name": "ASARO"}
+{"_type": "author", "_id": "mike-graham-de-la-rosa", "name": "Mike Graham de La Rosa"}
+{"_type": "author", "_id": "suzanne-m-schadl", "name": "Suzanne M. Schadl"}
+{"_type": "author", "_id": "peter-doyle", "name": "Peter Doyle"}
+{"_type": "author", "_id": "julie-novak", "name": "Julie Novak"}
+{"_type": "author", "_id": "reed-farrel-coleman", "name": "Reed Farrel Coleman"}
+{"_type": "author", "_id": "william-i-robinson", "name": "William I. Robinson"}
+{"_type": "author", "_id": "carlos-munoz", "name": "Carlos Mu\u00f1oz"}
+{"_type": "author", "_id": "chaz-bufe", "name": "Chaz Bufe"}
+{"_type": "author", "_id": "dan-arel", "name": "Dan Arel"}
+{"_type": "author", "_id": "george-hurchalla", "name": "George Hurchalla"}
+{"_type": "author", "_id": "cory-doctorow", "name": "Cory Doctorow"}
+{"_type": "author", "_id": "david-alan-corbin", "name": "David Alan Corbin"}
+{"_type": "author", "_id": "anselm-jappe", "name": "Anselm Jappe"}
+{"_type": "author", "_id": "donald-nicholson-smith", "name": "Donald Nicholson-Smith"}
+{"_type": "author", "_id": "t-j-clark", "name": "T.J. Clark"}
+{"_type": "author", "_id": "carter-scholz", "name": "Carter Scholz"}
+{"_type": "author", "_id": "juliana-jewels-smith", "name": "Juliana \"Jewels\" Smith"}
+{"_type": "author", "_id": "ronald-nelson", "name": "Ronald Nelson"}
+{"_type": "author", "_id": "mike-hampton", "name": "Mike Hampton"}
+{"_type": "author", "_id": "kiese-laymon", "name": "Kiese Laymon"}
+{"_type": "author", "_id": "david-pilgrim", "name": "David Pilgrim"}
+{"_type": "author", "_id": "franklin-hughes", "name": "Franklin Hughes"}
+{"_type": "author", "_id": "david-eisler", "name": "David Eisler"}
+{"_type": "author", "_id": "bernard-lown-md", "name": "Bernard Lown MD"}
+{"_type": "author", "_id": "ariel-lown-lewiton", "name": "Ariel Lown Lewiton"}
+{"_type": "author", "_id": "g-h-mosson", "name": "G.H. Mosson"}
+{"_type": "author", "_id": "marcus-colasurdo", "name": "Marcus Colasurdo"}
+{"_type": "author", "_id": "c-l-r-james", "name": "C.L.R. James"}
+{"_type": "author", "_id": "mike-stout", "name": "Mike Stout"}
+{"_type": "author", "_id": "joann-wypijewski", "name": "JoAnn Wypijewski"}
+{"_type": "author", "_id": "andrew-hansen", "name": "Andrew Hansen"}
+{"_type": "author", "_id": "ken-macleod", "name": "Ken MacLeod"}
+{"_type": "author", "_id": "industrial-workers-of-the-world-i-w-w", "name": "Industrial Workers of the World (I.W.W.)"}
+{"_type": "author", "_id": "cynthia-kaufman", "name": "Cynthia Kaufman"}
+{"_type": "author", "_id": "richard-manning", "name": "Richard Manning"}
+{"_type": "author", "_id": "rick-bass", "name": "Rick Bass"}
+{"_type": "author", "_id": "leo-panitch", "name": "Leo Panitch"}
+{"_type": "author", "_id": "sam-gindin", "name": "Sam Gindin"}
+{"_type": "author", "_id": "greg-albo", "name": "Greg Albo"}
+{"_type": "author", "_id": "george-caffentzis", "name": "George Caffentzis"}
+{"_type": "author", "_id": "owen-hill", "name": "Owen Hill"}
+{"_type": "author", "_id": "matthew-n-lyons", "name": "Matthew N. Lyons"}
+{"_type": "author", "_id": "moe-bowstern", "name": "Moe Bowstern"}
+{"_type": "author", "_id": "mic-crenshaw", "name": "Mic Crenshaw"}
+{"_type": "author", "_id": "alec-dunn", "name": "Alec Dunn"}
+{"_type": "author", "_id": "celina-flores", "name": "Celina Flores"}
+{"_type": "author", "_id": "julie-perini", "name": "Julie Perini"}
+{"_type": "author", "_id": "erin-yanke", "name": "Erin Yanke"}
+{"_type": "author", "_id": "summer-brenner", "name": "Summer Brenner"}
+{"_type": "author", "_id": "brian-bowes", "name": "Brian Bowes"}
+{"_type": "author", "_id": "kali-akuno", "name": "Kali Akuno"}
+{"_type": "author", "_id": "richard-d-wolff", "name": "Richard D. Wolff"}
+{"_type": "author", "_id": "matt-meyer", "name": "Matt Meyer"}
+{"_type": "author", "_id": "chantelle-aimee-osman", "name": "Chantelle Aim\u00e9e  Osman"}
+{"_type": "author", "_id": "lawrence-block", "name": "Lawrence Block"}
+{"_type": "author", "_id": "eric-larson", "name": "Eric Larson"}
+{"_type": "author", "_id": "larry-cohen", "name": "Larry Cohen"}
+{"_type": "author", "_id": "gary-phillips", "name": "Gary Phillips"}
+{"_type": "author", "_id": "marie-louise-berneri", "name": "Marie Louise Berneri"}
+{"_type": "author", "_id": "george-woodcock", "name": "George Woodcock"}
+{"_type": "author", "_id": "matthew-s-adams", "name": "Matthew S. Adams"}
+{"_type": "author", "_id": "rhiannon-firth", "name": "Rhiannon Firth"}
+{"_type": "author", "_id": "kim-stanley-robinson", "name": "Kim Stanley Robinson"}
+{"_type": "author", "_id": "simone-zelitch", "name": "Simone Zelitch"}
+{"_type": "author", "_id": "jim-feast", "name": "Jim Feast"}
+{"_type": "author", "_id": "stephanie-mcmillan", "name": "Stephanie McMillan"}
+{"_type": "author", "_id": "daniel-gross", "name": "Daniel Gross"}
+{"_type": "author", "_id": "john-womack-jr", "name": "John Womack Jr."}
+{"_type": "author", "_id": "peter-olney", "name": "Peter Olney"}
+{"_type": "author", "_id": "glenn-perusek", "name": "Glenn Perusek"}
+{"_type": "author", "_id": "cal-winslow", "name": "Cal Winslow"}
+{"_type": "author", "_id": "penny-rimbaud", "name": "Penny Rimbaud"}
+{"_type": "author", "_id": "ursula-k-le-guin", "name": "Ursula K. Le Guin"}
+{"_type": "author", "_id": "david-ensminger", "name": "David Ensminger"}
+{"_type": "author", "_id": "adolfo-perez-esquivel", "name": "Adolfo Perez Esquivel"}
+{"_type": "author", "_id": "lynne-stewart", "name": "Lynne Stewart"}
+{"_type": "author", "_id": "ashanti-alston", "name": "Ashanti Alston"}
+{"_type": "author", "_id": "erich-muhsam", "name": "Erich M\u00fchsam"}
+{"_type": "author", "_id": "saku-pinta", "name": "Saku Pinta"}
+{"_type": "author", "_id": "siue-moffat", "name": "Siue Moffat"}
+{"_type": "author", "_id": "missy-kulick", "name": "Missy Kulick"}
+{"_type": "author", "_id": "celso", "name": "Celso"}
+{"_type": "author", "_id": "errico-malatesta", "name": "Errico Malatesta"}
+{"_type": "author", "_id": "carl-levy", "name": "Carl Levy"}
+{"_type": "author", "_id": "joshua-kahn", "name": "Joshua Kahn"}
+{"_type": "author", "_id": "stephen-d-arcy", "name": "Stephen D'Arcy"}
+{"_type": "author", "_id": "tony-weis", "name": "Tony Weis"}
+{"_type": "author", "_id": "toban-black", "name": "Toban Black"}
+{"_type": "author", "_id": "naomi-klein", "name": "Naomi Klein"}
+{"_type": "author", "_id": "bill-mckibben", "name": "Bill McKibben"}
+{"_type": "author", "_id": "david-ranney", "name": "David Ranney"}
+{"_type": "author", "_id": "ziga-vodovnik", "name": "\u017diga Vodovnik"}
+{"_type": "author", "_id": "howard-zinn", "name": "Howard Zinn"}
+{"_type": "author", "_id": "allan-kausch", "name": "Allan Kausch"}
+{"_type": "author", "_id": "iain-sinclair", "name": "Iain Sinclair"}
+{"_type": "author", "_id": "tomoyuki-hoshino", "name": "Tomoyuki Hoshino"}
+{"_type": "author", "_id": "andrienne-carey-hurley", "name": "Andrienne Carey Hurley"}
+{"_type": "author", "_id": "dequi-kioni-sadiki", "name": "d\u00e9qui kioni-sadiki"}
+{"_type": "author", "_id": "sekou-odinga", "name": "Sekou Odinga"}
+{"_type": "author", "_id": "dhoruba-bin-wahad", "name": "Dhoruba Bin Wahad"}
+{"_type": "author", "_id": "imam-jamil-al-amin", "name": "Imam Jamil Al-Amin"}
+{"_type": "author", "_id": "jamal-joseph", "name": "Jamal Joseph"}
+{"_type": "author", "_id": "david-gilbert", "name": "David Gilbert"}
+{"_type": "author", "_id": "boots-riley", "name": "Boots Riley"}
+{"_type": "author", "_id": "eleanor-arnason", "name": "Eleanor Arnason"}
+{"_type": "author", "_id": "nicky-garratt", "name": "Nicky Garratt"}
+{"_type": "author", "_id": "elliott-liu", "name": "Elliott Liu"}
+{"_type": "author", "_id": "quincy-saul", "name": "Quincy Saul"}
+{"_type": "author", "_id": "seth-tobocman", "name": "Seth Tobocman"}
+{"_type": "author", "_id": "mac-mcgill", "name": "Mac McGill"}
+{"_type": "author", "_id": "songe-riddle", "name": "Songe Riddle"}
+{"_type": "author", "_id": "russell-maroon-shoatz", "name": "Russell Maroon Shoatz"}
+{"_type": "author", "_id": "chuck-d", "name": "Chuck D"}
+{"_type": "author", "_id": "fred-ho", "name": "Fred Ho"}
+{"_type": "author", "_id": "nozizwe-madlala-routledge", "name": "Nozizwe Madlala-Routledge"}
+{"_type": "author", "_id": "joe-r-lansdale", "name": "Joe R. Lansdale"}
+{"_type": "author", "_id": "g-w-sok", "name": "G.W. Sok"}
+{"_type": "author", "_id": "john-robb", "name": "John Robb"}
+{"_type": "author", "_id": "noel-ignatiev", "name": "Noel Ignatiev"}
+{"_type": "author", "_id": "louis-karoniaktajeh-hall", "name": "Louis Karoniaktajeh Hall"}
+{"_type": "author", "_id": "kahentinetha-rotiskarewake", "name": "Kahentinetha Rotiskarewake"}
+{"_type": "author", "_id": "philippe-blouin", "name": "Philippe Blouin"}
+{"_type": "author", "_id": "matt-peterson", "name": "Matt Peterson"}
+{"_type": "author", "_id": "malek-rasamny", "name": "Malek Rasamny"}
+{"_type": "author", "_id": "jim-nisbet", "name": "Jim Nisbet"}
+{"_type": "author", "_id": "the-free-association", "name": "The Free Association"}
+{"_type": "author", "_id": "alice-lynd", "name": "Alice Lynd"}
+{"_type": "author", "_id": "crystal-vielula", "name": "Crystal Vielula"}
+{"_type": "author", "_id": "jai-sen", "name": "Jai Sen"}
+{"_type": "author", "_id": "graphic-history-collective", "name": "Graphic History Collective"}
+{"_type": "author", "_id": "ian-brennan", "name": "Ian Brennan"}
+{"_type": "author", "_id": "john-waters", "name": "John Waters"}
+{"_type": "author", "_id": "david-graeber", "name": "David Graeber"}
+{"_type": "author", "_id": "gats", "name": "GATS"}
+{"_type": "author", "_id": "jennifer-silverman", "name": "Jennifer Silverman"}
+{"_type": "author", "_id": "sarah-talbot", "name": "Sarah Talbot"}
+{"_type": "author", "_id": "yantra-bertelli", "name": "Yantra Bertelli"}
+{"_type": "author", "_id": "beezus-b-murphy", "name": "Beezus B. Murphy"}
+{"_type": "author", "_id": "tatiana-gill", "name": "Tatiana Gill"}
+{"_type": "author", "_id": "shout-your-abortion", "name": "Shout Your Abortion"}
+{"_type": "author", "_id": "amelia-bonow", "name": "Amelia Bonow"}
+{"_type": "author", "_id": "joseph-dietzgen", "name": "Joseph Dietzgen"}
+{"_type": "author", "_id": "larry-gambone", "name": "Larry Gambone"}
+{"_type": "author", "_id": "vincent-j-guihan", "name": "Vincent J. Guihan"}
+{"_type": "author", "_id": "immanuel-ness", "name": "Immanuel Ness"}
+{"_type": "author", "_id": "michael-c-fisher", "name": "Michael C. Fisher"}
+{"_type": "author", "_id": "john-shirley", "name": "John Shirley"}
+{"_type": "author", "_id": "michael-albert", "name": "Michael Albert"}
+{"_type": "author", "_id": "eileen-gunn", "name": "Eileen Gunn"}
+{"_type": "author", "_id": "barry-maxwell", "name": "Barry Maxwell"}
+{"_type": "author", "_id": "wren-awry", "name": "Wren Awry"}
+{"_type": "author", "_id": "cindy-barukh-milstein", "name": "Cindy Barukh Milstein"}
+{"_type": "author", "_id": "erica-lagalisse", "name": "Erica Lagalisse"}
+{"_type": "author", "_id": "barbara-ehrenreich", "name": "Barbara Ehrenreich"}
+{"_type": "author", "_id": "community-environmental-legal-defense-fund", "name": "Community Environmental Legal Defense Fund"}
+{"_type": "author", "_id": "thomas-linzey", "name": "Thomas Linzey"}
+{"_type": "author", "_id": "iain-mcintyre", "name": "Iain  McIntyre"}
+{"_type": "author", "_id": "sean-stewart", "name": "Sean Stewart"}
+{"_type": "author", "_id": "dave-laing", "name": "Dave Laing"}
+{"_type": "author", "_id": "tv-smith", "name": "TV Smith"}
+{"_type": "author", "_id": "cynthia-chin-lee", "name": "Cynthia Chin-Lee"}
+{"_type": "author", "_id": "lea-lyon", "name": "Lea Lyon"}
+{"_type": "author", "_id": "aziz-choudry", "name": "Aziz Choudry"}
+{"_type": "author", "_id": "jill-hanley", "name": "Jill Hanley"}
+{"_type": "author", "_id": "eric-shragge", "name": "Eric Shragge"}
+{"_type": "author", "_id": "hilary-moore", "name": "Hilary Moore"}
+{"_type": "author", "_id": "luis-nieves-falcon", "name": "Luis Nieves Falc\u00f3n"}
+{"_type": "author", "_id": "oscar-lopez-rivera", "name": "Oscar L\u00f3pez Rivera"}
+{"_type": "author", "_id": "archbishop-desmond-tutu", "name": "Archbishop Desmond Tutu"}
+{"_type": "author", "_id": "shanta-nimbark-sacharoff", "name": "Shanta Nimbark Sacharoff"}
+{"_type": "author", "_id": "selma-james", "name": "Selma James"}
+{"_type": "author", "_id": "margaret-prescod", "name": "Margaret Prescod"}
+{"_type": "author", "_id": "nina-lopez", "name": "Nina Lopez"}
+{"_type": "author", "_id": "john-m-elmore", "name": "John M. Elmore"}
+{"_type": "author", "_id": "clement-duval", "name": "Cl\u00e9ment  Duval"}
+{"_type": "author", "_id": "marianne-enckell", "name": "Marianne Enckell"}
+{"_type": "author", "_id": "michael-shreve", "name": "Michael Shreve"}
+{"_type": "author", "_id": "michael-ryan", "name": "Michael Ryan"}
+{"_type": "author", "_id": "ed-mead", "name": "Ed Mead"}
+{"_type": "author", "_id": "dylan-rodriguez", "name": "Dylan Rodr\u00edguez"}
+{"_type": "author", "_id": "bas-umali", "name": "Bas Umali"}
+{"_type": "author", "_id": "jessica-mills", "name": "Jessica Mills"}
+{"_type": "author", "_id": "cindy-milstein", "name": "Cindy Milstein"}
+{"_type": "author", "_id": "erik-ruin", "name": "Erik Ruin"}
+{"_type": "author", "_id": "paul-krassner", "name": "Paul Krassner"}
+{"_type": "author", "_id": "robb-johnson", "name": "Robb Johnson"}
+{"_type": "author", "_id": "richard-a-walker", "name": "Richard A. Walker"}
+{"_type": "author", "_id": "benjamin-whitmer", "name": "Benjamin Whitmer"}
+{"_type": "author", "_id": "farquhar-mcharg", "name": "Farquhar McHarg"}
+{"_type": "author", "_id": "nick-mamatas", "name": "Nick  Mamatas"}
+{"_type": "author", "_id": "lucien-van-der-walt", "name": "Lucien van der Walt"}
+{"_type": "author", "_id": "kirk-helliker", "name": "Kirk Helliker"}
+{"_type": "author", "_id": "phil-mailer", "name": "Phil Mailer"}
+{"_type": "author", "_id": "maurice-brinton", "name": "Maurice Brinton"}
+{"_type": "author", "_id": "nick-blinko", "name": "Nick Blinko"}
+{"_type": "author", "_id": "klaus-viehmann", "name": "Klaus Viehmann"}
+{"_type": "author", "_id": "bill-dunne", "name": "Bill Dunne"}
+{"_type": "author", "_id": "linda-evans", "name": "Linda Evans"}
+{"_type": "author", "_id": "eve-goldberg", "name": "Eve Goldberg"}
+{"_type": "author", "_id": "james-kilgore", "name": "James Kilgore"}
+{"_type": "author", "_id": "henry-rollins", "name": "Henry Rollins"}
+{"_type": "author", "_id": "liam-warfield", "name": "Liam  Warfield"}
+{"_type": "author", "_id": "walter-crasshole", "name": "Walter Crasshole"}
+{"_type": "author", "_id": "yony-leyser", "name": "Yony Leyser"}
+{"_type": "author", "_id": "anna-joy-springer", "name": "Anna Joy Springer"}
+{"_type": "author", "_id": "lynn-breedlove", "name": "Lynn Breedlove"}
+{"_type": "author", "_id": "jeremy-adam-smith", "name": "Jeremy Adam Smith"}
+{"_type": "author", "_id": "tomas-moniz", "name": "Tomas Moniz"}
+{"_type": "author", "_id": "ariel-gore", "name": "Ariel Gore"}
+{"_type": "author", "_id": "gilbert-shelton", "name": "Gilbert Shelton"}
+{"_type": "author", "_id": "akilah-s-richards", "name": "Akilah S. Richards"}
+{"_type": "author", "_id": "bayo-akomolafe", "name": "Bayo Akomolafe"}
+{"_type": "author", "_id": "norman-spinrad", "name": "Norman Spinrad"}
+{"_type": "author", "_id": "patrick-reinsborough", "name": "Patrick Reinsborough"}
+{"_type": "author", "_id": "doyle-canning", "name": "Doyle Canning"}
+{"_type": "author", "_id": "jonathan-matthew-smucker", "name": "Jonathan Matthew Smucker"}
+{"_type": "author", "_id": "lois-ahrens", "name": "Lois Ahrens"}
+{"_type": "author", "_id": "craig-gilmore", "name": "Craig Gilmore"}
+{"_type": "author", "_id": "ruth-wilson-gilmore", "name": "Ruth Wilson Gilmore"}
+{"_type": "author", "_id": "kevin-pyle", "name": "Kevin Pyle"}
+{"_type": "author", "_id": "sabrina-jones", "name": "Sabrina Jones"}
+{"_type": "author", "_id": "susan-willmarth", "name": "Susan Willmarth"}
+{"_type": "author", "_id": "constance-bantman", "name": "Constance Bantman"}
+{"_type": "author", "_id": "bert-altena", "name": "Bert Altena"}
+{"_type": "author", "_id": "joyce-l-kornbluh", "name": "Joyce L.  Kornbluh"}
+{"_type": "author", "_id": "fred-thompson", "name": "Fred Thompson"}
+{"_type": "author", "_id": "j-smith", "name": "J. Smith"}
+{"_type": "author", "_id": "alison-gaylin", "name": "Alison Gaylin"}
+{"_type": "author", "_id": "nick-estes", "name": "Nick Estes"}
+{"_type": "author", "_id": "melanie-yazzie", "name": "Melanie Yazzie"}
+{"_type": "author", "_id": "jennifer-nez-denetdale", "name": "Jennifer Nez Denetdale"}
+{"_type": "author", "_id": "david-correia", "name": "David Correia"}
+{"_type": "author", "_id": "radmilla-cody", "name": "Radmilla Cody"}
+{"_type": "author", "_id": "brandon-benallie", "name": "Brandon Benallie"}
+{"_type": "author", "_id": "margrit-schiller", "name": "Margrit Schiller"}
+{"_type": "author", "_id": "ann-hansen", "name": "Ann Hansen"}
+{"_type": "author", "_id": "osvaldo-bayer", "name": "Osvaldo Bayer"}
+{"_type": "author", "_id": "nalo-hopkinson", "name": "Nalo Hopkinson"}
+{"_type": "author", "_id": "laura-whitehorn", "name": "Laura Whitehorn"}
+{"_type": "author", "_id": "gustav-landauer", "name": "Gustav Landauer"}
+{"_type": "author", "_id": "richard-day", "name": "Richard Day"}
+{"_type": "author", "_id": "michael-lowy", "name": "Michael L\u00f6wy"}
+{"_type": "author", "_id": "olivier-besancenot", "name": "Olivier Besancenot"}
+{"_type": "author", "_id": "david-campbell", "name": "David Campbell"}
+{"_type": "author", "_id": "alexis-pauline-gumbs", "name": "Alexis Pauline Gumbs"}
+{"_type": "author", "_id": "mai-a-williams", "name": "Mai'a Williams"}
+{"_type": "author", "_id": "queen-of-the-neighbourhood", "name": "Queen of the Neighbourhood"}
+{"_type": "author", "_id": "robert-fraga", "name": "Robert Fraga"}
+{"_type": "author", "_id": "chris-hutchinson", "name": "Chris Hutchinson"}
+{"_type": "author", "_id": "gary-dumm", "name": "Gary Dumm"}
+{"_type": "author", "_id": "sharon-rudahl", "name": "Sharon Rudahl"}
+{"_type": "author", "_id": "william-godwin", "name": "William Godwin"}
+{"_type": "author", "_id": "cara-hoffman", "name": "Cara Hoffman"}
+{"_type": "author", "_id": "karen-joy-fowler", "name": "Karen Joy Fowler"}
+{"_type": "author", "_id": "mickey-z", "name": "Mickey Z."}
+{"_type": "author", "_id": "richard-cole", "name": "Richard Cole"}
+{"_type": "author", "_id": "andrea-gibbons", "name": "Andrea Gibbons"}
+{"_type": "author", "_id": "nick-mamatas", "name": "Nick Mamatas"}
+{"_type": "author", "_id": "j-sakai", "name": "J. Sakai"}
+{"_type": "author", "_id": "marcus-rediker", "name": "Marcus Rediker"}
+{"_type": "author", "_id": "nina-lopez", "name": "Nina L\u00f3pez"}
+{"_type": "author", "_id": "emily-nokes", "name": "Emily Nokes"}
+{"_type": "author", "_id": "lindy-west", "name": "Lindy West"}
+{"_type": "author", "_id": "alec-icky-dunn", "name": "Alec Icky Dunn"}
+{"_type": "author", "_id": "adebimpe-tunde", "name": "Adebimpe Tunde"}
+{"_type": "author", "_id": "david-rovics", "name": "David Rovics"}
+{"_type": "author", "_id": "ann-vandermeer", "name": "Ann VanderMeer"}
+{"_type": "author", "_id": "jeff-vandermeer", "name": "Jeff VanderMeer"}
+{"_type": "author", "_id": "john-quail", "name": "John Quail"}
+{"_type": "author", "_id": "nick-heath", "name": "Nick Heath"}
+{"_type": "author", "_id": "elizabeth-morgan", "name": "Elizabeth Morgan"}
+{"_type": "author", "_id": "kuwasi-balagoon", "name": "Kuwasi Balagoon"}
+{"_type": "author", "_id": "matt-meyers", "name": "Matt Meyers"}
+{"_type": "author", "_id": "karl-kersplebedeb", "name": "Karl Kersplebedeb"}
+{"_type": "author", "_id": "mike-konopacki", "name": "Mike Konopacki"}
+{"_type": "author", "_id": "nathaniel-kusinitz", "name": "Nathaniel Kusinitz"}
+{"_type": "author", "_id": "james-connolly", "name": "James Connolly"}
+{"_type": "author", "_id": "theo-dorgan", "name": "Theo Dorgan"}
+{"_type": "author", "_id": "james-connolly-heron", "name": "James Connolly Heron"}
+{"_type": "author", "_id": "rachelle-lee-smith", "name": "Rachelle Lee Smith"}
+{"_type": "author", "_id": "candace-gingrich", "name": "Candace Gingrich"}
+{"_type": "author", "_id": "graeme-taylor", "name": "Graeme Taylor"}
+{"_type": "author", "_id": "michelle-cruz-gonzales", "name": "Michelle Cruz Gonzales"}
+{"_type": "author", "_id": "martin-sorrondeguy", "name": "Mart\u00edn Sorrondeguy"}
+{"_type": "author", "_id": "mimi-thi-nguyen", "name": "Mimi Thi Nguyen"}
+{"_type": "author", "_id": "stevie-chick", "name": "Stevie Chick"}
+{"_type": "author", "_id": "raya-dunayevskaya", "name": "Raya Dunayevskaya"}
+{"_type": "author", "_id": "grace-lee-boggs", "name": "Grace Lee Boggs"}
+{"_type": "author", "_id": "martin-glaberman", "name": "Martin Glaberman"}
+{"_type": "author", "_id": "randal-doane", "name": "Randal Doane"}
+{"_type": "author", "_id": "barry-the-baker-auguste", "name": "Barry \"The Baker\" Auguste"}
+{"_type": "author", "_id": "nette-andrew", "name": "Nette, Andrew"}
+{"_type": "author", "_id": "george-berger", "name": "George Berger"}
+{"_type": "author", "_id": "sara-nelson", "name": "Sara Nelson"}
+{"_type": "author", "_id": "kim-kelly", "name": "Kim Kelly"}
+{"_type": "author", "_id": "dan-berger", "name": "Dan Berger"}
+{"_type": "author", "_id": "dream-hampton", "name": "dream hampton"}
+{"_type": "author", "_id": "rudy-rucker", "name": "Rudy Rucker"}
+{"_type": "author", "_id": "scott-branson", "name": "Scott Branson"}
+{"_type": "author", "_id": "raven-hudson", "name": "Raven Hudson"}
+{"_type": "author", "_id": "bry-reed", "name": "Bry Reed"}
+{"_type": "author", "_id": "akbar-ahmed", "name": "Akbar Ahmed"}
+{"_type": "author", "_id": "calvin-reid", "name": "Calvin Reid"}
+{"_type": "author", "_id": "nisi-shawl", "name": "Nisi Shawl"}
+{"_type": "author", "_id": "lydia-sargent", "name": "Lydia Sargent"}
+{"_type": "author", "_id": "john-mink", "name": "John Mink"}
+{"_type": "author", "_id": "leon-rosselson", "name": "Leon Rosselson"}
+{"_type": "author", "_id": "janet-biehl", "name": "Janet Biehl"}
+{"_type": "author", "_id": "kyle-decker", "name": "Kyle Decker"}
+{"_type": "author", "_id": "michael-blumlein", "name": "Michael Blumlein"}
+{"_type": "author", "_id": "annemarie-monahan", "name": "Annemarie Monahan"}
+{"_type": "author", "_id": "rebecca-gordon-nesbitt", "name": "Rebecca Gordon-Nesbitt"}
+{"_type": "author", "_id": "jorge-fornet", "name": "Jorge Fornet"}
+{"_type": "author", "_id": "john-crowley", "name": "John Crowley"}
+{"_type": "author", "_id": "chris-crass", "name": "Chris Crass"}
+{"_type": "author", "_id": "chris-dixon", "name": "Chris Dixon"}
+{"_type": "author", "_id": "planka-nu", "name": "Planka.nu"}
+{"_type": "author", "_id": "tuen-voeten", "name": "Tuen Voeten"}
+{"_type": "author", "_id": "henry-louis-gates-jr", "name": "Henry Louis Gates Jr."}
+{"_type": "author", "_id": "adrian-a-smith", "name": "Adrian A. Smith"}
+{"_type": "author", "_id": "voline", "name": "Voline"}
+{"_type": "author", "_id": "rudolf-rocker", "name": "Rudolf Rocker"}
+{"_type": "author", "_id": "clifton-ross", "name": "Clifton Ross"}
+{"_type": "author", "_id": "raul-zibechi", "name": "Ra\u00fal Zibechi"}
+{"_type": "author", "_id": "james-w-loewen", "name": "James W. Loewen"}
+{"_type": "author", "_id": "vandana-singh", "name": "Vandana Singh"}
+{"_type": "author", "_id": "bob-torres", "name": "Bob Torres"}
+{"_type": "author", "_id": "jenna-torres", "name": "Jenna Torres"}
+{"_type": "author", "_id": "gabriel-san-roman", "name": "Gabriel San Rom\u00e1n"}
+{"_type": "author", "_id": "t-m-scruggs", "name": "T.M. Scruggs"}
+{"_type": "author", "_id": "michael-fox", "name": "Michael Fox"}
+{"_type": "author", "_id": "carlos-martinez", "name": "Carlos Martinez"}
+{"_type": "author", "_id": "jojo-farrell", "name": "JoJo Farrell"}
+{"_type": "author", "_id": "shin-eun-jung", "name": "Shin Eun-jung"}
+{"_type": "author", "_id": "john-trumpbour", "name": "John Trumpbour"}
+{"_type": "author", "_id": "david-hartsough", "name": "David Hartsough"}
+{"_type": "author", "_id": "joyce-hollyday", "name": "Joyce Hollyday"}
+{"_type": "author", "_id": "john-dear", "name": "John Dear"}
+{"_type": "author", "_id": "ken-butigan", "name": "Ken Butigan"}
+{"_type": "author", "_id": "debby-irving", "name": "Debby Irving"}
+{"_type": "author", "_id": "allen-ruff", "name": "Allen Ruff"}
+{"_type": "author", "_id": "shannon-clay", "name": "Shannon Clay"}
+{"_type": "author", "_id": "lady", "name": "Lady"}
+{"_type": "author", "_id": "kristin-schwartz", "name": "Kristin Schwartz"}
+{"_type": "author", "_id": "michael-staudenmaier", "name": "Michael Staudenmaier"}
+{"_type": "author", "_id": "elizabeth-betita-martinez", "name": "Elizabeth Betita Mart\u00ednez"}
+{"_type": "author", "_id": "mandy-carter", "name": "Mandy Carter"}
+{"_type": "author", "_id": "cornel-west", "name": "Cornel West"}
+{"_type": "author", "_id": "alice-walker", "name": "Alice Walker"}
+{"_type": "author", "_id": "sonia-sanchez", "name": "Sonia Sanchez"}
+{"_type": "author", "_id": "anneke-campbell", "name": "Anneke Campbell"}
+{"_type": "author", "_id": "brian-bergstrom", "name": "Brian Bergstrom"}
+{"_type": "author", "_id": "lucy-fraser", "name": "Lucy Fraser"}
+{"_type": "author", "_id": "iain-boal", "name": "Iain Boal"}
+{"_type": "author", "_id": "janferie-stone", "name": "Janferie Stone"}
+{"_type": "author", "_id": "michael-watts", "name": "Michael Watts"}
+{"_type": "author", "_id": "donald-rooum", "name": "Donald Rooum"}
+{"_type": "author", "_id": "turbulence-collective", "name": "Turbulence Collective"}
+{"_type": "author", "_id": "william-c-blizzard", "name": "William C. Blizzard"}
+{"_type": "author", "_id": "wess-harris", "name": "Wess Harris"}
+{"_type": "author", "_id": "rebecca-subar", "name": "Rebecca Subar"}
+{"_type": "author", "_id": "rosi-greenberg", "name": "Rosi Greenberg"}
+{"_type": "author", "_id": "esteban-kelly", "name": "Esteban Kelly"}
+{"_type": "author", "_id": "douglas-stone", "name": "Douglas Stone"}
+{"_type": "author", "_id": "francis-dupuis-deri", "name": "Francis Dupuis-D\u00e9ri"}
+{"_type": "author", "_id": "lazer-lederhendler", "name": "Lazer Lederhendler"}
+{"_type": "author", "_id": "freedom-press", "name": "Freedom Press"}
+{"_type": "author", "_id": "nina-power", "name": "Nina Power"}
+{"_type": "author", "_id": "barbara-alice-mann", "name": "Barbara Alice Mann"}
+{"_type": "author", "_id": "jayne-clementson", "name": "Jayne Clementson"}
+{"_type": "author", "_id": "e-p-thompson", "name": "E.P. Thompson"}
+{"_type": "author", "_id": "derrick-weston-brown", "name": "Derrick Weston Brown"}
+{"_type": "author", "_id": "mark-van-steenwyk", "name": "Mark Van Steenwyk"}
+{"_type": "author", "_id": "joel-hedstrom", "name": "Joel Hedstrom"}
+{"_type": "author", "_id": "mariarosa-dalla-costa", "name": "Mariarosa Dalla Costa"}
+{"_type": "author", "_id": "harry-cleaver", "name": "Harry Cleaver"}
+{"_type": "author", "_id": "camille-barbagallo", "name": "Camille Barbagallo"}
+{"_type": "author", "_id": "richard-braude", "name": "Richard Braude"}
+{"_type": "author", "_id": "working-class-history", "name": "Working Class History"}
+{"_type": "author", "_id": "matilda-bickers", "name": "Matilda Bickers"}
+{"_type": "author", "_id": "peech-breshears", "name": "peech breshears"}
+{"_type": "author", "_id": "janis-luna", "name": "Janis Luna"}
+{"_type": "author", "_id": "molly-smith", "name": "Molly Smith"}
+{"_type": "author", "_id": "yvonne-moore", "name": "Yvonne Moore"}
+{"_type": "author", "_id": "bill-ayers", "name": "Bill Ayers"}
+{"_type": "author", "_id": "barry-graham", "name": "Barry Graham"}
+{"_type": "author", "_id": "z-zane-mcneill", "name": "Z. Zane McNeill"}
+{"_type": "author", "_id": "milton-knight", "name": "Milton Knight"}
+{"_type": "author", "_id": "lawrence-ware", "name": "Lawrence Ware"}
+{"_type": "author", "_id": "davor-dzalto", "name": "Davor D\u017ealto"}
+{"_type": "author", "_id": "subcomandante-marcos", "name": "Subcomandante Marcos"}
+{"_type": "author", "_id": "lightning-collective", "name": "Lightning Collective"}
 {"_type": "book", "authors": [{"_type": "author", "_id": "kenneth-wishnia", "name": "Kenneth Wishnia"}, {"_type": "author", "_id": "barbara-damato", "name": "Barbara D\u2019Amato"}], "cover": {"_type": "image", "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/23_Shades_of_black.jpg"}, "description": "23 Shades of Black is socially conscious crime fiction. It takes place in New York City in the early 1980s, i.e., the Reagan years, and was written partly in response to the reactionary discourse of the time, when the current thirty-year assault on the rights of working people began in earnest, and the divide between rich and poor deepened with the blessing of the political and corporate elites. But it is not a political tract, it\u2019s a kick-ass novel that was nominated for the Edgar and the Anthony Awards, and made Booklist\u2019s Best First Mysteries of the Year.\nThe heroine, Filomena Buscarsela, is an immigrant who experienced tremendous poverty and injustice in her native Ecuador, and who grew up determined to devote her life to helping others. She tells us that she really should have been a priest, but since that avenue was closed to her, she chose to become a cop instead. The problem is that as one of the first Latinas on the NYPD, she is not just a woman in a man\u2019s world, she is a woman of color in a white man\u2019s world. And it\u2019s hell. Filomena is mistreated and betrayed by her fellow officers, which leads her to pursue a case independently in the hopes of being promoted to detective for the Rape Crisis Unit. Along the way, she is required to enforce unjust drug laws that she disagrees with, and to betray her own community (which ostracizes her as a result) in an undercover operation to round up undocumented immigrants. Several scenes are set in the East Village art and punk rock scene of the time, and the murder case eventually turns into an investigation of corporate environmental crime from a working class perspective that is all-too-rare in the genre.And yet this thing is damn funny, too.", "file": {"_type": "file", "_sanityAsset": "file@file:///Users/jacob/pmassets/books/23_Shades_of_black_9781604867053.pdf"}, "isbn": 9781604867053, "isbnPrint": 9781604865875, "price_usd": 17.95, "title": "23 Shades of Black: "}
 {"_type": "book", "authors": [{"_type": "author", "_id": "gord-hill", "name": "Gord Hill"}], "cover": {"_type": "image", "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/500_Years_Indigenous_Resistance.jpg"}, "description": "The history of the colonization of the Americas by Europeans is often portrayed as a mutually beneficial process, in which \u201dcivilization\u201d was brought to the Natives, who in return shared their land and cultures. A more critical history might present it as a genocide in which Indigenous peoples were helpless victims, overwhelmed and awed by European military power. In reality, neither of these views is correct. \n500 Years of Indigenous Resistance is more than a history of European colonization of the Americas. In this slim volume, Gord Hill chronicles the resistance by Indigenous peoples, which limited and shaped the forms and extent of colonialism. This history encompasses North and South America, the development of nation-states, and the resurgence of Indigenous resistance in the post-WW2 era. ", "file": {"_type": "file", "_sanityAsset": "file@file:///Users/jacob/pmassets/books/500_Years_Indigenous_Resistance_9781604862614.pdf"}, "isbn": 9781604862614, "isbnPrint": 9781604861068, "price_usd": 12.0, "title": "500 Years of Indigenous Resistance: "}
 {"_type": "book", "authors": [{"_type": "author", "_id": "e-ethelbert-miller", "name": "E. Ethelbert Miller"}], "cover": {"_type": "image", "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/5th_Inning.jpg"}, "description": "The 5th Inning is poet and literary activist E. Ethelbert Miller\u2019s second memoir. Coming after Fathering Words: The Making of an African American Writer (published in 2000), this book finds Miller returning to baseball, the game of his youth, in order to find the metaphor that will provide the measurement of his life. At 60, he ponders whether his life can now be entered into the official record books as a success or failure.\nThe 5th Inning is one man\u2019s examination of personal relationships, depression, love and loss. This is a story of the individual alone on the pitching mound or in the batters box. It\u2019s a box score filled with remembrance. It\u2019s a combination of baseball and the blues. The paperback has an additional chapter.", "file": {"_type": "file", "_sanityAsset": "file@file:///Users/jacob/pmassets/books/5th_Inning_9781604861679.pdf"}, "isbn": 9781604861679, "isbnPrint": 9781604865219, "price_usd": 15.95, "title": "5th Inning: "}

@@ -41,7 +41,7 @@ for i in data:
 
 all_authors = [i for n, i in enumerate(all_authors) if i not in all_authors[:n]]
 
-# import_data.extend(all_authors)
+import_data.extend(all_authors)
 import_data.extend(all_books)
 
 with open("import_data.ndjson", "w") as out_file:
