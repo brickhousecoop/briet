@@ -18,7 +18,7 @@ const catalogQuery = `
 `
 
 export const metadata: Metadata = {
-  title: 'BRIET Marketplace',
+  title: 'BRIET Bookmarket',
   description: 'Ebooks, for libraries, for keeps.',
 }
 

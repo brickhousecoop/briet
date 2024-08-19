@@ -32,7 +32,7 @@ const BookBuyPage = ({ book }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: ${book.title}`}</title>
+        <title>{`BRIET Bookmarket: ${book.title}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -79,7 +79,7 @@ const BookBuyPage = ({ book }) => {
                 </button>
               </form>
             :
-              <Link href={`/order/free/${book._id}`} className={styles.downloadutton} onClick={trackCheckout}>
+              <Link href={`/order/free/${book._id}`} className={styles.downloadbutton} onClick={trackCheckout}>
                 <h2>Order: $0 &rarr;</h2>
                 <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
               </Link>

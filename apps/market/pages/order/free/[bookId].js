@@ -19,7 +19,7 @@ const OrderPage = ({ book }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: Order Placed`}</title>
+        <title>{`BRIET Bookmarket: Order Placed`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -28,7 +28,7 @@ const OrderPage = ({ book }) => {
           <span className="logo">BRIET</span> Order Complete
         </h1>
 
-        <Link className={styles.downloadutton} href={book.downloadUrl}>
+        <Link className={styles.downloadbutton} href={book.downloadUrl}>
           Download your book
         </Link>
 

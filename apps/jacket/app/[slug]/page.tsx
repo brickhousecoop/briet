@@ -33,7 +33,7 @@ export async function generateMetadata(
   const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
 
   return {
-    title: page?.title ? `BRIET: ${page.title}` : 'BRIET Marketplace'
+    title: page?.title ? `BRIET: ${page.title}` : 'BRIET Bookmarket'
     // description: page?.overview TODO: add to Sanity
     //   ? toPlainText(page.overview)
     //   : (await parent).description,

@@ -90,7 +90,7 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.downloadutton {
+.downloadbutton {
   font-size: 24px;
 
   margin: 3rem;
@@ -134,7 +134,13 @@ button.card {
 }
 
 .cataloglisting p {
-  background-color: #ffffffcc;
+  background-color: #fffc;
+  width: fit-content;
+  border-radius: 0.25em;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #000c;
+  }
 }
 
 .cataloglisting + .cataloglisting {
@@ -186,6 +192,10 @@ button.card {
   .card,
   .footer {
     border-color: #222;
+  }
+  .card {
+    background-color: #ccc;
+    color: #222;
   }
   .code {
     background: #111;
