@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.1",
+    "@clerk/nextjs": "^5.3.1",
     "@natlibfi/marc-record": "^8.1.0",
     "@sanity/image-url": "^1.0.2",
     "@stripe/stripe-js": "^3.0.5",
