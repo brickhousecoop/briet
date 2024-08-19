@@ -96,6 +96,12 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <footer>
+        <h2 className={inter.className}>
+          Contact
+        </h2>
+        <p className={inter.className}><a href="mailto:help@briet.app">help@briet.app</a> ❦ <a href="https://thebrick.house/briet/">more info</a></p>
+      </footer>
     </main>
   )
 }
