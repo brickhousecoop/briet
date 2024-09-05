@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "sanityClient for Vercel apps",
   "exports": {
-    ".": "./main.ts"
+    "default": "./main.ts"
   },
   "author": {
     "name": "Jacob Ford",
