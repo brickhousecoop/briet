@@ -58,7 +58,8 @@ export default BrietFullCatalog
 export const getStaticProps = async () => {
   const books = await sanity.fetch(catalogQuery)
 
-  // console.log(collections) //debug
+  // console.log(books) //debug
+  // console.log(books?.length + ' BOOKS') //debug
 
   return {
     props: {
