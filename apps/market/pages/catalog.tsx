@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 const catalogQuery = `
   *[_type == "book"] {
@@ -58,7 +58,8 @@ export default BrietFullCatalog
 export const getStaticProps = async () => {
   const books = await sanity.fetch(catalogQuery)
 
-  // console.log(collections) //debug
+  // console.log(books) //debug
+  // console.log(books?.length + ' BOOKS') //debug
 
   return {
     props: {

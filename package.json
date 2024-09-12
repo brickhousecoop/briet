@@ -21,7 +21,7 @@
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-turbo": "^1.12.4",
-    "turbo": "^2.0.5"
+    "turbo": "^2.1.1"
   },
   "license": "UNLICENSED",
   "private": true,

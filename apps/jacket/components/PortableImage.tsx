@@ -2,7 +2,7 @@
 
 import type { Image } from 'sanity'
 import Img from 'next/image'
-import { readOnlyClient as sanityClient } from 'sanity-client'
+import { readOnlyClient as sanityClient } from '@repo/sanity-client'
 import { useNextSanityImage } from 'next-sanity-image'
 
 export default function PortableImage({

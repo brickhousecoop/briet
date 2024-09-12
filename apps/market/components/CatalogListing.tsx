@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/Home.module.css'
 
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';

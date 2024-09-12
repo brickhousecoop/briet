@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {

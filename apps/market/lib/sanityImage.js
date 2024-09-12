@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { readOnlyClient as sanity} from "sanity-client"
+import { readOnlyClient as sanity} from "@repo/sanity-client"
 import { useNextSanityImage } from 'next-sanity-image'
 
 const SanityImage = ({ sanityAsset, alt }) => {

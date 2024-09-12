@@ -1,4 +1,4 @@
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 import { MarcRecord } from '@natlibfi/marc-record';
 
 const allBookIdsQuery = `

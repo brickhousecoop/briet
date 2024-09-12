@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "opds": "^2.0.0",
-    "sanity-client": "*"
+    "@repo/sanity-client": "*"
   },
   "devDependencies": {
     "@types/node": "^22.1.0"
