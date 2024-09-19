@@ -13,13 +13,14 @@ all_authors = []
 all_books = []
 
 for i in data:
-    author_list = [a for a in [i["Contributor 1 Full Name"], i["Contributor 2 Full Name"], i["Contributor 3 Full Name"], i["Contributor 4 Full Name"], i["Contributor 5 Full Name"], i["Contributor 6 Full Name"], i["Contributor 7 Full Name"]] if a != ""]
+    author_list = [a for a in [i["Contributor 1"], i["Contributor 2"], i["Contributor 3"]] if a != ""]
     authors = []
     authors_refs = []
 
     for a in author_list:
-        author_slug = slugify(a)
-        author_id = author_slug + "-viapmpressimport"
+        author_firstlast = a.split(", ").reverse().join()
+        author_slug = slugify(author_firstlast)
+        author_id = author_slug + "-viawildsideimport"
         authors.append({
             "_type": "author",
             "_id": author_id,
@@ -46,11 +47,11 @@ for i in data:
             "slug": {"current": slugify(fulltitle)},
             "authors": authors_refs,
             "cover": {"_type": "image",
-                      "_sanityAsset": "image@file:///Users/jacob/pmassets/covers/" + i["File Name"][:-18] + ".jpg",
+                      "_sanityAsset": "image@file:///Users/jacob/firesideassets/covers/" + i["File Name"][:-18] + ".jpg",
                      },
            "description": description_plaintext,
            "file": {"_type": "file",
-                    "_sanityAsset": "file@file:///Users/jacob/pmassets/books/" + i["File Name"],
+                    "_sanityAsset": "file@file:///Users/jacob/firesideassets/books/" + i["File Name"],
                    },
            "isbn": int(i["eBook ISBN"]),
            "isbnPrint": int(i["Print ISBN"]),
