@@ -130,7 +130,7 @@ export default defineType({
       authorName0: 'authors.0.name',
       authorName1: 'authors.1.name',
       date: 'releaseDate',
-      media: 'poster',
+      media: 'cover',
     },
     prepare(selection) {
       const year = selection.date && selection.date.split('-')[0]
