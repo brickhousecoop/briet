@@ -18,14 +18,18 @@ for i in data:
     authors_refs = []
 
     for a in author_list:
-        author_firstlast = a.split(", ").reverse().join()
+        print(a)
+        print(a.split(", "))
+        print(a.split(", ").reverse())
+        author_firstlast_list = a.split(", ")[::-1]
+        author_firstlast = " ".join(author_firstlast_list)
         author_slug = slugify(author_firstlast)
         author_id = author_slug + "-viawildsideimport"
         authors.append({
             "_type": "author",
             "_id": author_id,
             "slug": {"current": author_slug},
-            "name": a
+            "name": author_firstlast
         })
         authors_refs.append({
             "_type": "reference",
