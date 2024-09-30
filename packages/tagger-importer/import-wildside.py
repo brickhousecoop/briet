@@ -39,7 +39,7 @@ for i in data:
     for a in authors:
         all_authors.append(a)
 
-    soup_descriptionhtml = BeautifulSoup(i['Main Description'], "html.parser")
+    soup_descriptionhtml = BeautifulSoup(i['Content Description'], "html.parser")
     description_plaintext = soup_descriptionhtml.get_text()
 
     if (i["Subtitle"]):
@@ -51,14 +51,14 @@ for i in data:
             "slug": {"current": slugify(fulltitle)},
             "authors": authors_refs,
             "cover": {"_type": "image",
-                      "_sanityAsset": "image@file:///Users/jacob/wildsideassets/covers/" + i["File Name"][:-18] + ".jpg",
+                      "_sanityAsset": "image@file:///Users/jacob/wildsideassets/covers/" + i["eISBN13"] + ".jpg",
                      },
            "description": description_plaintext,
            "file": {"_type": "file",
-                    "_sanityAsset": "file@file:///Users/jacob/wildsideassets/books/" + i["File Name"],
+                    "_sanityAsset": "file@file:///Users/jacob/wildsideassets/books/" + i["eISBN13"] + '.epub',
                    },
-           "isbn": int(i["eBook ISBN"]),
-           "isbnPrint": int(i["Print ISBN"]),
+           "isbn": int(i["eISBN13"]),
+           "isbnPrint": int(i["Print ISBN13"]) if i["Print ISBN13"] != '' else None,
            "price_usd": float(i["Price"]),
            "title": fulltitle}
     all_books.append(doc)
