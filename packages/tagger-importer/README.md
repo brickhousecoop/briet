@@ -4,4 +4,8 @@ I use [`pdm`](https://pdm-project.org/en/latest/) which you can get with `brew i
 
 1. `pdm install`
 2. `$(pdm venv activate)`
-3. `python format_for_import.py`
+3. `python import-[press].py`
+
+or
+
+`pdm run ./import-wildside.py`
