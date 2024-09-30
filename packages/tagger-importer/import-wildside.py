@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 from slugify import slugify
 
-data_path = "./Metadata.csv"
+data_path = "./Wildside_Press_Metadata_20240915073548.csv"
 data = csv.DictReader(open(data_path))
 
 import_data = []
