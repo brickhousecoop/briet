@@ -1,5 +1,5 @@
 const opds = require('opds')
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 const catalog = require('../catalog.json')
 console.log('catalogJSon', catalog)
@@ -44,7 +44,7 @@ function brietTaggerToOpds(taggerCatalog) {
 }
 
 const feed = {
-  title: "BRIET Marketplace",
+  title: "BRIET Bookmarket",
   author: {
     name: "The Brick House Cooperative",
     uri: "https://thebrick.house"

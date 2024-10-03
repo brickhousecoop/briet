@@ -19,10 +19,13 @@
   "dependencies": {
     "@vercel/analytics": "^0.1.11",
     "fathom-client": "^3.5.0",
-    "next": "^13.4.1",
+    "next": "^14.2.4",
+    "next-sanity": "^9.3.10",
+    "next-sanity-image": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "@repo/sanity-client": "*"
   },
   "devDependencies": {
     "@types/node": "18.15.11",

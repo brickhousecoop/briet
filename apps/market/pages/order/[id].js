@@ -6,14 +6,14 @@ import Footer from '@components/footer'
 import styles from '../../styles/Home.module.css'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-11-15',
+  apiVersion: '2023-10-16',
 })
 
 const OrderPage = ({ order }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: Order Placed`}</title>
+        <title>{`BRIET Bookmarket: Order Placed`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -28,12 +28,6 @@ const OrderPage = ({ order }) => {
 
         <p>Status: {order.status}</p>
         <p>Payment Status: {order.payment_status}</p>
-
-        <p className={styles.description}>
-          Powered by <a href="https://controlleddigitallending.org">
-            <strong>Controlled Digital Lending</strong>
-          </a>
-        </p>
       </main>
 
       <Footer/>

@@ -1,15 +1,29 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "bh-briet-market#build": {
-      "outputs": [".next/**"]
+      "outputs": [
+        ".next/**"
+      ]
     },
     "bh-briet-jacket#build": {
-      "outputs": [".next/**"]
+      "outputs": [
+        ".next/**"
+      ]
+    },
+    "bh-briet-tagger#build": {
+      "env": [
+        "SANITY_STUDIO_PROJECTID",
+        "SANITY_STUDIO_DATASET"
+      ]
     },
     "lint": {
       "outputs": []

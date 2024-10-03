@@ -3,7 +3,6 @@
 }
 
 .main {
-  min-height: 100vh;
   padding: 2rem 0;
   flex-direction: column;
   justify-content: center;
@@ -26,15 +25,10 @@
   flex-grow: 1;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
 .title a:hover,
 .title a:focus,
 .title a:active {
-  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 
 .title {
@@ -96,7 +90,7 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.downloadutton {
+.downloadbutton {
   font-size: 24px;
 
   margin: 3rem;
@@ -140,7 +134,13 @@ button.card {
 }
 
 .cataloglisting p {
-  background-color: #ffffffcc;
+  background-color: #fffc;
+  width: fit-content;
+  border-radius: 0.25em;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #000c;
+  }
 }
 
 .cataloglisting + .cataloglisting {
@@ -192,6 +192,10 @@ button.card {
   .card,
   .footer {
     border-color: #222;
+  }
+  .card {
+    background-color: #ccc;
+    color: #222;
   }
   .code {
     background: #111;

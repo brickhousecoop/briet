@@ -20,7 +20,7 @@ export default function Home() {
             From{' '}
             <Image
               src="/brickhouse_logo.svg"
-              alt="Vercel Logo"
+              alt="Brich House Logo"
               className={styles.vercelLogo}
               width={150}
               height={24}
@@ -41,7 +41,7 @@ export default function Home() {
         />
       </div>
 
-      <h2 className={inter.className}>BRIET is three interwoven applications:</h2>
+      <h2 className={inter.className}>BRIET is four interwoven applications:</h2>
 
       <div className={styles.grid}>
         <a
@@ -82,7 +82,26 @@ export default function Home() {
             Librarians browse for e-books and easily add them to their catalog
           </p>
         </a>
+
+        <a
+          href="https://reader.briet.app"
+          className={styles.card}
+        >
+          <h2 className={inter.className}>
+            Reader <span>-&gt;</span>
+          </h2>
+          <p className={styles.tag}>FOR ALL PATRONS</p>
+          <p className={inter.className}>
+            Whitelabel hosted reader software for patrons to access their borrowed ebooks
+          </p>
+        </a>
       </div>
+      <footer>
+        <h2 className={inter.className}>
+          Contact
+        </h2>
+        <p className={inter.className}><a href="mailto:help@briet.app">help@briet.app</a> ❦ <a href="https://thebrick.house/briet/">more info</a></p>
+      </footer>
     </main>
   )
 }

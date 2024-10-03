@@ -1,3 +1,7 @@
+:root {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -12,6 +16,10 @@ p, ul, li, ul {
 
 h1, h2 {
   text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: 4rem;
 }
 
 .title {
@@ -30,12 +38,20 @@ form input {
 }
 
 fieldset {
-  border: 2px solid black;
+  border: 2px solid currentColor;
   border-radius: 2em;
   padding: 2rem;
+  margin-block: 2rem;
+  transition: 0.5s border, padding;
+}
+
+fieldset:target {
+  padding: calc(2rem - 3px);
+  border-width: 5px;
 }
 
 fieldset legend {
+  font-weight: bold;
   margin-left: 1rem;
 }
 
@@ -71,4 +87,10 @@ span.logo {
   padding: 0 0.5em;
   margin: 0 min(0.25em, 5px);
   text-decoration-color: currentColor;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+  aspect-ratio: 16/9;
 }

@@ -6,6 +6,18 @@ export default defineType({
   title: 'Books',
   type: 'document',
   icon: BookIcon,
+  groups: [
+    {
+      name: 'identfiers',
+      title: 'Identifiers',
+    },
+  ],
+  fieldsets: [
+    {
+      name: 'isbns',
+      title: 'ISBNs',
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -34,14 +46,25 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
-      name: 'isbn',
-      title: 'ISBN',
+      name: 'isbn', // TODO: migrate to isbnEbook
+      title: 'Ebook ISBN',
+      group: 'identfiers',
+      fieldset: 'isbns',
       type: 'number',
-      description: 'Optional; only add if your book has a unique one'
+      description: 'Optional; leave blank if unsure'
+    }),
+    defineField({
+      name: 'isbnPrint',
+      title: 'Print ISBN',
+      group: 'identfiers',
+      fieldset: 'isbns',
+      type: 'number',
+      description: 'Optional; leave blank if unsure'
     }),
     defineField({
       name: 'identifer_ia',
       title: 'Internet Archive Identifier',
+      group: 'identfiers',
       type: 'string',
       description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
     }),
@@ -76,13 +99,21 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'publisher',
+      title: 'Publisher',
+      type: 'reference',
+      to: [
+        {type: 'publisher'},
+      ]
+    }),
+    defineField({
       name: 'price_usd',
       title: 'Price (USD)',
       description: 'Enter 0 for freely downloadable books',
       type: 'number',
       validation: Rule => [
         Rule.required().positive().precision(2),
-        Rule.custom(price => price == 0 ? true : 'Free book! But just double checking--$0 books will be available for immediate download by the public.').warning(),
+        Rule.custom(price => price === 0 ? 'Just double checking you meant to make this book free! $0 books will be available for immediate download by the public.' : true).warning(),
       ],
     }),
     defineField({
@@ -99,7 +130,7 @@ export default defineType({
       authorName0: 'authors.0.name',
       authorName1: 'authors.1.name',
       date: 'releaseDate',
-      media: 'poster',
+      media: 'cover',
     },
     prepare(selection) {
       const year = selection.date && selection.date.split('-')[0]

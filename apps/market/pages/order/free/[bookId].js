@@ -1,4 +1,4 @@
-import { readOnlyClient as sanity } from 'sanity-client'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
@@ -19,7 +19,7 @@ const OrderPage = ({ book }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: Order Placed`}</title>
+        <title>{`BRIET Bookmarket: Order Placed`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -28,7 +28,7 @@ const OrderPage = ({ book }) => {
           <span className="logo">BRIET</span> Order Complete
         </h1>
 
-        <Link className={styles.downloadutton} href={book.downloadUrl}>
+        <Link className={styles.downloadbutton} href={book.downloadUrl}>
           Download your book
         </Link>
 
@@ -38,12 +38,6 @@ const OrderPage = ({ book }) => {
         }
 
         <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
-
-        <p className={styles.description}>
-          Powered by <a href="https://controlleddigitallending.org">
-            <strong>Controlled Digital Lending</strong>
-          </a>
-        </p>
       </main>
 
       <Footer/>

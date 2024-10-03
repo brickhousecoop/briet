@@ -1,16 +1,10 @@
-import { readOnlyClient as sanity } from 'sanity-client'
-import { loadStripe } from '@stripe/stripe-js'
-import { useRouter } from 'next/router'
+import { readOnlyClient as sanity } from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
 import Link from 'next/link'
 import va from '@vercel/analytics'
-
-function Header(props) {
-  return <h2>Download free &rarr;</h2>
-}
 
 import styles from '../../../styles/Home.module.css'
 
@@ -30,16 +24,15 @@ const singleBookQuery = `
   }[0]
 `
 
-const BookBuyPage = ({ book, form }) => {
+const BookBuyPage = ({ book }) => {
   const trackCheckout = ({ bookTitle, price }) => {
     va.track('Checkout', { title: bookTitle, price: price })
   }
-  const router = useRouter()
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Marketplace: ${book.title}`}</title>
+        <title>{`BRIET Bookmarket: ${book.title}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -58,7 +51,7 @@ const BookBuyPage = ({ book, form }) => {
           </p>
         :
           <p className={styles.instructions}>
-            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be lent freely to you.
+            <strong>Not a librarian?</strong> Send this page on to your local library. We are BRIET, and our mission is to sell ebooks to libraries, so they can be loaned freely to you.
           </p>
         }
 
@@ -86,7 +79,7 @@ const BookBuyPage = ({ book, form }) => {
                 </button>
               </form>
             :
-              <Link href={`/order/free/${book._id}`} className={styles.downloadutton} onClick={trackCheckout}>
+              <Link href={`/order/free/${book._id}`} className={styles.downloadbutton} onClick={trackCheckout}>
                 <h2>Order: $0 &rarr;</h2>
                 <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
               </Link>
@@ -96,12 +89,6 @@ const BookBuyPage = ({ book, form }) => {
             <h2>MARC record &darr;</h2>
             <p>For integration into library cataloging systems</p>
           </a>
-
-          <p className={styles.description}>
-            Powered by <a href="https://controlleddigitallending.org">
-              <strong>Controlled Digital Lending</strong>
-            </a>
-          </p>
         </div>
       </main>
 

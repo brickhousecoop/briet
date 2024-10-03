@@ -1,3 +1,0 @@
-[submodule "packages/bookreader"]
-	path = packages/bookreader
-	url = git@github.com:internetarchive/bookreader.git

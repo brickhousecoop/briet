@@ -8,19 +8,23 @@
     "dev-tagger": "vercel link --project=bh-briet-tagger --scope=nocomment --yes && vercel pull && vercel dev",
     "dev-server": "vercel link --project=bh-briet-server --scope=nocomment --yes && vercel pull && vercel dev",
     "dev-market": "vercel link --project=bh-briet-market --scope=nocomment --yes && vercel pull && vercel dev",
+    "dev-reader": "vercel link --project=bh-briet-reader --scope=nocomment --yes && vercel pull && vercel dev",
     "dev": "dotenv -e .vercel/.env -c development -- turbo run dev --no-cache --parallel --continue",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "build:jacket": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-jacket",
     "build:tagger": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-tagger",
     "build:server": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-server",
-    "build:market": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market"
+    "build:market": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market",
+    "build:reader": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-turbo": "^1.12.4",
-    "turbo": "^1.12.4"
+    "turbo": "^2.1.1"
   },
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "packageManager": "npm@10.8.1",
+  "name": "bh-briet"
 }

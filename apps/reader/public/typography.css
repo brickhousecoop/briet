@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Whirly Birdie";
+  src: url('fonts/WhirlyBirdie.ttf') format("truetype");
+}
+
+@font-face {
+  src: url('fonts/WarblerText-Regular.woff2') format("woff2"),
+       url('fonts/WarblerText-Regular.woff') format("woff");
+  font-family: 'Warbler Text Web';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url('fonts/WarblerText-Italic.woff2') format("woff2"),
+       url('fonts/WarblerText-Italic.woff') format("woff");
+  font-family: 'Warbler Text Web';
+  font-style: italic;
+  font-weight: 400;
+}
+
+
+@font-face {
+  font-family: 'Crayonette DJR';
+  src: url('fonts/CrayonetteDJR-Regular.eot'); /* IE < 9 */
+  src: url('fonts/CrayonetteDJR-Regular.eot?#') format("embedded-opentype"), /* IE 9 */
+       url('fonts/CrayonetteDJR-Regular.woff2') format("woff2"),
+       url('fonts/CrayonetteDJR-Regular.woff')  format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  src: url('fonts/FernVariable-Roman-VF.woff2') format("woff2"),
+       url('fonts/FernVariable-Roman-VF.woff') format("woff");
+  font-family: 'Fern Web';
+  font-style: normal;
+  font-weight: 400 800;
+}
+
+
+@font-face {
+  src: url('fonts/FernVariable-Italic-VF.woff2') format("woff2"),
+       url('fonts/FernVariable-Italic-VF.woff') format("woff");
+  font-family: 'Fern Web';
+  font-style: italic;
+  font-weight: 400 800;
+}

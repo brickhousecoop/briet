@@ -1,8 +1,10 @@
 {
-  "name": "sanity-client",
+  "name": "@repo/sanity-client",
   "version": "1.0.0",
   "description": "sanityClient for Vercel apps",
-  "main": "main.js",
+  "exports": {
+    "default": "./main.ts"
+  },
   "author": {
     "name": "Jacob Ford",
     "email": "jacob@nocomment.llc",
@@ -11,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@sanity/client": "^3.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0"
   }
 }
