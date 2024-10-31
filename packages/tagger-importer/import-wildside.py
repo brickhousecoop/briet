@@ -50,6 +50,9 @@ for i in data:
     doc = {"_type": "book",
             "slug": {"current": slugify(fulltitle)},
             "authors": authors_refs,
+            "publisher": {"_type":"reference",
+                          "_ref": "f5d444a2-a1f4-4842-8765-9cc821b453ae", # Wildside Press
+                         },
             "cover": {"_type": "image",
                       "_sanityAsset": "image@file:///Users/jacob/wildsideassets/covers/" + i["eISBN13"] + ".jpg",
                      },
