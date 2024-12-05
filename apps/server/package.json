@@ -9,7 +9,6 @@
     "email": "jacob@nocomment.llc",
     "url": "https://nocomment.llc"
   },
-  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
