@@ -1,5 +1,6 @@
 {
   "outputDirectory": ".",
+  "regions": ["cle1", "sfo1", "iad1"],
   "rewrites": [
     {
       "source": "/",
