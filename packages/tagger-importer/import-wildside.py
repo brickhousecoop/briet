@@ -22,7 +22,7 @@ for i in data:
         author_firstlast = " ".join(author_firstlast_list)
         author_slug = slugify(author_firstlast)
         author_id = author_slug + "-viawildsideimport"
-        if not any(auth for auth in authors if auth['_id'] == author_id):
+        if not any(a for a in all_authors if a['_id'] == author_id):
             authors.append({
                 "_type": "author",
                 "_id": author_id,
