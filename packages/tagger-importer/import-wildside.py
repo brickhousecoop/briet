@@ -18,19 +18,20 @@ for i in data:
     authors_refs = []
 
     for a in author_list:
-        print(a)
-        print(a.split(", "))
-        print(a.split(", ").reverse())
         author_firstlast_list = a.split(", ")[::-1]
         author_firstlast = " ".join(author_firstlast_list)
         author_slug = slugify(author_firstlast)
         author_id = author_slug + "-viawildsideimport"
-        authors.append({
-            "_type": "author",
-            "_id": author_id,
-            "slug": {"current": author_slug},
-            "name": author_firstlast
-        })
+        if not any(auth for auth in authors if auth['_id'] == author_id):
+            authors.append({
+                "_type": "author",
+                "_id": author_id,
+                "slug": {"current": author_slug},
+                "name": author_firstlast
+            })
+        else:
+            print('Author already in catalog', author_id)
+
         authors_refs.append({
             "_type": "reference",
             "_ref": author_id
