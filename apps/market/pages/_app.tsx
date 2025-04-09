@@ -1,4 +1,12 @@
 import type { AppProps } from 'next/app'
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -13,7 +21,16 @@ function App({ Component, pageProps }: AppProps) {
         data-site={process.env.NEXT_PUBLIC_FATHOM_SITEID}
         strategy="afterInteractive"
       />
-      <Component {...pageProps} />
+      <ClerkProvider {...pageProps}>
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <Component {...pageProps} />
+      </ClerkProvider>
       <VercelAnalytics />
       <SpeedInsights />
     </>

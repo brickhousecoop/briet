@@ -3,6 +3,9 @@ export const metadata = {
   description: 'Ebooks for libraries, for keeps.',
 }
 
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import {
   ClerkProvider,
   SignInButton,
@@ -10,8 +13,9 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-  OrganizationProfile,
 } from '@clerk/nextjs'
+
+import Script from 'next/script'
 
 import '@styles/globals.css'
 
@@ -23,6 +27,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <Script
+          src="https://cdn.usefathom.com/script.js"
+          data-site={process.env.NEXT_PUBLIC_FATHOM_SITEID}
+          strategy="afterInteractive"
+        />
         <body>
           <SignedOut>
             <SignInButton />
@@ -30,10 +39,11 @@ export default function RootLayout({
           </SignedOut>
           <SignedIn>
             <UserButton />
-            <OrganizationProfile />
           </SignedIn>
           {children}
         </body>
+        <VercelAnalytics />
+        <SpeedInsights />
       </html>
     </ClerkProvider>
   )
