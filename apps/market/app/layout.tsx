@@ -6,9 +6,11 @@ export const metadata = {
 import {
   ClerkProvider,
   SignInButton,
+  SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton
+  UserButton,
+  OrganizationProfile,
 } from '@clerk/nextjs'
 
 import '@styles/globals.css'
@@ -24,9 +26,11 @@ export default function RootLayout({
         <body>
           <SignedOut>
             <SignInButton />
+            <SignUpButton />
           </SignedOut>
           <SignedIn>
             <UserButton />
+            <OrganizationProfile />
           </SignedIn>
           {children}
         </body>
