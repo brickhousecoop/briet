@@ -13,16 +13,19 @@
   "main": "package.json",
   "scripts": {
     "build": "sanity build",
-    "dev": "npm run --prefix ../../ dev-tagger",
+    "dev": "sanity dev",
     "start": "sanity start"
   },
   "dependencies": {
-    "@sanity/eslint-config-studio": "^4.0.0",
-    "@sanity/icons": "^2.11.8",
-    "@sanity/vision": "^3.40.0",
-    "eslint": "^9.1.1",
+    "@sanity/eslint-config-studio": "^5.0.2",
+    "@sanity/icons": "^3.7.0",
+    "@sanity/vision": "^3.83.0",
+    "eslint": "^9.24.0",
     "prop-types": "^15.8.1",
-    "sanity": "^3.40.0",
-    "styled-components": "^6.1.9"
+    "sanity": "^3.83.0",
+    "styled-components": "^6.1.17"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
