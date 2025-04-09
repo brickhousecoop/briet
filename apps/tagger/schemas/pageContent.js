@@ -14,9 +14,6 @@ export default {
         name: 'alt',
         type: 'string',
         validation: Rule => Rule.required(),
-        options: {
-          isHighlighted: true,
-        },
       }]
     },
   ],
