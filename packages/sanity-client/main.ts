@@ -12,8 +12,8 @@ const sanityDataset   = process.env.NEXT_PUBLIC_SANITY_DATASET
                      || process.env.SANITY_DATASET;
 
 export default sanityClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID || process.env.SANITY_STUDIO_SANITY_PROJECTID || process.env.SANITY_PROJECTID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || process.env.SANITY_DATASET,
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   token: process.env.SANITY_TOKEN,
   apiVersion: '2022-08-21', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
   useCdn: false
@@ -21,8 +21,8 @@ export default sanityClient({
 
 export const readOnlyClient = sanityClient({
   // dataset MUST be public
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID || process.env.SANITY_PROJECTID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || process.env.SANITY_DATASET,
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   apiVersion: '2022-08-21',
   useCdn: true
 })
