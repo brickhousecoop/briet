@@ -11,10 +11,12 @@ const sanityDataset   = process.env.NEXT_PUBLIC_SANITY_DATASET
                      || process.env.SANITY_STUDIO_SANITY_DATASET
                      || process.env.SANITY_DATASET;
 
+const sanityToken = process.env.SANITY_TOKEN;
+
 export default sanityClient({
   projectId: sanityProjectId,
   dataset: sanityDataset,
-  token: process.env.SANITY_TOKEN,
+  token: sanityToken,
   apiVersion: '2022-08-21', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
   useCdn: true
 })
