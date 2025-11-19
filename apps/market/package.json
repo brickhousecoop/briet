@@ -21,16 +21,16 @@
     "@astrojs/check": "^0.9.1",
     "@clerk/nextjs": "^5.3.1",
     "@natlibfi/marc-record": "^8.1.0",
+    "@repo/sanity-client": "*",
     "@sanity/image-url": "^1.0.2",
     "@stripe/stripe-js": "^3.0.5",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
-    "next": "^14.2.5",
+    "next": "^14.2.33",
     "next-sanity": "^9.3.10",
     "next-sanity-image": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@repo/sanity-client": "*",
     "stripe": "^14.17.0"
   },
   "devDependencies": {
