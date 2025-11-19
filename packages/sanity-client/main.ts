@@ -16,13 +16,5 @@ export default sanityClient({
   dataset: sanityDataset,
   token: process.env.SANITY_TOKEN,
   apiVersion: '2022-08-21', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
-  useCdn: false
-})
-
-export const readOnlyClient = sanityClient({
-  // dataset MUST be public
-  projectId: sanityProjectId,
-  dataset: sanityDataset,
-  apiVersion: '2022-08-21',
   useCdn: true
 })
