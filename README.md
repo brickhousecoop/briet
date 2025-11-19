@@ -1,4 +1,4 @@
-# `Getting Started`
+# Getting Started
 
 [BRIET](https://briet.app/) is a web-based platform that enables the permanent sale of ebooks and other digital works to libraries and institutions, thereby protecting traditional library rights. It’s a project of The Brick House Cooperative, a collective of independent publishers founded in 2020 with a mission to defend historic library rights and press freedom. It's named after the pioneering librarian [Suzanne Briet](https://en.wikipedia.org/wiki/Suzanne_Briet). We're also the cooperative team behind the [Flaming Hydra](https://flaminghydra.com/) newsletter.
 
