@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { formatAmountForStripe } from '../../utils/stripe-helpers'
-import { readOnlyClient as sanity } from '@repo/sanity-client'
+import sanity from '@repo/sanity-client'
 import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {

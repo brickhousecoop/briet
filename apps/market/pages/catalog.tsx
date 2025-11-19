@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { readOnlyClient as sanity } from '@repo/sanity-client'
+import sanity from '@repo/sanity-client'
 
 const catalogQuery = `
   *[_type == "book"] {

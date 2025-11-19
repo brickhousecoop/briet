@@ -1,4 +1,4 @@
-import { readOnlyClient as sanity } from '@repo/sanity-client'
+import sanity from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'

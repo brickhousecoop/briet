@@ -1,5 +1,5 @@
 const opds = require('opds')
-import { readOnlyClient as sanity } from '@repo/sanity-client'
+import sanity from '@repo/sanity-client'
 
 const catalog = require('../catalog.json')
 console.log('catalogJSon', catalog)

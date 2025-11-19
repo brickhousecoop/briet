@@ -3,7 +3,7 @@ import type { Metadata, ResolvingMetadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 // import { toPlainText } from 'next-sanity'
-import { readOnlyClient as sanity } from '@repo/sanity-client'
+import sanity from '@repo/sanity-client'
 
 import '@/styles/globals.css'
 import styles from '@/styles/Home.module.css'
