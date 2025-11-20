@@ -10,6 +10,15 @@
       ]
     },
     "bh-briet-market#build": {
+      "env": [
+        "SANITY_TOKEN",
+        "STRIPE_SECRET_KEY",
+        "FORMIUM_TOKEN",
+        "CLERK_SECRET_KEY"
+      ],
+      "inputs": [
+        ".env*"
+      ],
       "outputs": [
         ".next/**"
       ]
