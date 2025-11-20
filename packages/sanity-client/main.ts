@@ -1,4 +1,4 @@
-import sanityClient from '@sanity/client'
+import { createClient } from '@sanity/client'
 
 // two options, optimized according to permissions
 // https://www.sanity.io/help/js-client-usecdn-token
@@ -13,11 +13,11 @@ const sanityDataset   = process.env.NEXT_PUBLIC_SANITY_DATASET
 
 const sanityToken = process.env.SANITY_TOKEN;
 
-export default sanityClient({
+export default createClient({
   projectId: sanityProjectId,
   dataset: sanityDataset,
   token: sanityToken,
   perspective: 'published',
-  apiVersion: '2025-11-18', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
-  useCdn: true
+  apiVersion: '2025-11-18',
+  useCdn: true,
 })
