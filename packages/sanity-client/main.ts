@@ -17,6 +17,7 @@ export default sanityClient({
   projectId: sanityProjectId,
   dataset: sanityDataset,
   token: sanityToken,
+  perspective: 'published',
   apiVersion: '2022-08-21', // known good UTC date https://www.sanity.io/docs/api-versioning#228b7a6a8148
   useCdn: true
 })
