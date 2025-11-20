@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+import { withBotId } from 'botid/next/config';
+
 const nextConfig = {
   async redirects() {
     return [
@@ -19,4 +21,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withBotId(nextConfig)
