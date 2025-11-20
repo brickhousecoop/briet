@@ -102,7 +102,7 @@ export const getStaticPaths = async () => {
 
   const paths = books.map(book => ({
     params: { id: book._id }
-  }));
+  })).slice(0, 10); // sample 10 paths to prerender mostly just to learn getStaticPaths
 
   return {
     paths,

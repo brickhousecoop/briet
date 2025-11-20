@@ -22,11 +22,12 @@ export const getStaticPaths = async () => {
 
   const paths = books.map(book => ({
     params: { id: book._id }
-  }));
+  })).slice(0, 10); // sample 10 paths to prerender mostly just to learn getStaticPaths
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
+  return {
+    paths,
+    fallback: 'blocking',
+  };
 };
 
 export const getStaticProps = async ({ params }) => {
@@ -70,7 +71,10 @@ export const getStaticProps = async ({ params }) => {
 
   const marcString = marcRecord.toString()
 
-  return { props: { marcString } };
+  return {
+    props: { marcString },
+    revalidate: 5,
+  };
 };
 
 export default MarcRecordPage
