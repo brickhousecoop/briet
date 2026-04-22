@@ -40,6 +40,12 @@ Ingests an ODL/OPDS BookServer feed and returns a librarian-friendly marketplace
 
 _(not yet scoped)_
 
+## `lender`
+
+**[Lenny for Libraries](https://lennyforlibraries.org/) on BRIET**
+
+Documentation TK
+
 # BRIET Styleguide
 
 ## How to spell “ebook”
