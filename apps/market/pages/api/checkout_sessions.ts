@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getAuth, clerkClient } from '@clerk/nextjs/server'
 import { formatAmountForStripe } from '../../utils/stripe-helpers'
 import { readOnlyClient as sanity } from '@repo/sanity-client'
 import Stripe from 'stripe'
@@ -22,13 +23,36 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    const { userId, orgId, orgSlug } = getAuth(req)
+    if (!userId) {
+      res.redirect(303, `/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${req.body.briet_item_id ?? ''}`)}`)
+      return
+    }
+    if (!orgId) {
+      // Orders are scoped to Clerk organizations so we can collate a library
+      // across time even as individual members come and go.
+      res.redirect(303, `/account/select-org?redirect_url=${encodeURIComponent(`/buy/${req.body.briet_item_id ?? ''}`)}`)
+      return
+    }
+
     const bookId: string = req.body.briet_item_id
     const book = await sanity.fetch(singleBookQuery, { id: bookId });
+
+    const user = await (await clerkClient()).users.getUser(userId)
+    const primaryEmail = user.emailAddresses.find(e => e.id === user.primaryEmailAddressId)?.emailAddress
+
     try {
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/buy/${bookId}`,
+        ...(primaryEmail ? { customer_email: primaryEmail } : {}),
+        metadata: {
+          briet_book_id: bookId,
+          briet_clerk_user_id: userId,
+          briet_clerk_org_id: orgId,
+          ...(orgSlug ? { briet_clerk_org_slug: orgSlug } : {}),
+        },
         line_items: [
           {
             price_data: {
@@ -50,6 +74,9 @@ export default async function handler(
         payment_intent_data: {
           metadata: {
             briet_payout_to: book.publisher_name,
+            briet_book_id: bookId,
+            briet_clerk_user_id: userId,
+            briet_clerk_org_id: orgId,
           },
         },
         customer_creation: 'always',

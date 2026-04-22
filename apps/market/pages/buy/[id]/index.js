@@ -5,8 +5,45 @@ import Image from '@lib/sanityImage'
 import Footer from '@components/footer'
 import Link from 'next/link'
 import va from '@vercel/analytics'
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  useOrganization,
+} from '@clerk/nextjs'
 
 import styles from '../../../styles/Home.module.css'
+
+const PurchaseButton = ({ book, trackCheckout }) => {
+  const { organization, isLoaded } = useOrganization()
+
+  if (!isLoaded) {
+    return <button type="button" className={styles.card} disabled>Loading…</button>
+  }
+
+  if (!organization) {
+    return (
+      <Link
+        href={`/account/select-org?redirect_url=${encodeURIComponent(`/buy/${book._id}`)}`}
+        className={styles.card}
+      >
+        <h2>Select an organization &rarr;</h2>
+        <p>Orders are placed on behalf of an institution (usually a library).</p>
+      </Link>
+    )
+  }
+
+  return (
+    <form action="/api/checkout_sessions" method="POST">
+      <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id} />
+      <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
+        <h2>Purchase: ${book.price_usd} &rarr;</h2>
+        <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
+        <p><small>Checking out as <strong>{organization.name}</strong></small></p>
+      </button>
+    </form>
+  )
+}
 
 const allBookIdsQuery = `
   *[_type == "book"] { _id }
@@ -70,20 +107,26 @@ const BookBuyPage = ({ book }) => {
 
           <p className={styles.description}>{book.description}</p>
 
-            {book.price_usd > 0 ?
-              <form action="/api/checkout_sessions" method="POST">
-                <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
-                <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
-                  <h2>Purchase: ${book.price_usd} &rarr;</h2>
-                  <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
-                </button>
-              </form>
-            :
+            {book.price_usd > 0 ? (
+              <>
+                <SignedIn>
+                  <PurchaseButton book={book} trackCheckout={trackCheckout} />
+                </SignedIn>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <button type="button" className={styles.card}>
+                      <h2>Sign in to purchase &rarr;</h2>
+                      <p>Sign in or create an account to buy on behalf of your institution.</p>
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+              </>
+            ) : (
               <Link href={`/order/free/${book._id}`} className={styles.downloadbutton} onClick={trackCheckout}>
                 <h2>Order: $0 &rarr;</h2>
                 <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
               </Link>
-            }
+            )}
 
           <a href={`/buy/${book._id}/marc`} className={styles.card}>
             <h2>MARC record &darr;</h2>

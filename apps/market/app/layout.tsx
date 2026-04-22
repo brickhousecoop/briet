@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import {
   ClerkProvider,
+  OrganizationSwitcher,
   SignInButton,
   SignUpButton,
   SignedIn,
@@ -15,6 +16,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 
+import Link from 'next/link'
 import Script from 'next/script'
 
 import '@styles/globals.css'
@@ -33,13 +35,18 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <body>
-          <SignedOut>
-            <SignInButton />
-            <SignUpButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <header style={{ display: 'flex', gap: '1rem', alignItems: 'center', padding: '0.5rem 1rem' }}>
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <OrganizationSwitcher hidePersonal afterSelectOrganizationUrl="/account/orders" />
+              <Link href="/account/orders">Orders</Link>
+              <Link href="/account/library">Library</Link>
+              <UserButton />
+            </SignedIn>
+          </header>
           {children}
         </body>
         <VercelAnalytics />

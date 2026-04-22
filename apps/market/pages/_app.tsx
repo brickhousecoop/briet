@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app'
+import Link from 'next/link'
 import {
   ClerkProvider,
+  OrganizationSwitcher,
   SignInButton,
   SignUpButton,
   SignedIn,
@@ -22,13 +24,18 @@ function App({ Component, pageProps }: AppProps) {
         strategy="afterInteractive"
       />
       <ClerkProvider {...pageProps}>
-        <SignedOut>
-          <SignInButton />
-          <SignUpButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <header style={{ display: 'flex', gap: '1rem', alignItems: 'center', padding: '0.5rem 1rem' }}>
+          <SignedOut>
+            <SignInButton />
+            <SignUpButton />
+          </SignedOut>
+          <SignedIn>
+            <OrganizationSwitcher hidePersonal afterSelectOrganizationUrl="/account/orders" />
+            <Link href="/account/orders">Orders</Link>
+            <Link href="/account/library">Library</Link>
+            <UserButton />
+          </SignedIn>
+        </header>
         <Component {...pageProps} />
       </ClerkProvider>
       <VercelAnalytics />
