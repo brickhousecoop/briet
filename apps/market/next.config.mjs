@@ -21,4 +21,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withBotId(nextConfig)
+export default withBotId(nextConfig)
