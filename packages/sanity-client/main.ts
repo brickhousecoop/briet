@@ -17,7 +17,6 @@ const sanityConfig = {
   projectId: sanityProjectId,
   dataset: sanityDataset,
   token: sanityToken,
-  perspective: 'published',
   apiVersion: '2025-11-18',
   useCdn: true,
 }
@@ -25,6 +24,7 @@ const sanityConfig = {
 export function createSanityClient(overrides = {}) {
   return createClient({
     ...sanityConfig,
+    perspective: 'published',
     ...overrides,
   })
 }
