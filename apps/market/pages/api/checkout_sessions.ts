@@ -1,11 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { formatAmountForStripe } from '../../utils/stripe-helpers'
+import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
 import sanity from '@repo/sanity-client'
-import Stripe from 'stripe'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
-})
 
 const singleBookQuery = `
   *[_type == "book" && _id == $id] {
@@ -22,6 +17,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    const stripe = getStripeServerClient()
     const bookId: string = req.body.briet_item_id
     const book = await sanity.fetch(singleBookQuery, { id: bookId });
     try {

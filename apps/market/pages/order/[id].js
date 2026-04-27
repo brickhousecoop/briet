@@ -1,13 +1,8 @@
-import Stripe from 'stripe'
-
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
+import { getStripeServerClient } from '../../utils/stripe-helpers'
 
 import styles from '../../styles/Home.module.css'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16',
-})
 
 const OrderPage = ({ order }) => {
   return (
@@ -36,6 +31,7 @@ const OrderPage = ({ order }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
+  const stripe = getStripeServerClient()
   const sessionId = params.id
   const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
 
