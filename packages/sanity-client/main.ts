@@ -13,11 +13,20 @@ const sanityDataset   = process.env.NEXT_PUBLIC_SANITY_DATASET
 
 const sanityToken = process.env.SANITY_TOKEN;
 
-export default createClient({
+const sanityConfig = {
   projectId: sanityProjectId,
   dataset: sanityDataset,
   token: sanityToken,
   perspective: 'published',
   apiVersion: '2025-11-18',
   useCdn: true,
-})
+}
+
+export function createSanityClient(overrides = {}) {
+  return createClient({
+    ...sanityConfig,
+    ...overrides,
+  })
+}
+
+export default createSanityClient()
