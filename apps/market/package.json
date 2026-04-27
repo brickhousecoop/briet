@@ -28,7 +28,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "botid": "^1.5.10",
     "next": "^14.2.33",
-    "next-sanity": "^11.6.8",
+    "next-sanity": "^9.12.3",
     "next-sanity-image": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
