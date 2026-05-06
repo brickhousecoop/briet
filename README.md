@@ -40,10 +40,15 @@ You'll need
 You need to be pretty strict about node@20 (latest stable version is fine)— versions 21+ are known to have issues with the dependencies of this app. This is configured in `./apps/tagger/.tool-versions` for `mise` or similar tools to pick up.
 
 `cd apps/tagger`
+
 `mise install` (or another way to ensure you are on `node` version 20, see above)
+
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
+
 `npx sanity@latest login`, log into your Sanity account
+
 `vc dev` to link with Vercel first time, pull env vars, & run
+
 or `npm run dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
 
 ## `server`
@@ -78,11 +83,16 @@ However automatic download fulfillment is a great next feature to tackle, dear r
 You'll need
 - to be added to Brick House's Vercel team, for ENV vars
 - to be added as developer to Brick House's Stripe account, if you are working on checkout flow
+- to be added as developer to BRIET's Clerk account, if you are working on user auth (including checkout)
 
 `cd apps/market`
+
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
+
 `vc link --scope brickhousecoop --project bh-briet-market` to link with Vercel and pull env vars
+
 `vc dev`
+
 or `npm run dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
 
 ## `lender` (Lenny)
@@ -90,6 +100,8 @@ or `npm run dev` if you just want to tinker locally, but you will need probably 
 **Library Books ⮕ Library Patrons**
 
 Not in this repo, nor on Vercel. Deployed to a DigitalOcean box pointed to by lender.briet.app.
+
+Reach out to Jacob/David/Maria for an `/admin` login.
 
 Upstream repo is https://github.com/archiveLabs/lenny
 
