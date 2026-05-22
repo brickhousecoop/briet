@@ -18,11 +18,12 @@
   },
   "dependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
-    "@sanity/icons": "^2.11.8",
-    "@sanity/vision": "^3.40.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/vision": "^4.3.0",
     "eslint": "^9.1.1",
     "prop-types": "^15.8.1",
-    "sanity": "^3.40.0",
-    "styled-components": "^6.1.9"
+    "sanity": "^4.3.0",
+    "slate-react": "^0.117.4",
+    "styled-components": "^6.1.15"
   }
 }
