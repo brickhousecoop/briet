@@ -23,7 +23,6 @@
     "@natlibfi/marc-record": "^10.0.2",
     "@repo/sanity-client": "*",
     "@sanity/image-url": "^1.2.0",
-    "@stripe/stripe-js": "^8.5.2",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "botid": "^1.5.11",
