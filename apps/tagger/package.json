@@ -25,8 +25,5 @@
     "sanity": "^4.3.0",
     "slate-react": "^0.117.4",
     "styled-components": "^6.1.15"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
