@@ -22,11 +22,21 @@ Most likely an external tool as we want to support WordPress, WordPress with Led
 
 _(not yet built, nor begun)_
 
+## `jacket`
+
+**The BRIET homepage**
+
+A small Next.js site serving [briet.app](https://briet.app/), with content from the BRIET Catalog (Sanity).
+
+### `jacket` Development
+
+`npm install` from the repo root, then in `apps/jacket` either `npm run dev:local` (plain `next dev`, needs the `NEXT_PUBLIC_SANITY_*` vars in `.env.local`) or `npm run dev` for the Vercel flow (project `bh-briet-jacket`).
+
 ## `tagger`
 
 **BRIET Books ⮕ BRIET Catalog**
 
-CMS to to manage the BRIET Catalog: metadata, prices, and asset files for digital books and other digital items. Built on Sanity, user access managed by BRIET staff.
+CMS to manage the BRIET Catalog: metadata, prices, and asset files for digital books and other digital items. Built on Sanity, user access managed by BRIET staff.
 
 In production at **tagger.briet.app**
 
@@ -49,7 +59,7 @@ You need to be pretty strict about node@20 (latest stable version is fine)— ve
 
 `vc dev` to link with Vercel first time, pull env vars, & run
 
-or `npm run dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
+**Or, without Vercel:** `npm run dev:local` runs `sanity dev` directly — after `sanity login`, no env vars needed (`.env.development` carries the non-secret project ID).
 
 ## `server`
 
@@ -93,7 +103,13 @@ You'll need
 
 `vc dev`
 
-or `npx next dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
+**Or, without Vercel:** copy `.env.example` to `.env.local` and fill in the Sanity vars (ask another developer), then `npm run dev:local`. That's enough to browse the catalog locally — the Stripe key only matters if you're working on the checkout flow.
+
+## `reader`
+
+**In-browser ebook reading**
+
+A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader) plus a Vercel Edge function (`api/getPage`) that renders page images. `npm run dev` in `apps/reader` serves the static files with `http-server`; the edge function itself only runs under `vercel dev`.
 
 ## `lender` (Lenny)
 
@@ -111,7 +127,7 @@ Our fork is https://github.com/brickhousecoop/lenny
 
 ## How to spell “ebook”
 
-It is spelled `ebook` or `ebooks`. Not `e-book`, `eBook`, or `e-Book`. Ebook should be capititalized only when you would normally capitalize a word.
+It is spelled `ebook` or `ebooks`. Not `e-book`, `eBook`, or `e-Book`. Ebook should be capitalized only when you would normally capitalize a word.
 
 ## On the etymological difference between _lending_ and _loaning_
 

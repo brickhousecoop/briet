@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "npm run --prefix ../../ dev-jacket",
+    "dev:local": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

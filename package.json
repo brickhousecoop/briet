@@ -16,7 +16,7 @@
     "build:tagger": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-tagger",
     "build:server": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-server",
     "build:market": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market",
-    "build:reader": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-market"
+    "build:reader": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-reader"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
