@@ -2,6 +2,7 @@
 .turbo
 
 notes
+backups/
 
 ### Node ###
 
@@ -135,3 +136,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.env.local.*

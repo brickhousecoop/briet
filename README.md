@@ -93,7 +93,7 @@ You'll need
 
 `vc dev`
 
-or `npm run dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
+or `npx next dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
 
 ## `lender` (Lenny)
 
