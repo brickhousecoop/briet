@@ -27,5 +27,17 @@
   "license": "UNLICENSED",
   "private": true,
   "packageManager": "npm@10.8.1",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "20.x",
+      "onFail": "warn"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": ">=10",
+      "onFail": "warn"
+    }
+  },
   "name": "bh-briet"
 }
