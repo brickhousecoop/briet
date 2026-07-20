@@ -45,13 +45,13 @@ In production at **tagger.briet.app**
 You'll need
 - a [Sanity account](https://www.sanity.io/login/sign-up)
 - to be invited (at Developer role or higher) to [BRIET's Sanity Project](https://www.sanity.io/organizations/oeYsaoziG/project/3lm68n5v).
-- nodejs 20 (see below)
+- nodejs 24 (see below)
 
-You need to be pretty strict about node@20 (latest stable version is fine)— versions 21+ are known to have issues with the dependencies of this app. This is configured in `./apps/tagger/.tool-versions` for `mise` or similar tools to pick up.
+We target the current Node LTS (24), pinned in `.tool-versions`/`.nvmrc` for `mise`, `asdf`, or `nvm` to pick up. Sanity requires Node ≥20.19, so any recent LTS works; 24 gives the longest support runway.
 
 `cd apps/tagger`
 
-`mise install` (or another way to ensure you are on `node` version 20, see above)
+`mise install` (or another way to ensure you are on `node` version 24, see above)
 
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
 

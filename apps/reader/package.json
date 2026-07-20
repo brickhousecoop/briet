@@ -2,6 +2,9 @@
   "name": "bh-briet-reader",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "http-server public"
   },
