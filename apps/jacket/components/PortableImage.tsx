@@ -10,9 +10,7 @@ export default function PortableImage({
 }: {
   asset: Image & { alt?: string; caption?: string }
 }) {
-	console.log('asset', asset)
-
-  const imageProps = useNextSanityImage(sanityClient, asset)
+  const imageProps = useNextSanityImage(sanity, asset)
 
   if (!imageProps) return null;
 
