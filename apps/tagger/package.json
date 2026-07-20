@@ -11,6 +11,9 @@
     "url": "https://nocomment.llc"
   },
   "main": "package.json",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "sanity build",
     "dev": "npm run --prefix ../../ dev-tagger",

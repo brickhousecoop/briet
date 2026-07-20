@@ -11,6 +11,9 @@
     "url": "https://nocomment.llc"
   },
   "main": "next.config.js",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "next build",
     "dev": "npm run --prefix ../../ dev-market",

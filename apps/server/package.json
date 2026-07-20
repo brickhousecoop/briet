@@ -13,6 +13,9 @@
   "directories": {
     "lib": "lib"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
