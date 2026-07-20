@@ -1,8 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const isURL = require('is-url');
-const pdfjs = require('pdfjs-dist/legacy/build/pdf.js');
-const pdfjsWorker = require('pdfjs-dist/legacy/build/pdf.worker.min.mjs');
-const Canvas = require("canvas");
+const pdfjs = require('pdfjs-dist/legacy/build/pdf.mjs');
+const Canvas = require("@napi-rs/canvas");
 const assert = require("assert").strict;
 
 function NodeCanvasFactory() {}
@@ -37,8 +36,6 @@ NodeCanvasFactory.prototype = {
 };
 
 module.exports.convert = async function (pdf, conversion_config = {}) {
-  pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
   // Get the PDF in Uint8Array form
 
   let pdfData = pdf;
@@ -153,7 +150,7 @@ async function doc_render(pdfDocument, pageNo, canvasFactory, conversion_config)
   let renderTask = await page.render(renderContext).promise;
 
   // Convert the canvas to an image buffer.
-  let image = canvasAndContext.canvas.toBuffer();
+  let image = canvasAndContext.canvas.toBuffer('image/jpeg');
 
   return image;
 } // doc_render
