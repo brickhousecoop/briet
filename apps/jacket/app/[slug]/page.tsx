@@ -14,7 +14,7 @@ import PortablePageContent from '@/components/PortablePageContent'
 // const PagePreview = dynamic(() => import('@/components/pages/page/PagePreview'))
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 const pageBySlugQuery = `
@@ -30,7 +30,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
+  const { slug } = await params
+  const page = await sanity.fetch(pageBySlugQuery, {slug})
 
   return {
     title: page?.title ? `BRIET: ${page.title}` : 'BRIET Bookmarket'
@@ -41,7 +42,8 @@ export async function generateMetadata(
 }
 
 export default async function PageSlugRoute({ params }: Props) {
-  const page = await sanity.fetch(pageBySlugQuery, {slug: params.slug})
+  const { slug } = await params
+  const page = await sanity.fetch(pageBySlugQuery, {slug})
 
   console.log('page', page)
 
