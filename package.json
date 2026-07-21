@@ -19,8 +19,8 @@
     "build:reader": "dotenv -e .vercel/.env -c development -- turbo run build --filter=bh-briet-reader"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-config-turbo": "^1.12.4",
+    "eslint": "^9.39.5",
+    "eslint-config-turbo": "^2.10.5",
     "turbo": "^2.1.1",
     "vercel": "^56.3.2"
   },

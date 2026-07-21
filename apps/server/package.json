@@ -20,10 +20,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "opds": "^2.0.0",
-    "@repo/sanity-client": "*"
+    "@repo/sanity-client": "*",
+    "opds": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.1.0"
+    "@types/node": "^26.1.1"
   }
 }

@@ -43,6 +43,6 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",
     "typescript": "^5.9.3",
-    "vercel": "^54.3.0"
+    "vercel": "^56.3.2"
   }
 }
