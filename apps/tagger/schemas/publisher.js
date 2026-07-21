@@ -1,4 +1,4 @@
-import {CommentIcon} from '@sanity/icons'
+import {CommentIcon} from '@sanity/icons/Comment'
 
 export default {
   name: 'publisher',

@@ -1,5 +1,5 @@
 import { defineField } from 'sanity'
-import { CogIcon } from '@sanity/icons'
+import { CogIcon } from '@sanity/icons/Cog'
 
 export default {
   name: 'pageSettings',
