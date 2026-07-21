@@ -18,7 +18,8 @@
     "build": "sanity build",
     "dev": "npm run --prefix ../../ dev-tagger",
     "dev:local": "sanity dev",
-    "start": "sanity start"
+    "start": "sanity start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@sanity/eslint-config-studio": "^6.0.0",
