@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles/Home.module.css'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
 interface Book {
   _id: string;
@@ -24,7 +24,7 @@ interface CatalogListingProps {
   book: Book;
 }
 
-const builder = imageUrlBuilder({
+const builder = createImageUrlBuilder({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID || '',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || '',
 })
