@@ -69,6 +69,13 @@ export default defineType({
       description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
     }),
     defineField({
+      name: 'identifer_ol',
+      title: 'Open Library Edition ID (OLID)',
+      group: 'identfiers',
+      type: 'string',
+      description: 'Open Library edition key, e.g. OL32941311M. The book must exist in Open Library first; Lenny keys its catalog on this.'
+    }),
+    defineField({
       name: 'cover',
       title: 'Cover Image',
       type: 'image',
