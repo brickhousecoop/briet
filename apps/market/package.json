@@ -19,7 +19,8 @@
     "dev": "npm run --prefix ../../ dev-market",
     "dev:local": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --experimental-test-module-mocks --import ./test/resolve-hook.mjs --test 'test/**/*.test.mjs'"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

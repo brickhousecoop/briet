@@ -16,9 +16,7 @@
   "engines": {
     "node": "24.x"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "dependencies": {
     "@repo/sanity-client": "*",
     "opds": "^2.0.0"
