@@ -1,16 +1,7 @@
 "use client";
 
 import Img from 'next/image'
-import { createImageUrlBuilder } from '@sanity/image-url'
-import sanity from '@repo/sanity-client'
-
-const builder = createImageUrlBuilder(sanity)
-
-// Sanity image asset refs encode their dimensions: image-<hash>-<width>x<height>-<ext>
-function assetDimensions(ref: string) {
-  const [width, height] = ref.split('-')[2].split('x').map(Number)
-  return { width, height }
-}
+import { assetDimensions, sanityImageLoader } from '@repo/sanity-client'
 
 export default function PortableImage({
   asset,
@@ -23,7 +14,8 @@ export default function PortableImage({
 
   return (
     <Img
-      src={builder.image(asset).width(800).url()}
+      loader={sanityImageLoader}
+      src={asset._ref}
       alt=""
       width={width}
       height={height}

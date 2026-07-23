@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
 // two options, optimized according to permissions
 // https://www.sanity.io/help/js-client-usecdn-token
@@ -29,4 +30,28 @@ export function createSanityClient(overrides = {}) {
   })
 }
 
-export default createSanityClient()
+const sanity = createSanityClient()
+export default sanity
+
+const builder = createImageUrlBuilder(sanity)
+
+// Sanity image asset refs encode their dimensions: image-<hash>-<width>x<height>-<ext>
+export function assetDimensions(ref: string) {
+  const [width, height] = ref.split('-')[2].split('x').map(Number)
+  return { width, height }
+}
+
+// next/image loader: hand each requested width to Sanity's CDN so the browser gets a
+// real responsive srcset (and auto WebP/AVIF) straight from the source, instead of Next
+// re-optimizing an already-resized image. `src` is the asset _ref.
+export function sanityImageLoader({
+  src,
+  width,
+  quality,
+}: {
+  src: string
+  width: number
+  quality?: number
+}) {
+  return builder.image(src).width(width).quality(quality || 75).auto('format').url()
+}

@@ -1,14 +1,5 @@
 import Image from "next/image"
-import { createImageUrlBuilder } from "@sanity/image-url"
-import sanity from "@repo/sanity-client"
-
-const builder = createImageUrlBuilder(sanity)
-
-// Sanity image asset refs encode their dimensions: image-<hash>-<width>x<height>-<ext>
-function assetDimensions(ref) {
-  const [width, height] = ref.split('-')[2].split('x').map(Number)
-  return { width, height }
-}
+import { assetDimensions, sanityImageLoader } from "@repo/sanity-client"
 
 const SanityImage = ({ sanityAsset, alt }) => {
   const ref = sanityAsset?.asset?._ref
@@ -18,7 +9,8 @@ const SanityImage = ({ sanityAsset, alt }) => {
 
   return (
     <Image
-      src={builder.image(sanityAsset).width(800).url()}
+      loader={sanityImageLoader}
+      src={ref}
       alt={alt}
       width={width}
       height={height}
