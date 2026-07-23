@@ -45,8 +45,6 @@ export default async function PageSlugRoute({ params }: Props) {
   const { slug } = await params
   const page = await sanity.fetch(pageBySlugQuery, {slug})
 
-  console.log('page', page)
-
   // if (draftMode().isEnabled) {
   //   return <PagePreview params={params} initial={page} />
   // }
