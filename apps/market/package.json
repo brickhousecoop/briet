@@ -26,7 +26,6 @@
     "@clerk/nextjs": "^6.39.6",
     "@natlibfi/marc-record": "^10.0.2",
     "@repo/sanity-client": "*",
-    "@sanity/image-url": "^2.1.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "botid": "^1.5.11",

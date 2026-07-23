@@ -58,3 +58,9 @@ export function sanityImageLoader({
 }) {
   return builder.image(src).width(width).quality(quality || 75).auto('format').url()
 }
+
+// Build a Sanity image URL from a source (asset ref, asset object, or image field);
+// chain .width()/.height()/.url() on the result. Shares the one client/builder above.
+export function imageUrlFor(source: Parameters<typeof builder.image>[0]) {
+  return builder.image(source)
+}
