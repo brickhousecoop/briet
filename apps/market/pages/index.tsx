@@ -1,9 +1,16 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Footer from '@components/footer'
-import CatalogListing from '@components/CatalogListing'
+import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
 import sanity from '@repo/sanity-client'
+
+type Collection = {
+  _id: string
+  name: string
+  slug: { current: string }
+  members: Book[]
+}
 
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
@@ -43,7 +50,7 @@ export const metadata: Metadata = {
   description: 'Ebooks, for libraries, for keeps.',
 }
 
-const BrietHomepage = ({ collections, demoBook }) => {
+const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/Home.module.css'
 import { imageUrlFor } from '@repo/sanity-client'
 
-interface Book {
+export interface Book {
   _id: string;
   title?: string | null;
   description?: string | null;

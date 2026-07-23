@@ -66,7 +66,8 @@ export default async function handler(
       }
       res.redirect(303, session.url);
     } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
+      const e = err as { statusCode?: number; message?: string }
+      res.status(e.statusCode || 500).json(e.message);
     }
   } else {
     res.setHeader('Allow', 'POST');

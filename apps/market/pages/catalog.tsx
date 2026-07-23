@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Footer from '@components/footer'
-import CatalogListing from '@components/CatalogListing'
+import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
 import { createSanityClient } from '@repo/sanity-client'
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 const sanity = createSanityClient({ useCdn: false })
 
-const BrietFullCatalog = ({ books }) => {
+const BrietFullCatalog = ({ books }: { books: Book[] }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
