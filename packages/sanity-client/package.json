@@ -2,8 +2,12 @@
   "name": "@repo/sanity-client",
   "version": "1.0.0",
   "description": "sanityClient for Vercel apps",
+  "type": "module",
   "exports": {
     "default": "./main.ts"
+  },
+  "scripts": {
+    "test": "node --test"
   },
   "author": {
     "name": "Jacob Ford",

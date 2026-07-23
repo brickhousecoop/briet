@@ -37,7 +37,10 @@ const builder = createImageUrlBuilder(sanity)
 
 // Sanity image asset refs encode their dimensions: image-<hash>-<width>x<height>-<ext>
 export function assetDimensions(ref: string) {
-  const [width, height] = ref.split('-')[2].split('x').map(Number)
+  const [width, height] = ref.split('-')[2]?.split('x').map(Number) ?? []
+  if (!Number.isFinite(width) || !Number.isFinite(height)) {
+    throw new Error(`Malformed Sanity asset ref (expected image-<hash>-<W>x<H>-<ext>): ${ref}`)
+  }
   return { width, height }
 }
 
