@@ -8,6 +8,7 @@ export default function PortableImage({
 }: {
   asset: { _ref: string }
 }) {
+  // an image block with no asset selected (incomplete content) renders nothing
   if (!asset?._ref) return null
 
   const { width, height } = assetDimensions(asset._ref)

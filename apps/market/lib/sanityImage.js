@@ -2,6 +2,8 @@ import Image from "next/image"
 import { assetDimensions, sanityImageLoader } from "@repo/sanity-client"
 
 const SanityImage = ({ sanityAsset, alt }) => {
+  // cover is an optional field (no required validation on the book schema),
+  // so a book without one renders no image rather than erroring.
   const ref = sanityAsset?.asset?._ref
   if (!ref) return null
 
