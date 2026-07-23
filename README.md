@@ -109,7 +109,9 @@ You'll need
 
 **In-browser ebook reading**
 
-A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader) plus a Vercel Edge function (`api/getPage`) that renders page images. `npm run dev` in `apps/reader` serves the static files with `http-server`; the edge function itself only runs under `vercel dev`.
+A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader), served by `http-server` — run `npm run dev` in `apps/reader`. It ships a landing page plus one pre-baked demo book (static page JPEGs under `public/borrow/`), which market's homepage embeds in an iframe.
+
+There is no page-rendering backend: the old PDF→JPG edge function (`api/getPage`) and its native deps were removed, so `reader` is now purely static. A real book-serving pipeline for non-PDF books still needs to be built.
 
 ## `lender` (Lenny)
 
