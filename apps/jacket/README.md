@@ -1,6 +1,6 @@
 # `jacket` — BRIET homepage
 
-The main [briet.app](https://briet.app/) site. Next.js 14 (app router), content from the BRIET Catalog (Sanity).
+The main [briet.app](https://briet.app/) site. Next.js 16 (app router) + React 19, content from the BRIET Catalog (Sanity).
 
 ## Development
 

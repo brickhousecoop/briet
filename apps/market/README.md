@@ -1,6 +1,6 @@
 # `market` — BRIET Bookmarket
 
-The public-facing marketplace at [market.briet.app](https://market.briet.app/), where libraries purchase ebooks. Next.js 14, catalog content from Sanity, checkout via Stripe, auth via Clerk.
+The public-facing marketplace at [market.briet.app](https://market.briet.app/), where libraries purchase ebooks. Next.js 16 + React 19, catalog content from Sanity, checkout via Stripe, auth via Clerk.
 
 ## Development
 
