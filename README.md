@@ -32,7 +32,7 @@ npx sanity login
 
 | App | Needs env vars? |
 |---|---|
-| jacket | yes — `NEXT_PUBLIC_SANITY_PROJECTID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_TOKEN` |
+| jacket | yes — copy `.env.example`; its committed defaults work as-is |
 | market | yes — see `apps/market/.env.example` |
 | tagger | no — `.env.development` is committed and carries the non-secret project ID |
 | reader | no — fully static |
@@ -107,7 +107,9 @@ A small Next.js site serving [briet.app](https://briet.app/), with content from 
 
 ### `jacket` Development
 
-`npm install` from the repo root, then in `apps/jacket` either `npm run dev:local` (plain `next dev`, needs the `NEXT_PUBLIC_SANITY_*` vars in `.env.local`) or `npm run dev` for the Vercel flow (project `bh-briet-jacket`).
+`npm install` from the repo root, then copy `apps/jacket/.env.example` to `.env.local` — the committed defaults are enough to build and run, since the Sanity project ID is public and the `test` dataset needs no token. `npm run dev:local` then runs `next dev` on port 3000.
+
+**With Vercel:** `npm run dev` runs the app through `vercel dev` (project `bh-briet-jacket`), and `vercel env pull` gets you the real token if you need authenticated content.
 
 ## `tagger`
 
