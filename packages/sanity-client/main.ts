@@ -16,7 +16,9 @@ const sanityToken = process.env.SANITY_TOKEN;
 
 // Both datasets are private, and Sanity answers an unauthenticated read with zero
 // documents rather than a 401 — so a missing token looks like an empty catalog.
-if (!sanityToken) {
+// Server-only: the browser bundle pulls this module in for the image helpers
+// below, and never has the token.
+if (typeof window === 'undefined' && !sanityToken) {
   throw new Error('SANITY_TOKEN is required; without it Sanity returns no documents instead of an error.')
 }
 
