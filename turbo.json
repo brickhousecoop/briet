@@ -31,6 +31,9 @@
       "env": [
         "SANITY_STUDIO_PROJECTID",
         "SANITY_STUDIO_DATASET"
+      ],
+      "outputs": [
+        "dist/**"
       ]
     },
     "lint": {
