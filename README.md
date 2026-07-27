@@ -41,7 +41,7 @@ Market's Stripe and Clerk keys only matter for the checkout and `/account` flows
 
 ### Which Sanity dataset you get
 
-Apps that read the catalog (`jacket`, `market`, `server`) default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. `tagger` is the exception and points at `production`, since it's the CMS and editors need the real catalog.
+`jacket` and `market` default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. Two apps use `production` on purpose: `tagger`, because it's the CMS and editors need the real catalog, and `server`, because it publishes the public OPDS feed.
 
 Both datasets are private. `SANITY_TOKEN` is required, and the client throws without it — Sanity answers an unauthenticated read with zero documents rather than an error, so a missing token would otherwise look like an empty catalog.
 
