@@ -6,6 +6,83 @@ This monorepo contains the code which runs our platforms (see below). We seek vo
 
 To get started, reach out [here on our webform](https://thebrick.house/briet/).
 
+# Local Development
+
+Every app has two dev scripts. `dev:local` runs the app's own dev server (`next dev`, `sanity dev`, `http-server`) and is what you want almost always. `dev` runs the app through `vercel dev`, which is slower, needs Vercel auth, and — per [Vercel's own guidance](https://vercel.com/docs/cli/dev) — buys you nothing for a framework app, since `next dev` already handles functions, redirects, rewrites, headers, and middleware natively.
+
+## Bootstrap a fresh checkout
+
+**1. Node 24.** Pinned in `.tool-versions` and `.nvmrc`, so `mise install`, `asdf install`, or `nvm use` all pick it up.
+
+**2. Install from the repo root.** This is an npm workspace — one install covers every app. Installing inside an app directory instead will produce a broken tree.
+
+```
+npm install
+```
+
+`Unsupported engine` warnings come from `server` and are safe to ignore.
+
+**3. Log into Sanity.** Required for `tagger`; also how your access to catalog content is granted.
+
+```
+npx sanity login
+```
+
+**4. Set up env vars.** Env vars are **per app**, not shared — each app is its own Vercel project with its own variables, and each reads its own `apps/<app>/.env.local`. That file is gitignored, so a fresh checkout has none.
+
+| App | Needs env vars? |
+|---|---|
+| jacket | yes — `NEXT_PUBLIC_SANITY_PROJECTID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_TOKEN` |
+| market | yes — see `apps/market/.env.example` |
+| tagger | no — `.env.development` is committed and carries the non-secret project ID |
+| reader | no — fully static |
+
+Market's Stripe and Clerk keys only matter for the checkout and `/account` flows; without them the catalog still browses fine.
+
+Two ways to get values:
+
+**On the Brick House Vercel team** — pull them. Log in once, then link and pull in each app that needs it:
+
+```
+npx vercel login
+cd apps/market
+npx vercel link --scope brickhousecoop --project bh-briet-market
+npx vercel env pull
+```
+
+`vercel link` is one-time setup per app directory — it writes `.vercel/project.json`, just an org ID and project ID so later commands know which project you mean. `vercel env pull` writes `.env.local` from the project's Development variables, and **overwrites** the file rather than merging. Re-run it when vars change; you never need to re-run `link`. Projects are named `bh-briet-<app>`.
+
+**Not on the team** — copy `apps/market/.env.example` to `.env.local` and ask a developer for the blank values.
+
+## Run one app
+
+From the repo root:
+
+```
+npm run dev:local -w apps/jacket
+```
+
+Or equivalently `cd apps/jacket && npm run dev:local`.
+
+## Run all apps
+
+From the repo root:
+
+```
+npm run dev:local
+```
+
+Runs every app's `dev:local` in parallel via turbo. Ports are pinned, so the URLs are stable:
+
+| App | URL |
+|---|---|
+| jacket | http://localhost:3000 |
+| market | http://localhost:3001 |
+| tagger | http://localhost:3333 |
+| reader | http://localhost:8080 |
+
+`server` has no dev script and is skipped (see its section below).
+
 # Structure
 
 BRIET is several interwoven applications. For librarians and institutions, the key point is the [Bookmarket](https://market.briet.app/), where approved customers can purchase ebooks, just like physical books. To be an approved customer, a library or institution must be a [public signatory](https://www.controlleddigitallending.org/) to the position statement on controlled digital lending (CDL).
@@ -109,7 +186,7 @@ You'll need
 
 **In-browser ebook reading**
 
-A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader), served by `http-server` — run `npm run dev` in `apps/reader`. It ships a landing page plus one pre-baked demo book (static page JPEGs under `public/borrow/`), which market's homepage embeds in an iframe.
+A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader), served by `http-server` — run `npm run dev:local` in `apps/reader`. It ships a landing page plus one pre-baked demo book (static page JPEGs under `public/borrow/`), which market's homepage embeds in an iframe.
 
 There is no page-rendering backend: the old PDF→JPG edge function (`api/getPage`) and its native deps were removed, so `reader` is now purely static. A real book-serving pipeline for non-PDF books still needs to be built.
 

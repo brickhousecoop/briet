@@ -17,7 +17,7 @@
   "scripts": {
     "build": "next build",
     "dev": "npm run --prefix ../../ dev-market",
-    "dev:local": "next dev",
+    "dev:local": "next dev -p 3001",
     "lint": "eslint .",
     "start": "next start",
     "test": "node --experimental-test-module-mocks --import ./test/resolve-hook.mjs --test 'test/**/*.test.mjs'"

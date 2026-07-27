@@ -17,7 +17,7 @@
   "scripts": {
     "build": "sanity build",
     "dev": "npm run --prefix ../../ dev-tagger",
-    "dev:local": "sanity dev",
+    "dev:local": "sanity dev --port 3333",
     "start": "sanity start",
     "lint": "eslint ."
   },

@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "npm run --prefix ../../ dev-jacket",
-    "dev:local": "next dev",
+    "dev:local": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."

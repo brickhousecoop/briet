@@ -6,7 +6,8 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "http-server public"
+    "dev": "npm run --prefix ../../ dev-reader",
+    "dev:local": "http-server public -p 8080"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
