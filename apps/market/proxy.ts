@@ -21,7 +21,7 @@ export default clerkMiddleware(
 
 export const config = {
   matcher: [
-    // Only run middleware (Clerk auth) on /account/* paths
+    // Only run Clerk auth on /account/* paths
     '/account/:path*',
   ],
 }
