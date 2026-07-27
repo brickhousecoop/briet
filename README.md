@@ -32,12 +32,26 @@ npx sanity login
 
 | App | Needs env vars? |
 |---|---|
-| jacket | yes — copy `.env.example`; its committed defaults work as-is |
+| jacket | yes — copy `.env.example`, fill in `SANITY_TOKEN` |
 | market | yes — see `apps/market/.env.example` |
 | tagger | no — `.env.development` is committed and carries the non-secret project ID |
 | reader | no — fully static |
 
 Market's Stripe and Clerk keys only matter for the checkout and `/account` flows; without them the catalog still browses fine.
+
+### Which Sanity dataset you get
+
+Apps that read the catalog (`jacket`, `market`, `server`) default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. `tagger` is the exception and points at `production`, since it's the CMS and editors need the real catalog.
+
+Both datasets are private. `SANITY_TOKEN` is required, and the client throws without it — Sanity answers an unauthenticated read with zero documents rather than an error, so a missing token would otherwise look like an empty catalog.
+
+To read production content locally, override the one variable for a single run:
+
+```
+NEXT_PUBLIC_SANITY_DATASET=production npm run dev:local -w apps/market
+```
+
+Shell environment beats `.env.local`, so nothing needs editing. Note this swaps **only** the content. Clerk and Stripe stay on their test keys, which is deliberate — pointing local dev at live auth or live payments would mean real accounts and real charges.
 
 Two ways to get values:
 
@@ -107,9 +121,9 @@ A small Next.js site serving [briet.app](https://briet.app/), with content from 
 
 ### `jacket` Development
 
-`npm install` from the repo root, then copy `apps/jacket/.env.example` to `.env.local` — the committed defaults are enough to build and run, since the Sanity project ID is public and the `test` dataset needs no token. `npm run dev:local` then runs `next dev` on port 3000.
+`npm install` from the repo root, then copy `apps/jacket/.env.example` to `.env.local` and fill in `SANITY_TOKEN` (ask a developer, or `vercel env pull`). `npm run dev:local` then runs `next dev` on port 3000.
 
-**With Vercel:** `npm run dev` runs the app through `vercel dev` (project `bh-briet-jacket`), and `vercel env pull` gets you the real token if you need authenticated content.
+**With Vercel:** `npm run dev` runs the app through `vercel dev` (project `bh-briet-jacket`).
 
 ## `tagger`
 

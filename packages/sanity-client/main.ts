@@ -14,6 +14,12 @@ const sanityDataset   = process.env.NEXT_PUBLIC_SANITY_DATASET
 
 const sanityToken = process.env.SANITY_TOKEN;
 
+// Both datasets are private, and Sanity answers an unauthenticated read with zero
+// documents rather than a 401 — so a missing token looks like an empty catalog.
+if (!sanityToken) {
+  throw new Error('SANITY_TOKEN is required; without it Sanity returns no documents instead of an error.')
+}
+
 const sanityConfig = {
   projectId: sanityProjectId,
   dataset: sanityDataset,

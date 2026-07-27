@@ -5,6 +5,7 @@ import assert from 'node:assert/strict'
 // project so URLs are deterministic. Dynamic import runs after env is set.
 process.env.NEXT_PUBLIC_SANITY_PROJECTID = 'testproj'
 process.env.NEXT_PUBLIC_SANITY_DATASET = 'production'
+process.env.SANITY_TOKEN = 'faketoken'
 const { assetDimensions, sanityImageLoader } = await import('./main.ts')
 
 const REF = 'image-abc123-2550x3300-jpg'
