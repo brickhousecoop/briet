@@ -134,9 +134,9 @@ We target the current Node LTS (24), pinned in `.tool-versions`/`.nvmrc` for `mi
 
 `npx sanity@latest login`, log into your Sanity account
 
-`vc dev` to link with Vercel first time, pull env vars, & run
+`npm run dev:local` runs `sanity dev` on port 3333. No env vars needed — `.env.development` is committed and carries the non-secret project ID, and your access comes from `sanity login`.
 
-**Or, without Vercel:** `npm run dev:local` runs `sanity dev` directly — after `sanity login`, no env vars needed (`.env.development` carries the non-secret project ID).
+**With Vercel:** `npm run dev` runs the app through `vercel dev` instead. Rarely useful here, since Sanity Studio's own dev server is what production builds from anyway.
 
 ## `server`
 
@@ -176,11 +176,18 @@ You'll need
 
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
 
-`vc link --scope brickhousecoop --project bh-briet-market` to link with Vercel and pull env vars
+Get env vars into `apps/market/.env.local`, either by pulling them:
 
-`vc dev`
+```
+npx vercel link --scope brickhousecoop --project bh-briet-market
+npx vercel env pull
+```
 
-**Or, without Vercel:** copy `.env.example` to `.env.local` and fill in the Sanity vars (ask another developer), then `npm run dev:local`. That's enough to browse the catalog locally — the Stripe key only matters if you're working on the checkout flow.
+or, if you're not on the Vercel team, by copying `.env.example` to `.env.local` and asking a developer for the values. Only the Sanity vars are needed to browse the catalog — Stripe matters for checkout, Clerk for the `/account` flow.
+
+`npm run dev:local` runs `next dev` on port 3001.
+
+**With Vercel:** `npm run dev` runs the app through `vercel dev`. Slower and needs auth; `next dev` already handles rewrites, headers, and the Clerk proxy natively.
 
 ## `reader`
 
