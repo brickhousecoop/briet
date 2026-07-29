@@ -45,7 +45,7 @@ await new Promise((resolve) => server.listen(0, resolve))
 const { port } = server.address()
 
 mock.module('@repo/sanity-client', {
-  namedExports: {
+  exports: {
     createSanityWriteClient: () => sanityFor({}),
     createSanityClient: (overrides = {}) => sanityFor(overrides),
   },

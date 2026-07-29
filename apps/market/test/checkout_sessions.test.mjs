@@ -23,10 +23,12 @@ let sessionParams
 let bookResult // what the mocked Sanity catalog returns for a fetch
 
 mock.module('@repo/sanity-client', {
-  defaultExport: {
-    fetch: async (_query, params) => {
-      fetchParams = params
-      return bookResult
+  exports: {
+    default: {
+      fetch: async (_query, params) => {
+        fetchParams = params
+        return bookResult
+      },
     },
   },
 })
@@ -43,7 +45,7 @@ class MockStripe {
     }
   }
 }
-mock.module('stripe', { defaultExport: MockStripe })
+mock.module('stripe', { exports: { default: MockStripe } })
 
 const { default: handler } = await import('../pages/api/checkout_sessions.ts')
 

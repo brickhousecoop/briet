@@ -86,7 +86,7 @@ class MockStripe {
     }
   }
 }
-mock.module('stripe', { defaultExport: MockStripe })
+mock.module('stripe', { exports: { default: MockStripe } })
 
 const sanity = createClient({
   projectId: 'p',
@@ -97,8 +97,11 @@ const sanity = createClient({
   useProjectHostname: false,
 })
 mock.module('@repo/sanity-client', {
-  defaultExport: sanity,
-  namedExports: { createSanityClient: () => sanity, createSanityWriteClient: () => sanity },
+  exports: {
+    default: sanity,
+    createSanityClient: () => sanity,
+    createSanityWriteClient: () => sanity,
+  },
 })
 
 after(() => server.close())
