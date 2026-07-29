@@ -93,6 +93,18 @@ test('books Lenny cannot import are dropped rather than returned half-formed', a
   assert.deepEqual(res.body, { books: [importableBook] })
 })
 
+test('a bundle with nothing importable fails without burning the code', async () => {
+  record.books = [{ olid: null, url: null }]
+  const res = await get('abcd-1234')
+
+  assert.equal(res.statusCode, 422)
+  assert.deepEqual(res.body, { error: 'nothing_to_import' })
+
+  // the cataloguing gap is fixable in the Studio; the purchase must survive it
+  assert.deepEqual(claimedIds, [])
+  assert.equal(record.redeemedAt, null)
+})
+
 test('non-GET is rejected with 405 and an Allow header', async () => {
   const res = makeRes()
   await handler({ method: 'POST', query: {} }, res)

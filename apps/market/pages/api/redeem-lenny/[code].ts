@@ -43,6 +43,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'already_redeemed' })
   }
 
+  // Drop any book missing an OLID or file rather than hand Lenny a half-record
+  // it would have to reject anyway. Resolve this before claiming: a bundle with
+  // nothing importable is a cataloguing gap, and burning the buyer's code over
+  // it would destroy the purchase to report a problem the Studio can still fix.
+  const books = (record.books || []).filter((b) => b.olid && b.url)
+  if (books.length === 0) {
+    return res.status(422).json({ error: 'nothing_to_import' })
+  }
+
   // Atomic one-shot claim: the patch only matches while redeemedAt is unset, so
   // of any concurrent redemptions exactly one patches a document; the rest
   // patch zero and are told the code is spent.
@@ -54,15 +63,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .commit()
     claimed = (result.results || []).length > 0
   } catch (err) {
-    console.error(`redeem-lenny: failed to claim code ${code}`, err)
+    console.error(`redeem-lenny: failed to claim ${record._id}`, err)
     return res.status(500).json({ error: 'claim_failed' })
   }
   if (!claimed) {
     return res.status(400).json({ error: 'already_redeemed' })
   }
 
-  // Drop any book missing an OLID or file rather than hand Lenny a half-record
-  // it would have to reject anyway.
-  const books = (record.books || []).filter((b) => b.olid && b.url)
   return res.status(200).json({ books })
 }
