@@ -38,6 +38,19 @@ export function createSanityClient(overrides = {}) {
   })
 }
 
+// Mutations use their own token. Sanity cannot scope a token below "write
+// everything in every dataset" without an Enterprise custom role, so the split
+// is what keeps that credential out of the read paths that render the catalog.
+// Reads must not use this client: it bypasses the CDN and the token is costlier
+// to leak.
+export function createSanityWriteClient() {
+  const token = process.env.SANITY_WRITE_TOKEN
+  if (!token) {
+    throw new Error('SANITY_WRITE_TOKEN is required to mutate Sanity; SANITY_TOKEN is read-only.')
+  }
+  return createSanityClient({ token, useCdn: false })
+}
+
 const sanity = createSanityClient()
 export default sanity
 

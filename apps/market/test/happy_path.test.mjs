@@ -98,7 +98,7 @@ const sanity = createClient({
 })
 mock.module('@repo/sanity-client', {
   defaultExport: sanity,
-  namedExports: { createSanityClient: () => sanity },
+  namedExports: { createSanityClient: () => sanity, createSanityWriteClient: () => sanity },
 })
 
 after(() => server.close())

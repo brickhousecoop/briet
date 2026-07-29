@@ -1,11 +1,9 @@
 import { randomBytes } from 'node:crypto'
 import type Stripe from 'stripe'
-import { createSanityClient } from '@repo/sanity-client'
+import { createSanityWriteClient } from '@repo/sanity-client'
 
 // No 0/O/1/I so codes survive being read aloud over a phone.
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
-
-const write = createSanityClient({ useCdn: false })
 
 function randomCode(): string {
   const chars = Array.from(randomBytes(8), (b) => ALPHABET[b % ALPHABET.length])
@@ -25,7 +23,10 @@ export async function mintRedeemCode(session: Stripe.Checkout.Session): Promise<
     return null
   }
 
-  const doc = await write.createIfNotExists({
+  // Built here rather than at module scope: `next build` evaluates this module
+  // while collecting page data, so demanding the token up there fails the build
+  // on any deployment that only serves the catalog.
+  const doc = await createSanityWriteClient().createIfNotExists({
     _id: `redeem-${session.id}`,
     _type: 'redeemCode',
     code: randomCode(),

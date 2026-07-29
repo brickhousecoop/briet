@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createSanityClient } from '@repo/sanity-client'
+import { createSanityClient, createSanityWriteClient } from '@repo/sanity-client'
 
-// Reads can use the CDN; the one-shot claim is a mutation and must bypass it.
+// Reads can use the CDN; the write client bypasses it, and is built per request
+// so a deployment without the write token still builds and serves reads.
 const read = createSanityClient()
-const write = createSanityClient({ useCdn: false })
 
 type RedeemableBook = { olid: string | null; title: string; url: string | null }
 type RedeemCode = { _id: string; redeemedAt: string | null; books: RedeemableBook[] | null }
@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // results this counts are not on it.
   let claimed: boolean
   try {
-    const result = await write
+    const result = await createSanityWriteClient()
       .patch({ query: '_id == $id && !defined(redeemedAt)', params: { id: record._id } })
       .set({ redeemedAt: new Date().toISOString() })
       .commit({ returnDocuments: false })

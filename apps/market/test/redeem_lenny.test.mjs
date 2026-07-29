@@ -46,17 +46,22 @@ const { port } = server.address()
 
 mock.module('@repo/sanity-client', {
   namedExports: {
-    createSanityClient: (overrides = {}) => createClient({
+    createSanityWriteClient: () => sanityFor({}),
+    createSanityClient: (overrides = {}) => sanityFor(overrides),
+  },
+})
+
+function sanityFor(overrides) {
+  return createClient({
       projectId: 'p',
       dataset: 'd',
       apiVersion: '2025-11-18',
       token: 't',
-      apiHost: `http://localhost:${port}`,
-      useProjectHostname: false,
-      ...overrides,
-    }),
-  },
-})
+    apiHost: `http://localhost:${port}`,
+    useProjectHostname: false,
+    ...overrides,
+  })
+}
 
 after(() => server.close())
 

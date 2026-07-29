@@ -37,13 +37,21 @@ npx sanity login
 | tagger | no — `.env.development` is committed and carries the non-secret project ID |
 | reader | no — fully static |
 
-Market's Stripe and Clerk keys only matter for the checkout and `/account` flows; without them the catalog still browses fine.
+Market's Stripe, Clerk and `SANITY_WRITE_TOKEN` values only matter for the checkout and `/account` flows; without them the catalog still browses fine.
 
 ### Which Sanity dataset you get
 
 `jacket` and `market` default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. Two apps use `production` on purpose: `tagger`, because it's the CMS and editors need the real catalog, and `server`, because it publishes the public OPDS feed.
 
 Both datasets are private. `SANITY_TOKEN` is required, and the client throws without it — Sanity answers an unauthenticated read with zero documents rather than an error, so a missing token would otherwise look like an empty catalog.
+
+### Read and write tokens are separate
+
+`SANITY_TOKEN` should be read-only. Market's redeem flow is the only thing that writes to Sanity, and it uses `SANITY_WRITE_TOKEN` instead, via `createSanityWriteClient()` in `@repo/sanity-client`.
+
+They are split because Sanity cannot scope a token any narrower: the minimum role that can create and patch documents is Editor, which can read, write and delete every document in every dataset in the project. Per-type, per-field and per-dataset restrictions all require [custom roles](https://www.sanity.io/docs/content-lake/build-a-custom-role-with-the-access-api), which are Enterprise-only. So the boundary we can actually enforce is which code paths hold the credential, and every page that just renders the catalog holds one that cannot mutate anything.
+
+For the same reason, prefer a distinct token value per Vercel environment — a token reaches every dataset, so a leaked Preview token is a Production problem.
 
 To read production content locally, override the one variable for a single run:
 

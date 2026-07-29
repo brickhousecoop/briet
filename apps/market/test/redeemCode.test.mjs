@@ -9,7 +9,7 @@ let stored // documents in the fake dataset, keyed by _id
 
 mock.module('@repo/sanity-client', {
   namedExports: {
-    createSanityClient: () => ({
+    createSanityWriteClient: () => ({
       // Sanity keeps the first writer's document and returns it untouched,
       // which is what makes the deterministic _id an idempotency guarantee.
       createIfNotExists: async (doc) => (stored[doc._id] ??= doc),
