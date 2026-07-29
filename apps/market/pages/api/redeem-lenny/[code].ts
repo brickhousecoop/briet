@@ -1,9 +1,12 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { createSanityClient } from '@repo/sanity-client'
 
 // Reads can use the CDN; the one-shot claim is a mutation and must bypass it.
 const read = createSanityClient()
 const write = createSanityClient({ useCdn: false })
+
+type RedeemableBook = { olid: string | null; title: string; url: string | null }
+type RedeemCode = { _id: string; redeemedAt: string | null; books: RedeemableBook[] | null }
 
 const codeQuery = `
   *[_type == "redeemCode" && code == $code] {
@@ -32,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(404).json({ error: 'not_found' })
   }
 
-  const record = await read.fetch(codeQuery, { code })
+  const record: RedeemCode | null = await read.fetch(codeQuery, { code })
   if (!record) {
     return res.status(404).json({ error: 'not_found' })
   }
@@ -60,6 +63,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Drop any book missing an OLID or file rather than hand Lenny a half-record
   // it would have to reject anyway.
-  const books = (record.books || []).filter((b: any) => b.olid && b.url)
+  const books = (record.books || []).filter((b) => b.olid && b.url)
   return res.status(200).json({ books })
 }

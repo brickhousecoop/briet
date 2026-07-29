@@ -1,7 +1,7 @@
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import Link from 'next/link'
-import { mintRedeemCode } from '@lib/redeemCode'
+import { mintRedeemCode } from '../../lib/redeemCode'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 
 import styles from '../../styles/Home.module.css'
@@ -62,16 +62,11 @@ export const getServerSideProps = async ({ params }) => {
     return { notFound: true }
   }
 
-  // Sessions created before checkout started tagging the book carry no item id
-  // and cannot be fulfilled automatically.
-  const bookId = session.metadata?.briet_item_id
-  const redeemCode =
-    session.payment_status === 'paid' && bookId ? await mintRedeemCode(session.id, bookId) : null
+  const redeemCode = await mintRedeemCode(session)
 
   return {
     props: {
       order: {
-        id: session.id,
         payment_status: session.payment_status,
         email: session.customer_details?.email ?? null,
       },

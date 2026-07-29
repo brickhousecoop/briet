@@ -22,12 +22,10 @@ let sessionParams
 let bookResult // what the mocked Sanity catalog returns for a fetch
 
 mock.module('@repo/sanity-client', {
-  exports: {
-    default: {
-      fetch: async (_query, params) => {
-        fetchParams = params
-        return bookResult
-      },
+  defaultExport: {
+    fetch: async (_query, params) => {
+      fetchParams = params
+      return bookResult
     },
   },
 })
@@ -44,7 +42,7 @@ class MockStripe {
     }
   }
 }
-mock.module('stripe', { exports: { default: MockStripe } })
+mock.module('stripe', { defaultExport: MockStripe })
 
 const { default: handler } = await import('../pages/api/checkout_sessions.ts')
 
@@ -86,6 +84,9 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
 
   // publisher rides along for manual payout
   assert.equal(sessionParams.payment_intent_data.metadata.briet_payout_to, 'Test Press')
+
+  // the order page reads this back to know which book to mint a code for
+  assert.equal(sessionParams.metadata.briet_item_id, 'book-1')
 
   // redirect URLs are anchored to the request origin and book id
   assert.equal(sessionParams.success_url, 'https://market.briet.app/order/{CHECKOUT_SESSION_ID}')
