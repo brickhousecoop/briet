@@ -6,7 +6,7 @@
 //
 // Usage:
 //   node apps/tagger/scripts/create-redeem-code.mjs --books <bookId> [<bookId> ...] \
-//        [--code CODE] [--order STRIPE_SESSION_ID] [--note "..."]
+//        [--code CODE] [--session STRIPE_SESSION_ID] [--note "..."]
 //
 // Env (write access required):
 //   SANITY_PROJECTID (or SANITY_STUDIO_PROJECTID), SANITY_DATASET (or SANITY_STUDIO_DATASET),
@@ -28,7 +28,7 @@ function parseArgs(argv) {
     if (a === '--books') {
       while (argv[i + 1] && !argv[i + 1].startsWith('--')) args.books.push(argv[++i])
     } else if (a === '--code') args.code = argv[++i]
-    else if (a === '--order') args.order = argv[++i]
+    else if (a === '--session') args.session = argv[++i]
     else if (a === '--note') args.note = argv[++i]
     else throw new Error(`Unknown argument: ${a}`)
   }
@@ -77,15 +77,15 @@ async function main() {
   const doc = await client.create({
     _type: 'redeemCode',
     code,
-    books: args.books.map((id) => ({ _type: 'reference', _ref: id })),
-    ...(args.order ? { orderId: args.order } : {}),
+    books: args.books.map((id) => ({ _type: 'reference', _ref: id, _key: id })),
+    ...(args.session ? { stripeSessionId: args.session } : {}),
     ...(args.note ? { note: args.note } : {}),
   })
 
   console.log(`Created redeem code: ${code}`)
   console.log(`  doc:     ${doc._id}`)
   console.log(`  books:   ${books.map((b) => `${b.title} (${b.identifer_ol})`).join(', ')}`)
-  if (args.order) console.log(`  order:   ${args.order}`)
+  if (args.session) console.log(`  session: ${args.session}`)
 }
 
 main().catch((err) => {

@@ -3,6 +3,10 @@
 import { withBotId } from 'botid/next/config';
 
 const nextConfig = {
+  // Absent means live: the badge warns during demos, it does not guard.
+  env: {
+    NEXT_PUBLIC_STRIPE_MODE: process.env.STRIPE_SECRET_KEY?.startsWith('sk_test_') ? 'test' : 'live',
+  },
   async redirects() {
     return [
       {

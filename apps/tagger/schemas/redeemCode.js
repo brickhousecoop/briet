@@ -26,10 +26,10 @@ export default defineType({
       validation: Rule => Rule.required().min(1),
     }),
     defineField({
-      name: 'orderId',
-      title: 'Stripe Order / Session ID',
+      name: 'stripeSessionId',
+      title: 'Stripe Checkout Session ID',
       type: 'string',
-      description: 'Optional. The Stripe checkout session this code fulfils, for traceability.',
+      description: 'The Stripe checkout session this code fulfils, for traceability.',
     }),
     defineField({
       name: 'redeemedAt',

@@ -1,58 +1,83 @@
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
+import Link from 'next/link'
+import { mintRedeemCode } from '@lib/redeemCode'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 
 import styles from '../../styles/Home.module.css'
 
-const OrderPage = ({ order }) => {
+const OrderPage = ({ order, redeemCode }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Bookmarket: Order Placed`}</title>
+        <title>{`BRIET Bookmarket: ${redeemCode ? 'Your Redemption Code' : 'Order Pending'}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> Order Pending
+          <span className="logo">BRIET</span> {redeemCode ? 'Order Complete' : 'Order Pending'}
         </h1>
 
-        <p>We are reviewing your order and will reach out to {order.customer.email} with your download if you’re approved to implement <a href="https://controlleddigitallending.org">CDL</a>.</p>
+        {redeemCode ? (
+          <>
+            <p className={styles.description}>Your redemption code:</p>
 
-        <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
+            <p className={styles.redeemcode}>{redeemCode}</p>
 
-        <p>Status: {order.status}</p>
-        <p>Payment Status: {order.payment_status}</p>
+            <p className={styles.instructions}>
+              Enter this code in your <Link href="https://github.com/ArchiveLabs/lenny">Lenny</Link> library’s
+              Import screen to pull this book into your collection. The code works once, so keep it until the import
+              succeeds.
+            </p>
+
+            <p>A receipt is on its way to {order.email}.</p>
+          </>
+        ) : (
+          <>
+            <p>
+              We have your order and are reviewing the payment. Once it clears, reload this page for your redemption
+              code.
+            </p>
+
+            <p>Payment status: {order.payment_status}</p>
+          </>
+        )}
+
+        <p>
+          Questions, or need to make changes? Email <a href="mailto:help@briet.app">help@briet.app</a>.
+        </p>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }
 
 export const getServerSideProps = async ({ params }) => {
   const stripe = getStripeServerClient()
-  const sessionId = params.id
-  const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId)
+  const session = await stripe.checkout.sessions.retrieve(params.id)
 
-  if (!checkoutSession) {
-    return {
-      notFound: true
-    }
+  if (!session) {
+    return { notFound: true }
   }
+
+  // Sessions created before checkout started tagging the book carry no item id
+  // and cannot be fulfilled automatically.
+  const bookId = session.metadata?.briet_item_id
+  const redeemCode =
+    session.payment_status === 'paid' && bookId ? await mintRedeemCode(session.id, bookId) : null
 
   return {
     props: {
       order: {
-        id: checkoutSession.id,
-        status: checkoutSession.status,
-        payment_status: checkoutSession.payment_status,
-        customer: {
-          email: checkoutSession.customer_email,
-        },
-      }
-    }
-  };
-};
+        id: session.id,
+        payment_status: session.payment_status,
+        email: session.customer_details?.email ?? null,
+      },
+      redeemCode,
+    },
+  }
+}
 
 export default OrderPage
