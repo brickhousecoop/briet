@@ -8,6 +8,7 @@ import assert from 'node:assert/strict'
 // (currency conversion, metadata wiring) runs for real.
 
 process.env.STRIPE_SECRET_KEY = 'sk_test_fake'
+process.env.SITE_URL = 'https://market.briet.app'
 
 const fakeBook = {
   _id: 'book-1',
@@ -88,7 +89,7 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
   // the order page reads this back to know which book to mint a code for
   assert.equal(sessionParams.metadata.briet_item_id, 'book-1')
 
-  // redirect URLs are anchored to the request origin and book id
+  // redirect URLs are anchored to the configured site and book id
   assert.equal(sessionParams.success_url, 'https://market.briet.app/order/{CHECKOUT_SESSION_ID}')
   assert.equal(sessionParams.cancel_url, 'https://market.briet.app/buy/book-1')
 

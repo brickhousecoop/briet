@@ -17,6 +17,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    // Anyone can POST here with any Origin they like, and Stripe sends the buyer
+    // wherever these URLs point once the card clears. Reading them from the
+    // request would let a caller land a paying customer on a site they control,
+    // holding a session id that redeems this order's code.
+    const siteUrl = process.env.SITE_URL
+    if (!siteUrl) {
+      throw new Error('Missing SITE_URL')
+    }
+
     const stripe = getStripeServerClient()
     const bookId: string = req.body.briet_item_id
     const book = await sanity.fetch(singleBookQuery, { id: bookId });
@@ -27,8 +36,8 @@ export default async function handler(
     try {
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
-        success_url: `${req.headers.origin}/order/{CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/buy/${bookId}`,
+        success_url: `${siteUrl}/order/{CHECKOUT_SESSION_ID}`,
+        cancel_url: `${siteUrl}/buy/${bookId}`,
         line_items: [
           {
             price_data: {
