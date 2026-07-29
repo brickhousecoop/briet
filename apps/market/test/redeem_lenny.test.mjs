@@ -1,36 +1,64 @@
-import { test, mock, beforeEach } from 'node:test'
+import { test, mock, beforeEach, after } from 'node:test'
 import assert from 'node:assert/strict'
+import http from 'node:http'
+import { createClient } from '@sanity/client'
 
 // Lenny GETs this with a one-time code and imports whatever books come back.
 // The code is a bearer token spent on first use, so the status codes and the
-// one-shot claim are the contract. Sanity is the only boundary mocked; the
-// patch mock stands in for the conditional write that does the claiming.
+// one-shot claim are the contract.
+//
+// The boundary here is Sanity's HTTP API, not its client: the real @sanity/client
+// runs against the fake server below. Stubbing the client instead would let a
+// misread of its return contract pass — which is exactly how the claim shipped
+// broken once, always reporting "already redeemed" after spending the code.
+// The fake server decides the conditional match itself, so this covers the
+// request and response contract but not whether the GROQ predicate is valid.
 
-let record // what the code lookup returns
-let claimedIds // ids the conditional patch actually matched
+let record // the stored redeemCode document, or null
+let claims // one entry per mutation the server actually matched
 
-const patchBuilder = (selection) => ({
-  set: () => ({
-    commit: async () => {
-      // the real patch matches only while redeemedAt is unset
-      const hit = !record?.redeemedAt && selection.params.id === record?._id
-      if (hit) {
-        record.redeemedAt = new Date().toISOString()
-        claimedIds.push(selection.params.id)
-      }
-      return { results: hit ? [{ id: selection.params.id }] : [] }
-    },
-  }),
+const server = http.createServer((req, res) => {
+  let body = ''
+  req.on('data', (chunk) => (body += chunk))
+  req.on('end', () => {
+    const url = new URL(req.url, 'http://localhost')
+    res.setHeader('Content-Type', 'application/json')
+
+    if (url.pathname.includes('/data/query/')) {
+      return res.end(JSON.stringify({ ms: 1, result: record }))
+    }
+
+    const { patch } = JSON.parse(body).mutations[0]
+    const matched = record && !record.redeemedAt && patch.params.id === record._id
+    if (matched) {
+      record.redeemedAt = patch.set.redeemedAt
+      claims.push(patch.params.id)
+    }
+    res.end(JSON.stringify({
+      transactionId: 'tx1',
+      results: matched ? [{ id: record._id, operation: 'update' }] : [],
+    }))
+  })
 })
+
+await new Promise((resolve) => server.listen(0, resolve))
+const { port } = server.address()
 
 mock.module('@repo/sanity-client', {
   namedExports: {
-    createSanityClient: () => ({
-      fetch: async () => record,
-      patch: patchBuilder,
+    createSanityClient: (overrides = {}) => createClient({
+      projectId: 'p',
+      dataset: 'd',
+      apiVersion: '2025-11-18',
+      token: 't',
+      apiHost: `http://localhost:${port}`,
+      useProjectHostname: false,
+      ...overrides,
     }),
   },
 })
+
+after(() => server.close())
 
 const { default: handler } = await import('../pages/api/redeem-lenny/[code].ts')
 
@@ -56,7 +84,7 @@ const importableBook = {
 }
 
 beforeEach(() => {
-  claimedIds = []
+  claims = []
   record = { _id: 'redeem-cs_test_123', redeemedAt: null, books: [importableBook] }
 })
 
@@ -65,7 +93,7 @@ test('a valid code returns its books and is spent in the same request', async ()
 
   assert.equal(res.statusCode, 200)
   assert.deepEqual(res.body, { books: [importableBook] })
-  assert.deepEqual(claimedIds, ['redeem-cs_test_123'])
+  assert.deepEqual(claims, ['redeem-cs_test_123'])
 })
 
 test('reusing a spent code is rejected, and the books are not returned again', async () => {
@@ -74,7 +102,7 @@ test('reusing a spent code is rejected, and the books are not returned again', a
 
   assert.equal(res.statusCode, 400)
   assert.deepEqual(res.body, { error: 'already_redeemed' })
-  assert.deepEqual(claimedIds, ['redeem-cs_test_123']) // claimed exactly once
+  assert.deepEqual(claims, ['redeem-cs_test_123']) // claimed exactly once
 })
 
 test('an unknown code is a 404', async () => {
@@ -101,7 +129,7 @@ test('a bundle with nothing importable fails without burning the code', async ()
   assert.deepEqual(res.body, { error: 'nothing_to_import' })
 
   // the cataloguing gap is fixable in the Studio; the purchase must survive it
-  assert.deepEqual(claimedIds, [])
+  assert.deepEqual(claims, [])
   assert.equal(record.redeemedAt, null)
 })
 

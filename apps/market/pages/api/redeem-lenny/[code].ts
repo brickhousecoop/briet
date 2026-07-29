@@ -55,13 +55,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Atomic one-shot claim: the patch only matches while redeemedAt is unset, so
   // of any concurrent redemptions exactly one patches a document; the rest
   // patch zero and are told the code is spent.
+  //
+  // returnDocuments:false is what makes the result readable. A query selection
+  // otherwise resolves to a bare array of patched documents, and the mutation
+  // results this counts are not on it.
   let claimed: boolean
   try {
     const result = await write
       .patch({ query: '_id == $id && !defined(redeemedAt)', params: { id: record._id } })
       .set({ redeemedAt: new Date().toISOString() })
-      .commit()
-    claimed = (result.results || []).length > 0
+      .commit({ returnDocuments: false })
+    claimed = result.results.length > 0
   } catch (err) {
     console.error(`redeem-lenny: failed to claim ${record._id}`, err)
     return res.status(500).json({ error: 'claim_failed' })

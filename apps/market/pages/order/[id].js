@@ -31,7 +31,7 @@ const OrderPage = ({ order, redeemCode }) => {
               succeeds.
             </p>
 
-            <p>A receipt is on its way to {order.email}.</p>
+            {order.email && <p>A receipt is on its way to {order.email}.</p>}
           </>
         ) : (
           <>
@@ -57,11 +57,6 @@ const OrderPage = ({ order, redeemCode }) => {
 export const getServerSideProps = async ({ params }) => {
   const stripe = getStripeServerClient()
   const session = await stripe.checkout.sessions.retrieve(params.id)
-
-  if (!session) {
-    return { notFound: true }
-  }
-
   const redeemCode = await mintRedeemCode(session)
 
   return {
