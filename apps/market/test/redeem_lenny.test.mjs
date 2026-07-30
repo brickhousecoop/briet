@@ -29,7 +29,10 @@ const server = http.createServer((req, res) => {
     }
 
     const { patch } = JSON.parse(body).mutations[0]
-    const matched = record && !record.redeemedAt && patch.params.id === record._id
+    // Sanity matches nothing, and reports no error, unless the selection is a
+    // full `*[...]` query. Modelled here because a bare filter fails silently.
+    const wellFormed = patch.query.trimStart().startsWith('*[')
+    const matched = wellFormed && record && !record.redeemedAt && patch.params.id === record._id
     if (matched) {
       record.redeemedAt = patch.set.redeemedAt
       claims.push(patch.params.id)

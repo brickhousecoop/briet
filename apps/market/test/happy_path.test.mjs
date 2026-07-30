@@ -61,7 +61,8 @@ const server = http.createServer((req, res) => {
 
     const { patch } = mutation
     const target = docs.get(patch.params.id)
-    const matched = target && !target.redeemedAt
+    // A bare filter matches nothing in real Sanity, silently; only `*[...]` works.
+    const matched = patch.query.trimStart().startsWith('*[') && target && !target.redeemedAt
     if (matched) target.redeemedAt = patch.set.redeemedAt
     res.end(JSON.stringify({ results: matched ? [{ id: target._id }] : [] }))
   })

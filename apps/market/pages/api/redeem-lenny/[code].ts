@@ -56,13 +56,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // of any concurrent redemptions exactly one patches a document; the rest
   // patch zero and are told the code is spent.
   //
-  // returnDocuments:false is what makes the result readable. A query selection
-  // otherwise resolves to a bare array of patched documents, and the mutation
-  // results this counts are not on it.
+  // Two shapes here are load-bearing and fail silently if changed. The query must
+  // be a full `*[...]` expression: given a bare filter Sanity matches nothing,
+  // reports no error, and the code is refused as spent while never being claimed.
+  // And returnDocuments:false is what makes the result readable at all, since a
+  // query selection otherwise resolves to a bare array of patched documents that
+  // carries none of the mutation results counted below.
   let claimed: boolean
   try {
     const result = await createSanityWriteClient()
-      .patch({ query: '_id == $id && !defined(redeemedAt)', params: { id: record._id } })
+      .patch({ query: '*[_id == $id && !defined(redeemedAt)]', params: { id: record._id } })
       .set({ redeemedAt: new Date().toISOString() })
       .commit({ returnDocuments: false })
     claimed = result.results.length > 0

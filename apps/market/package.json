@@ -20,7 +20,8 @@
     "dev:local": "next dev -p 3001",
     "lint": "eslint .",
     "start": "next start",
-    "test": "node --experimental-test-module-mocks --import ./test/resolve-hook.mjs --test 'test/**/*.test.mjs'"
+    "test": "node --experimental-test-module-mocks --import ./test/resolve-hook.mjs --test 'test/**/*.test.mjs'",
+    "test:integration": "node --env-file=.env.local --import ./test/resolve-hook.mjs --test 'test/integration/**/*.integration.mjs'"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

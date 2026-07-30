@@ -1,0 +1,86 @@
+import { test, before, after } from 'node:test'
+import assert from 'node:assert/strict'
+import { createSanityWriteClient } from '@repo/sanity-client'
+import { mintRedeemCode } from '../../lib/redeemCode.ts'
+import redeem from '../../pages/api/redeem-lenny/[code].ts'
+
+// The whole purchase-to-import path against real Sanity. Not part of `npm test`:
+// it needs SANITY_WRITE_TOKEN and network, and it writes documents.
+//
+// It exists because the faked suite cannot see this class of bug. Two mistakes
+// shipped past fully green tests — reading `commit()`'s result off the wrong
+// shape, and selecting the claim with a bare filter instead of `*[...]`, which
+// Sanity matches against nothing while reporting no error. Both spent the
+// buyer's code and then reported it already redeemed. A stub answers however you
+// taught it to; only Content Lake knows what it actually accepts.
+
+const sanity = createSanityWriteClient()
+const RUN = `test-e2e-${Date.now()}`
+const BOOK = `${RUN}-book`
+const SESSION = `cs_test_${RUN}`
+const CODE_DOC = `redeem-${SESSION}`
+
+const makeRes = () => {
+  const res = { statusCode: null, body: null, headers: {} }
+  res.status = (code) => { res.statusCode = code; return res }
+  res.json = (body) => { res.body = body; return res }
+  res.setHeader = (key, value) => { res.headers[key] = value; return res }
+  res.end = (body) => { res.body = body; return res }
+  return res
+}
+
+const get = async (code) => {
+  const res = makeRes()
+  await redeem({ method: 'GET', query: { code } }, res)
+  return res
+}
+
+before(async () => {
+  const { dataset } = sanity.config()
+  assert.notEqual(dataset, 'production', 'refusing to write test documents into production')
+
+  // Reuse an existing file asset rather than uploading; the OLID is the form
+  // Lenny's parser accepts (it strips OL/M and skips anything else).
+  const fileRef = await sanity.fetch('*[_type=="book" && defined(file.asset)][0].file.asset._ref')
+  assert.ok(fileRef, 'no book with a file asset to borrow')
+  await sanity.create({
+    _id: BOOK,
+    _type: 'book',
+    title: 'Integration test book',
+    identifer_ol: 'OL32941311M',
+    file: { _type: 'file', asset: { _type: 'reference', _ref: fileRef } },
+  })
+})
+
+after(async () => {
+  await sanity.delete(CODE_DOC).catch(() => {}) // referencing document first
+  await sanity.delete(BOOK).catch(() => {})
+  assert.equal(await sanity.fetch('count(*[_id in $ids])', { ids: [BOOK, CODE_DOC] }), 0)
+})
+
+test('a paid checkout mints a code that Lenny can redeem exactly once', async () => {
+  const session = {
+    id: SESSION,
+    payment_status: 'paid',
+    metadata: { briet_item_id: BOOK },
+  }
+
+  const code = await mintRedeemCode(session)
+  assert.match(code, /^[A-Z2-9]{4}-[A-Z2-9]{4}$/)
+
+  // reloading the receipt must not mint a second code for the same purchase
+  assert.equal(await mintRedeemCode(session), code)
+
+  const first = await get(code)
+  assert.equal(first.statusCode, 200)
+  assert.equal(first.body.books.length, 1)
+  assert.equal(first.body.books[0].olid, 'OL32941311M')
+  assert.match(first.body.books[0].url, /^https:\/\/cdn\.sanity\.io\/files\//)
+
+  // the claim reached Content Lake, rather than merely being reported
+  assert.ok(await sanity.fetch('*[_id == $id][0].redeemedAt', { id: CODE_DOC }))
+
+  const replay = await get(code)
+  assert.equal(replay.statusCode, 400)
+  assert.deepEqual(replay.body, { error: 'already_redeemed' })
+})
