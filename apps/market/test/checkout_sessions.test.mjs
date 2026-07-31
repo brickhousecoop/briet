@@ -1,6 +1,7 @@
 import { test, after, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 import { startFakeSanity } from './helpers/fakeSanity.mjs'
+import { makeRes } from './helpers/fakeRes.mjs'
 
 // The checkout handler is the money path: it turns a BRIET catalog book into a
 // Stripe Checkout session. No module mocks: Sanity runs against a fake Content
@@ -38,16 +39,6 @@ const stripeCapture = {
       },
     },
   },
-}
-
-const makeRes = () => {
-  const res = { statusCode: null, redirectUrl: null, body: null, headers: {} }
-  res.status = (code) => { res.statusCode = code; return res }
-  res.json = (body) => { res.body = body; return res }
-  res.redirect = (code, url) => { res.statusCode = code; res.redirectUrl = url; return res }
-  res.setHeader = (key, value) => { res.headers[key] = value; return res }
-  res.end = (body) => { res.body = body; return res }
-  return res
 }
 
 const post = async (briet_item_id) => {
@@ -92,13 +83,12 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
   assert.equal(res.redirectUrl, 'https://checkout.stripe.com/c/pay/cs_test_123')
 })
 
-test('an unknown book id gives a clean 404, no Stripe call, no internals leaked', async () => {
+test('an unknown book id gives a clean 404, no Stripe call', async () => {
   const res = await post('does-not-exist')
 
   assert.equal(res.statusCode, 404)
   assert.equal(sessionParams, undefined) // never reached Stripe
-  // regression: previously threw on book.price_usd and leaked the raw TypeError
-  assert.equal(res.body, 'Book not found')
+  assert.deepEqual(res.body, { error: 'not_found' })
 })
 
 test('non-POST is rejected with 405 and an Allow header', async () => {

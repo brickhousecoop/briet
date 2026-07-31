@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { createSanityWriteClient } from '@repo/sanity-client'
 import { mintRedeemCode } from '../../lib/redeemCode.ts'
 import redeem from '../../pages/api/redeem-lenny/[code].ts'
+import { makeRes } from '../helpers/fakeRes.mjs'
 
 // The whole purchase-to-import path against real Sanity. Not part of `npm test`:
 // it needs SANITY_WRITE_TOKEN and network, and it writes documents.
@@ -17,15 +18,6 @@ const RUN = `test-e2e-${Date.now()}`
 const BOOK = `${RUN}-book`
 const SESSION = `cs_test_${RUN}`
 const CODE_DOC = `redeem-${SESSION}`
-
-const makeRes = () => {
-  const res = { statusCode: null, body: null, headers: {} }
-  res.status = (code) => { res.statusCode = code; return res }
-  res.json = (body) => { res.body = body; return res }
-  res.setHeader = (key, value) => { res.headers[key] = value; return res }
-  res.end = (body) => { res.body = body; return res }
-  return res
-}
 
 const get = async (code) => {
   const res = makeRes()

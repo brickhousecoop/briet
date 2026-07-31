@@ -38,7 +38,7 @@ export default async function handler(
     const bookId: string = req.body.briet_item_id
     const book = await (deps.sanity ?? sanity).fetch(singleBookQuery, { id: bookId });
     if (!book) {
-      res.status(404).json('Book not found')
+      res.status(404).json({ error: 'not_found' })
       return
     }
     try {

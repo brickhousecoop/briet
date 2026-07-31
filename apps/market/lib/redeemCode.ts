@@ -3,6 +3,8 @@ import type Stripe from 'stripe'
 import { createSanityWriteClient } from '@repo/sanity-client'
 
 // No 0/O/1/I so codes survive being read aloud over a phone.
+// Duplicated in apps/tagger/scripts/create-redeem-code.mjs (a standalone script
+// in another app); keep the two alphabets and the XXXX-XXXX shape in sync.
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
 function randomCode(): string {
@@ -19,10 +21,10 @@ function randomCode(): string {
 // has not cleared, or the session predates checkout tagging the book.
 //
 // The write client is injectable so tests can point a real client at a fake
-// Content Lake. Production callers omit it, so it is built lazily here: `next
-// build` evaluates this module while collecting page data, and deployments that
-// only serve the catalog must not demand the write token up front. Keep it
-// `??`-lazy; a required param would leak into pages/order/[id].js.
+// Content Lake. Production callers omit it and it is built lazily (`next build`
+// evaluates this module while collecting page data), so deploys that only serve
+// the catalog — no SANITY_WRITE_TOKEN — still build. Keep it optional: a required
+// param would force the token onto pages/order/[id].js.
 export async function mintRedeemCode(
   session: Stripe.Checkout.Session,
   writeClient?: ReturnType<typeof createSanityWriteClient>

@@ -19,6 +19,8 @@ import { createClient } from '@sanity/client'
 import { randomBytes } from 'node:crypto'
 
 // No 0/O/1/I to keep codes easy to read aloud.
+// Duplicated in apps/market/lib/redeemCode.ts (the checkout minter, another app);
+// keep the two alphabets and the XXXX-XXXX shape in sync.
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
 function parseArgs(argv) {

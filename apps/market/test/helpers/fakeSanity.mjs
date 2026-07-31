@@ -2,15 +2,14 @@ import http from 'node:http'
 import { createClient } from '@sanity/client'
 import { parse, evaluate } from 'groq-js'
 
-// A fake Content Lake the REAL @sanity/client talks to over HTTP. Unlike a
-// module mock, this exercises the client's actual request construction and
-// response parsing — the seam where the one-shot-claim bug shipped (a malformed
-// patch query that Content Lake silently matches nothing against).
+// A fake Content Lake the REAL @sanity/client talks to over HTTP, so tests
+// exercise the client's actual request construction and response parsing rather
+// than a stub that answers however it was taught.
 //
 // Queries and mutations run through `groq-js`, so GROQ predicates and reference
-// dereferencing are really evaluated — a fake that hand-matched would pass an
-// always-matching handler bug. This covers the request/response *contract*. It
-// cannot prove Content Lake accepts a query; redeem.integration.mjs keeps that.
+// dereferencing are really evaluated rather than hand-matched. This covers the
+// request/response *contract*; it cannot prove Content Lake accepts a query,
+// which redeem.integration.mjs keeps.
 //
 // node:test runs each test file in its own process, so each suite gets its own
 // server on an ephemeral port; the store is per-server. See packages/sanity-client.

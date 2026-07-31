@@ -1,28 +1,18 @@
 import { test, after, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
 import { startFakeSanity } from './helpers/fakeSanity.mjs'
+import { makeRes } from './helpers/fakeRes.mjs'
 
 // Lenny GETs this with a one-time code and imports whatever books come back. The
 // code is a bearer token spent on first use, so the status codes and the one-shot
-// claim are the contract. Runs against a fake Content Lake via the real client —
-// stubbing the client instead let a misread of its return contract ship once
-// (always reporting "already redeemed" after spending the code). The fake
-// evaluates the real GROQ predicate, so this covers the request/response contract
-// but not whether Content Lake accepts the query; redeem.integration.mjs keeps that.
+// claim are the contract. Runs against a fake Content Lake via the real client and
+// real GROQ evaluation, so this covers the request/response contract but not whether
+// Content Lake accepts the query; redeem.integration.mjs keeps that.
 
 const fake = await startFakeSanity()
 after(() => fake.close())
 
 const { default: handler } = await import('../pages/api/redeem-lenny/[code].ts')
-
-const makeRes = () => {
-  const res = { statusCode: null, body: null, headers: {} }
-  res.status = (code) => { res.statusCode = code; return res }
-  res.json = (body) => { res.body = body; return res }
-  res.setHeader = (key, value) => { res.headers[key] = value; return res }
-  res.end = (body) => { res.body = body; return res }
-  return res
-}
 
 const get = async (code) => {
   const res = makeRes()
