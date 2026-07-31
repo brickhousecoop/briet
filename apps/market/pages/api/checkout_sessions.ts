@@ -91,8 +91,11 @@ export default async function handler(
       }
       res.redirect(303, session.url);
     } catch (err) {
-      const e = err as { statusCode?: number; message?: string }
-      res.status(e.statusCode || 500).json(e.message);
+      // Log the real error server-side; the buyer gets a stable shape, not
+      // Stripe's raw message rendered as the form response.
+      console.error('checkout_sessions: Stripe checkout failed', err)
+      const statusCode = (err as { statusCode?: number }).statusCode || 500
+      res.status(statusCode).json({ error: 'checkout_failed' })
     }
   } else {
     res.setHeader('Allow', 'POST');
