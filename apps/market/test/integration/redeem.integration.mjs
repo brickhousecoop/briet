@@ -7,12 +7,10 @@ import redeem from '../../pages/api/redeem-lenny/[code].ts'
 // The whole purchase-to-import path against real Sanity. Not part of `npm test`:
 // it needs SANITY_WRITE_TOKEN and network, and it writes documents.
 //
-// It exists because the faked suite cannot see this class of bug. Two mistakes
-// shipped past fully green tests — reading `commit()`'s result off the wrong
-// shape, and selecting the claim with a bare filter instead of `*[...]`, which
-// Sanity matches against nothing while reporting no error. Both spent the
-// buyer's code and then reported it already redeemed. A stub answers however you
-// taught it to; only Content Lake knows what it actually accepts.
+// This is where the one-shot claim is actually verified. Content Lake accepts a
+// malformed claim silently — no error, nothing matched — which reads as "already
+// redeemed" and costs the buyer their purchase. A stubbed client answers however
+// it was taught to and cannot show that.
 
 const sanity = createSanityWriteClient()
 const RUN = `test-e2e-${Date.now()}`

@@ -1,9 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createSanityClient, createSanityWriteClient } from '@repo/sanity-client'
 
-// Reads can use the CDN; the write client bypasses it, and is built per request
-// so a deployment without the write token still builds and serves reads.
-const read = createSanityClient()
+// Deps are injected in tests so the one-shot claim runs against a fake Content
+// Lake via the real @sanity/client. The `write` fallback is built lazily (see
+// the claim site): never hoist it into a default param, or every read — including
+// 404/422 paths on deployments without SANITY_WRITE_TOKEN — would demand the token.
+type Client = ReturnType<typeof createSanityClient>
+type Deps = { read?: Client; write?: Client }
 
 type RedeemableBook = { olid: string | null; title: string; url: string | null }
 type RedeemCode = { _id: string; redeemedAt: string | null; books: RedeemableBook[] | null }
@@ -24,7 +27,7 @@ const codeQuery = `
 // code and expects { books: [{ olid, url, title }] }. It treats any 4xx (other
 // than 429) as "invalid or already redeemed" and 5xx as "upstream unavailable",
 // so the status codes below are chosen to map onto that handling.
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse, deps: Deps = {}) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
     return res.status(405).end('Method Not Allowed')
@@ -35,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(404).json({ error: 'not_found' })
   }
 
-  const record: RedeemCode | null = await read.fetch(codeQuery, { code })
+  const record: RedeemCode | null = await (deps.read ?? createSanityClient()).fetch(codeQuery, { code })
   if (!record) {
     return res.status(404).json({ error: 'not_found' })
   }
@@ -64,7 +67,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // carries none of the mutation results counted below.
   let claimed: boolean
   try {
-    const result = await createSanityWriteClient()
+    // Built here rather than at module scope: a deployment without the write token
+    // must still build and serve reads, so the client is created only when claiming.
+    const result = await (deps.write ?? createSanityWriteClient())
       .patch({ query: '*[_id == $id && !defined(redeemedAt)]', params: { id: record._id } })
       .set({ redeemedAt: new Date().toISOString() })
       .commit({ returnDocuments: false })

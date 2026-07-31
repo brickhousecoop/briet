@@ -17,16 +17,23 @@ function randomCode(): string {
 // order page cannot mint two codes for one purchase; a repeat call returns the
 // code minted first. Returns null when there is nothing to fulfil — the payment
 // has not cleared, or the session predates checkout tagging the book.
-export async function mintRedeemCode(session: Stripe.Checkout.Session): Promise<string | null> {
+//
+// The write client is injectable so tests can point a real client at a fake
+// Content Lake. Production callers omit it, so it is built lazily here: `next
+// build` evaluates this module while collecting page data, and deployments that
+// only serve the catalog must not demand the write token up front. Keep it
+// `??`-lazy; a required param would leak into pages/order/[id].js.
+export async function mintRedeemCode(
+  session: Stripe.Checkout.Session,
+  writeClient?: ReturnType<typeof createSanityWriteClient>
+): Promise<string | null> {
   const bookId = session.metadata?.briet_item_id
   if (session.payment_status !== 'paid' || !bookId) {
     return null
   }
 
-  // Built here rather than at module scope: `next build` evaluates this module
-  // while collecting page data, so demanding the token up there fails the build
-  // on any deployment that only serves the catalog.
-  const doc = await createSanityWriteClient().createIfNotExists({
+  const write = writeClient ?? createSanityWriteClient()
+  const doc = await write.createIfNotExists({
     _id: `redeem-${session.id}`,
     _type: 'redeemCode',
     code: randomCode(),

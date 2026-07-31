@@ -1,72 +1,17 @@
-import { test, mock, beforeEach, after } from 'node:test'
+import { test, after, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
-import http from 'node:http'
-import { createClient } from '@sanity/client'
+import { startFakeSanity } from './helpers/fakeSanity.mjs'
 
-// Lenny GETs this with a one-time code and imports whatever books come back.
-// The code is a bearer token spent on first use, so the status codes and the
-// one-shot claim are the contract.
-//
-// The boundary here is Sanity's HTTP API, not its client: the real @sanity/client
-// runs against the fake server below. Stubbing the client instead would let a
-// misread of its return contract pass — which is exactly how the claim shipped
-// broken once, always reporting "already redeemed" after spending the code.
-// The fake server decides the conditional match itself, so this covers the
-// request and response contract but not whether the GROQ predicate is valid.
+// Lenny GETs this with a one-time code and imports whatever books come back. The
+// code is a bearer token spent on first use, so the status codes and the one-shot
+// claim are the contract. Runs against a fake Content Lake via the real client —
+// stubbing the client instead let a misread of its return contract ship once
+// (always reporting "already redeemed" after spending the code). The fake
+// evaluates the real GROQ predicate, so this covers the request/response contract
+// but not whether Content Lake accepts the query; redeem.integration.mjs keeps that.
 
-let record // the stored redeemCode document, or null
-let claims // one entry per mutation the server actually matched
-
-const server = http.createServer((req, res) => {
-  let body = ''
-  req.on('data', (chunk) => (body += chunk))
-  req.on('end', () => {
-    const url = new URL(req.url, 'http://localhost')
-    res.setHeader('Content-Type', 'application/json')
-
-    if (url.pathname.includes('/data/query/')) {
-      return res.end(JSON.stringify({ ms: 1, result: record }))
-    }
-
-    const { patch } = JSON.parse(body).mutations[0]
-    // Sanity matches nothing, and reports no error, unless the selection is a
-    // full `*[...]` query. Modelled here because a bare filter fails silently.
-    const wellFormed = patch.query.trimStart().startsWith('*[')
-    const matched = wellFormed && record && !record.redeemedAt && patch.params.id === record._id
-    if (matched) {
-      record.redeemedAt = patch.set.redeemedAt
-      claims.push(patch.params.id)
-    }
-    res.end(JSON.stringify({
-      transactionId: 'tx1',
-      results: matched ? [{ id: record._id, operation: 'update' }] : [],
-    }))
-  })
-})
-
-await new Promise((resolve) => server.listen(0, resolve))
-const { port } = server.address()
-
-mock.module('@repo/sanity-client', {
-  exports: {
-    createSanityWriteClient: () => sanityFor({}),
-    createSanityClient: (overrides = {}) => sanityFor(overrides),
-  },
-})
-
-function sanityFor(overrides) {
-  return createClient({
-      projectId: 'p',
-      dataset: 'd',
-      apiVersion: '2025-11-18',
-      token: 't',
-    apiHost: `http://localhost:${port}`,
-    useProjectHostname: false,
-    ...overrides,
-  })
-}
-
-after(() => server.close())
+const fake = await startFakeSanity()
+after(() => fake.close())
 
 const { default: handler } = await import('../pages/api/redeem-lenny/[code].ts')
 
@@ -81,27 +26,42 @@ const makeRes = () => {
 
 const get = async (code) => {
   const res = makeRes()
-  await handler({ method: 'GET', query: { code } }, res)
+  await handler({ method: 'GET', query: { code } }, res, { read: fake.client(), write: fake.client() })
   return res
 }
 
-const importableBook = {
-  olid: 'OL32941311M',
+// The redeem query dereferences file.asset->url, so seed the book's file as an asset
+// reference (a file-<hash>-<ext> asset doc) as Content Lake stores it.
+const EPUB_URL = 'https://cdn.sanity.io/files/p/production/def456.epub'
+const epubAsset = { _id: 'file-def456-epub', _type: 'sanity.fileAsset', url: EPUB_URL }
+const book = {
+  _id: 'book-1',
+  _type: 'book',
   title: 'The Test Book',
-  url: 'https://cdn.sanity.io/files/p/production/book.epub',
+  identifer_ol: 'OL32941311M',
+  file: { _type: 'file', asset: { _type: 'reference', _ref: 'file-def456-epub' } },
 }
+const importable = { olid: 'OL32941311M', title: 'The Test Book', url: EPUB_URL }
+
+const redeemDoc = (books, redeemedAt = null) => ({
+  _id: 'redeem-cs_test_123',
+  _type: 'redeemCode',
+  code: 'ABCD-1234',
+  redeemedAt,
+  books: books.map((b) => ({ _type: 'reference', _ref: b._id, _key: b._id })),
+})
 
 beforeEach(() => {
-  claims = []
-  record = { _id: 'redeem-cs_test_123', redeemedAt: null, books: [importableBook] }
+  fake.reset()
+  fake.seed([epubAsset, book, redeemDoc([book])])
 })
 
 test('a valid code returns its books and is spent in the same request', async () => {
   const res = await get('abcd-1234')
 
   assert.equal(res.statusCode, 200)
-  assert.deepEqual(res.body, { books: [importableBook] })
-  assert.deepEqual(claims, ['redeem-cs_test_123'])
+  assert.deepEqual(res.body, { books: [importable] })
+  assert.ok(fake.doc('redeem-cs_test_123').redeemedAt) // claimed
 })
 
 test('reusing a spent code is rejected, and the books are not returned again', async () => {
@@ -110,11 +70,10 @@ test('reusing a spent code is rejected, and the books are not returned again', a
 
   assert.equal(res.statusCode, 400)
   assert.deepEqual(res.body, { error: 'already_redeemed' })
-  assert.deepEqual(claims, ['redeem-cs_test_123']) // claimed exactly once
+  assert.equal(fake.calls.mutations.filter((m) => m.patch).length, 1) // claimed exactly once
 })
 
 test('an unknown code is a 404', async () => {
-  record = null
   const res = await get('nope-nope')
 
   assert.equal(res.statusCode, 404)
@@ -122,28 +81,30 @@ test('an unknown code is a 404', async () => {
 })
 
 test('books Lenny cannot import are dropped rather than returned half-formed', async () => {
-  record.books = [importableBook, { olid: null, url: 'x' }, { olid: 'OL1M', url: null }]
+  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifer_ol: null, file: book.file }
+  const noFile = { _id: 'no-file', _type: 'book', title: 'No file', identifer_ol: 'OL1M', file: null }
+  fake.seed([noOlid, noFile, redeemDoc([book, noOlid, noFile])])
   const res = await get('abcd-1234')
 
   assert.equal(res.statusCode, 200)
-  assert.deepEqual(res.body, { books: [importableBook] })
+  assert.deepEqual(res.body, { books: [importable] })
 })
 
 test('a bundle with nothing importable fails without burning the code', async () => {
-  record.books = [{ olid: null, url: null }]
+  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifer_ol: null, file: null }
+  fake.seed([noOlid, redeemDoc([noOlid])])
   const res = await get('abcd-1234')
 
   assert.equal(res.statusCode, 422)
   assert.deepEqual(res.body, { error: 'nothing_to_import' })
 
   // the cataloguing gap is fixable in the Studio; the purchase must survive it
-  assert.deepEqual(claims, [])
-  assert.equal(record.redeemedAt, null)
+  assert.equal(fake.doc('redeem-cs_test_123').redeemedAt, null)
 })
 
 test('non-GET is rejected with 405 and an Allow header', async () => {
   const res = makeRes()
-  await handler({ method: 'POST', query: {} }, res)
+  await handler({ method: 'POST', query: {} }, res, { read: fake.client(), write: fake.client() })
 
   assert.equal(res.statusCode, 405)
   assert.equal(res.headers['Allow'], 'GET')

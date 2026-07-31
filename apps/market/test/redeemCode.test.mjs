@@ -1,21 +1,15 @@
-import { test, mock, beforeEach } from 'node:test'
+import { test, after, beforeEach } from 'node:test'
 import assert from 'node:assert/strict'
+import { startFakeSanity } from './helpers/fakeSanity.mjs'
 
-// Minting is what turns a paid checkout into something the buyer can redeem in
-// Lenny. The gate matters as much as the mint: an unpaid or untagged session
-// must not produce a working code. Sanity is the only boundary mocked.
+// Minting turns a paid checkout into a code the buyer can redeem in Lenny. The
+// gate matters as much as the mint: an unpaid or untagged session must not
+// produce a working code. Runs against a fake Content Lake via the real client,
+// so the createIfNotExists idempotency guarantee is exercised for real.
 
-let stored // documents in the fake dataset, keyed by _id
-
-mock.module('@repo/sanity-client', {
-  exports: {
-    createSanityWriteClient: () => ({
-      // Sanity keeps the first writer's document and returns it untouched,
-      // which is what makes the deterministic _id an idempotency guarantee.
-      createIfNotExists: async (doc) => (stored[doc._id] ??= doc),
-    }),
-  },
-})
+const fake = await startFakeSanity()
+after(() => fake.close())
+beforeEach(() => fake.reset())
 
 const { mintRedeemCode } = await import('../lib/redeemCode.ts')
 
@@ -25,17 +19,13 @@ const paidSession = {
   metadata: { briet_item_id: 'book-1' },
 }
 
-beforeEach(() => {
-  stored = {}
-})
-
 test('a paid session mints a code for the purchased book', async () => {
-  const code = await mintRedeemCode(paidSession)
+  const code = await mintRedeemCode(paidSession, fake.client())
 
   assert.match(code, /^[A-Z2-9]{4}-[A-Z2-9]{4}$/)
 
-  // one code per checkout session, enforced by the id rather than a lookup
-  const created = stored['redeem-cs_test_123']
+  // one code per checkout session, enforced by the deterministic _id, not a lookup
+  const created = fake.doc('redeem-cs_test_123')
   assert.equal(created.code, code)
   assert.equal(created._type, 'redeemCode')
   assert.equal(created.stripeSessionId, 'cs_test_123')
@@ -43,23 +33,23 @@ test('a paid session mints a code for the purchased book', async () => {
 })
 
 test('reloading the order page returns the first code, it does not mint a second', async () => {
-  const first = await mintRedeemCode(paidSession)
-  const second = await mintRedeemCode(paidSession)
+  const first = await mintRedeemCode(paidSession, fake.client())
+  const second = await mintRedeemCode(paidSession, fake.client())
 
   assert.equal(second, first)
-  assert.deepEqual(Object.keys(stored), ['redeem-cs_test_123'])
+  assert.equal(fake.doc('redeem-cs_test_123').code, first) // first code survives; both creates attempted, one stored
 })
 
 test('an unpaid session mints nothing', async () => {
-  const code = await mintRedeemCode({ ...paidSession, payment_status: 'unpaid' })
+  const code = await mintRedeemCode({ ...paidSession, payment_status: 'unpaid' }, fake.client())
 
   assert.equal(code, null)
-  assert.deepEqual(stored, {})
+  assert.equal(fake.doc('redeem-cs_test_123'), undefined)
 })
 
 test('a session with no book id mints nothing', async () => {
-  const code = await mintRedeemCode({ ...paidSession, metadata: {} })
+  const code = await mintRedeemCode({ ...paidSession, metadata: {} }, fake.client())
 
   assert.equal(code, null)
-  assert.deepEqual(stored, {})
+  assert.equal(fake.calls.mutations.length, 0)
 })

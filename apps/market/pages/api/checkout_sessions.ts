@@ -1,6 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import Stripe from 'stripe'
+import sanity, { createSanityClient } from '@repo/sanity-client'
 import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
-import sanity from '@repo/sanity-client'
+
+// Deps are injected in tests so the money path runs against a fake Content Lake
+// (via a real @sanity/client) and a param-capturing Stripe stand-in. Production
+// callers pass only (req, res), so the `??` fallbacks select the module singleton
+// and the env-configured Stripe.
+type Deps = { sanity?: ReturnType<typeof createSanityClient>; stripe?: InstanceType<typeof Stripe> }
 
 const singleBookQuery = `
   *[_type == "book" && _id == $id] {
@@ -14,7 +21,8 @@ const singleBookQuery = `
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  deps: Deps = {}
 ) {
   if (req.method === 'POST') {
     // Anyone can POST here with any Origin they like, and Stripe sends the buyer
@@ -26,9 +34,9 @@ export default async function handler(
       throw new Error('Missing SITE_URL')
     }
 
-    const stripe = getStripeServerClient()
+    const stripe = deps.stripe ?? getStripeServerClient()
     const bookId: string = req.body.briet_item_id
-    const book = await sanity.fetch(singleBookQuery, { id: bookId });
+    const book = await (deps.sanity ?? sanity).fetch(singleBookQuery, { id: bookId });
     if (!book) {
       res.status(404).json('Book not found')
       return
