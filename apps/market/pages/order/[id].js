@@ -1,5 +1,6 @@
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
+import CopyButton from '@components/CopyButton'
 import Link from 'next/link'
 import { mintRedeemCode } from '../../lib/redeemCode'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
@@ -21,9 +22,12 @@ const OrderPage = ({ order, redeemCode }) => {
 
         {redeemCode ? (
           <>
-            <p className={styles.description}>Your redemption code:</p>
+            <p className={`${styles.description} ${styles.redeemcodeLabel}`}>Your redemption code:</p>
 
-            <p className={styles.redeemcode}>{redeemCode}</p>
+            <div className={styles.redeemcodeRow}>
+              <code className={styles.redeemcode}>{redeemCode}</code>
+              <CopyButton text={redeemCode} label="Copy code" className={styles.copyInBox} />
+            </div>
 
             <p className={styles.instructions}>
               Enter this code in your <Link href="https://github.com/ArchiveLabs/lenny">Lenny</Link> library’s

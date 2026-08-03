@@ -44,6 +44,7 @@
 }
 
 .description {
+  text-align: center;
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
@@ -206,15 +207,57 @@ button.card {
   }
 }
 
-.redeemcode {
+/* Tightens the 4rem .description gap so the label sits closer to its box. */
+.redeemcodeLabel {
+  margin-bottom: 1rem;
+}
+
+/* The row is relative so the copy button can dock to its right edge, leaving
+   the code horizontally centered in the box rather than offset by the button. */
+.redeemcodeRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fafafa;
-  border: 1px solid #eaeaea;
-  border-radius: 5px;
-  padding: 1rem 2rem;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  padding: 1.25rem 4.5rem;
   margin: 0 0 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.redeemcodeRow .redeemcode {
+  text-align: center;
   font-size: 2.5rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   user-select: all;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+/* Layout hook for the reusable CopyButton when docked inside the redeem-code
+   box: pins it to the box's right edge. Button styling lives in
+   components/CopyButton.module.css; this only positions it. */
+.copyInBox {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* At narrow widths the absolute button (≈119px) is wider than the 4.5rem right
+   padding it docks into and would cover the code's last characters. Stack it
+   under the code instead: bring it back into flow and let the row wrap. */
+@media (max-width: 640px) {
+  .redeemcodeRow {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.25rem;
+  }
+
+  .copyInBox {
+    position: static;
+    transform: none;
+  }
 }
