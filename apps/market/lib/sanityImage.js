@@ -1,17 +1,23 @@
 import Image from "next/image"
-import sanity from "@repo/sanity-client"
-import { useNextSanityImage } from 'next-sanity-image'
+import { assetDimensions, sanityImageLoader } from "@repo/sanity-client"
 
 const SanityImage = ({ sanityAsset, alt }) => {
-  const imageProps = useNextSanityImage(sanity, sanityAsset)
+  // cover is an optional field (no required validation on the book schema),
+  // so a book without one renders no image rather than erroring.
+  const ref = sanityAsset?.asset?._ref
+  if (!ref) return null
+
+  const { width, height } = assetDimensions(ref)
+
   return (
     <Image
+      loader={sanityImageLoader}
+      src={ref}
       alt={alt}
-      style={{
-        maxWidth: "100%",
-        height: "auto"
-      }}
-      {...imageProps}
+      width={width}
+      height={height}
+      sizes="(max-width: 800px) 100vw, 800px"
+      style={{ maxWidth: "100%", height: "auto" }}
     />
   )
 }

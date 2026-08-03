@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
 import sanity from '@repo/sanity-client'
 
@@ -20,6 +20,10 @@ export default async function handler(
     const stripe = getStripeServerClient()
     const bookId: string = req.body.briet_item_id
     const book = await sanity.fetch(singleBookQuery, { id: bookId });
+    if (!book) {
+      res.status(404).json('Book not found')
+      return
+    }
     try {
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
@@ -66,7 +70,8 @@ export default async function handler(
       }
       res.redirect(303, session.url);
     } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
+      const e = err as { statusCode?: number; message?: string }
+      res.status(e.statusCode || 500).json(e.message);
     }
   } else {
     res.setHeader('Allow', 'POST');

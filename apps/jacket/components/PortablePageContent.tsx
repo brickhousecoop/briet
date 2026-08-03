@@ -2,7 +2,7 @@ import {
   PortableText,
   type PortableTextBlock,
   type PortableTextComponents,
-} from 'next-sanity'
+} from '@portabletext/react'
 
 import PortableImage from './PortableImage'
 

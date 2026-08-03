@@ -11,19 +11,24 @@
     "url": "https://nocomment.llc"
   },
   "main": "package.json",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "sanity build",
     "dev": "npm run --prefix ../../ dev-tagger",
-    "start": "sanity start"
+    "dev:local": "sanity dev --port 3333",
+    "start": "sanity start",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@sanity/eslint-config-studio": "^4.0.0",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/vision": "^4.3.0",
+    "@sanity/eslint-config-studio": "^6.0.0",
+    "@sanity/icons": "^5.1.0",
+    "@sanity/vision": "^6.5.0",
     "eslint": "^9.1.1",
     "prop-types": "^15.8.1",
-    "sanity": "^4.3.0",
-    "slate-react": "^0.117.4",
+    "sanity": "^6.5.0",
+    "slate-react": "^0.126.0",
     "styled-components": "^6.1.15"
   }
 }

@@ -6,6 +6,97 @@ This monorepo contains the code which runs our platforms (see below). We seek vo
 
 To get started, reach out [here on our webform](https://thebrick.house/briet/).
 
+# Local Development
+
+Every app has two dev scripts. `dev:local` runs the app's own dev server (`next dev`, `sanity dev`, `http-server`) and is what you want almost always. `dev` runs the app through `vercel dev`, which is slower, needs Vercel auth, and — per [Vercel's own guidance](https://vercel.com/docs/cli/dev) — buys you nothing for a framework app, since `next dev` already handles functions, redirects, rewrites, headers, and middleware natively.
+
+## Bootstrap a fresh checkout
+
+**1. Node 24.** Pinned in `.tool-versions` and `.nvmrc`, so `mise install`, `asdf install`, or `nvm use` all pick it up.
+
+**2. Install from the repo root.** This is an npm workspace — one install covers every app. Installing inside an app directory instead will produce a broken tree.
+
+```
+npm install
+```
+
+`Unsupported engine` warnings come from `server` and are safe to ignore.
+
+**3. Log into Sanity.** Required for `tagger`; also how your access to catalog content is granted.
+
+```
+npx sanity login
+```
+
+**4. Set up env vars.** Env vars are **per app**, not shared — each app is its own Vercel project with its own variables, and each reads its own `apps/<app>/.env.local`. That file is gitignored, so a fresh checkout has none.
+
+| App | Needs env vars? |
+|---|---|
+| jacket | yes — copy `.env.example`, fill in `SANITY_TOKEN` |
+| market | yes — see `apps/market/.env.example` |
+| tagger | no — `.env.development` is committed and carries the non-secret project ID |
+| reader | no — fully static |
+
+Market's Stripe and Clerk keys only matter for the checkout and `/account` flows; without them the catalog still browses fine.
+
+### Which Sanity dataset you get
+
+`jacket` and `market` default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. Two apps use `production` on purpose: `tagger`, because it's the CMS and editors need the real catalog, and `server`, because it publishes the public OPDS feed.
+
+Both datasets are private. `SANITY_TOKEN` is required, and the client throws without it — Sanity answers an unauthenticated read with zero documents rather than an error, so a missing token would otherwise look like an empty catalog.
+
+To read production content locally, override the one variable for a single run:
+
+```
+NEXT_PUBLIC_SANITY_DATASET=production npm run dev:local -w apps/market
+```
+
+Shell environment beats `.env.local`, so nothing needs editing. Note this swaps **only** the content. Clerk and Stripe stay on their test keys, which is deliberate — pointing local dev at live auth or live payments would mean real accounts and real charges.
+
+Two ways to get values:
+
+**On the Brick House Vercel team** — pull them. Log in once, then link and pull in each app that needs it:
+
+```
+npx vercel login
+cd apps/market
+npx vercel link --scope brickhousecoop --project bh-briet-market
+npx vercel env pull
+```
+
+`vercel link` is one-time setup per app directory — it writes `.vercel/project.json`, just an org ID and project ID so later commands know which project you mean. `vercel env pull` writes `.env.local` from the project's Development variables, and **overwrites** the file rather than merging. Re-run it when vars change; you never need to re-run `link`. Projects are named `bh-briet-<app>`.
+
+**Not on the team** — copy `apps/market/.env.example` to `.env.local` and ask a developer for the blank values.
+
+## Run one app
+
+From the repo root:
+
+```
+npm run dev:local -w apps/jacket
+```
+
+Or equivalently `cd apps/jacket && npm run dev:local`.
+
+## Run all apps
+
+From the repo root:
+
+```
+npm run dev:local
+```
+
+Runs every app's `dev:local` in parallel via turbo. Ports are pinned, so the URLs are stable:
+
+| App | URL |
+|---|---|
+| jacket | http://localhost:3000 |
+| market | http://localhost:3001 |
+| tagger | http://localhost:3333 |
+| reader | http://localhost:8080 |
+
+`server` has no dev script and is skipped (see its section below).
+
 # Structure
 
 BRIET is several interwoven applications. For librarians and institutions, the key point is the [Bookmarket](https://market.briet.app/), where approved customers can purchase ebooks, just like physical books. To be an approved customer, a library or institution must be a [public signatory](https://www.controlleddigitallending.org/) to the position statement on controlled digital lending (CDL).
@@ -22,11 +113,23 @@ Most likely an external tool as we want to support WordPress, WordPress with Led
 
 _(not yet built, nor begun)_
 
+## `jacket`
+
+**The BRIET homepage**
+
+A small Next.js site serving [briet.app](https://briet.app/), with content from the BRIET Catalog (Sanity).
+
+### `jacket` Development
+
+`npm install` from the repo root, then copy `apps/jacket/.env.example` to `.env.local` and fill in `SANITY_TOKEN` (ask a developer, or `vercel env pull`). `npm run dev:local` then runs `next dev` on port 3000.
+
+**With Vercel:** `npm run dev` runs the app through `vercel dev` (project `bh-briet-jacket`).
+
 ## `tagger`
 
 **BRIET Books ⮕ BRIET Catalog**
 
-CMS to to manage the BRIET Catalog: metadata, prices, and asset files for digital books and other digital items. Built on Sanity, user access managed by BRIET staff.
+CMS to manage the BRIET Catalog: metadata, prices, and asset files for digital books and other digital items. Built on Sanity, user access managed by BRIET staff.
 
 In production at **tagger.briet.app**
 
@@ -35,21 +138,21 @@ In production at **tagger.briet.app**
 You'll need
 - a [Sanity account](https://www.sanity.io/login/sign-up)
 - to be invited (at Developer role or higher) to [BRIET's Sanity Project](https://www.sanity.io/organizations/oeYsaoziG/project/3lm68n5v).
-- nodejs 20 (see below)
+- nodejs 24 (see below)
 
-You need to be pretty strict about node@20 (latest stable version is fine)— versions 21+ are known to have issues with the dependencies of this app. This is configured in `./apps/tagger/.tool-versions` for `mise` or similar tools to pick up.
+We target the current Node LTS (24), pinned in `.tool-versions`/`.nvmrc` for `mise`, `asdf`, or `nvm` to pick up. Sanity requires Node ≥20.19, so any recent LTS works; 24 gives the longest support runway.
 
 `cd apps/tagger`
 
-`mise install` (or another way to ensure you are on `node` version 20, see above)
+`mise install` (or another way to ensure you are on `node` version 24, see above)
 
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
 
 `npx sanity@latest login`, log into your Sanity account
 
-`vc dev` to link with Vercel first time, pull env vars, & run
+`npm run dev:local` runs `sanity dev` on port 3333. No env vars needed — `.env.development` is committed and carries the non-secret project ID, and your access comes from `sanity login`.
 
-or `npm run dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
+**With Vercel:** `npm run dev` runs the app through `vercel dev` instead. Rarely useful here, since Sanity Studio's own dev server is what production builds from anyway.
 
 ## `server`
 
@@ -89,11 +192,26 @@ You'll need
 
 `npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
 
-`vc link --scope brickhousecoop --project bh-briet-market` to link with Vercel and pull env vars
+Get env vars into `apps/market/.env.local`, either by pulling them:
 
-`vc dev`
+```
+npx vercel link --scope brickhousecoop --project bh-briet-market
+npx vercel env pull
+```
 
-or `npx next dev` if you just want to tinker locally, but you will need probably some env vars from another developer (try Jacob)
+or, if you're not on the Vercel team, by copying `.env.example` to `.env.local` and asking a developer for the values. Only the Sanity vars are needed to browse the catalog — Stripe matters for checkout, Clerk for the `/account` flow.
+
+`npm run dev:local` runs `next dev` on port 3001.
+
+**With Vercel:** `npm run dev` runs the app through `vercel dev`. Slower and needs auth; `next dev` already handles rewrites, headers, and the Clerk proxy natively.
+
+## `reader`
+
+**In-browser ebook reading**
+
+A static build of the Internet Archive [BookReader](https://github.com/internetarchive/bookreader), served by `http-server` — run `npm run dev:local` in `apps/reader`. It ships a landing page plus one pre-baked demo book (static page JPEGs under `public/borrow/`), which market's homepage embeds in an iframe.
+
+There is no page-rendering backend: the old PDF→JPG edge function (`api/getPage`) and its native deps were removed, so `reader` is now purely static. A real book-serving pipeline for non-PDF books still needs to be built.
 
 ## `lender` (Lenny)
 
@@ -111,7 +229,7 @@ Our fork is https://github.com/brickhousecoop/lenny
 
 ## How to spell “ebook”
 
-It is spelled `ebook` or `ebooks`. Not `e-book`, `eBook`, or `e-Book`. Ebook should be capititalized only when you would normally capitalize a word.
+It is spelled `ebook` or `ebooks`. Not `e-book`, `eBook`, or `e-Book`. Ebook should be capitalized only when you would normally capitalize a word.
 
 ## On the etymological difference between _lending_ and _loaning_
 
