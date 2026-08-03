@@ -33,7 +33,6 @@ const BookBuyPage = ({ book }) => {
     <div className={styles.container}>
       <Head>
         <title>{`BRIET Bookmarket: ${book.title}`}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>

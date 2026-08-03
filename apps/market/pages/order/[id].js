@@ -12,7 +12,6 @@ const OrderPage = ({ order, redeemCode }) => {
     <div className={styles.container}>
       <Head>
         <title>{`BRIET Bookmarket: ${redeemCode ? 'Your Redemption Code' : 'Order Pending'}`}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>

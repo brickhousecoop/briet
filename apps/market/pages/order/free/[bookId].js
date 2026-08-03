@@ -20,7 +20,6 @@ const OrderPage = ({ book }) => {
     <div className={styles.container}>
       <Head>
         <title>{`BRIET Bookmarket: Order Placed`}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>

@@ -1,5 +1,5 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
+import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
@@ -45,14 +45,13 @@ const singleBookQuery = `
 
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
 
-export const metadata: Metadata = {
-  title: 'BRIET Bookmarket',
-  description: 'Ebooks, for libraries, for keeps.',
-}
-
 const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book }) => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>BRIET Bookmarket</title>
+      </Head>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="logo">BRIET</span> Bookmarket
