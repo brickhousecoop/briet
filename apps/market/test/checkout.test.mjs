@@ -13,7 +13,7 @@ const fake = await startFakeSanity()
 after(() => fake.close())
 beforeEach(() => fake.reset())
 
-const { default: handler } = await import('../pages/api/checkout_sessions.ts')
+const { default: handler } = await import('../pages/api/checkout.ts')
 
 // The catalog query dereferences publisher->name and cover.asset->url, so seed the
 // book with reference-shaped fields (as Content Lake stores them) plus their targets.

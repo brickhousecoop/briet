@@ -71,7 +71,7 @@ const BookBuyPage = ({ book }) => {
           <p className={styles.description}>{book.description}</p>
 
             {book.price_usd > 0 ?
-              <form action="/api/checkout_sessions" method="POST">
+              <form action="/api/checkout" method="POST">
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
                 <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>

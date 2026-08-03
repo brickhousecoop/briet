@@ -1,5 +1,5 @@
 // A minimal NextApiResponse stand-in capturing what the handlers write.
-// `redirect` is only used by checkout_sessions but costs nothing to carry.
+// `redirect` is only used by checkout but costs nothing to carry.
 export const makeRes = () => {
   const res = { statusCode: null, body: null, headers: {} }
   res.status = (code) => { res.statusCode = code; return res }
