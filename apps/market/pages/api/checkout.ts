@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import sanity, { createSanityClient } from '@repo/sanity-client'
+import { generateRedeemCode } from '../../lib/redeemCode'
 import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
 
 // Deps are injected in tests so the money path runs against a fake Content Lake
@@ -42,6 +43,7 @@ export default async function handler(
       return
     }
     try {
+      const redeemCode = generateRedeemCode()
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         success_url: `${siteUrl}/order/{CHECKOUT_SESSION_ID}`,
@@ -64,11 +66,14 @@ export default async function handler(
             },
           },
         ],
-        // The order page reads briet_item_id back to mint the redemption code.
+        // Choose the redemption code up front and stash it in Stripe metadata so it can appear in the receipt email.
+        // It won't work for redemption until the buyer completes checkout and lands on success_url.
         metadata: {
           briet_item_id: bookId,
+          briet_redeem_code: redeemCode,
         },
         payment_intent_data: {
+          description: `Your BRIET redemption code is ${redeemCode}`,
           metadata: {
             briet_payout_to: book.publisher_name,
           },

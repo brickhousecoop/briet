@@ -28,9 +28,15 @@ const OrderPage = ({ book }) => {
           <span className="logo">BRIET</span> Order Complete
         </h1>
 
-        <Link className={styles.downloadbutton} href={book.downloadUrl}>
-          Download your book
-        </Link>
+        {book.downloadUrl ? (
+          <Link className={styles.downloadbutton} href={book.downloadUrl}>
+            Download your book
+          </Link>
+        ) : (
+          <p className={styles.description}>
+            This download is currently unavailable. Please contact <a href="mailto:help@briet.app">help@briet.app</a>.
+          </p>
+        )}
 
         {book.isPunctumBook
         ? <p>This is a <Link href="https://punctumbooks.com">punctum</Link> ebook. All punctum books are free, and BRIET aims to make them even more accessible to public libaries. Still: please consider <Link href="https://punctumbooks.com/support/">donating to punctum</Link>.</p>

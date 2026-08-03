@@ -16,13 +16,13 @@ const { mintRedeemCode } = await import('../lib/redeemCode.ts')
 const paidSession = {
   id: 'cs_test_123',
   payment_status: 'paid',
-  metadata: { briet_item_id: 'book-1' },
+  metadata: { briet_item_id: 'book-1', briet_redeem_code: 'ABCD-2345' },
 }
 
 test('a paid session mints a code for the purchased book', async () => {
   const code = await mintRedeemCode(paidSession, fake.client())
 
-  assert.match(code, /^[A-Z2-9]{4}-[A-Z2-9]{4}$/)
+  assert.equal(code, 'ABCD-2345')
 
   // one code per checkout session, enforced by the deterministic _id, not a lookup
   const created = fake.doc('redeem-cs_test_123')
@@ -47,8 +47,11 @@ test('an unpaid session mints nothing', async () => {
   assert.equal(fake.doc('redeem-cs_test_123'), undefined)
 })
 
-test('a session with no book id mints nothing', async () => {
-  const code = await mintRedeemCode({ ...paidSession, metadata: {} }, fake.client())
+test('a session with incomplete redemption metadata mints nothing', async () => {
+  const code = await mintRedeemCode(
+    { ...paidSession, metadata: { briet_item_id: 'book-1' } },
+    fake.client(),
+  )
 
   assert.equal(code, null)
   assert.equal(fake.calls.mutations.length, 0)

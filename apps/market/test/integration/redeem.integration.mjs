@@ -1,7 +1,7 @@
 import { test, before, after } from 'node:test'
 import assert from 'node:assert/strict'
 import { createSanityWriteClient } from '@repo/sanity-client'
-import { mintRedeemCode } from '../../lib/redeemCode.ts'
+import { generateRedeemCode, mintRedeemCode } from '../../lib/redeemCode.ts'
 import redeem from '../../pages/api/redeem-lenny/[code].ts'
 import { makeRes } from '../helpers/fakeRes.mjs'
 
@@ -18,6 +18,7 @@ const RUN = `test-e2e-${Date.now()}`
 const BOOK = `${RUN}-book`
 const SESSION = `cs_test_${RUN}`
 const CODE_DOC = `redeem-${SESSION}`
+const REDEEM_CODE = generateRedeemCode()
 
 const get = async (code) => {
   const res = makeRes()
@@ -52,7 +53,7 @@ test('a paid checkout mints a code that Lenny can redeem exactly once', async ()
   const session = {
     id: SESSION,
     payment_status: 'paid',
-    metadata: { briet_item_id: BOOK },
+    metadata: { briet_item_id: BOOK, briet_redeem_code: REDEEM_CODE },
   }
 
   const code = await mintRedeemCode(session)
