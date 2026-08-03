@@ -26,9 +26,9 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     // Anyone can POST here with any Origin they like, and Stripe sends the buyer
-    // wherever these URLs point once the card clears. Reading them from the
-    // request would let a caller land a paying customer on a site they control,
-    // holding a session id that redeems this order's code.
+    // wherever these URLs point once the card clears. Reading them from any
+    // request headers could let an attacker create a Stripe session with URLs that
+    // redirect to a site they control.
     const siteUrl = process.env.SITE_URL
     if (!siteUrl) {
       throw new Error('Missing SITE_URL')

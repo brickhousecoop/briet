@@ -3,10 +3,11 @@
 }
 
 .main {
+  /* flex-direction/justify/align are inert without display:flex — and that's
+     load-bearing: it keeps the redeem-code row a full-width block, which is
+     what lets its contents center. Don't add display:flex without reworking
+     that. */
   padding: 2rem 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer {
