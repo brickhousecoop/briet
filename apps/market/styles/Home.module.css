@@ -181,6 +181,43 @@ button.card {
   margin-left: 0.5rem;
 }
 
+.searchForm {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.resultCount {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.searchForm input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.searchForm button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  background: #ff002b;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.searchForm button:hover {
+  background: #cc0022;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
@@ -203,4 +240,18 @@ button.card {
   .logo img {
     filter: invert(1);
   }
+
+  .searchForm input {
+    background: #222;
+    border-color: #444;
+    color: #eee;
+  }
+  .searchForm button {
+    background: #ccc;
+    color: #222;
+  }
+  .searchForm button:hover {
+    background: #bbb;
+  }
+
 }
