@@ -23,6 +23,9 @@
       ]
     },
     "bh-briet-jacket#build": {
+      "env": [
+        "SANITY_TOKEN"
+      ],
       "outputs": [
         ".next/**"
       ]
