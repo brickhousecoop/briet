@@ -7,11 +7,10 @@ import Link from 'next/link'
 import styles from '@styles/Home.module.css'
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && price_usd == 0] {
     _id,
-    title,
     isPunctumBook,
-    "downloadUrl": file.asset -> url,
+    "hasFile": defined(file.asset->url),
   }[0]
 `
 
@@ -27,10 +26,10 @@ const OrderPage = ({ book }) => {
           <span className="logo">BRIET</span> Order Complete
         </h1>
 
-        {book.downloadUrl ? (
-          <Link className={styles.downloadbutton} href={book.downloadUrl}>
+        {book.hasFile ? (
+          <a className={styles.downloadbutton} href={`/api/download/free/${book._id}`}>
             Download your book
-          </Link>
+          </a>
         ) : (
           <p className={styles.description}>
             This download is currently unavailable. Please contact <a href="mailto:help@briet.app">help@briet.app</a>.
@@ -56,7 +55,6 @@ export const getServerSideProps = async ({ params }) => {
   if (!book) {
     return {
       notFound: true,
-      revalidate: 5
     }
   }
 

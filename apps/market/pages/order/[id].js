@@ -1,3 +1,5 @@
+import sanity from '@repo/sanity-client'
+
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CopyButton from '@components/CopyButton'
@@ -7,7 +9,9 @@ import { getStripeServerClient } from '../../utils/stripe-helpers'
 
 import styles from '../../styles/Home.module.css'
 
-const OrderPage = ({ order, redeemCode }) => {
+const hasFileQuery = `defined(*[_type == "book" && _id == $id][0].file.asset->url)`
+
+const OrderPage = ({ order, redeemCode, hasDownload }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -21,7 +25,15 @@ const OrderPage = ({ order, redeemCode }) => {
 
         {redeemCode ? (
           <>
-            <p className={`${styles.description} ${styles.redeemcodeLabel}`}>Your redemption code:</p>
+            {hasDownload && (
+              <a className={styles.downloadbutton} href={`/api/download/order/${order.id}`}>
+                Download your book
+              </a>
+            )}
+
+            <p className={`${styles.description} ${styles.redeemcodeLabel}`}>
+              {hasDownload ? 'Or import it into your library with this redemption code:' : 'Your redemption code:'}
+            </p>
 
             <div className={styles.redeemcodeRow}>
               <code className={styles.redeemcode}>{redeemCode}</code>
@@ -62,13 +74,19 @@ export const getServerSideProps = async ({ params }) => {
   const session = await stripe.checkout.sessions.retrieve(params.id)
   const redeemCode = await mintRedeemCode(session)
 
+  // Without a file there is nothing for the download route to serve, and offering
+  // the button anyway would land a paying buyer on a bare 404.
+  const hasDownload = redeemCode !== null && await sanity.fetch(hasFileQuery, { id: session.metadata.briet_item_id })
+
   return {
     props: {
       order: {
+        id: session.id,
         payment_status: session.payment_status,
         email: session.customer_details?.email ?? null,
       },
       redeemCode,
+      hasDownload,
     },
   }
 }
