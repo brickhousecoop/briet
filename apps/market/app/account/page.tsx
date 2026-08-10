@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { currentUser } from '@clerk/nextjs/server'
 import sanity from '@repo/sanity-client'
 
+import CopyButton from '@components/CopyButton'
+
 import { listOrdersForEmails, type Order } from '../../lib/accountOrders'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 import styles from '@styles/Home.module.css'
@@ -27,7 +29,8 @@ const OrderListing = ({ order }: { order: Order }) => (
 
     {order.redeemCode ? (
       <p>
-        Lenny redemption code: <code className={styles.code}>{order.redeemCode}</code>
+        Lenny redemption code: <code className={styles.code}>{order.redeemCode}</code>{' '}
+        <CopyButton text={order.redeemCode} label="Copy code" />
         {order.redeemedAt && ' — already redeemed'}
       </p>
     ) : (

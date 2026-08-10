@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 
 import styles from './CopyButton.module.css'
@@ -9,7 +11,7 @@ import styles from './CopyButton.module.css'
 // context) leaves the label alone so the user just presses again. `label` lets
 // callers name what's copied ("Copy link", "Copy code"); the post-copy label
 // stays "Copied".
-const CopyButton = ({ text, label = 'Copy', className }) => {
+const CopyButton = ({ text, label = 'Copy', className = '' }) => {
   const [copied, setCopied] = useState(false)
   const timer = useRef()
 
