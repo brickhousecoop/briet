@@ -225,6 +225,12 @@ Upstream repo is https://github.com/archiveLabs/lenny
 
 Our fork is https://github.com/brickhousecoop/lenny
 
+## `lender`
+
+**[Lenny for Libraries](https://lennyforlibraries.org/) on BRIET**
+
+Documentation TK
+
 # BRIET Styleguide
 
 ## How to spell “ebook”
