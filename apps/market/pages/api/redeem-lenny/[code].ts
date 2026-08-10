@@ -23,6 +23,8 @@ const codeQuery = `
   }[0]
 `
 
+// TODO: replace `url` with a signed expiring URL.
+
 // Lenny's importer (ArchiveLabs/lenny#193) GETs this endpoint with a one-time
 // code and expects { books: [{ olid, url, title }] }. It treats any 4xx (other
 // than 429) as "invalid or already redeemed" and 5xx as "upstream unavailable",

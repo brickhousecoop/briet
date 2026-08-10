@@ -4,6 +4,7 @@ import type { createSanityClient } from '@repo/sanity-client'
 // Sanity file assets are served from a world-readable CDN URL, so this redirect
 // hands out a link that keeps working for anyone it is forwarded to. Whatever the
 // calling route decides is the whole of the access control.
+// TODO: replace this with a signed expiring URL.
 
 const downloadQuery = `
   *[_type == "book" && _id == $id] {
