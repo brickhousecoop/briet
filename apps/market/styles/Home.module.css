@@ -261,3 +261,39 @@ button.card {
     transform: none;
   }
 }
+
+.orderlisting {
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.orderlisting h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* .downloadbutton's 3rem margin is sized to stand alone on an order page; in a
+   list of orders it has to sit close to what it belongs to. */
+.orderlisting .downloadbutton {
+  margin: 0;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.25rem;
+  max-width: none;
+  width: auto;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .orderlisting {
+    border-color: #222;
+  }
+  .orderlisting .downloadbutton {
+    background-color: #ccc;
+    color: #222;
+  }
+}
