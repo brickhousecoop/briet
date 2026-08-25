@@ -71,6 +71,19 @@ const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; d
           <p>Bring this experience to more readers!</p>
         </fieldset>}
 
+        <fieldset>
+          <legend>Search the catalog</legend>
+          <form action="/search" method="get" className={styles.searchForm}>
+            <input
+              type="search"
+              name="q"
+              placeholder="Search by title, author, or keyword…"
+              aria-label="Search the BRIET catalog"
+            />
+            <button type="submit">Search</button>
+          </form>
+        </fieldset>
+
         <h2>Featured Collections</h2>
 
         <div className={styles.grid}>
