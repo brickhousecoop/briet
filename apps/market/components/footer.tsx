@@ -10,7 +10,7 @@ const BrietFooter = () =>
     <Link href="/terms-of-sale">Terms of Sale</Link>
     ¶
     <Link href="mailto:help@briet.app">Contact</Link>
-    {process.env.NEXT_PUBLIC_STRIPE_MODE === 'test' && <><span>¶</span><span>Stripe test mode</span></>}
+    {process.env.NEXT_PUBLIC_STRIPE_MODE === 'test' && <><span>¶</span> <span>test mode</span></>}
   </footer>
 
 BrietFooter.displayName = 'BrietFooter'
