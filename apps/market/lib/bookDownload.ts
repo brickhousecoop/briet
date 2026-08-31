@@ -14,7 +14,7 @@ const downloadQuery = `
   }[0]
 `
 
-type BookDownload = { slug: string; url: string | null; extension: string | null }
+type BookDownload = { slug: string | null; url: string | null; extension: string | null }
 
 // Redirects to the book's current file, or returns false when it has none.
 // Sanity percent-encodes `?dl` into Content-Disposition, so a slug is what keeps

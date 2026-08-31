@@ -9,7 +9,9 @@ type Collection = {
   _id: string
   name: string
   slug: { current: string }
-  members: Book[]
+  // members has no required rule in the collection schema, and a dangling
+  // member reference dereferences to null.
+  members: (Book | null)[] | null
 }
 
 const collectionsQuery = `
@@ -61,7 +63,7 @@ const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; d
           Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
 
-        {demoBookId && <fieldset>
+        {demoBook && <fieldset>
           <legend>A demo of how ebooks from <span className='logo'>BRIET</span> can be loaned to patrons</legend>
           <iframe src={`https://reader.briet.app/borrow/${demoBookId}/`}/>
           <a href={`https://reader.briet.app/borrow/${demoBookId}/`}>&#x26F6; Pop out in full window →</a>
@@ -97,7 +99,7 @@ const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; d
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
             <legend>{collection.name}</legend>
-            {collection.members.map(book =>
+            {(collection.members ?? []).filter((book): book is Book => Boolean(book)).map(book =>
               <CatalogListing book={book} key={book._id}/>
             )}
           </fieldset>
@@ -124,7 +126,9 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      collections: collections.featuredCollections,
+      // the settings doc and its featuredCollections field are both optional;
+      // a missing one is an empty homepage, not a crash.
+      collections: collections?.featuredCollections ?? [],
       demoBook,
     },
     revalidate: 5,

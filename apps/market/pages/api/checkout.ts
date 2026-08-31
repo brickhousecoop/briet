@@ -38,7 +38,9 @@ export default async function handler(
     const stripe = deps.stripe ?? getStripeServerClient()
     const bookId: string = req.body.briet_item_id
     const book = await (deps.sanity ?? sanity).fetch(singleBookQuery, { id: bookId });
-    if (!book) {
+    // An untitled book is not sellable — Stripe rejects an empty product name
+    // with the same parameter_invalid_empty that a missing cover used to hit.
+    if (!book || !book.title) {
       res.status(404).json({ error: 'not_found' })
       return
     }

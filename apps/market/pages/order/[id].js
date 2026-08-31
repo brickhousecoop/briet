@@ -4,6 +4,7 @@ import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CopyButton from '@components/CopyButton'
 import Link from 'next/link'
+import Stripe from 'stripe'
 import { mintRedeemCode } from '../../lib/redeemCode'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 
@@ -73,7 +74,17 @@ const OrderPage = ({ order, redeemCode, hasDownload }) => {
 
 export const getServerSideProps = async ({ params }) => {
   const stripe = getStripeServerClient()
-  const session = await stripe.checkout.sessions.retrieve(params.id)
+  let session
+  try {
+    session = await stripe.checkout.sessions.retrieve(params.id)
+  } catch (err) {
+    // A mistyped or cross-environment session id is a bad URL, not a server
+    // fault. Everything else (e.g. an auth failure from a bad key) stays loud.
+    if (err instanceof Stripe.errors.StripeInvalidRequestError && err.code === 'resource_missing') {
+      return { notFound: true }
+    }
+    throw err
+  }
   const redeemCode = await mintRedeemCode(session)
 
   // Without a file there is nothing for the download route to serve, and offering
