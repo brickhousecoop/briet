@@ -28,6 +28,18 @@ For a librarian purchasing a book:
 
 Free books (`price_usd == 0`) skip Stripe entirely: the buy page links straight to `/order/free/[bookId]`, which serves the download with no code involved.
 
+### Redeem endpoint contract (`/api/redeem-lenny/[code]`)
+
+GET returns:
+
+- **200** — `{ books: [{ olid, title, url }] }`; `olid` is the raw `identifier_ol` (`OL…M`), `url` is the direct Sanity CDN file URL. Books missing an olid or file are omitted, and the payload says nothing about how many copies the code redeems.
+- **400** `{error: "already_redeemed"}` — code spent
+- **404** `{error: "not_found"}` — no such code
+- **422** `{error: "nothing_to_import"}` — every book lacks an olid or file (code *not* spent)
+- **500** `{error: "claim_failed"}` — Sanity write failed
+
+The 4xx/5xx split maps onto how Lenny's importer (ArchiveLabs/lenny#193) treats "invalid or spent" vs. "upstream unavailable".
+
 ### Order history (`/account`)
 
 - Signed-in buyers can see their past orders at `/account` -- the site's only Clerk-gated area (`proxy.ts` protects just `/account/*`).
