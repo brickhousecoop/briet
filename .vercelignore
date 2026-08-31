@@ -3,3 +3,6 @@
 backups
 eli
 .turbo
+
+# Env files carry real credentials; never ship them in an upload.
+**/.env*

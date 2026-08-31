@@ -17,6 +17,7 @@
         "DEMO_MODE"
       ],
       "inputs": [
+        "$TURBO_DEFAULT$",
         ".env*"
       ],
       "outputs": [

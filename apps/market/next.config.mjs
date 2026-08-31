@@ -8,6 +8,11 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_STRIPE_MODE: process.env.STRIPE_SECRET_KEY?.startsWith('sk_test_') ? 'test' : 'live',
   },
+  // Demo deployments (DEMO_MODE): without this, Next's automatic trailing-slash
+  // and // normalization 308s go out with no X-Robots-Tag (headers() below does
+  // not apply to them). With it they 404 instead, header included. Prod keeps
+  // its current redirects.
+  skipTrailingSlashRedirect: !!process.env.DEMO_MODE,
   async headers() {
     // Demo deployments (DEMO_MODE): strict noindex. The header covers every
     // route, including deep URLs a crawler may already know; app/robots.ts
