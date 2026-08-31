@@ -20,7 +20,7 @@ const OrderPage = ({ order, redeemCode, hasDownload }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> {redeemCode ? 'Order Complete' : 'Order Pending'}
+          <Link href="/"><span className="logo">BRIET</span></Link> {redeemCode ? 'Order Complete' : 'Order Pending'}
         </h1>
 
         {redeemCode ? (

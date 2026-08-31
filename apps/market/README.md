@@ -28,6 +28,13 @@ For a librarian purchasing a book:
 
 Free books (`price_usd == 0`) skip Stripe entirely: the buy page links straight to `/order/free/[bookId]`, which serves the download with no code involved.
 
+### Order history (`/account`)
+
+- Signed-in buyers can see their past orders at `/account` -- the site's only Clerk-gated area (`proxy.ts` protects just `/account/*`).
+- Orders are matched by comparing the buyer's verified Clerk emails against the email given at Stripe checkout, so an old order surfaces by adding the address used then.
+- Nothing in the UI links to `/account` yet -- buyers only reach it by knowing the URL.
+- The email match scans every Stripe session in the account (see `lib/accountOrders.ts`); a proper order index would come with the planned `checkout.session.completed` webhook.
+
 This is the only part of market that writes to Sanity, so it needs `SANITY_WRITE_TOKEN` on top of the read-only `SANITY_TOKEN` -- see [read and write tokens are separate](../../README.md#read-and-write-tokens-are-separate). It also needs `SITE_URL`, because Stripe's return URLs are built from configuration rather than the request's `Origin` header, which could lead to a security issue.
 
 A book is only importable if it has an Open Library edition id (`identifier_ol`) and a file; the endpoint returns 422 without spending the code otherwise. To mint a code by hand see `apps/tagger/scripts/README.md`.

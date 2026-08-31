@@ -23,7 +23,7 @@ const OrderPage = ({ book }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> Order Complete
+          <Link href="/"><span className="logo">BRIET</span></Link> Order Complete
         </h1>
 
         {book.hasFile ? (
