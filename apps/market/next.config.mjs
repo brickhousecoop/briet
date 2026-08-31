@@ -8,6 +8,14 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_STRIPE_MODE: process.env.STRIPE_SECRET_KEY?.startsWith('sk_test_') ? 'test' : 'live',
   },
+  async headers() {
+    // Demo deployments (DEMO_MODE): strict noindex. The header covers every
+    // route, including deep URLs a crawler may already know; app/robots.ts
+    // keeps polite crawlers away on top of this.
+    return process.env.DEMO_MODE
+      ? [{ source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }]
+      : []
+  },
   async redirects() {
     return [
       {
