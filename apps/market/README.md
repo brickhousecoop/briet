@@ -16,7 +16,7 @@ See the [root README](../../README.md) for full setup. Quick version:
 
 ### Demo deployments
 
-`DEMO_MODE` marks a deployment as a demo: `next.config.mjs` sends `X-Robots-Tag: noindex, nofollow` on every route and `app/robots.ts` disallows all crawlers. Checkout in demo deployments runs against Stripe in test mode (test keys, card 4242…), and whenever `NEXT_PUBLIC_STRIPE_MODE=test` the footer shows a "test mode" badge so an audience can tell test charges from real ones — but the codes minted are real and redeemable, so a demo purchase exercises the exact fulfilment path above.
+`DEMO_MODE` marks a deployment as a demo: `next.config.mjs` sends `X-Robots-Tag: noindex, nofollow` on every route and `app/robots.ts` disallows all crawlers, and the footer shows a "Demo Mode" badge so an audience can tell the demo from production. Checkout in demo deployments runs against Stripe in test mode (test keys, card 4242…), but the codes minted are real and redeemable, so a demo purchase exercises the exact fulfilment path above.
 
 ### Checkout
 
