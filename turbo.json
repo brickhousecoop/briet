@@ -13,7 +13,8 @@
       "env": [
         "SANITY_TOKEN",
         "STRIPE_SECRET_KEY",
-        "CLERK_SECRET_KEY"
+        "CLERK_SECRET_KEY",
+        "DEMO_MODE"
       ],
       "inputs": [
         ".env*"
