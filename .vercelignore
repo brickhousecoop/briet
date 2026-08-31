@@ -1,0 +1,5 @@
+# Excluded from `vercel deploy` uploads (CLI deploys from the repo root upload
+# the whole tree; git-integration deploys ignore this file).
+backups
+eli
+.turbo
