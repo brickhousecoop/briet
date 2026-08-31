@@ -47,7 +47,7 @@ const singleBookQuery = `
 
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
 
-const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book }) => {
+const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book | null }) => {
   return (
     <div className={styles.container}>
       <Head>
