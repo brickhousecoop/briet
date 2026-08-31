@@ -108,6 +108,15 @@ test('a paid order for a book with no file is a 404 rather than a broken redirec
   assert.equal(res.redirectUrl, undefined)
 })
 
+test('a book with no slug names its download after the book id, not "null"', async () => {
+  fake.reset()
+  fake.seed([seededAsset, { ...seededBook, _id: 'book-noslug', slug: undefined, price_usd: 0 }])
+  const res = await getFree('book-noslug')
+
+  assert.equal(res.statusCode, 302)
+  assert.equal(res.redirectUrl, `${FILE_URL}?dl=book-noslug.epub`)
+})
+
 test('a free book downloads without any order', async () => {
   const res = await getFree('book-free')
 

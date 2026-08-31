@@ -30,6 +30,8 @@ export async function redirectToBookFile(
   }
 
   res.setHeader('Cache-Control', 'private, no-store')
-  res.redirect(302, `${book.url}?dl=${book.slug}.${book.extension}`)
+  // slug is optional on the book schema (one live book has none); the id is the
+  // fallback saved-filename so the download never names itself "null".
+  res.redirect(302, `${book.url}?dl=${book.slug ?? bookId}.${book.extension}`)
   return true
 }
