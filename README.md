@@ -105,6 +105,22 @@ Runs every app's `dev:local` in parallel via turbo. Ports are pinned, so the URL
 
 `server` has no dev script and is skipped (see its section below).
 
+# Deploying
+
+Every app is a Vercel project watching this repo, so deploys are driven by git and the CLI isn't needed.
+
+- Push to `main` — production: briet.app, market.briet.app, tagger.briet.app, reader.briet.app
+- Push to `demo` — demo.market.briet.app, market only, built with `DEMO_MODE`
+- Any other branch — a preview URL per project
+
+`main` is protected and takes a reviewed PR. `demo` is a publish target rather than somewhere to work — fast-forward it from your working branch when the demo site should move:
+
+```
+git switch demo && git merge --ff-only <your-branch> && git push && git switch -
+```
+
+Most projects run `npx turbo-ignore`, so a push only rebuilds the apps it touched; the demo project skips every branch except `demo`. See `apps/market/README.md` for what `DEMO_MODE` changes.
+
 # Structure
 
 BRIET is several interwoven applications. For librarians and institutions, the key point is the [Bookmarket](https://market.briet.app/), where approved customers can purchase ebooks, just like physical books. To be an approved customer, a library or institution must be a [public signatory](https://www.controlleddigitallending.org/) to the position statement on controlled digital lending (CDL).
