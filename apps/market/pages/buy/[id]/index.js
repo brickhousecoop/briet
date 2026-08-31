@@ -64,7 +64,7 @@ const BookBuyPage = ({ book }) => {
 
           <div className={styles.float}>
             <h2>{book.title}</h2>
-            {(book.authors ?? []).filter(Boolean).map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
+            {(book.authors ?? []).filter(author => author?.name).map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
           <p className={styles.description}>{book.description}</p>

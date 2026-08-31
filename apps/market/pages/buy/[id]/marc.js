@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
 
   // authors is optional on the book schema and a dangling author reference
   // dereferences to null, so drop null elements before mapping.
-  const authors = (book.authors ?? []).filter(Boolean);
+  const authors = (book.authors ?? []).filter(author => author?.name);
 
   const authorFields = authors.map(author => {
     return {
