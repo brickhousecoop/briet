@@ -3,10 +3,10 @@
 import { withBotId } from 'botid/next/config';
 
 const nextConfig = {
-  // Drives a footer badge so a demo audience can tell test charges from real
-  // ones. It labels the build; it does not guard anything.
   env: {
-    NEXT_PUBLIC_STRIPE_MODE: process.env.STRIPE_SECRET_KEY?.startsWith('sk_test_') ? 'test' : 'live',
+    // Public projection of DEMO_MODE for client bundles (footer badge).
+    // Server-side gating (noindex headers, robots.txt) reads DEMO_MODE directly.
+    NEXT_PUBLIC_DEMO_MODE: process.env.DEMO_MODE ? '1' : '',
   },
   // Demo deployments (DEMO_MODE): without this, Next's automatic trailing-slash
   // and // normalization 308s go out with no X-Robots-Tag (headers() below does
