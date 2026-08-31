@@ -56,7 +56,8 @@ export default async function handler(
               product_data: {
                 name: book.title,
                 description: 'copies for controlled digital lending by your institution, each copy to one patron at a time',
-                images: [book.coverImageUrl],
+                // cover is optional in the book schema; Stripe rejects empty image entries
+                ...(book.coverImageUrl && { images: [book.coverImageUrl] }),
               }
             },
             quantity: 1,

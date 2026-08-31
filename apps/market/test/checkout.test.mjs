@@ -95,6 +95,17 @@ test('an unknown book id gives a clean 404, no Stripe call', async () => {
   assert.deepEqual(res.body, { error: 'not_found' })
 })
 
+test('a book with no cover omits images from the Stripe session', async () => {
+  // cover is optional in the book schema: GROQ dereferences a missing cover to
+  // null, and Stripe rejects empty image entries (parameter_invalid_empty).
+  fake.reset()
+  fake.seed([seededPublisher, { ...seededBook, cover: undefined }])
+  const res = await post('book-1')
+
+  assert.equal(res.statusCode, 303)
+  assert.equal(sessionParams.line_items[0].price_data.product_data.images, undefined)
+})
+
 test('non-POST is rejected with 405 and an Allow header', async () => {
   const res = makeRes()
   await handler({ method: 'GET', headers: {} }, res, { sanity: fake.client(), stripe: stripeCapture })
