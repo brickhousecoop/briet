@@ -31,22 +31,24 @@ const OrderPage = ({ order, redeemCode, hasDownload }) => {
               </a>
             )}
 
-            <p className={`${styles.description} ${styles.redeemcodeLabel}`}>
-              {hasDownload ? 'Or import it into your library with this redemption code:' : 'Your redemption code:'}
-            </p>
+            <section className={styles.redeemsection}>
+              <p className={styles.redeemlabel}>
+                {hasDownload ? 'Or import it into your library with this redemption code:' : 'Your redemption code:'}
+              </p>
 
-            <div className={styles.redeemcodeRow}>
-              <code className={styles.redeemcode}>{redeemCode}</code>
-              <CopyButton text={redeemCode} label="Copy code" className={styles.copyInBox} />
-            </div>
+              <div className={styles.redeemcodeRow}>
+                <code className={styles.redeemcode}>{redeemCode}</code>
+                <CopyButton text={redeemCode} label="Copy code" className={styles.copyInBox} />
+              </div>
 
-            <p className={styles.instructions}>
-              Enter this code in your <Link href="https://github.com/ArchiveLabs/lenny">Lenny</Link> library’s
-              Import screen to pull this book into your collection. The code works once, so keep it until the import
-              succeeds.
-            </p>
+              <p className={styles.redeemnote}>
+                Enter this code in your <Link href="https://github.com/ArchiveLabs/lenny">Lenny</Link> library’s
+                Import screen to pull this book into your collection. The code works once, so keep it until the import
+                succeeds.
+              </p>
+            </section>
 
-            {order.email && <p>A receipt is on its way to {order.email}.</p>}
+            {order.email && <p className={styles.ordernote}>A receipt is on its way to {order.email}.</p>}
           </>
         ) : (
           <>
@@ -59,7 +61,7 @@ const OrderPage = ({ order, redeemCode, hasDownload }) => {
           </>
         )}
 
-        <p>
+        <p className={styles.ordernote}>
           Questions, or need to make changes? Email <a href="mailto:help@briet.app">help@briet.app</a>.
         </p>
       </main>

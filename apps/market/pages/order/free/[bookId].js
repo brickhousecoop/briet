@@ -41,7 +41,7 @@ const OrderPage = ({ book }) => {
         : <p>Note that this book is free, but is still subject to the terms of <a href="https://controlleddigitallending.org">Controlled Digital Lending</a> when acquired via BRIET.</p>
         }
 
-        <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
+        <p className={styles.ordernote}>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
       </main>
 
       <Footer/>

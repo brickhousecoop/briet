@@ -78,7 +78,7 @@ const BookBuyPage = ({ book }) => {
                 </button>
               </form>
             :
-              <Link href={`/order/free/${book._id}`} className={styles.downloadbutton} onClick={trackCheckout}>
+              <Link href={`/order/free/${book._id}`} className={styles.freeordercard} onClick={trackCheckout}>
                 <h2>Order: $0 &rarr;</h2>
                 <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
               </Link>
