@@ -69,7 +69,7 @@ export default defineType({
       description: 'Add if uploaded to Internet Archive, for inclusion in Open Library: archive.org/details/[identifer]'
     }),
     defineField({
-      name: 'identifer_ol',
+      name: 'identifier_ol',
       title: 'Open Library Edition ID (OLID)',
       group: 'identfiers',
       type: 'string',

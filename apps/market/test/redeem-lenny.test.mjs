@@ -28,7 +28,7 @@ const book = {
   _id: 'book-1',
   _type: 'book',
   title: 'The Test Book',
-  identifer_ol: 'OL32941311M',
+  identifier_ol: 'OL32941311M',
   file: { _type: 'file', asset: { _type: 'reference', _ref: 'file-def456-epub' } },
 }
 const importable = { olid: 'OL32941311M', title: 'The Test Book', url: EPUB_URL }
@@ -71,8 +71,8 @@ test('an unknown code is a 404', async () => {
 })
 
 test('books Lenny cannot import are dropped rather than returned half-formed', async () => {
-  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifer_ol: null, file: book.file }
-  const noFile = { _id: 'no-file', _type: 'book', title: 'No file', identifer_ol: 'OL1M', file: null }
+  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifier_ol: null, file: book.file }
+  const noFile = { _id: 'no-file', _type: 'book', title: 'No file', identifier_ol: 'OL1M', file: null }
   fake.seed([noOlid, noFile, redeemDoc([book, noOlid, noFile])])
   const res = await get('abcd-1234')
 
@@ -81,7 +81,7 @@ test('books Lenny cannot import are dropped rather than returned half-formed', a
 })
 
 test('a bundle with nothing importable fails without burning the code', async () => {
-  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifer_ol: null, file: null }
+  const noOlid = { _id: 'no-olid', _type: 'book', title: 'No OLID', identifier_ol: null, file: null }
   fake.seed([noOlid, redeemDoc([noOlid])])
   const res = await get('abcd-1234')
 

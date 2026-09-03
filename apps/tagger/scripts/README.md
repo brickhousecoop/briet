@@ -75,14 +75,18 @@ have no checkout behind them: a spare code to carry into a demo, or fulfilling a
 that was placed before the book was tagged.
 
 ```sh
-SANITY_PROJECTID=… SANITY_DATASET=production SANITY_TOKEN=… \
+SANITY_PROJECTID=… SANITY_DATASET=production SANITY_WRITE_TOKEN=… \
 node apps/tagger/scripts/create-redeem-code.mjs --books <bookId> [<bookId> …] \
   [--code CODE] [--session STRIPE_SESSION_ID] [--note "for the Everytown demo"]
 ```
 
-The token needs write access. Book ids are Sanity document `_id`s.
+The token must have write access: `SANITY_WRITE_TOKEN` if set, else `SANITY_TOKEN` —
+a read-only one (jacket's `SANITY_TOKEN`) passes the book checks and fails at the
+write with a named 403. Sourcing an app's `.env.local` covers the project id and
+dataset: the script also accepts `SANITY_STUDIO_*` and `NEXT_PUBLIC_SANITY_*`.
+Book ids are Sanity document `_id`s.
 
-The script refuses any book without an Open Library **edition** id (`identifer_ol`, e.g.
+The script refuses any book without an Open Library **edition** id (`identifier_ol`, e.g.
 `OL32941311M`) or a file, because Lenny cannot import one: it parses the OLID and rejects
 anything that fails an EPUB check. Codes are one-shot and `redeemedAt` is read-only in the
 Studio, so a burned code cannot be reset from the UI — mint a spare rather than planning to

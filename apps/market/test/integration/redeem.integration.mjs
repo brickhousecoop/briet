@@ -38,7 +38,7 @@ before(async () => {
     _id: BOOK,
     _type: 'book',
     title: 'Integration test book',
-    identifer_ol: 'OL32941311M',
+    identifier_ol: 'OL32941311M',
     file: { _type: 'file', asset: { _type: 'reference', _ref: fileRef } },
   })
 })

@@ -16,7 +16,7 @@ const codeQuery = `
     _id,
     redeemedAt,
     "books": books[] -> {
-      "olid": identifer_ol,
+      "olid": identifier_ol,
       "title": title,
       "url": file.asset->url,
     },
