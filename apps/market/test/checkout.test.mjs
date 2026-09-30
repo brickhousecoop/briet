@@ -46,7 +46,11 @@ const post = async (briet_item_id) => {
   await handler(
     { method: 'POST', body: { briet_item_id }, headers: { origin: 'https://market.briet.app' } },
     res,
-    { sanity: fake.client(), stripe: stripeCapture }
+    {
+      sanity: fake.client(),
+      stripe: stripeCapture,
+      getUser: async () => ({ primaryEmailAddress: { emailAddress: 'buyer@example.org' } }),
+    }
   )
   return res
 }

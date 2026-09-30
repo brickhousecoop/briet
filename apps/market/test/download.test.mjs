@@ -53,7 +53,10 @@ const getOrder = async (sessionId, session = paidSession) => {
   const res = makeRes()
   await orderHandler({ method: 'GET', query: { sessionId } }, res, {
     sanity: fake.client(),
-    stripe: stripeWith(session),
+    stripe: stripeWith({ customer_details: { email: 'buyer@example.org' }, ...session }),
+    getUser: async () => ({
+      emailAddresses: [{ emailAddress: 'buyer@example.org', verification: { status: 'verified' } }],
+    }),
   })
   return res
 }

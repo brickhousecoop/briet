@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import sanity, { createSanityClient } from '@repo/sanity-client'
+import { getPagesUser } from '../../lib/pagesUser'
 import { generateRedeemCode } from '../../lib/redeemCode'
 import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
 
@@ -8,7 +9,11 @@ import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe
 // (via a real @sanity/client) and a param-capturing Stripe stand-in. Production
 // callers pass only (req, res), so the `??` fallbacks select the module singleton
 // and the env-configured Stripe.
-type Deps = { sanity?: ReturnType<typeof createSanityClient>; stripe?: InstanceType<typeof Stripe> }
+type Deps = {
+  sanity?: ReturnType<typeof createSanityClient>
+  stripe?: InstanceType<typeof Stripe>
+  getUser?: typeof getPagesUser
+}
 
 const singleBookQuery = `
   *[_type == "book" && _id == $id] {
@@ -26,7 +31,15 @@ export default async function handler(
   deps: Deps = {}
 ) {
   if (req.method === 'POST') {
-    // Anyone can POST here with any Origin they like, and Stripe sends the buyer
+    const bookId: string = req.body.briet_item_id
+    const user = await (deps.getUser ?? getPagesUser)(req)
+    if (!user) {
+      return res.redirect(303, `/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${bookId}`)}`)
+    }
+    const email = user.primaryEmailAddress?.emailAddress
+    if (!email) throw new Error('Missing primary email address')
+
+    // A signed-in buyer can POST here with any Origin, and Stripe sends the buyer
     // wherever these URLs point once the card clears. Reading them from any
     // request headers could let an attacker create a Stripe session with URLs that
     // redirect to a site they control.
@@ -36,7 +49,6 @@ export default async function handler(
     }
 
     const stripe = deps.stripe ?? getStripeServerClient()
-    const bookId: string = req.body.briet_item_id
     const book = await (deps.sanity ?? sanity).fetch(singleBookQuery, { id: bookId });
     // An untitled book is not sellable — Stripe rejects an empty product name
     // with the same parameter_invalid_empty that a missing cover used to hit.
@@ -82,6 +94,7 @@ export default async function handler(
           },
         },
         customer_creation: 'always',
+        customer_email: email,
         consent_collection: {
           terms_of_service: 'required',
         },

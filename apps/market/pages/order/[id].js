@@ -5,6 +5,8 @@ import Footer from '@components/footer'
 import CopyButton from '@components/CopyButton'
 import Link from 'next/link'
 import Stripe from 'stripe'
+import { sessionBelongsToUser } from '../../lib/accountOrders'
+import { getPagesUser } from '../../lib/pagesUser'
 import { mintRedeemCode } from '../../lib/redeemCode'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 
@@ -12,19 +14,26 @@ import styles from '../../styles/Home.module.css'
 
 const hasFileQuery = `defined(*[_type == "book" && _id == $id][0].file.asset->url)`
 
-const OrderPage = ({ order, redeemCode, hasDownload }) => {
+const OrderPage = ({ order, redeemCode, hasDownload, forbidden }) => {
+  const heading = forbidden ? 'Order Unavailable' : redeemCode ? 'Order Complete' : 'Order Pending'
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>{`BRIET Bookmarket: ${redeemCode ? 'Your Redemption Code' : 'Order Pending'}`}</title>
+        <title>{`BRIET Bookmarket: ${redeemCode ? 'Your Redemption Code' : heading}`}</title>
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <Link href="/"><span className="logo">BRIET</span></Link> {redeemCode ? 'Order Complete' : 'Order Pending'}
+          <Link href="/"><span className="logo">BRIET</span></Link> {heading}
         </h1>
 
-        {redeemCode ? (
+        {forbidden ? (
+          <p className={styles.description}>
+            This order was placed with an email that isn&apos;t on your account. Sign in with the account that placed
+            it, or contact <a href="mailto:help@briet.app">help@briet.app</a>.
+          </p>
+        ) : redeemCode ? (
           <>
             {hasDownload && (
               <a className={styles.downloadbutton} href={`/api/download/order/${order.id}`}>
@@ -72,7 +81,17 @@ const OrderPage = ({ order, redeemCode, hasDownload }) => {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params, req, res }) => {
+  const user = await getPagesUser(req)
+  if (!user) {
+    return {
+      redirect: {
+        destination: `/account/sign-in?redirect_url=${encodeURIComponent(`/order/${params.id}`)}`,
+        permanent: false,
+      },
+    }
+  }
+
   const stripe = getStripeServerClient()
   let session
   try {
@@ -85,6 +104,11 @@ export const getServerSideProps = async ({ params }) => {
     }
     throw err
   }
+  if (!sessionBelongsToUser(session, user)) {
+    res.statusCode = 403
+    return { props: { forbidden: true } }
+  }
+
   const redeemCode = await mintRedeemCode(session)
 
   // Without a file there is nothing for the download route to serve, and offering

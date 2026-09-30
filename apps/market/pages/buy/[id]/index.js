@@ -76,6 +76,9 @@ const BookBuyPage = ({ book }) => {
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
                   <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
                 </button>
+                <p className={styles.instructions}>
+                  Purchasing is for approved library accounts. <Link href={`/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${book._id}`)}`}>Sign in</Link> or <Link href="/account/sign-up">request access</Link>.
+                </p>
               </form>
             :
               <Link href={`/order/free/${book._id}`} className={styles.freeordercard} onClick={trackCheckout}>

@@ -1,3 +1,4 @@
+import type { User } from '@clerk/nextjs/server'
 import type Stripe from 'stripe'
 import type { createSanityClient } from '@repo/sanity-client'
 
@@ -24,6 +25,15 @@ const orderDetailQuery = `{
   },
 }`
 
+// An order belongs to whoever has its checkout email verified on their account.
+// Unverified addresses are excluded: anyone can claim one they do not own.
+export function sessionBelongsToUser(session: Stripe.Checkout.Session, user: Pick<User, 'emailAddresses'>) {
+  const email = session.customer_details?.email?.toLowerCase()
+  return Boolean(email && user.emailAddresses.some((address) =>
+    address.verification?.status === 'verified' && address.emailAddress.toLowerCase() === email
+  ))
+}
+
 // Stripe's customer_details[email] filter is case-sensitive, and Checkout stores
 // the address exactly as the buyer typed it — so a buyer who capitalised anything
 // is invisible to a filtered query. Scanning and comparing ourselves is the only
@@ -32,24 +42,22 @@ const orderDetailQuery = `{
 // It walks every session in the account, which bounds how far this scales: the way
 // out is an order index keyed on a normalised email, which the checkout.session.completed
 // webhook that lib/redeemCode.ts wants would be the natural place to maintain.
-async function paidSessionsFor(stripe: InstanceType<typeof Stripe>, emails: string[]) {
-  const wanted = new Set(emails.map((email) => email.toLowerCase()))
+async function paidSessionsFor(stripe: InstanceType<typeof Stripe>, user: Pick<User, 'emailAddresses'>) {
   const sessions: Stripe.Checkout.Session[] = []
   for await (const session of stripe.checkout.sessions.list({ limit: 100 })) {
-    const email = session.customer_details?.email?.toLowerCase()
-    if (session.payment_status === 'paid' && email && wanted.has(email)) {
+    if (session.payment_status === 'paid' && sessionBelongsToUser(session, user)) {
       sessions.push(session)
     }
   }
   return sessions
 }
 
-export async function listOrdersForEmails(
+export async function listOrdersForUser(
   stripe: InstanceType<typeof Stripe>,
   sanity: ReturnType<typeof createSanityClient>,
-  emails: string[]
+  user: Pick<User, 'emailAddresses'>
 ): Promise<Order[]> {
-  const sessions = await paidSessionsFor(stripe, emails)
+  const sessions = await paidSessionsFor(stripe, user)
   if (sessions.length === 0) {
     return []
   }

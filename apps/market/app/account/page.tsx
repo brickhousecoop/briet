@@ -4,7 +4,7 @@ import sanity from '@repo/sanity-client'
 
 import CopyButton from '@components/CopyButton'
 
-import { listOrdersForEmails, type Order } from '../../lib/accountOrders'
+import { listOrdersForUser, type Order } from '../../lib/accountOrders'
 import { getStripeServerClient } from '../../utils/stripe-helpers'
 import styles from '@styles/Home.module.css'
 
@@ -45,15 +45,8 @@ export default async function OrderHistoryPage() {
   const user = await currentUser()
   if (!user) return <p>You must be signed in to view this page.</p>
 
-  // Orders are keyed by the address given at Stripe checkout, which need not be
-  // the one this account signed up with. Matching every verified address lets a
-  // buyer see an old order by adding and verifying the email they used then.
-  // Unverified addresses are excluded: anyone can claim one they do not own.
-  const emails = user.emailAddresses
-    .filter((address) => address.verification?.status === 'verified')
-    .map((address) => address.emailAddress)
-
-  const orders = await listOrdersForEmails(getStripeServerClient(), sanity, emails)
+  // Orders match verified account emails to the address given at Stripe checkout.
+  const orders = await listOrdersForUser(getStripeServerClient(), sanity, user)
 
   return (
     <div className={styles.container}>
@@ -69,9 +62,7 @@ export default async function OrderHistoryPage() {
         )}
 
         <p className={styles.instructions}>
-          Missing an order? It is listed under whichever email you gave at checkout. Add that
-          address to your account, or email <a href="mailto:help@briet.app">help@briet.app</a> and
-          we will find it.
+          Missing an order? Email <a href="mailto:help@briet.app">help@briet.app</a> and we&apos;ll find it.
         </p>
       </main>
     </div>

@@ -1,13 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import sanity, { createSanityClient } from '@repo/sanity-client'
+import { sessionBelongsToUser } from '../../../../lib/accountOrders'
+import { getPagesUser } from '../../../../lib/pagesUser'
 import { redirectToBookFile } from '../../../../lib/bookDownload'
 import { getStripeServerClient } from '../../../../utils/stripe-helpers'
 
-type Deps = { sanity?: ReturnType<typeof createSanityClient>; stripe?: InstanceType<typeof Stripe> }
+type Deps = {
+  sanity?: ReturnType<typeof createSanityClient>
+  stripe?: InstanceType<typeof Stripe>
+  getUser?: typeof getPagesUser
+}
 
-// The buyer's download for a paid order. The Stripe Checkout Session id is the
-// only credential: whoever has the order URL can re-download indefinitely.
+// Paid downloads require the checkout email to be verified on the buyer's account.
 export default async function handler(req: NextApiRequest, res: NextApiResponse, deps: Deps = {}) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
@@ -32,6 +37,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
   const bookId = session.metadata?.briet_item_id
   if (session.payment_status !== 'paid' || !bookId) {
     return res.status(404).json({ error: 'not_found' })
+  }
+
+  const user = await (deps.getUser ?? getPagesUser)(req)
+  if (!user || !sessionBelongsToUser(session, user)) {
+    return res.redirect(302, `/order/${sessionId}`)
   }
 
   if (!await redirectToBookFile(res, deps.sanity ?? sanity, bookId)) {
