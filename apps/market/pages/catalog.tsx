@@ -3,10 +3,10 @@ import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { createSanityClient } from '@repo/sanity-client'
+import { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 
 const catalogQuery = `
-  *[_type == "book"] {
+  *[_type == "book" && ${purchasableFilter}] {
     _id,
     title,
     cover,

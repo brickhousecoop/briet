@@ -51,6 +51,14 @@ export function createSanityWriteClient() {
   return createSanityClient({ token, useCdn: false })
 }
 
+// GROQ filter for book queries: `*[_type == "book" && ${purchasableFilter}]`.
+// Purchasable means free with a file, or paid with an OLID and an EPUB (Lenny
+// keys imports on the OLID). Without HIDE_UNPURCHASABLE_BOOKS set, the filter
+// matches every book.
+export const purchasableFilter = process.env.HIDE_UNPURCHASABLE_BOOKS
+  ? '((price_usd == 0 && defined(file.asset)) || (defined(identifier_ol) && file.asset->extension == "epub"))'
+  : 'true'
+
 const sanity = createSanityClient()
 export default sanity
 
