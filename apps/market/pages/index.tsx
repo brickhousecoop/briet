@@ -3,7 +3,7 @@ import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 type Collection = {
   _id: string
@@ -14,13 +14,15 @@ type Collection = {
   members: (Book | null)[] | null
 }
 
+// The parentheses make GROQ filter the dereferenced documents; without them it
+// returns nulls instead. Collections left empty are dropped.
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
-    featuredCollections[]->{
+    "featuredCollections": (featuredCollections[]->{
       _id,
       name,
       slug,
-      members[]->{
+      "members": (members[]->)[${purchasableFilter}]{
         _id,
         title,
         cover,
@@ -29,7 +31,7 @@ const collectionsQuery = `
         publisher->{ name },
         price_usd,
       },
-    }
+    })[count(members) > 0]
   }[0]
 `
 

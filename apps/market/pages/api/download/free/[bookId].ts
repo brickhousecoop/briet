@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import sanity, { createSanityClient } from '@repo/sanity-client'
+import sanity, { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 import { redirectToBookFile } from '../../../../lib/bookDownload'
 
 type Deps = { sanity?: ReturnType<typeof createSanityClient> }
 
-const priceQuery = `*[_type == "book" && _id == $id][0].price_usd`
+const priceQuery = `*[_type == "book" && _id == $id && ${purchasableFilter}][0].price_usd`
 
 // $0 books are downloadable by anyone who knows the book id, which is what the
 // catalog already offers. A priced book gets the same 404 as a missing one.

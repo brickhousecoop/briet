@@ -1,4 +1,4 @@
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
@@ -7,7 +7,7 @@ import Link from 'next/link'
 import styles from '@styles/Home.module.css'
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id && price_usd == 0] {
+  *[_type == "book" && _id == $id && price_usd == 0 && ${purchasableFilter}] {
     _id,
     isPunctumBook,
     "hasFile": defined(file.asset->url),

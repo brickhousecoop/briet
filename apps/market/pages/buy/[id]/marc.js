@@ -1,11 +1,11 @@
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 import { MarcRecord } from '@natlibfi/marc-record';
 
 const allBookIdsQuery = `
-  *[_type == "book"] { _id }
+  *[_type == "book" && ${purchasableFilter}] { _id }
 `
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && ${purchasableFilter}] {
     _id,
     title,
     authors[] -> { _id, name, uri },

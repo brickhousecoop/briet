@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
-import sanity, { createSanityClient } from '@repo/sanity-client'
+import sanity, { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 import { getPagesUser } from '../../lib/pagesUser'
 import { generateRedeemCode } from '../../lib/redeemCode'
 import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
@@ -16,7 +16,7 @@ type Deps = {
 }
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && ${purchasableFilter}] {
     _id,
     title,
     "publisher_name": publisher->name,
