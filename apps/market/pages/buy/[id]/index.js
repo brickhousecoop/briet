@@ -89,12 +89,6 @@ const BookBuyPage = ({ book }) => {
               <h2>MARC record &darr;</h2>
               <p>For integration into library cataloging systems</p>
             </a>
-
-            {book.price_usd > 0 &&
-              <p className={styles.instructions}>
-                Purchasing is for approved library accounts. <Link href={`/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${book._id}`)}`}>Sign in</Link> or <Link href="/account/sign-up">request access</Link>.
-              </p>
-            }
           </div>
         </div>
       </main>

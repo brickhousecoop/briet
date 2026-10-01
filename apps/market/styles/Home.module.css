@@ -174,8 +174,15 @@ button.card {
   margin: 0;
 }
 
-.actions > .instructions {
-  flex-basis: 100%;
+/* The Clerk <SignIn>/<SignUp> box is a plain block form; this wrapper centers
+   it in the account page shell. The min-height reserves the tallest form so
+   hydration doesn't shift the page. */
+.accountform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50rem;
+  margin: 2rem 0;
 }
 
 .cataloglisting {

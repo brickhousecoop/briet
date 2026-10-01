@@ -49,22 +49,20 @@ export default async function OrderHistoryPage() {
   const orders = await listOrdersForUser(getStripeServerClient(), sanity, user)
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <span className="logo">BRIET</span> Your Orders
-        </h1>
+    <>
+      <h2 className={styles.title}>
+        Your Orders
+      </h2>
 
-        {orders.length > 0 ? (
-          orders.map((order) => <OrderListing key={order.sessionId} order={order} />)
-        ) : (
-          <p>No orders yet.</p>
-        )}
+      {orders.length > 0 ? (
+        orders.map((order) => <OrderListing key={order.sessionId} order={order} />)
+      ) : (
+        <p>No orders yet.</p>
+      )}
 
-        <p className={styles.instructions}>
-          Missing an order? Email <a href="mailto:help@briet.app">help@briet.app</a> and we&apos;ll find it.
-        </p>
-      </main>
-    </div>
+      <p className={styles.instructions}>
+        Missing an order? Email <a href="mailto:help@briet.app">help@briet.app</a> and we&apos;ll find it.
+      </p>
+    </>
   )
 }
