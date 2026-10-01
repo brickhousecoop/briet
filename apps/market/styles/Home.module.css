@@ -151,6 +151,33 @@ button.card {
   cursor: pointer;
 }
 
+/* The two buy-page calls to action share one row at a common height, and the
+   approved-accounts note spans the full width beneath them. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 2rem;
+  flex-basis: 100%;
+}
+
+.actions > form {
+  display: flex;
+  flex: 1 1 300px;
+  max-width: 300px;
+  margin: 0;
+}
+
+.actions .card,
+.actions .freeordercard {
+  flex: 1 1 300px;
+  margin: 0;
+}
+
+.actions > .instructions {
+  flex-basis: 100%;
+}
+
 .cataloglisting {
   display: block;
   width: 100%;
@@ -202,13 +229,15 @@ button.card {
 }
 
 .card h2,
-.float h2 {
+.float h2,
+.freeordercard h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
 
 .card p,
-.float p {
+.float p,
+.freeordercard p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;

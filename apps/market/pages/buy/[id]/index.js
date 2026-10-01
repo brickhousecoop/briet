@@ -69,6 +69,7 @@ const BookBuyPage = ({ book }) => {
 
           <p className={styles.description}>{book.description}</p>
 
+          <div className={styles.actions}>
             {book.price_usd > 0 ?
               <form action="/api/checkout" method="POST">
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
@@ -76,9 +77,6 @@ const BookBuyPage = ({ book }) => {
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
                   <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
                 </button>
-                <p className={styles.instructions}>
-                  Purchasing is for approved library accounts. <Link href={`/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${book._id}`)}`}>Sign in</Link> or <Link href="/account/sign-up">request access</Link>.
-                </p>
               </form>
             :
               <Link href={`/order/free/${book._id}`} className={styles.freeordercard} onClick={trackCheckout}>
@@ -87,10 +85,17 @@ const BookBuyPage = ({ book }) => {
               </Link>
             }
 
-          <a href={`/buy/${book._id}/marc`} className={styles.card}>
-            <h2>MARC record &darr;</h2>
-            <p>For integration into library cataloging systems</p>
-          </a>
+            <a href={`/buy/${book._id}/marc`} className={styles.card}>
+              <h2>MARC record &darr;</h2>
+              <p>For integration into library cataloging systems</p>
+            </a>
+
+            {book.price_usd > 0 &&
+              <p className={styles.instructions}>
+                Purchasing is for approved library accounts. <Link href={`/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${book._id}`)}`}>Sign in</Link> or <Link href="/account/sign-up">request access</Link>.
+              </p>
+            }
+          </div>
         </div>
       </main>
 
