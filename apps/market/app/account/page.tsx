@@ -18,11 +18,14 @@ const formatAmount = (amountTotal: number | null) =>
 
 const OrderListing = ({ order }: { order: Order }) => (
   <div className={styles.orderlisting}>
-    <h2>{order.bookTitle ?? 'This book is no longer in the catalog'}</h2>
+    <h2>{order.bookId && order.bookTitle
+      ? <Link href={`/buy/${encodeURIComponent(order.bookId)}`}>{order.bookTitle}</Link>
+      : order.bookTitle ?? '(This book is no longer in the catalog)'
+    }</h2>
     <p>{formatDate(order.created)} · {formatAmount(order.amountTotal)}</p>
 
     {order.hasDownload && (
-      <a className={styles.downloadbutton} href={`/api/download/order/${order.sessionId}`}>
+      <a className={styles.downloadbutton} href={`/api/download/order/${encodeURIComponent(order.sessionId)}`}>
         Download
       </a>
     )}
@@ -35,7 +38,7 @@ const OrderListing = ({ order }: { order: Order }) => (
       </p>
     ) : (
       <p>
-        <Link href={`/order/${order.sessionId}`}>Get your Lenny redemption code</Link>
+        <Link href={`/order/${encodeURIComponent(order.sessionId)}`}>Get your Lenny redemption code</Link>
       </p>
     )}
   </div>
@@ -57,7 +60,7 @@ export default async function OrderHistoryPage() {
       {orders.length > 0 ? (
         orders.map((order) => <OrderListing key={order.sessionId} order={order} />)
       ) : (
-        <p>No orders yet.</p>
+        <p>No orders found.</p>
       )}
 
       <p className={styles.instructions}>
