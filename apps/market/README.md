@@ -18,6 +18,8 @@ See the [root README](../../README.md) for full setup. Quick version:
 
 `DEMO_MODE` marks a deployment as a demo: `next.config.mjs` sends `X-Robots-Tag: noindex, nofollow` on every route and `app/robots.ts` disallows all crawlers, and the footer shows a "Demo Mode" badge so an audience can tell the demo from production. Checkout in demo deployments runs against Stripe in test mode (test keys, card 4242…), but the codes minted are real and redeemable, so a demo purchase exercises the exact fulfilment path above.
 
+Purchase requires the buyer's primary email to be verified on their Clerk account: an unverified buyer is turned away before Stripe is reached and sent to `/account/settings` (Clerk's `<UserProfile>`), where an address can be added or verified. Verification also happens in Clerk's sign-up step. Clerk's [test mode](https://clerk.com/docs/guides/development/testing/test-emails-and-phones) avoids real inboxes: any `+clerk_test` address verifies instantly with code `424242`. Test mode is on by default on development instances (which localhost's `pk_test_` key is) and must be enabled in the Clerk Dashboard for production instances.
+
 ### Checkout
 
 For a librarian purchasing a book:
@@ -43,7 +45,7 @@ The 4xx/5xx split maps onto how Lenny's importer (ArchiveLabs/lenny#193) treats 
 ### Order history (`/account`)
 
 - Signed-in buyers can see their past orders at `/account` -- the site's only Clerk-gated area (`proxy.ts` protects just `/account/*`).
-- Orders are matched by comparing the buyer's verified Clerk emails against the email given at Stripe checkout, so an old order surfaces by adding the address used then.
+- Orders are matched by comparing the buyer's verified Clerk emails against the email given at Stripe checkout, so an old order surfaces by adding and verifying the address used then (verification is in Clerk, not in this app -- see [Demo deployments](#demo-deployments)).
 - Nothing in the UI links to `/account` yet -- buyers only reach it by knowing the URL.
 - The email match scans every Stripe session in the account (see `lib/accountOrders.ts`); a proper order index would come with the planned `checkout.session.completed` webhook.
 

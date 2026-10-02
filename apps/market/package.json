@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
-    "@clerk/nextjs": "^6.39.6",
+    "@clerk/nextjs": "^7.9.9",
     "@natlibfi/marc-record": "^10.0.2",
     "@repo/sanity-client": "*",
     "@vercel/analytics": "^2.0.1",

@@ -11,7 +11,6 @@ import { makeRes } from './helpers/fakeRes.mjs'
 
 const fake = await startFakeSanity()
 after(() => fake.close())
-beforeEach(() => fake.reset())
 
 const { default: handler } = await import('../pages/api/checkout.ts')
 
@@ -41,7 +40,11 @@ const stripeCapture = {
   },
 }
 
-const post = async (briet_item_id) => {
+const verifiedBuyer = {
+  primaryEmailAddress: { emailAddress: 'buyer@example.org', verification: { status: 'verified' } },
+}
+
+const post = async (briet_item_id, user = verifiedBuyer) => {
   const res = makeRes()
   await handler(
     { method: 'POST', body: { briet_item_id }, headers: { origin: 'https://market.briet.app' } },
@@ -49,7 +52,7 @@ const post = async (briet_item_id) => {
     {
       sanity: fake.client(),
       stripe: stripeCapture,
-      getUser: async () => ({ primaryEmailAddress: { emailAddress: 'buyer@example.org' } }),
+      getUser: async () => user,
     }
   )
   return res
@@ -89,6 +92,17 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
   // user is sent to the Stripe-hosted page
   assert.equal(res.statusCode, 303)
   assert.equal(res.redirectUrl, 'https://checkout.stripe.com/c/pay/cs_test_123')
+})
+
+test('an unverified buyer is refused before Stripe is reached', async () => {
+  const unverified = {
+    primaryEmailAddress: { emailAddress: 'buyer@example.org', verification: { status: 'unverified' } },
+  }
+  const res = await post('book-1', unverified)
+
+  assert.equal(res.statusCode, 303)
+  assert.equal(res.redirectUrl, '/account/settings?verify=email')
+  assert.equal(sessionParams, undefined) // never reached Stripe
 })
 
 test('an unknown book id gives a clean 404, no Stripe call', async () => {

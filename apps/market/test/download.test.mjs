@@ -49,16 +49,18 @@ const stripeWith = (session) => ({
 
 const paidSession = { payment_status: 'paid', metadata: { briet_item_id: 'book-1' } }
 
-const getOrder = async (sessionId, session = paidSession) => {
+const getOrder = async (sessionId, session = paidSession, buyer = defaultBuyer) => {
   const res = makeRes()
   await orderHandler({ method: 'GET', query: { sessionId } }, res, {
     sanity: fake.client(),
     stripe: stripeWith({ customer_details: { email: 'buyer@example.org' }, ...session }),
-    getUser: async () => ({
-      emailAddresses: [{ emailAddress: 'buyer@example.org', verification: { status: 'verified' } }],
-    }),
+    getUser: async () => buyer,
   })
   return res
+}
+
+const defaultBuyer = {
+  emailAddresses: [{ emailAddress: 'buyer@example.org', verification: { status: 'verified' } }],
 }
 
 const getFree = async (bookId) => {
@@ -79,6 +81,37 @@ test('a paid order redirects to the book file, named for download', async () => 
   assert.equal(res.redirectUrl, `${FILE_URL}?dl=the-test-book.epub`)
   assert.equal(res.headers['Cache-Control'], 'private, no-store')
 })
+
+// The file URL must never reach someone the order does not belong to. These
+// buyers are redirected back to the order page rather than being handed the
+// file.
+const refusedBuyers = [
+  {
+    name: 'a signed-out visitor',
+    buyer: null,
+  },
+  {
+    name: 'a buyer with a different email',
+    buyer: {
+      emailAddresses: [{ emailAddress: 'other@example.org', verification: { status: 'verified' } }],
+    },
+  },
+  {
+    name: 'a buyer whose checkout email is unverified',
+    buyer: {
+      emailAddresses: [{ emailAddress: 'buyer@example.org', verification: { status: 'unverified' } }],
+    },
+  },
+]
+
+for (const { name, buyer } of refusedBuyers) {
+  test(`${name} is redirected away from the file`, async () => {
+    const res = await getOrder('cs_test_123', paidSession, buyer)
+
+    assert.equal(res.statusCode, 302)
+    assert.equal(res.redirectUrl, '/order/cs_test_123')
+  })
+}
 
 test('an unpaid session gets nothing', async () => {
   const res = await getOrder('cs_test_123', { payment_status: 'unpaid', metadata: { briet_item_id: 'book-1' } })

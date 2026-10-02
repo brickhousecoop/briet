@@ -33,11 +33,22 @@ export default async function handler(
   if (req.method === 'POST') {
     const bookId: string = req.body.briet_item_id
     const user = await (deps.getUser ?? getPagesUser)(req)
+    // An expired Clerk session token reads as signed-out here, so the buyer
+    // gets bounced to sign-in, is refreshed there, and has to click Purchase a
+    // second time. Pages Router buy pages do not refresh the Clerk session token.
     if (!user) {
       return res.redirect(303, `/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${bookId}`)}`)
     }
     const email = user.primaryEmailAddress?.emailAddress
     if (!email) throw new Error('Missing primary email address')
+
+    // accountOrders.ts only matches verified addresses, so letting an unverified
+    // buyer pay would charge them before the order page turns them away. Refuse
+    // before Stripe is reached and point at the account settings page, where an
+    // address can be added or verified.
+    if (user.primaryEmailAddress?.verification?.status !== 'verified') {
+      return res.redirect(303, '/account/settings?verify=email')
+    }
 
     // A signed-in buyer can POST here with any Origin, and Stripe sends the buyer
     // wherever these URLs point once the card clears. Reading them from any
