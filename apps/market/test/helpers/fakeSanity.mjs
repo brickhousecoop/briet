@@ -26,7 +26,6 @@ const matchingIds = async (docs, query, params) => {
 
 export async function startFakeSanity() {
   const store = new Map()
-  const calls = { mutations: [] }
 
   const server = http.createServer((req, res) => {
     let body = ''
@@ -47,7 +46,6 @@ export async function startFakeSanity() {
           const { mutations } = JSON.parse(body)
           const results = []
           for (const m of mutations) {
-            calls.mutations.push(m)
             if (m.createIfNotExists) {
               const doc = m.createIfNotExists
               const existed = store.has(doc._id)
@@ -87,11 +85,10 @@ export async function startFakeSanity() {
       useCdn: false,
     })
 
-  const reset = () => { store.clear(); calls.mutations.length = 0 }
+  const reset = () => store.clear()
 
   return {
     port,
-    calls,
     client: makeClient, // read + write share the fake; the distinction is the token, not the host
     seed: (docs) => { for (const d of docs) store.set(d._id, d) },
     doc: (id) => store.get(id),

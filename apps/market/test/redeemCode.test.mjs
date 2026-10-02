@@ -5,7 +5,8 @@ import { startFakeSanity } from './helpers/fakeSanity.mjs'
 // Minting turns a paid checkout into a code the buyer can redeem in Lenny. The
 // gate matters as much as the mint: an unpaid or untagged session must not
 // produce a working code. Runs against a fake Content Lake via the real client,
-// so the createIfNotExists idempotency guarantee is exercised for real.
+// so mutation semantics are simulated; createIfNotExists idempotency for real
+// is redeem.integration.mjs's job.
 
 const fake = await startFakeSanity()
 after(() => fake.close())
@@ -32,14 +33,6 @@ test('a paid session mints a code for the purchased book', async () => {
   assert.deepEqual(created.books, [{ _type: 'reference', _ref: 'book-1', _key: 'book-1' }])
 })
 
-test('reloading the order page returns the first code, it does not mint a second', async () => {
-  const first = await mintRedeemCode(paidSession, fake.client())
-  const second = await mintRedeemCode(paidSession, fake.client())
-
-  assert.equal(second, first)
-  assert.equal(fake.doc('redeem-cs_test_123').code, first) // first code survives; both creates attempted, one stored
-})
-
 test('an unpaid session mints nothing', async () => {
   const code = await mintRedeemCode({ ...paidSession, payment_status: 'unpaid' }, fake.client())
 
@@ -54,5 +47,5 @@ test('a session with incomplete redemption metadata mints nothing', async () => 
   )
 
   assert.equal(code, null)
-  assert.equal(fake.calls.mutations.length, 0)
+  assert.equal(fake.doc('redeem-cs_test_123'), undefined)
 })

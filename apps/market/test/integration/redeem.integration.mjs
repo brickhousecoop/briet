@@ -26,9 +26,16 @@ const get = async (code) => {
   return res
 }
 
+// The production guard sets `guarded` before any document is created. Cleanup
+// is registered at module scope but does nothing unless the guard passed, so a
+// guard failure means no delete is attempted against a dataset this test has no
+// business writing to.
+let guarded = false
+
 before(async () => {
   const { dataset } = sanity.config()
   assert.notEqual(dataset, 'production', 'refusing to write test documents into production')
+  guarded = true
 
   // Reuse an existing file asset rather than uploading; the OLID is the form
   // Lenny's parser accepts (it strips OL/M and skips anything else).
@@ -44,6 +51,7 @@ before(async () => {
 })
 
 after(async () => {
+  if (!guarded) return
   await sanity.delete(CODE_DOC).catch(() => {}) // referencing document first
   await sanity.delete(BOOK).catch(() => {})
   assert.equal(await sanity.fetch('count(*[_id in $ids])', { ids: [BOOK, CODE_DOC] }), 0)
