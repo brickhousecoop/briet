@@ -30,7 +30,7 @@ const OrderPage = ({ order, redeemCode, hasDownload, forbidden }) => {
 
         {forbidden ? (
           <p className={styles.description}>
-            This order was placed with an email  address that isn&apos;t linked to your account. Please make sure you verified your email, or contact <a href="mailto:help@briet.app">help@briet.app</a>.
+            This order was placed with an email  address that either isn&apos;t linked to your account or hasn&apos;t been verified.
           </p>
         ) : redeemCode ? (
           <>
