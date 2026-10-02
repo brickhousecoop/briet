@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import sanity, { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 import { getPagesUser } from '../../lib/pagesUser'
 import { generateRedeemCode } from '../../lib/redeemCode'
-import { formatAmountForStripe, getStripeServerClient } from '../../utils/stripe-helpers'
+import { getStripeServerClient } from '../../utils/stripe-helpers'
 
 // Deps are injected in tests so the money path runs against a fake Content Lake
 // (via a real @sanity/client) and a param-capturing Stripe stand-in. Production
@@ -77,7 +77,7 @@ export default async function handler(
           {
             price_data: {
               currency: 'usd',
-              unit_amount: formatAmountForStripe(book.price_usd, 'usd'),
+              unit_amount: Math.round(book.price_usd * 100),
               product_data: {
                 name: book.title,
                 description: 'copies for controlled digital lending by your institution, each copy to one patron at a time',

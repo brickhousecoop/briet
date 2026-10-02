@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './CopyButton.module.css'
 
@@ -13,14 +13,12 @@ import styles from './CopyButton.module.css'
 // stays "Copied".
 const CopyButton = ({ text, label = 'Copy', className = '' }) => {
   const [copied, setCopied] = useState(false)
-  const timer = useRef()
 
-  // Revert the "Copied" state after a moment; clear on unmount and on each new
-  // copy so a rapid second click isn't cut short by the first click's timer.
+  // Revert the "Copied" state after a moment; clear the timer on cleanup.
   useEffect(() => {
     if (!copied) return
-    timer.current = setTimeout(() => setCopied(false), 2000)
-    return () => clearTimeout(timer.current)
+    const timer = setTimeout(() => setCopied(false), 2000)
+    return () => clearTimeout(timer)
   }, [copied])
 
   const copy = async () => {
