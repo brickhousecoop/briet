@@ -1,24 +1,28 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
+import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 type Collection = {
   _id: string
   name: string
   slug: { current: string }
-  members: Book[]
+  // members has no required rule in the collection schema, and a dangling
+  // member reference dereferences to null.
+  members: (Book | null)[] | null
 }
 
+// The parentheses make GROQ filter the dereferenced documents; without them it
+// returns nulls instead. Collections left empty are dropped.
 const collectionsQuery = `
   *[_id == "eca1ce22-f0bf-4205-88e6-3733d723bf05"] {
-    featuredCollections[]->{
+    "featuredCollections": (featuredCollections[]->{
       _id,
       name,
       slug,
-      members[]->{
+      "members": (members[]->)[${purchasableFilter}]{
         _id,
         title,
         cover,
@@ -27,7 +31,7 @@ const collectionsQuery = `
         publisher->{ name },
         price_usd,
       },
-    }
+    })[count(members) > 0]
   }[0]
 `
 
@@ -45,14 +49,13 @@ const singleBookQuery = `
 
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'
 
-export const metadata: Metadata = {
-  title: 'BRIET Bookmarket',
-  description: 'Ebooks, for libraries, for keeps.',
-}
-
-const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book }) => {
+const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; demoBook: Book | null }) => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>BRIET Bookmarket</title>
+      </Head>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="logo">BRIET</span> Bookmarket
@@ -62,7 +65,7 @@ const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; d
           Ebooks, for libraries, <strong>for keeps</strong>.
         </p>
 
-        {demoBookId && <fieldset>
+        {demoBook && <fieldset>
           <legend>A demo of how ebooks from <span className='logo'>BRIET</span> can be loaned to patrons</legend>
           <iframe src={`https://reader.briet.app/borrow/${demoBookId}/`}/>
           <a href={`https://reader.briet.app/borrow/${demoBookId}/`}>&#x26F6; Pop out in full window →</a>
@@ -98,7 +101,7 @@ const BrietHomepage = ({ collections, demoBook }: { collections: Collection[]; d
         {collections.map(collection =>
           <fieldset id={collection.slug.current} key={collection._id}>
             <legend>{collection.name}</legend>
-            {collection.members.map(book =>
+            {(collection.members ?? []).filter((book): book is Book => Boolean(book)).map(book =>
               <CatalogListing book={book} key={book._id}/>
             )}
           </fieldset>
@@ -125,7 +128,9 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      collections: collections.featuredCollections,
+      // the settings doc and its featuredCollections field are both optional;
+      // a missing one is an empty homepage, not a crash.
+      collections: collections?.featuredCollections ?? [],
       demoBook,
     },
     revalidate: 5,

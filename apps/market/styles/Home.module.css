@@ -3,10 +3,11 @@
 }
 
 .main {
+  /* flex-direction/justify/align are inert without display:flex — and that's
+     load-bearing: it keeps the redeem-code row a full-width block, which is
+     what lets its contents center. Don't add display:flex without reworking
+     that. */
   padding: 2rem 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer {
@@ -34,7 +35,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: clamp(2.25rem, 9vw, 4rem);
 }
 
 .title,
@@ -43,6 +44,7 @@
 }
 
 .description {
+  text-align: center;
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
@@ -90,27 +92,97 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
+/* Block-level with a fit-content width so `margin: auto` centers it without
+   the parent needing to be a flex container. */
 .downloadbutton {
-  font-size: 24px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.65rem;
 
-  margin: 3rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  max-width: 300px;
+  margin: 2.5rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
 
-  display: block;
-
-  background-color: black;
+  background-color: #111;
   color: white;
+  text-decoration: none;
 
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease;
+}
+
+/* The download glyph is a mask rather than an <img>, so it inherits the
+   button's colour and every caller gets it without repeating inline SVG. */
+.downloadbutton::before {
+  content: '';
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.downloadbutton:hover,
+.downloadbutton:focus-visible {
+  background-color: #ff002b;
+  color: white;
+  text-decoration: none;
+}
+
+.downloadbutton:active {
+  transform: translateY(1px);
+}
+
+/* A buy page's free-order call to action: a filled card holding its own
+   heading and blurb, not a single-label button. */
+.freeordercard {
+  display: block;
+  max-width: 300px;
+  margin: 3rem;
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
 }
 
 button.card {
   cursor: pointer;
+}
+
+/* The two buy-page calls to action share one row at a common height, and the
+   approved-accounts note spans the full width beneath them. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 2rem;
+  flex-basis: 100%;
+}
+
+.actions > form {
+  display: flex;
+  flex: 1 1 300px;
+  max-width: 300px;
+  margin: 0;
+}
+
+.actions .card,
+.actions .freeordercard {
+  flex: 1 1 300px;
+  margin: 0;
+}
+
+/* The Clerk <SignIn>/<SignUp> box is a plain block form; this wrapper centers
+   it in the account page shell. The min-height reserves the tallest form so
+   hydration doesn't shift the page. */
+.accountform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50rem;
+  margin: 2rem 0;
 }
 
 .cataloglisting {
@@ -164,13 +236,15 @@ button.card {
 }
 
 .card h2,
-.float h2 {
+.float h2,
+.freeordercard h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
 
 .card p,
-.float p {
+.float p,
+.freeordercard p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
@@ -230,6 +304,15 @@ button.card {
   .footer {
     border-color: #222;
   }
+  .downloadbutton {
+    background-color: #f2f2f2;
+    color: #111;
+  }
+  .downloadbutton:hover,
+  .downloadbutton:focus-visible {
+    background-color: #ff002b;
+    color: white;
+  }
   .card {
     background-color: #ccc;
     color: #222;
@@ -254,4 +337,129 @@ button.card {
     background: #bbb;
   }
 
+}
+
+/* One panel holds the label, the code and its instructions, so the redemption
+   path reads as a single alternative to the download button above it. */
+.redeemsection {
+  background: #fafafa;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.redeemlabel {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* The row is relative so the copy button can dock to its right edge, leaving
+   the code horizontally centered in the panel rather than offset by the button. */
+.redeemcodeRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4.5rem;
+}
+
+.redeemnote {
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.ordernote {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+  text-align: center;
+  margin: 0.75rem 0;
+}
+
+.redeemcodeRow .redeemcode {
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 0.12em;
+  user-select: all;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+/* Layout hook for the reusable CopyButton when docked inside the redeem-code
+   box: pins it to the box's right edge. Button styling lives in
+   components/CopyButton.module.css; this only positions it. */
+.copyInBox {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* At narrow widths the absolute button (≈119px) is wider than the 4.5rem right
+   padding it docks into and would cover the code's last characters. Stack it
+   under the code instead: bring it back into flow and let the row wrap. */
+@media (max-width: 640px) {
+  .redeemsection {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .redeemcodeRow {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  /* Keep the code on one line rather than breaking it mid-token. */
+  .redeemcodeRow .redeemcode {
+    font-size: 2rem;
+  }
+
+  .copyInBox {
+    position: static;
+    transform: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .redeemsection {
+    background: #111;
+    border-color: #2a2a2a;
+  }
+  .redeemnote,
+  .ordernote {
+    color: #a3a3a3;
+  }
+}
+
+.orderlisting {
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.orderlisting h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+/* .downloadbutton's auto margins centre it on an order page; in a list of
+   orders it has to sit close to what it belongs to. */
+.orderlisting .downloadbutton {
+  margin: 0;
+  font-size: 1.05rem;
+  padding: 0.7rem 1.15rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .orderlisting {
+    border-color: #222;
+  }
 }

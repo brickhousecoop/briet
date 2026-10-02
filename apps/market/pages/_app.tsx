@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import '@styles/globals.css'
 import Script from 'next/script'
 
+// The template shell for pages/ routes only; app/layout.tsx is the counterpart for app/.
+// Changes here should probably be made there too
 function App({ Component, pageProps }: AppProps) {
   return (
     <>

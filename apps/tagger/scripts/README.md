@@ -67,3 +67,30 @@ Yes — the import is **additive**. `--missing` writes only these documents by `
 it never deletes anything. It is not a dataset copy/replace. In practice only a few shared
 author records already exist; everything else (the `pageSettings`, collections, demo book,
 covers) is new.
+
+## create-redeem-code.mjs — mint a Lenny redeem code by hand
+
+Purchases mint their own code on the order page, so this script is for the cases that
+have no checkout behind them: a spare code to carry into a demo, or fulfilling an order
+that was placed before the book was tagged.
+
+```sh
+SANITY_PROJECTID=… SANITY_DATASET=production SANITY_WRITE_TOKEN=… \
+node apps/tagger/scripts/create-redeem-code.mjs --books <bookId> [<bookId> …] \
+  [--code CODE] [--session STRIPE_SESSION_ID] [--note "for the Everytown demo"]
+```
+
+The token must have write access: `SANITY_WRITE_TOKEN` if set, else `SANITY_TOKEN` —
+a read-only one (jacket's `SANITY_TOKEN`) passes the book checks and fails at the
+write with a named 403. Sourcing an app's `.env.local` covers the project id and
+dataset: the script also accepts `SANITY_STUDIO_*` and `NEXT_PUBLIC_SANITY_*`.
+Book ids are Sanity document `_id`s.
+
+The script refuses any book without an Open Library **edition** id (`identifier_ol`, e.g.
+`OL32941311M`) or a file, because Lenny cannot import one: it parses the OLID and rejects
+anything that fails an EPUB check. Codes are one-shot and `redeemedAt` is read-only in the
+Studio, so a burned code cannot be reset from the UI — mint a spare rather than planning to
+recover one.
+
+Mint into the same dataset the redeeming market deployment reads. Lenny hardcodes
+`https://market.briet.app/api/redeem-lenny`, which serves `production`.

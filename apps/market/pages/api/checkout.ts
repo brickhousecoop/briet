@@ -1,0 +1,136 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+import Stripe from 'stripe'
+import sanity, { createSanityClient, purchasableFilter } from '@repo/sanity-client'
+import { getPagesUser } from '../../lib/pagesUser'
+import { generateRedeemCode } from '../../lib/redeemCode'
+import { getStripeServerClient } from '../../utils/stripe-helpers'
+
+// Deps are injected in tests so the money path runs against a fake Content Lake
+// (via a real @sanity/client) and a param-capturing Stripe stand-in. Production
+// callers pass only (req, res), so the `??` fallbacks select the module singleton
+// and the env-configured Stripe.
+type Deps = {
+  sanity?: ReturnType<typeof createSanityClient>
+  stripe?: InstanceType<typeof Stripe>
+  getUser?: typeof getPagesUser
+}
+
+const singleBookQuery = `
+  *[_type == "book" && _id == $id && ${purchasableFilter}] {
+    _id,
+    title,
+    "publisher_name": publisher->name,
+    "coverImageUrl": cover.asset->url,
+    price_usd,
+  }[0]
+`
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  deps: Deps = {}
+) {
+  if (req.method === 'POST') {
+    const bookId: string = req.body.briet_item_id
+    const user = await (deps.getUser ?? getPagesUser)(req)
+    // An expired Clerk session token reads as signed-out here, so the buyer
+    // gets bounced to sign-in, is refreshed there, and has to click Purchase a
+    // second time. Pages Router buy pages do not refresh the Clerk session token.
+    if (!user) {
+      return res.redirect(303, `/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${bookId}`)}`)
+    }
+    const email = user.primaryEmailAddress?.emailAddress
+    if (!email) throw new Error('Missing primary email address')
+
+    // accountOrders.ts only matches verified addresses, so letting an unverified
+    // buyer pay would charge them before the order page turns them away. Refuse
+    // before Stripe is reached and point at the account settings page, where an
+    // address can be added or verified.
+    if (user.primaryEmailAddress?.verification?.status !== 'verified') {
+      return res.redirect(303, '/account/settings?verify=email')
+    }
+
+    // A signed-in buyer can POST here with any Origin, and Stripe sends the buyer
+    // wherever these URLs point once the card clears. Reading them from any
+    // request headers could let an attacker create a Stripe session with URLs that
+    // redirect to a site they control.
+    const siteUrl = process.env.SITE_URL
+    if (!siteUrl) {
+      throw new Error('Missing SITE_URL')
+    }
+
+    const stripe = deps.stripe ?? getStripeServerClient()
+    const book = await (deps.sanity ?? sanity).fetch(singleBookQuery, { id: bookId });
+    // An untitled book is not sellable — Stripe rejects an empty product name
+    // with the same parameter_invalid_empty that a missing cover used to hit.
+    if (!book || !book.title) {
+      res.status(404).json({ error: 'not_found' })
+      return
+    }
+    try {
+      const redeemCode = generateRedeemCode()
+      const session = await stripe.checkout.sessions.create({
+        mode: 'payment',
+        success_url: `${siteUrl}/order/{CHECKOUT_SESSION_ID}`,
+        cancel_url: `${siteUrl}/buy/${bookId}`,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              unit_amount: Math.round(book.price_usd * 100),
+              product_data: {
+                name: book.title,
+                description: 'copies for controlled digital lending by your institution, each copy to one patron at a time',
+                // cover is optional in the book schema; Stripe rejects empty image entries
+                ...(book.coverImageUrl && { images: [book.coverImageUrl] }),
+              }
+            },
+            quantity: 1,
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1,
+            },
+          },
+        ],
+        // Choose the redemption code up front and stash it in Stripe metadata so it can appear in the receipt email.
+        // It won't work for redemption until the buyer completes checkout and lands on success_url.
+        metadata: {
+          briet_item_id: bookId,
+          briet_redeem_code: redeemCode,
+        },
+        payment_intent_data: {
+          description: `Your BRIET redemption code is ${redeemCode}`,
+          metadata: {
+            briet_payout_to: book.publisher_name,
+          },
+        },
+        customer_creation: 'always',
+        customer_email: email,
+        consent_collection: {
+          terms_of_service: 'required',
+        },
+        custom_text: {
+          submit: {
+            message: 'Once your payment clears, the next page shows a redemption code. Enter it in your Lenny library to import this book. Contact help@briet.app with any questions.',
+          },
+          terms_of_service_acceptance: {
+            message: `Briet hereby sells authorized digital copies (“ADC”) of the eBooks [Listed in Schedule 1] to [Name of Library] (“Library”). The sale transfers title in the ADC to Library. Briet intends this sale to provide Library with rights to use the ADC that are substantially equivalent to the rights Library would have in a physical print copy (e.g., a paperback or hard cover book) of the applicable literary work purchased by Library under the first sale doctrine, codified at 17 U.S.C. § 109. ¶ Briet understands that certain incidental copies may be made in the process of effectuating these rights, including without limitation, lending to one reader at a time per ADC, transferring the ADC from one hosting provider or device to another, updating the format of the ADC to interoperate with the storage or reading device of Library’s choice, or performing any other activity that would fall within Sections 107-121 of the US Copyright Act. For the avoidance of doubt, Briet intends the sale to include the right to resell the ADC. ¶ More at market.briet.app/terms-of-sale`
+          },
+        }
+      });
+      if (session.url === null) {
+        throw Error('Null checkout session URL')
+      }
+      res.redirect(303, session.url);
+    } catch (err) {
+      // Log the real error server-side; the buyer gets a stable shape, not
+      // Stripe's raw message rendered as the form response.
+      console.error('checkout: Stripe checkout failed', err)
+      const statusCode = (err as { statusCode?: number }).statusCode || 500
+      res.status(statusCode).json({ error: 'checkout_failed' })
+    }
+  } else {
+    res.setHeader('Allow', 'POST');
+    res.status(405).end('Method Not Allowed');
+  }
+}

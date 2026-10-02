@@ -79,6 +79,10 @@ a:hover {
   }
 }
 
+a:has(> span.logo:only-child) {
+  text-decoration: none;
+}
+
 span.logo {
   display: inline-block;
   overflow-wrap: break-word;

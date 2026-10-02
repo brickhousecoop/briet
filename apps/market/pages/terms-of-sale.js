@@ -6,8 +6,7 @@ const BrietAboutPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>BRIET Bookmarket</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>BRIET Bookmarket: Terms of Sale</title>
       </Head>
 
       <main className={styles.main}>

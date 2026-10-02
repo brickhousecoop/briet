@@ -4,12 +4,13 @@ import Link from 'next/link'
 const BrietFooter = () =>
   <footer className={styles.footer}>
     <Link href="/">An early <span className="logo">BRIET</span> prototype</Link>
-    ¶
+    {' ¶ '}
     <Link href="/about">About</Link>
-    ¶
+    {' ¶ '}
     <Link href="/terms-of-sale">Terms of Sale</Link>
-    ¶
+    {' ¶ '}
     <Link href="mailto:help@briet.app">Contact</Link>
+    {process.env.NEXT_PUBLIC_DEMO_MODE ? ' ¶ Demo Mode' : null}
   </footer>
 
 BrietFooter.displayName = 'BrietFooter'

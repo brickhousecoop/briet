@@ -1,11 +1,11 @@
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 import { MarcRecord } from '@natlibfi/marc-record';
 
 const allBookIdsQuery = `
-  *[_type == "book"] { _id }
+  *[_type == "book" && ${purchasableFilter}] { _id }
 `
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && ${purchasableFilter}] {
     _id,
     title,
     authors[] -> { _id, name, uri },
@@ -33,7 +33,18 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const book = await sanity.fetch(singleBookQuery, { id: params.id });
 
-  const authorFields = book.authors.map(author => {
+  if (!book) {
+    return {
+      notFound: true,
+      revalidate: 5,
+    };
+  }
+
+  // authors is optional on the book schema and a dangling author reference
+  // dereferences to null, so drop null elements before mapping.
+  const authors = (book.authors ?? []).filter(author => author?.name);
+
+  const authorFields = authors.map(author => {
     return {
       tag: '100',
       subfields: [
@@ -45,18 +56,22 @@ export const getStaticProps = async ({ params }) => {
     }
   })
 
+  const titleSubfields = [{
+    code: 'a',
+    value: book.title
+  }]
+  // 245$c is omitted entirely for authorless books rather than emitted empty:
+  // an empty subfield is rejected or mis-ingested by library ILS importers.
+  if (authors.length > 0) {
+    titleSubfields.push({
+      code: 'c',
+      value: authors.map(author => author.name).join(', ')
+    })
+  }
+
   const titleFields = [{
     tag: '245',
-    subfields: [
-      {
-        code: 'a',
-        value: book.title
-      },
-      {
-        code: 'c',
-        value: book.authors.map(author => author.name).join(', ')
-      }
-    ]
+    subfields: titleSubfields
   }]
 
   const fields = []
