@@ -199,35 +199,7 @@ From Jacob, May 2026: just realized npm build/start scripts are broken here, so 
 
 The public-facing BRIET Marketplace, where libraries can purchase books.
 
-This is a NextJS app, hewing very closely to its default out-of-the-box template for the path of least resistance.
-
-Stripe handles the checkout & payment flow, and we invented the hacky solution of using Stripe's fraud flagging feature, to allow David to manually review purchases on our end before cards are charged (we have a flow defined which holds all transactions for manual review). David then fulfills orders manually, emailing the user their files directly (which he grabs from Tagger).
-
-However automatic download fulfillment is a great next feature to tackle, dear reader: https://github.com/brickhousecoop/briet/issues/86
-
-### `market` Development
-
-You'll need
-- to be added to Brick House's Vercel team, for ENV vars
-- to be added as developer to Brick House's Stripe account, if you are working on checkout flow
-- to be added as developer to BRIET's Clerk account, if you are working on user auth (including checkout)
-
-`cd apps/market`
-
-`npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
-
-Get env vars into `apps/market/.env.local`, either by pulling them:
-
-```
-npx vercel link --scope brickhousecoop --project bh-briet-market
-npx vercel env pull
-```
-
-or, if you're not on the Vercel team, by copying `.env.example` to `.env.local` and asking a developer for the values. Only the Sanity vars are needed to browse the catalog — Stripe matters for checkout, Clerk for the `/account` flow.
-
-`npm run dev:local` runs `next dev` on port 3001.
-
-**With Vercel:** `npm run dev` runs the app through `vercel dev`. Slower and needs auth; `next dev` already handles rewrites, headers, and the Clerk proxy natively.
+See the [Market README](apps/market/README.md) for development, environment variables, checkout, downloads, redemption codes, and account authentication.
 
 ## `reader`
 
