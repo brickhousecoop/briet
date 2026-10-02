@@ -12,6 +12,22 @@ See the [root README](../../README.md) for full setup. Quick version:
 
 `npm run dev` instead runs the full Vercel flow (`vercel link/pull/dev`), which requires membership in the Brick House Vercel team.
 
+## Environment variables
+
+Set values per deployment in Vercel, or in `.env.local` for local development.
+
+- `NEXT_PUBLIC_SANITY_PROJECTID`: Sanity project containing the catalog.
+- `NEXT_PUBLIC_SANITY_DATASET`: Sanity dataset to read and write (`development` or `production`).
+- `SANITY_TOKEN`: Read-only Sanity token for catalog queries.
+- `SANITY_WRITE_TOKEN`: Sanity Editor token for minting and spending redemption codes.
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Public Clerk key for sign-in and account UI.
+- `CLERK_SECRET_KEY`: Server Clerk key; must match the publishable key's instance.
+- `STRIPE_SECRET_KEY`: Stripe key for checkout and orders; test keys for staging/demo, live for prod.
+- `SITE_URL`: This deployment's origin, without a trailing slash, for Stripe return URLs.
+- `DEMO_MODE`: Any nonempty value enables the demo badge and blocks indexing; unset in prod.
+- `HIDE_UNPURCHASABLE_BOOKS`: Any nonempty value filters the catalog to free books with files or paid books with OLIDs and EPUBs.
+- `NEXT_PUBLIC_FATHOM_SITEID`: Optional Fathom analytics site ID.
+
 ## Key Market Features
 
 ### Demo deployments
