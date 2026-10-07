@@ -24,8 +24,8 @@ Set values per deployment in Vercel, or in `.env.local` for local development.
 - `CLERK_SECRET_KEY`: Server Clerk key; must match the publishable key's instance.
 - `STRIPE_SECRET_KEY`: Stripe key for checkout and orders; test keys for staging/demo, live for prod.
 - `SITE_URL`: This deployment's origin, without a trailing slash, for Stripe return URLs.
-- `DEMO_MODE`: Any nonempty value enables the demo badge and blocks indexing; unset in prod.
-- `HIDE_UNPURCHASABLE_BOOKS`: Any nonempty value filters the catalog to free books with files or paid books with OLIDs and EPUBs.
+- `DEMO_MODE`: `1` enables the demo badge and blocks indexing; leave unset in prod.
+- `HIDE_UNPURCHASABLE_BOOKS`: `1` filters the catalog to free books with files or paid books with OLIDs and EPUBs.
 - `NEXT_PUBLIC_FATHOM_SITEID`: Optional Fathom analytics site ID.
 
 ## Key Market Features

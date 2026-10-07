@@ -1,6 +1,9 @@
 import { createClient } from '@sanity/client'
 import { createImageUrlBuilder } from '@sanity/image-url'
 
+const hideUnpurchasableBooks = process.env.HIDE_UNPURCHASABLE_BOOKS === '1'
+  || process.env.HIDE_UNPURCHASABLE_BOOKS === 'true'
+
 // two options, optimized according to permissions
 // https://www.sanity.io/help/js-client-usecdn-token
 
@@ -53,9 +56,9 @@ export function createSanityWriteClient() {
 
 // GROQ filter for book queries: `*[_type == "book" && ${purchasableFilter}]`.
 // Purchasable means free with a file, or paid with an OLID and an EPUB (Lenny
-// keys imports on the OLID). Without HIDE_UNPURCHASABLE_BOOKS set, the filter
-// matches every book.
-export const purchasableFilter = process.env.HIDE_UNPURCHASABLE_BOOKS
+// keys imports on the OLID). HIDE_UNPURCHASABLE_BOOKS=1 (or true) enables it;
+// anything else, including unset, matches every book.
+export const purchasableFilter = hideUnpurchasableBooks
   ? '((price_usd == 0 && defined(file.asset)) || (defined(identifier_ol) && file.asset->extension == "epub"))'
   : 'true'
 
