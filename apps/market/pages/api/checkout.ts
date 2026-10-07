@@ -31,6 +31,14 @@ export default async function handler(
   deps: Deps = {}
 ) {
   if (req.method === 'POST') {
+    // Minting the redemption code after payment needs SANITY_WRITE_TOKEN; with
+    // only the read token the buyer's order page fails once Stripe has already
+    // taken the money. Refuse before a checkout session exists so a tokenless
+    // deployment never reaches the payment step.
+    if (!process.env.SANITY_WRITE_TOKEN) {
+      res.status(500).json({ error: 'SANITY_WRITE_TOKEN is required to mint redemption codes after payment; checkout refuses to start without it.' })
+      return
+    }
     const bookId: string = req.body.briet_item_id
     const user = await (deps.getUser ?? getPagesUser)(req)
     // An expired Clerk session token reads as signed-out here, so the buyer
@@ -40,7 +48,12 @@ export default async function handler(
       return res.redirect(303, `/account/sign-in?redirect_url=${encodeURIComponent(`/buy/${bookId}`)}`)
     }
     const email = user.primaryEmailAddress?.emailAddress
-    if (!email) throw new Error('Missing primary email address')
+    // A phone-only account has no address to verify, so send it to the same
+    // place as an unverified one: the settings page, where an address can be
+    // added. Throwing here would produce an unstructured 500 outside the try.
+    if (!email) {
+      return res.redirect(303, '/account/settings?verify=email')
+    }
 
     // accountOrders.ts only matches verified addresses, so letting an unverified
     // buyer pay would charge them before the order page turns them away. Refuse

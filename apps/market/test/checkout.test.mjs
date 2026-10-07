@@ -94,6 +94,47 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
   assert.equal(res.redirectUrl, 'https://checkout.stripe.com/c/pay/cs_test_123')
 })
 
+test('without SANITY_WRITE_TOKEN the checkout is refused before Stripe', async () => {
+  // setup.mjs seeds a dummy token so modules load; a deployment missing the
+  // write token must fail here, not on the buyer's order page after payment.
+  // Restore the token: node:test runs these tests in one process, and the ones
+  // below need it.
+  const savedToken = process.env.SANITY_WRITE_TOKEN
+  delete process.env.SANITY_WRITE_TOKEN
+  try {
+    const res = await post('book-1')
+
+    assert.equal(res.statusCode, 500)
+    assert.deepEqual(res.body, {
+      error: 'SANITY_WRITE_TOKEN is required to mint redemption codes after payment; checkout refuses to start without it.',
+    })
+    assert.equal(sessionParams, undefined) // never reached Stripe
+  } finally {
+    process.env.SANITY_WRITE_TOKEN = savedToken
+  }
+})
+
+test('with SANITY_WRITE_TOKEN the same request still reaches Stripe', async () => {
+  process.env.SANITY_WRITE_TOKEN = 'test-write-token'
+
+  const res = await post('book-1')
+
+  assert.equal(res.statusCode, 303)
+  assert.equal(res.redirectUrl, 'https://checkout.stripe.com/c/pay/cs_test_123')
+})
+
+const phoneOnlyBuyer = { primaryEmailAddress: null }
+
+// A phone-only account has no email to verify, so it gets the settings-page
+// redirect like an unverified one instead of an unstructured 500.
+test('a buyer with no email address is redirected to settings, not 500d', async () => {
+  const res = await post('book-1', phoneOnlyBuyer)
+
+  assert.equal(res.statusCode, 303)
+  assert.equal(res.redirectUrl, '/account/settings?verify=email')
+  assert.equal(sessionParams, undefined) // never reached Stripe
+})
+
 test('an unverified buyer is refused before Stripe is reached', async () => {
   const unverified = {
     primaryEmailAddress: { emailAddress: 'buyer@example.org', verification: { status: 'unverified' } },
