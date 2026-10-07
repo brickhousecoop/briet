@@ -55,11 +55,12 @@ export function createSanityWriteClient() {
 }
 
 // GROQ filter for book queries: `*[_type == "book" && ${purchasableFilter}]`.
-// Purchasable means free with a file, or paid with an OLID and an EPUB (Lenny
-// keys imports on the OLID). HIDE_UNPURCHASABLE_BOOKS=1 (or true) enables it;
-// anything else, including unset, matches every book.
+// Purchasable means free with a file, or paid with a price of at least $0.50
+// (Stripe's minimum charge) plus an OLID and an EPUB (Lenny keys imports on the
+// OLID). HIDE_UNPURCHASABLE_BOOKS=1 (or true) enables it; anything else,
+// including unset, matches every book.
 export const purchasableFilter = hideUnpurchasableBooks
-  ? '((price_usd == 0 && defined(file.asset)) || (defined(identifier_ol) && file.asset->extension == "epub"))'
+  ? '((price_usd == 0 && defined(file.asset)) || (defined(price_usd) && price_usd >= 0.5 && defined(identifier_ol) && file.asset->extension == "epub"))'
   : 'true'
 
 const sanity = createSanityClient()
