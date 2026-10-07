@@ -30,6 +30,10 @@ const codeQuery = `
 // than 429) as "invalid or already redeemed" and 5xx as "upstream unavailable",
 // so the status codes below are chosen to map onto that handling.
 export default async function handler(req: NextApiRequest, res: NextApiResponse, deps: Deps = {}) {
+  // This GET spends a single-use code and returns permanent EPUB URLs, so no
+  // cache — shared or private — may retain any response it produces.
+  res.setHeader('Cache-Control', 'no-store')
+
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
     return res.status(405).end('Method Not Allowed')

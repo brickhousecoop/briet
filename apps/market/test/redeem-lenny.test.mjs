@@ -91,6 +91,14 @@ test('a bundle with nothing importable fails without burning the code', async ()
   assert.equal(fake.doc('redeem-cs_test_123').redeemedAt, null)
 })
 
+test('every response is uncached, on success and on error', async () => {
+  const ok = await get('abcd-1234')
+  const err = await get('nope-nope')
+
+  assert.equal(ok.headers['Cache-Control'], 'no-store')
+  assert.equal(err.headers['Cache-Control'], 'no-store')
+})
+
 test('non-GET is rejected with 405 and an Allow header', async () => {
   const res = makeRes()
   await handler({ method: 'POST', query: {} }, res, { read: fake.client(), write: fake.client() })
