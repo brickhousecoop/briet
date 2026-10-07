@@ -3,6 +3,7 @@ import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
+import { bookCardProjection } from '@lib/bookCardProjection'
 import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 type Collection = {
@@ -36,15 +37,7 @@ const collectionsQuery = `
 `
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
-    _id,
-    title,
-    cover,
-    description,
-    authors[]->{ name },
-    publisher->{ name },
-    price_usd,
-  }[0]
+  *[_type == "book" && _id == $id] ${bookCardProjection}[0]
 `
 
 const demoBookId = '3d007a9b-9b9a-4b3a-9530-97d06ba071ed'

@@ -3,18 +3,11 @@ import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
+import { bookCardProjection } from '@lib/bookCardProjection'
 import { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 
 const catalogQuery = `
-  *[_type == "book" && ${purchasableFilter}] {
-    _id,
-    title,
-    cover,
-    description,
-    authors[]->{ name },
-    publisher->{ name },
-    price_usd,
-  }
+  *[_type == "book" && ${purchasableFilter}] ${bookCardProjection}
 `
 
 const sanity = createSanityClient({ useCdn: false })
@@ -58,9 +51,6 @@ export default BrietFullCatalog
 
 export const getStaticProps = async () => {
   const books = await sanity.fetch(catalogQuery)
-
-  // console.log(books) //debug
-  // console.log(books?.length + ' BOOKS') //debug
 
   return {
     props: {

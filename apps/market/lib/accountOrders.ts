@@ -44,7 +44,7 @@ export function sessionBelongsToUser(session: Stripe.Checkout.Session, user: Pic
 // scale very well.
 async function paidSessionsFor(stripe: InstanceType<typeof Stripe>, user: Pick<User, 'emailAddresses'>) {
   const sessions: Stripe.Checkout.Session[] = []
-  for await (const session of stripe.checkout.sessions.list({ limit: 100 })) {
+  for await (const session of stripe.checkout.sessions.list({ limit: 100, status: 'complete' })) {
     if (session.payment_status === 'paid' && sessionBelongsToUser(session, user)) {
       sessions.push(session)
     }

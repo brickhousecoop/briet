@@ -85,6 +85,10 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
     sessionParams.payment_intent_data.description.includes(sessionParams.metadata.briet_redeem_code),
   )
 
+  // Stripe rejects terms_of_service_acceptance.message over 1200 characters, which
+  // surfaces to buyers as checkout_failed. Pin the assembled message to the limit.
+  assert.ok(sessionParams.custom_text.terms_of_service_acceptance.message.length <= 1200)
+
   // redirect URLs are anchored to the configured site and book id
   assert.equal(sessionParams.success_url, 'https://market.briet.app/order/{CHECKOUT_SESSION_ID}')
   assert.equal(sessionParams.cancel_url, 'https://market.briet.app/buy/book-1')

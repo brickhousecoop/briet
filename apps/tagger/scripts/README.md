@@ -2,19 +2,6 @@
 
 ## seed-dev-dataset.mjs — seed `development` with the market homepage's content
 
-### The problem
-
-market's homepage (`apps/market/pages/index.tsx`) renders a `pageSettings` singleton and
-its `featuredCollections`, plus an embedded demo book. That content exists **only in the
-`production` dataset**. Local dev and CI builds read the **`development`** dataset
-(`NEXT_PUBLIC_SANITY_DATASET`), where the `pageSettings`/`collection` documents don't
-exist — so `getStaticProps` dereferences `null` and `npm run build:market` fails on `/`
-with `Cannot read properties of null (reading 'featuredCollections')`.
-
-(`/catalog` survives because it only needs `book` documents, which do exist in
-`development`. Disabling the Sanity CDN does **not** help — the docs are simply absent
-from that dataset.)
-
 ### The fix
 
 Copy just the homepage's document closure from a production export into `development`:
