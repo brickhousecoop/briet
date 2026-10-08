@@ -99,10 +99,6 @@ export default async function handler(
               }
             },
             quantity: 1,
-            adjustable_quantity: {
-              enabled: true,
-              minimum: 1,
-            },
           },
         ],
         // Choose the redemption code up front and stash it in Stripe metadata so it can appear in the receipt email.

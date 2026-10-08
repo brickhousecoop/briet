@@ -73,7 +73,10 @@ test('POST builds a Stripe session from the catalog book and redirects to it', a
   assert.equal(item.price_data.unit_amount, 2500) // $25 -> cents, via the real formatter
   assert.equal(item.price_data.product_data.name, 'The Test Book')
   assert.deepEqual(item.price_data.product_data.images, [COVER_URL])
-  assert.equal(item.adjustable_quantity.minimum, 1)
+  // One code redeems one copy, so the buyer can't adjust quantity at Stripe:
+  // fulfilment mints exactly one books[] entry per session.
+  assert.equal(item.quantity, 1)
+  assert.equal(item.adjustable_quantity, undefined)
 
   // publisher rides along for manual payout
   assert.equal(sessionParams.payment_intent_data.metadata.briet_payout_to, 'Test Press')
