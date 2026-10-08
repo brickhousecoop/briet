@@ -41,7 +41,7 @@ export function sessionBelongsToUser(session: Stripe.Checkout.Session, user: Pic
 // way to match an address the way people expect.
 //
 // TODO: this walks every session in the Stripe account, which is not going to
-// scale very well.
+// scale very well. Issue #116.
 async function paidSessionsFor(stripe: InstanceType<typeof Stripe>, user: Pick<User, 'emailAddresses'>) {
   const sessions: Stripe.Checkout.Session[] = []
   for await (const session of stripe.checkout.sessions.list({ limit: 100, status: 'complete' })) {
