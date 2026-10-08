@@ -1,0 +1,51 @@
+import { test, after, beforeEach } from 'node:test'
+import assert from 'node:assert/strict'
+import { startFakeSanity } from './helpers/fakeSanity.mjs'
+
+// Minting turns a paid checkout into a code the buyer can redeem in Lenny. The
+// gate matters as much as the mint: an unpaid or untagged session must not
+// produce a working code. Runs against a fake Content Lake via the real client,
+// so mutation semantics are simulated; createIfNotExists idempotency for real
+// is redeem.integration.mjs's job.
+
+const fake = await startFakeSanity()
+after(() => fake.close())
+beforeEach(() => fake.reset())
+
+const { mintRedeemCode } = await import('../lib/redeemCode.ts')
+
+const paidSession = {
+  id: 'cs_test_123',
+  payment_status: 'paid',
+  metadata: { briet_item_id: 'book-1', briet_redeem_code: 'ABCD-2345' },
+}
+
+test('a paid session mints a code for the purchased book', async () => {
+  const code = await mintRedeemCode(paidSession, fake.client())
+
+  assert.equal(code, 'ABCD-2345')
+
+  // one code per checkout session, enforced by the deterministic _id, not a lookup
+  const created = fake.doc('redeem-cs_test_123')
+  assert.equal(created.code, code)
+  assert.equal(created._type, 'redeemCode')
+  assert.equal(created.stripeSessionId, 'cs_test_123')
+  assert.deepEqual(created.books, [{ _type: 'reference', _ref: 'book-1', _key: 'book-1' }])
+})
+
+test('an unpaid session mints nothing', async () => {
+  const code = await mintRedeemCode({ ...paidSession, payment_status: 'unpaid' }, fake.client())
+
+  assert.equal(code, null)
+  assert.equal(fake.doc('redeem-cs_test_123'), undefined)
+})
+
+test('a session with incomplete redemption metadata mints nothing', async () => {
+  const code = await mintRedeemCode(
+    { ...paidSession, metadata: { briet_item_id: 'book-1' } },
+    fake.client(),
+  )
+
+  assert.equal(code, null)
+  assert.equal(fake.doc('redeem-cs_test_123'), undefined)
+})

@@ -1,32 +1,24 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
+import Head from '@components/head.jsx'
 import Footer from '@components/footer'
 import CatalogListing, { type Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { createSanityClient } from '@repo/sanity-client'
+import { bookCardProjection } from '@lib/bookCardProjection'
+import { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 
 const catalogQuery = `
-  *[_type == "book"] {
-    _id,
-    title,
-    cover,
-    description,
-    authors[]->{ name },
-    publisher->{ name },
-    price_usd,
-  }
+  *[_type == "book" && ${purchasableFilter}] ${bookCardProjection}
 `
-
-export const metadata: Metadata = {
-  title: 'BRIET Bookmarket',
-  description: 'Ebooks, for libraries, for keeps.',
-}
 
 const sanity = createSanityClient({ useCdn: false })
 
 const BrietFullCatalog = ({ books }: { books: Book[] }) => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>BRIET Bookmarket: Catalog</title>
+      </Head>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           The Whole<br/><Link href="/"><span className="logo">BRIET</span></Link> Catalog
@@ -59,9 +51,6 @@ export default BrietFullCatalog
 
 export const getStaticProps = async () => {
   const books = await sanity.fetch(catalogQuery)
-
-  // console.log(books) //debug
-  // console.log(books?.length + ' BOOKS') //debug
 
   return {
     props: {

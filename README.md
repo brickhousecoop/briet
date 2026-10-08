@@ -37,13 +37,21 @@ npx sanity login
 | tagger | no — `.env.development` is committed and carries the non-secret project ID |
 | reader | no — fully static |
 
-Market's Stripe and Clerk keys only matter for the checkout and `/account` flows; without them the catalog still browses fine.
+Market's Stripe, Clerk and `SANITY_WRITE_TOKEN` values only matter for the checkout and `/account` flows; without them the catalog still browses fine.
 
 ### Which Sanity dataset you get
 
 `jacket` and `market` default to the `development` dataset, which is seeded from production — see `apps/tagger/scripts/seed-dev-dataset.mjs` to refresh it. Two apps use `production` on purpose: `tagger`, because it's the CMS and editors need the real catalog, and `server`, because it publishes the public OPDS feed.
 
 Both datasets are private. `SANITY_TOKEN` is required, and the client throws without it — Sanity answers an unauthenticated read with zero documents rather than an error, so a missing token would otherwise look like an empty catalog.
+
+### Read and write tokens are separate
+
+`SANITY_TOKEN` should be read-only. Market's redeem flow is the only thing that writes to Sanity, and it uses `SANITY_WRITE_TOKEN` instead, via `createSanityWriteClient()` in `@repo/sanity-client`.
+
+They are split because Sanity cannot scope a token any narrower: the minimum role that can create and patch documents is Editor, which can read, write and delete every document in every dataset in the project. Per-type, per-field and per-dataset restrictions all require [custom roles](https://www.sanity.io/docs/content-lake/build-a-custom-role-with-the-access-api), which are Enterprise-only. So the boundary we can actually enforce is which code paths hold the credential, and every page that just renders the catalog holds one that cannot mutate anything.
+
+For the same reason, prefer a distinct token value per Vercel environment — a token reaches every dataset, so a leaked Preview token is a Production problem.
 
 To read production content locally, override the one variable for a single run:
 
@@ -96,6 +104,22 @@ Runs every app's `dev:local` in parallel via turbo. Ports are pinned, so the URL
 | reader | http://localhost:8080 |
 
 `server` has no dev script and is skipped (see its section below).
+
+# Deploying
+
+Every app is a Vercel project watching this repo, so deploys are driven by git and the CLI isn't needed.
+
+- Push to `main` — production: briet.app, market.briet.app, tagger.briet.app, reader.briet.app
+- Push to `demo` — demo.market.briet.app, market only, built with `DEMO_MODE`
+- Any other branch — a preview URL per project
+
+`main` is protected and takes a reviewed PR. `demo` is a publish target rather than somewhere to work — fast-forward it from your working branch when the demo site should move:
+
+```
+git switch demo && git merge --ff-only <your-branch> && git push && git switch -
+```
+
+Most projects run `npx turbo-ignore`, so a push only rebuilds the apps it touched; the demo project skips every branch except `demo`. See `apps/market/README.md` for what `DEMO_MODE` changes.
 
 # Structure
 
@@ -175,35 +199,7 @@ From Jacob, May 2026: just realized npm build/start scripts are broken here, so 
 
 The public-facing BRIET Marketplace, where libraries can purchase books.
 
-This is a NextJS app, hewing very closely to its default out-of-the-box template for the path of least resistance.
-
-Stripe handles the checkout & payment flow, and we invented the hacky solution of using Stripe's fraud flagging feature, to allow David to manually review purchases on our end before cards are charged (we have a flow defined which holds all transactions for manual review). David then fulfills orders manually, emailing the user their files directly (which he grabs from Tagger).
-
-However automatic download fulfillment is a great next feature to tackle, dear reader: https://github.com/brickhousecoop/briet/issues/86
-
-### `market` Development
-
-You'll need
-- to be added to Brick House's Vercel team, for ENV vars
-- to be added as developer to Brick House's Stripe account, if you are working on checkout flow
-- to be added as developer to BRIET's Clerk account, if you are working on user auth (including checkout)
-
-`cd apps/market`
-
-`npm install` (you can safely ignore `Unsupported engine` warnings, they are related to `server`)
-
-Get env vars into `apps/market/.env.local`, either by pulling them:
-
-```
-npx vercel link --scope brickhousecoop --project bh-briet-market
-npx vercel env pull
-```
-
-or, if you're not on the Vercel team, by copying `.env.example` to `.env.local` and asking a developer for the values. Only the Sanity vars are needed to browse the catalog — Stripe matters for checkout, Clerk for the `/account` flow.
-
-`npm run dev:local` runs `next dev` on port 3001.
-
-**With Vercel:** `npm run dev` runs the app through `vercel dev`. Slower and needs auth; `next dev` already handles rewrites, headers, and the Clerk proxy natively.
+See the [Market README](apps/market/README.md) for development, environment variables, checkout, downloads, redemption codes, and account authentication.
 
 ## `reader`
 

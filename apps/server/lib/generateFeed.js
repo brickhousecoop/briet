@@ -1,5 +1,5 @@
 const opds = require('opds')
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 const catalog = require('../catalog.json')
 console.log('catalogJSon', catalog)
@@ -52,7 +52,7 @@ const feed = {
 }
 
 const catalogQuery = `
-  *[_type == "book"]{
+  *[_type == "book" && ${purchasableFilter}]{
     _id,
     title,
     isbn,

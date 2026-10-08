@@ -1,0 +1,92 @@
+import type { User } from '@clerk/nextjs/server'
+import type Stripe from 'stripe'
+import type { createSanityClient } from '@repo/sanity-client'
+
+export type Order = {
+  sessionId: string
+  bookId: string | null
+  bookTitle: string | null
+  hasDownload: boolean
+  created: number
+  amountTotal: number | null
+  redeemCode: string | null
+  redeemedAt: string | null
+}
+
+const orderDetailQuery = `{
+  "codes": *[_type == "redeemCode" && stripeSessionId in $sessionIds] {
+    stripeSessionId,
+    code,
+    redeemedAt,
+  },
+  "books": *[_type == "book" && _id in $bookIds] {
+    _id,
+    title,
+    "hasFile": defined(file.asset->url),
+  },
+}`
+
+// An order belongs to whoever has its checkout email verified on their account.
+// Unverified addresses are excluded: anyone can claim one they do not own.
+export function sessionBelongsToUser(session: Stripe.Checkout.Session, user: Pick<User, 'emailAddresses'>) {
+  const email = session.customer_details?.email?.toLowerCase()
+  return Boolean(email && user.emailAddresses.some((address) =>
+    address.verification?.status === 'verified' && address.emailAddress.toLowerCase() === email
+  ))
+}
+
+// Stripe's customer_details[email] filter is case-sensitive, and Checkout stores
+// the address exactly as the buyer typed it — so a buyer who capitalised anything
+// is invisible to a filtered query. Scanning and comparing ourselves is the only
+// way to match an address the way people expect.
+//
+// TODO: this walks every session in the Stripe account, which is not going to
+// scale very well. Issue #116.
+async function paidSessionsFor(stripe: InstanceType<typeof Stripe>, user: Pick<User, 'emailAddresses'>) {
+  const sessions: Stripe.Checkout.Session[] = []
+  for await (const session of stripe.checkout.sessions.list({ limit: 100, status: 'complete' })) {
+    if (session.payment_status === 'paid' && sessionBelongsToUser(session, user)) {
+      sessions.push(session)
+    }
+  }
+  return sessions
+}
+
+export async function listOrdersForUser(
+  stripe: InstanceType<typeof Stripe>,
+  sanity: ReturnType<typeof createSanityClient>,
+  user: Pick<User, 'emailAddresses'>
+): Promise<Order[]> {
+  const sessions = await paidSessionsFor(stripe, user)
+  if (sessions.length === 0) {
+    return []
+  }
+
+  const sessionIds = sessions.map((session) => session.id)
+  const bookIds = Array.from(new Set(sessions.map((session) => session.metadata?.briet_item_id).filter(Boolean)))
+  const detail: {
+    codes: { stripeSessionId: string; code: string; redeemedAt: string | null }[]
+    books: { _id: string; title: string; hasFile: boolean }[]
+  } = await sanity.fetch(orderDetailQuery, { sessionIds, bookIds })
+
+  const codeBySession = new Map(detail.codes.map((c) => [c.stripeSessionId, c]))
+  const bookById = new Map(detail.books.map((b) => [b._id, b]))
+
+  return sessions
+    .sort((a, b) => b.created - a.created)
+    .map((session) => {
+      // Absent until the buyer opens the order page, which is what mints the code.
+      const minted = codeBySession.get(session.id)
+      const book = bookById.get(session.metadata?.briet_item_id ?? '')
+      return {
+        sessionId: session.id,
+        bookId: session.metadata?.briet_item_id ?? null,
+        bookTitle: book?.title ?? null,
+        hasDownload: book?.hasFile ?? false,
+        created: session.created,
+        amountTotal: session.amount_total,
+        redeemCode: minted?.code ?? null,
+        redeemedAt: minted?.redeemedAt ?? null,
+      }
+    })
+}
