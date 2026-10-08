@@ -36,6 +36,7 @@ export default async function handler(
     // taken the money. Refuse before a checkout session exists so a tokenless
     // deployment never reaches the payment step.
     if (!process.env.SANITY_WRITE_TOKEN) {
+      console.error('checkout: refusing to start, SANITY_WRITE_TOKEN is not set')
       res.status(500).json({ error: 'SANITY_WRITE_TOKEN is required to mint redemption codes after payment; checkout refuses to start without it.' })
       return
     }
@@ -69,7 +70,9 @@ export default async function handler(
     // redirect to a site they control.
     const siteUrl = process.env.SITE_URL
     if (!siteUrl) {
-      throw new Error('Missing SITE_URL')
+      console.error('checkout: refusing to start, SITE_URL is not set')
+      res.status(500).json({ error: 'Missing SITE_URL' })
+      return
     }
 
     const stripe = deps.stripe ?? getStripeServerClient()

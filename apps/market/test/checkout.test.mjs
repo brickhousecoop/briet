@@ -121,6 +121,21 @@ test('without SANITY_WRITE_TOKEN the checkout is refused before Stripe', async (
   }
 })
 
+test('without SITE_URL the checkout is refused before Stripe', async () => {
+  // Same shape as the write-token refusal above; setup.mjs seeds SITE_URL.
+  const saved = process.env.SITE_URL
+  delete process.env.SITE_URL
+  try {
+    const res = await post('book-1')
+
+    assert.equal(res.statusCode, 500)
+    assert.deepEqual(res.body, { error: 'Missing SITE_URL' })
+    assert.equal(sessionParams, undefined) // never reached Stripe
+  } finally {
+    process.env.SITE_URL = saved
+  }
+})
+
 test('with SANITY_WRITE_TOKEN the same request still reaches Stripe', async () => {
   process.env.SANITY_WRITE_TOKEN = 'test-write-token'
 
