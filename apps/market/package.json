@@ -42,8 +42,8 @@
     "@types/react-dom": "^19.2.3",
     "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.0",
     "groq-js": "^1.30.3",
-    "eslint-config-next": "^16.2.10",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.64.0",
     "vercel": "^56.3.2"
