@@ -1,0 +1,23 @@
+# The market test suite is self-contained (test/setup.mjs seeds dummy env
+# values; the fake Content Lake replaces the network), so plain `npm ci` +
+# `npm test` covers it with no secrets. Node 24 is required: the test
+# resolve-hook uses node:module's registerHooks.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm test
+        working-directory: apps/market
+      - run: npm run lint
+        working-directory: apps/market

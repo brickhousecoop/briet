@@ -1,4 +1,4 @@
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Image from '@lib/sanityImage'
@@ -9,11 +9,11 @@ import va from '@vercel/analytics'
 import styles from '../../../styles/Home.module.css'
 
 const allBookIdsQuery = `
-  *[_type == "book"] { _id }
+  *[_type == "book" && ${purchasableFilter}] { _id }
 `
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && ${purchasableFilter}] {
     _id,
     title,
     description,
@@ -33,7 +33,6 @@ const BookBuyPage = ({ book }) => {
     <div className={styles.container}>
       <Head>
         <title>{`BRIET Bookmarket: ${book.title}`}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
@@ -65,13 +64,14 @@ const BookBuyPage = ({ book }) => {
 
           <div className={styles.float}>
             <h2>{book.title}</h2>
-            {book.authors.map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
+            {(book.authors ?? []).filter(author => author?.name).map(author => <p key={author._id}><a href={author.uri}>{author.name}</a></p>)}
           </div>
 
           <p className={styles.description}>{book.description}</p>
 
+          <div className={styles.actions}>
             {book.price_usd > 0 ?
-              <form action="/api/checkout_sessions" method="POST">
+              <form action="/api/checkout" method="POST">
                 <input type="hidden" id="briet_item_id" name="briet_item_id" value={book._id}/>
                 <button type="submit" role="link" className={styles.card} onClick={trackCheckout}>
                   <h2>Purchase: ${book.price_usd} &rarr;</h2>
@@ -79,16 +79,17 @@ const BookBuyPage = ({ book }) => {
                 </button>
               </form>
             :
-              <Link href={`/order/free/${book._id}`} className={styles.downloadbutton} onClick={trackCheckout}>
+              <Link href={`/order/free/${book._id}`} className={styles.freeordercard} onClick={trackCheckout}>
                 <h2>Order: $0 &rarr;</h2>
                 <p>Your institution may freely loan to patrons: you <em>own</em> the file.</p>
               </Link>
             }
 
-          <a href={`/buy/${book._id}/marc`} className={styles.card}>
-            <h2>MARC record &darr;</h2>
-            <p>For integration into library cataloging systems</p>
-          </a>
+            <a href={`/buy/${book._id}/marc`} className={styles.card}>
+              <h2>MARC record &darr;</h2>
+              <p>For integration into library cataloging systems</p>
+            </a>
+          </div>
         </div>
       </main>
 

@@ -137,3 +137,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .env.local.*
+.env*
+!.env.example
+!apps/tagger/.env.development
