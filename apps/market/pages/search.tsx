@@ -3,12 +3,12 @@ import Footer from '@components/footer'
 import CatalogListing from '@components/CatalogListing'
 import type { Book } from '@components/CatalogListing'
 import styles from '@styles/Home.module.css'
-import { createSanityClient } from '@repo/sanity-client'
+import { createSanityClient, purchasableFilter } from '@repo/sanity-client'
 import type { GetServerSideProps } from 'next'
 
 const MAX_RESULTS = 100
 const searchQuery = `
-  *[_type == "book" && (
+  *[_type == "book" && ${purchasableFilter} && (
     title match $qPrefix ||
     array::join(authors[]->name, " ") match $q ||
     description match $q

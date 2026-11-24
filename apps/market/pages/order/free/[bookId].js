@@ -1,4 +1,4 @@
-import sanity from '@repo/sanity-client'
+import sanity, { purchasableFilter } from '@repo/sanity-client'
 
 import Head from '@components/head.jsx'
 import Footer from '@components/footer'
@@ -7,11 +7,10 @@ import Link from 'next/link'
 import styles from '@styles/Home.module.css'
 
 const singleBookQuery = `
-  *[_type == "book" && _id == $id] {
+  *[_type == "book" && _id == $id && price_usd == 0 && ${purchasableFilter}] {
     _id,
-    title,
     isPunctumBook,
-    "downloadUrl": file.asset -> url,
+    "hasFile": defined(file.asset->url),
   }[0]
 `
 
@@ -20,24 +19,29 @@ const OrderPage = ({ book }) => {
     <div className={styles.container}>
       <Head>
         <title>{`BRIET Bookmarket: Order Placed`}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <span className="logo">BRIET</span> Order Complete
+          <Link href="/"><span className="logo">BRIET</span></Link> Order Complete
         </h1>
 
-        <Link className={styles.downloadbutton} href={book.downloadUrl}>
-          Download your book
-        </Link>
+        {book.hasFile ? (
+          <a className={styles.downloadbutton} href={`/api/download/free/${book._id}`}>
+            Download your book
+          </a>
+        ) : (
+          <p className={styles.description}>
+            This download is currently unavailable. Please contact <a href="mailto:help@briet.app">help@briet.app</a>.
+          </p>
+        )}
 
         {book.isPunctumBook
         ? <p>This is a <Link href="https://punctumbooks.com">punctum</Link> ebook. All punctum books are free, and BRIET aims to make them even more accessible to public libaries. Still: please consider <Link href="https://punctumbooks.com/support/">donating to punctum</Link>.</p>
         : <p>Note that this book is free, but is still subject to the terms of <a href="https://controlleddigitallending.org">Controlled Digital Lending</a> when acquired via BRIET.</p>
         }
 
-        <p>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
+        <p className={styles.ordernote}>If you have any questions or need to make changes, email <a href="mailto:help@briet.app">help@briet.app</a>.</p>
       </main>
 
       <Footer/>
@@ -51,7 +55,6 @@ export const getServerSideProps = async ({ params }) => {
   if (!book) {
     return {
       notFound: true,
-      revalidate: 5
     }
   }
 

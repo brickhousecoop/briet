@@ -1,0 +1,66 @@
+/* Styles for the reusable copy-to-clipboard button (see CopyButton.jsx). The
+   grid-stacking sizing trick and the data-copied state toggle are described
+   there. */
+.copyButton {
+  display: inline-grid;
+  grid-auto-flow: column;
+  column-gap: 0.35rem;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 7px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.copyButton:hover {
+  border-color: #111;
+  background: #f5f5f5;
+}
+
+.copyButton:active {
+  background: #ececec;
+}
+
+/* Stack each icon/label pair in one cell so the widest sets the size. The
+   clipboard icon and the caller label have no extra state class; the check icon
+   and "Copied" text each carry a marker class so state flips target them. */
+.icon {
+  grid-area: 1 / 1;
+  width: 15px;
+  height: 15px;
+}
+
+.label {
+  grid-area: 1 / 2;
+  /* "Copied" is narrower than the caller label; center it in the shared cell
+     rather than leaving it flush-left with dead space. */
+  text-align: center;
+}
+
+/* Default: show clipboard + caller label, hide check + "Copied". visibility
+   (not opacity) so the hidden pair also leaves the accessibility tree —
+   otherwise a screen reader announces "Copy code Copied" for one button. It
+   keeps the grid cell reserved, so the sizing trick survives. */
+.check,
+.copied {
+  visibility: hidden;
+}
+
+/* data-copied flips which pair is visible, without any resize. */
+.copyButton[data-copied='true'] .icon:not(.check),
+.copyButton[data-copied='true'] .label:not(.copied) {
+  visibility: hidden;
+}
+
+.copyButton[data-copied='true'] .check,
+.copyButton[data-copied='true'] .copied {
+  visibility: visible;
+}

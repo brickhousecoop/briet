@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
+const isAccountRoute = createRouteMatcher(['/account(.*)'])
 const isPublicRoute = createRouteMatcher([
   '/account/sign-in(.*)',
   '/account/sign-up(.*)',
@@ -7,7 +8,7 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware(
   async (auth, request) => {
-    if (!isPublicRoute(request)) {
+    if (isAccountRoute(request) && !isPublicRoute(request)) {
       await auth.protect()
     }
   },
@@ -21,7 +22,10 @@ export default clerkMiddleware(
 
 export const config = {
   matcher: [
-    // Only run Clerk auth on /account/* paths
+    // Account pages are protected here; purchase handlers check auth themselves.
     '/account/:path*',
+    '/api/checkout',
+    '/order/:path*',
+    '/api/download/order/:sessionId',
   ],
 }

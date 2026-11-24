@@ -7,6 +7,7 @@ import publisher from './schemas/publisher'
 import collection from './schemas/collection'
 import page from './schemas/page'
 import marketSettings from './schemas/settings'
+import redeemCode from './schemas/redeemCode'
 
 export default defineConfig({
   'title': 'BRIET Bookmarket',
@@ -24,6 +25,7 @@ export default defineConfig({
       collection,
       page,
       marketSettings,
+      redeemCode,
     ],
   },
 })
